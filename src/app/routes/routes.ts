@@ -1,3 +1,4 @@
 import { createBrowserRouter } from 'react-router-dom'
+import { HomeRoute } from './home-route'
 
-export default createBrowserRouter([])
+export default createBrowserRouter([HomeRoute])
