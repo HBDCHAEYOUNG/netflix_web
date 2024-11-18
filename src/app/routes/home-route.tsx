@@ -1,7 +1,7 @@
-import Home from '../../pages/home/ui/home'
-import Login from '../../pages/login/ui/login'
-import CommonLayout from '../layouts/common-layout'
-import ErrorLayout from '../layouts/error-layout'
+import CommonLayout from '@app/layouts/common-layout'
+import ErrorLayout from '@app/layouts/error-layout'
+import Home from '@pages/home/ui/home'
+import Login from '@pages/login/ui/login'
 
 export const HomeRoute = {
 	path: '/',
