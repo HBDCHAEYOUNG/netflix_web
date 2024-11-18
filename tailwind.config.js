@@ -8,6 +8,7 @@ export default {
 				'primary/red': 'rgb(229, 9, 20)',
 				'primary/white': '#ffffff',
 
+				'secondary/red-200': '#C11119',
 				'secondary/red-300': '#F50723', //동영상 재생 바
 				'secondary/blue-100': '#0071EB',
 				'secondary/green': '#46D369', //new
