@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom'
 
 function CommonLayout() {
 	return (
-		<div className="bg-primary/black min-h-screen">
+		<div className="min-h-screen bg-Primary/Black">
 			안녕
 			<Outlet />
 		</div>

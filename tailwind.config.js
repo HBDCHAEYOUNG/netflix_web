@@ -40,12 +40,12 @@ export default {
 				'Grey/Grey-850': '#181818',
 				'Grey/Grey-900': '#141414',
 
-				'Transparent White/15%': 'rgb(255, 255, 255, 15%)',
-				'Transparent White/20%': 'rgb(255, 255, 255, 20%)',
-				'Transparent White/30%': 'rgb(255, 255, 255, 30%)',
-				'Transparent White/35%': 'rgb(255, 255, 255, 35%)',
-				'Transparent White/50%': 'rgb(255, 255, 255, 50%)',
-				'Transparent White/70%': 'rgb(255, 255, 255, 70%)',
+				'TransparentWhite/15%': 'rgb(255, 255, 255, 15%)',
+				'TransparentWhite/20%': 'rgb(255, 255, 255, 20%)',
+				'TransparentWhite/30%': 'rgb(255, 255, 255, 30%)',
+				'TransparentWhite/35%': 'rgb(255, 255, 255, 35%)',
+				'TransparentWhite/50%': 'rgb(255, 255, 255, 50%)',
+				'TransparentWhite/70%': 'rgb(255, 255, 255, 70%)',
 
 				'TransparentBlack/30%': 'rgb(0, 0, 0, 30%)',
 				'TransparentBlack/60%': 'rgb(0, 0, 0, 60%)',
@@ -96,6 +96,9 @@ export default {
 				'.no-scrollbar': {
 					'-ms-overflow-style': 'none',
 					'scrollbar-width': 'none',
+				},
+				'.rounded-common': {
+					borderRadius: '4px',
 				},
 
 				//typography
@@ -201,7 +204,7 @@ export default {
 					textUnderlinePosition: 'from-font',
 					textDecorationSkipInk: 'none',
 				},
-				'medium-smallbody': {
+				'Medium/SmallBody': {
 					//styleName: Medium/SmallBody;
 					fontFamily: 'Netflix Sans',
 					fontSize: '14px',
