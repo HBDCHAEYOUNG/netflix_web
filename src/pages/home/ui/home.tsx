@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import Logo from '@icons/icons/account.svg?react'
+import Button from '@ui/button/button-basic'
 
 function Home() {
 	return (
@@ -9,9 +10,9 @@ function Home() {
 				로그인
 			</Link>
 			<div className="flex flex-col gap-2">
-				{/* <Button />
-			<Button variant='secondary' />
-			<Button variant='outline' /> */}
+				<Button />
+				<Button variant="secondary" />
+				<Button variant="outline" />
 			</div>
 			<Logo />
 		</div>
