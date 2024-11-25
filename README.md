@@ -8,5 +8,6 @@
    eslint + prettier
    husky + lint-staged
    axios->ky
-
 4. index 자동화
+
+checkout

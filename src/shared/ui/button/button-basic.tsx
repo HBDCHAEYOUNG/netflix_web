@@ -1,15 +1,23 @@
-import { ButtonHTMLAttributes } from "react"
+import { cn } from '@lib/utils'
+import { ButtonProps, PrimaryButtonTheme } from './button.types'
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-	variant?: 'primary' | 'outline' | 'secondary'
+const primary = 'bg-Primary/Red hover:bg-Secondary/Red-200'
+const outline = 'text-Grey/Grey-200 border border-Grey/Grey-200 hover:text-Primary/White hover:border-Primary/White'
+const secondary = 'bg-TransparentWhite/20% hover:bg-TransparentWhite/15%'
+
+const color: Record<PrimaryButtonTheme, string> = {
+	primary,
+	outline,
+	secondary,
 }
 
-function Button({ variant = 'primary', ...rest}:ButtonProps) {
-	const themeClass = variant === 'primary' ? 
-		'bg-Primary/Red hover:bg-Secondary/Red-200' : 
-		variant === 'outline' ? 'text-Grey/Grey-200 border border-Grey/Grey-200 hover:bg-Grey/Grey-10' :
-		'bg-TransparentWhite/20% hover:bg-Secondary/Red-300'
-
-	return <button type='submit' className={`h-10 rounded-md w-full flex-center ${themeClass}`} {...rest}>Sign In</button>
+function Button({ theme = 'primary', children, className, icon, onClick, ...rest }: ButtonProps) {
+	const Icon = icon
+	return (
+		<button onClick={onClick} type="submit" className={cn('h-10 w-full rounded-md flex-center', color[theme], className)} {...rest}>
+			{Icon && <Icon className="mr-3" />}
+			{children}
+		</button>
+	)
 }
 export default Button
