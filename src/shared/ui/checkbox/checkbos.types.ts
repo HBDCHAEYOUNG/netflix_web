@@ -1,3 +1,5 @@
 import { HTMLAttributes } from 'react'
 
-export interface CheckboxProps extends HTMLAttributes<HTMLDivElement> {}
+export interface CheckboxBasicProps extends HTMLAttributes<HTMLDivElement> {
+	label: string
+}
