@@ -137,14 +137,14 @@ export default {
 					borderRadius: '4px',
 				},
 
-				'.regular-caption2': {
+				'.Regular-Caption2': {
 					fontFamily: 'Netflix Sans',
 					fontWeight: '400',
 					fontSize: '11px',
 					lineHeight: '14.05px',
 				},
-				'.regular-caption1': {
-					fontfamily: 'Netflix Sans',
+				'.Regular-Caption1': {
+					fontFamily: 'Netflix Sans',
 					fontSize: '13px',
 					fontWeight: '400',
 					lineHeight: '16px',
@@ -153,7 +153,7 @@ export default {
 					textUnderlinePosition: 'from-font',
 					textDecorationSkipInk: 'none',
 				},
-				'.regular-smallbody': {
+				'.Regular-Smallbody': {
 					fontFamily: 'Netflix Sans',
 					fontSize: '14px',
 					fontWeight: '400',
@@ -163,7 +163,7 @@ export default {
 					textUnderlinePosition: 'from-font',
 					textDecorationSkipInk: 'none',
 				},
-				'.regular-body': {
+				'.Regular-Body': {
 					fontFamily: 'Netflix Sans',
 					fontSize: '16px',
 					fontWeight: '400',
@@ -172,7 +172,7 @@ export default {
 					textUnderlinePosition: 'from-font',
 					textDecorationSkipInk: 'none',
 				},
-				'.regular-headline': {
+				'.Regular-Headline': {
 					fontFamily: 'Netflix Sans',
 					fontSize: '18px',
 					fontWeight: '400',
@@ -181,7 +181,7 @@ export default {
 					textUnderlinePosition: 'from-font',
 					textDecorationSkipInk: 'none',
 				},
-				'.regular-title4': {
+				'.Regular-Title4': {
 					fontFamily: 'Netflix Sans',
 					fontSize: '20px',
 					fontWeight: '400',
@@ -190,7 +190,7 @@ export default {
 					textUnderlinePosition: 'from-font',
 					textDecorationSkipInk: 'none',
 				},
-				'.regular-title3': {
+				'.Regular-Title3': {
 					fontFamily: 'Netflix Sans',
 					fontSize: '21px',
 					fontWeight: '400',
@@ -199,7 +199,7 @@ export default {
 					textUnderlinePosition: 'from-font',
 					textDecorationSkipInk: 'none',
 				},
-				'.regular-title2': {
+				'.Regular-Title2': {
 					fontFamily: 'Netflix Sans',
 					fontSize: '24px',
 					fontWeight: '400',
@@ -208,7 +208,7 @@ export default {
 					textUnderlinePosition: 'from-font',
 					textDecorationSkipInk: 'none',
 				},
-				'.regular-title1': {
+				'.Regular-Title1': {
 					fontFamily: 'Netflix Sans',
 					fontSize: '27px',
 					fontWeight: '400',
@@ -217,16 +217,16 @@ export default {
 					textUnderlinePosition: 'from-font',
 					textDecorationSkipInk: 'none',
 				},
-				'.regular-largetitle': {
-					fontfamily: 'Netflix Sans',
-					fontsize: '50px;',
+				'.Regular-LargeTitle': {
+					fontFamily: 'Netflix Sans',
+					fontSize: '50px',
 					fontWeight: '400',
 					lineHeight: '63.85px',
 					textAlign: 'left',
 					textUnderlinePosition: 'from-font',
 					textDecorationSkipInk: 'none',
 				},
-				'.medium-caption': {
+				'.Medium-Caption': {
 					fontFamily: 'Netflix Sans',
 					fontSize: '12px',
 					fontWeight: '500',
@@ -236,7 +236,17 @@ export default {
 					textUnderlinePosition: 'from-font',
 					textDecorationSkipInk: 'none',
 				},
-				'.medium-smallbody': {
+				'.Medium-Caption2': {
+					fontFamily: 'Netflix Sans',
+					fontSize: '12px',
+					fontWeight: '500',
+					lineHeight: '15.32px',
+					letterSpacing: '-0.25px',
+					textAlign: 'center',
+					textUnderlinePosition: 'from-font',
+					textDecorationSkipInk: 'none',
+				},
+				'.Medium-Smallbody': {
 					fontFamily: 'Netflix Sans',
 					fontSize: '14px',
 					fontWeight: '500',
@@ -245,7 +255,7 @@ export default {
 					textUnderlinePosition: 'from-font',
 					textDecorationSkipInk: 'none',
 				},
-				'.medium-body': {
+				'.Medium-Body': {
 					fontFamily: 'Netflix Sans',
 					fontSize: '16px',
 					fontWeight: '500',
@@ -254,7 +264,7 @@ export default {
 					textUnderlinePosition: 'from-font',
 					textDecorationSkipInk: 'none',
 				},
-				'.medium-headline': {
+				'.Medium-Headline': {
 					fontFamily: 'Netflix Sans',
 					fontSize: '21px',
 					fontWeight: '500',
@@ -263,7 +273,7 @@ export default {
 					textUnderlinePosition: 'from-font',
 					textDecorationSkipInk: 'none',
 				},
-				'.medium-title3': {
+				'.Medium-Title3': {
 					fontFamily: 'Netflix Sans',
 					fontSize: '24px',
 					fontWeight: '500',
@@ -272,7 +282,7 @@ export default {
 					textUnderlinePosition: 'from-font',
 					textDecorationSkipInk: 'none',
 				},
-				'.medium-title2': {
+				'.Medium-Title2': {
 					fontFamily: 'Netflix Sans',
 					fontSize: '28px',
 					fontWeight: '500',
@@ -281,7 +291,7 @@ export default {
 					textUnderlinePosition: 'from-font',
 					textDecorationSkipInk: 'none',
 				},
-				'.medium-title1': {
+				'.Medium-Title1': {
 					fontFamily: 'Netflix Sans',
 					fontSize: '30px',
 					fontWeight: '500',
@@ -290,7 +300,7 @@ export default {
 					textUnderlinePosition: 'from-font',
 					textDecorationSkipInk: 'none',
 				},
-				'.medium-largetitle': {
+				'.Medium-LargeTitle': {
 					fontFamily: 'Netflix Sans',
 					fontSize: '33px',
 					fontWeight: '500',
@@ -299,7 +309,7 @@ export default {
 					textUnderlinePosition: 'from-font',
 					textDecorationSkipInk: 'none',
 				},
-				'.bold-title2': {
+				'.Bold-Title2': {
 					fontFamily: 'Netflix Sans',
 					fontSize: '20px',
 					fontWeight: '700',
@@ -308,7 +318,7 @@ export default {
 					textUnderlinePosition: 'from-font',
 					textDecorationSkipInk: 'none',
 				},
-				'.bold-title1': {
+				'.Bold-Title1': {
 					fontFamily: 'Netflix Sans',
 					fontSize: '48px',
 					fontWeight: '700',
@@ -317,7 +327,7 @@ export default {
 					textUnderlinePosition: 'from-font',
 					textDecorationSkipInk: 'none',
 				},
-				'.bold-largetitle': {
+				'.Bold-LargeTitle': {
 					fontFamily: 'Netflix Sans',
 					fontSize: '55px',
 					fontWeight: '700',
