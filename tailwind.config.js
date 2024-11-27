@@ -92,6 +92,9 @@ export default {
 	plugins: [
 		({ addUtilities }) => {
 			addUtilities({
+				'.max-width-desktop': {
+					maxWidth: '1200px',
+				},
 				'.mobile-padding': {
 					paddingLeft: '12px',
 					paddingRight: '12px',
