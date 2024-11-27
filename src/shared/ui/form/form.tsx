@@ -29,7 +29,7 @@ interface FormItemProps extends HTMLAttributes<HTMLDivElement> {
 	descriptionClassName?: string // 설명 css 스타일
 	errorClassName?: string // 에러 메시지 css 스타일
 	require?: boolean // 필수 css
-	renderItem: ((field: any) => React.ReactNode) | React.ReactNode
+	renderItem?: (field: any) => ReactNode // 폼 아이템 렌더링 함수
 }
 
 const FormItem = (props: FormItemProps) => {
@@ -48,7 +48,7 @@ const FormItem = (props: FormItemProps) => {
 						</FormLabel>
 					)}
 					{description && <FormDescription className={`text-xs text-gray-400 ${descriptionClassName}`}>{description}</FormDescription>}
-					<FormControl>{typeof renderItem === 'function' ? renderItem(field) : renderItem}</FormControl>
+					<FormControl>{renderItem && renderItem(field)}</FormControl>
 					<FormMessage className={errorClassName} />
 				</FormGroup>
 			)}

@@ -11,7 +11,7 @@ const color: Record<PrimaryButtonTheme, string> = {
 	secondary,
 }
 
-function Button({ theme = 'primary', children, className, icon, onClick, ...rest }: ButtonBasicProps) {
+function ButtonBasic({ theme = 'primary', children, className, icon, onClick, ...rest }: ButtonBasicProps) {
 	const Icon = icon
 	return (
 		<button onClick={onClick} type="submit" className={cn('h-10 w-full rounded-md flex-center', color[theme], className)} {...rest}>
@@ -20,4 +20,4 @@ function Button({ theme = 'primary', children, className, icon, onClick, ...rest
 		</button>
 	)
 }
-export default Button
+export default ButtonBasic
