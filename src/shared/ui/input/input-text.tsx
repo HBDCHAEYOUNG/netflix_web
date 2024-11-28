@@ -33,6 +33,7 @@ export const InputText = React.forwardRef<HTMLInputElement, InputProps>(({ class
 				<div
 					className={cn(
 						'flex h-14 w-full flex-col justify-center rounded-md border border-[#808080] bg-Primary/Black px-3 text-Grey/Grey-50 outline outline-Primary/White Medium-Caption2',
+						className,
 					)}
 				>
 					<label className="text-left text-xs text-Grey/Grey-50">{label}</label>
