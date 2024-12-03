@@ -7,7 +7,7 @@
 	color: white;
 	font: Netflix Sans;
 }
-
+/* 
 @layer base {
   :root {
 		--background: 0 0% 100%;
@@ -71,4 +71,4 @@
   body {
     @apply bg-background text-foreground;
 	}
-}
+} */

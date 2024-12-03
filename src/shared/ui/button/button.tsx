@@ -1,5 +1,6 @@
 import { cn } from '@lib/utils'
-import { ButtonBasicProps, PrimaryButtonTheme } from './button.types'
+import { PropsWithChildren } from 'react'
+import { ButtonProps, PrimaryButtonTheme } from './button.types'
 
 const primary = 'bg-Primary/Red hover:bg-Secondary/Red-200'
 const outline = 'text-Grey/Grey-200 border border-Grey/Grey-200 hover:text-Primary/White hover:border-Primary/White'
@@ -11,13 +12,13 @@ const color: Record<PrimaryButtonTheme, string> = {
 	secondary,
 }
 
-function ButtonBasic({ theme = 'primary', children, className, icon, onClick, ...rest }: ButtonBasicProps) {
-	const Icon = icon
+function Button({ theme = 'primary', children, className, leftIcon, rightIcon, ...rest }: PropsWithChildren<ButtonProps>) {
 	return (
-		<button onClick={onClick} type="submit" className={cn('h-10 w-full rounded-md flex-center', color[theme], className)} {...rest}>
-			{Icon && <Icon className="mr-3" />}
+		<button className={cn('h-10 w-full rounded-md flex-center', color[theme], className)} {...rest}>
+			{leftIcon && leftIcon}
 			{children}
+			{rightIcon && rightIcon}
 		</button>
 	)
 }
-export default ButtonBasic
+export default Button

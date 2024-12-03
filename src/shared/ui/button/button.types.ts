@@ -1,14 +1,10 @@
-import { ReactNode } from 'react'
-import { HTMLAttributes } from 'react'
-import { ButtonHTMLAttributes } from 'react'
+import { HTMLAttributes, ReactNode } from 'react'
 
 export type PrimaryButtonTheme = 'primary' | 'outline' | 'secondary'
 
-export interface ButtonBasicProps extends HTMLAttributes<HTMLButtonElement> {
-	children: string | ReactNode
+export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
 	theme?: PrimaryButtonTheme
-	type?: ButtonHTMLAttributes<HTMLButtonElement>['type']
 	className?: string
-	icon?: React.ElementType
-	onClick?: () => void
+	leftIcon?: ReactNode
+	rightIcon?: ReactNode
 }

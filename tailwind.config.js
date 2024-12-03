@@ -139,7 +139,11 @@ export default {
 				'.rounded-common': {
 					borderRadius: '4px',
 				},
-
+				'.gradient1': {
+					background: 'rgb(0,4,19)',
+					background:
+						'linear-gradient(90deg, rgba(0,4,19,0.6209077380952381) 0%, rgba(14,27,79,0.590095413165266) 25%, rgba(229,9,20,0.5956976540616247) 50%, rgba(14,27,79,0.6012998949579832) 75%, rgba(14,27,79,0.22875087535014005) 100%)',
+				},
 				'.Regular-Caption2': {
 					fontFamily: 'Netflix Sans',
 					fontWeight: '400',
