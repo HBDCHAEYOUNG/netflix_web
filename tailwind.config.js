@@ -87,6 +87,10 @@ export default {
 				md: '4px',
 				sm: '2px',
 			},
+			aspectRatio: {
+				'4/3': '4 / 3',
+				frame: '1440 / 700',
+			},
 		},
 	},
 	plugins: [
