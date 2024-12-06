@@ -1,4 +1,4 @@
-import { Headline, ScreensPreview } from '@entities/home'
+import { Headline } from '@entities/home'
 import Icon from '@icons/arrow-right.svg?react'
 import HeroImage from '@images/bg1.png'
 import shadow from '@images/shadow.png'
@@ -41,11 +41,11 @@ function Home() {
 			</section>
 
 			{sections.map((section, index) => (
-				<section key={index} className="relative flex-col flex-center">
+				<section key={index} className="relative flex-col border-b-8 border-Grey/Grey-800 py-[72px] flex-center">
 					{section.component}
-					<div className="my-[72px] flex-center">
+					<div className="w-full flex-center">
 						<Headline title={section.headline.title} description={section.headline.description} />
-						<ScreensPreview frame={section.screensPreview.frame} screenshot={section.screensPreview.screenshot} />
+						<img src={section.image} alt="tv" />
 					</div>
 				</section>
 			))}
