@@ -4,9 +4,9 @@ import HeroImage from '@images/bg1.png'
 import shadow from '@images/shadow.png'
 import Button from '@ui/button/button'
 import Form from '@ui/form/form'
-import { InputText } from '@ui/index'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, InputText } from '@ui/index'
 import { useForm } from 'react-hook-form'
-import { sections } from '../const/home'
+import { faq, sections } from '../const/home'
 
 function Home() {
 	const form = useForm()
@@ -22,7 +22,7 @@ function Home() {
 				<img src={HeroImage} alt="hero-image" className="absolute w-full" />
 				<img src={shadow} alt="shadow" className="absolute w-full" />
 
-				<div className="w-full flex-col">
+				<div className="relative w-full flex-col">
 					<h1 className="mx-auto mb-4 w-fit Bold-Title1">Unlimited movies, TV shows, and more</h1>
 					<p className="mx-auto mb-6 w-fit Regular-Title2">Watch anywhere. Cancel anytime.</p>
 
@@ -49,6 +49,22 @@ function Home() {
 					</div>
 				</section>
 			))}
+
+			<section className="flex-col py-[72px] flex-center">
+				<Headline title="Frequently Asked Questions" />
+
+				<Accordion type="single" collapsible className="mx-auto mt-6 w-full max-w-[1104px]">
+					{faq.map((item, index) => (
+						<AccordionItem key={index} value={`item-${index + 1}`} className="mb-2 w-full">
+							<AccordionTrigger>{item.question}</AccordionTrigger>
+							<AccordionContent>{item.answer}</AccordionContent>
+						</AccordionItem>
+					))}
+				</Accordion>
+
+				<label className="mb-4 mt-12 Regular-Title4">Create or restart your membership</label>
+				<Button className="h-[56px] w-[208px] flex-center Medium-Title3">Get Started</Button>
+			</section>
 		</div>
 	)
 }

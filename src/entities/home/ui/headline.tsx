@@ -1,6 +1,6 @@
 interface HeadlineProps {
 	title: string
-	description: string
+	description?: string
 }
 
 export function Headline({ title, description }: HeadlineProps) {
