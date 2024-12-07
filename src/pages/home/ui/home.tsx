@@ -6,14 +6,28 @@ import Button from '@ui/button/button'
 import Form from '@ui/form/form'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, InputText } from '@ui/index'
 import { useForm } from 'react-hook-form'
-import { faq, sections } from '../const/home'
+import { faq, link, sections } from '../const/home'
+import { Link } from 'react-router-dom'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 function Home() {
-	const form = useForm()
+	const emailSchema = z.object({
+		email: z.string().email('이메일 형식이 아닙니다.'),
+	})
+
+	const form = useForm<z.infer<typeof emailSchema>>({
+		resolver: zodResolver(emailSchema),
+	})
 
 	const handleSubmit = () => {
 		console.log('submit')
 		console.log(form.watch('email'))
+	}
+
+	const handleCopyPhoneNumber = () => {
+		navigator.clipboard.writeText('1-844-505-2993')
+		alert('복사완료!')
 	}
 
 	return (
@@ -31,6 +45,7 @@ function Home() {
 						<Form.Item
 							name="email"
 							className="space-y-0 flex-center"
+							errorClassName="text-Primary/Red absolute"
 							renderItem={(field) => <InputText name="email" label="Email address" className="h-[56px] w-[368px]" {...field} />}
 						/>
 						<Button className="h-[56px] w-[208px] flex-center Medium-Title3" rightIcon={<Icon className="ml-4" />}>
@@ -50,7 +65,7 @@ function Home() {
 				</section>
 			))}
 
-			<section className="flex-col py-[72px] flex-center">
+			<section className="flex-col border-b-8 border-Grey/Grey-800 py-[72px] flex-center">
 				<Headline title="Frequently Asked Questions" />
 
 				<Accordion type="single" collapsible className="mx-auto mt-6 w-full max-w-[1104px]">
@@ -65,6 +80,22 @@ function Home() {
 				<label className="mb-4 mt-12 Regular-Title4">Create or restart your membership</label>
 				<Button className="h-[56px] w-[208px] flex-center Medium-Title3">Get Started</Button>
 			</section>
+
+			<footer className="px-[168px] py-[72px]">
+				<p className="mb-6 Regular-Body">
+					Questions? Call
+					<u className="cursor-pointer" onClick={handleCopyPhoneNumber}>
+						1-844-505-2993
+					</u>
+				</p>
+				<div className="grid gap-4 pb-[64px] md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+					{link.map((item, index) => (
+						<Link to={item.url} key={index} className="text-Grey/Grey-100 Regular-body underline">
+							{item.title}
+						</Link>
+					))}
+				</div>
+			</footer>
 		</div>
 	)
 }

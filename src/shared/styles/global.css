@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body {
+	@apply bg-black;
+}
 * {
 	box-sizing: border-box;
 	color: white;
