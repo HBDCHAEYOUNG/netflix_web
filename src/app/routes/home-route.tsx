@@ -8,7 +8,7 @@ export const HomeRoute = {
 	element: <CommonLayout />,
 	children: [
 		{ index: true, element: <Home /> },
-		{ path: 'auth', element: <Login /> },
+		{ path: 'login', element: <Login /> },
 	],
 	errorElement: <ErrorLayout />,
 }

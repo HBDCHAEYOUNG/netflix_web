@@ -41,7 +41,7 @@ const FormItem = (props: FormItemProps) => {
 			control={control}
 			name={name}
 			render={({ field }) => (
-				<FormGroup className={className} {...rest}>
+				<FormGroup className={cn('flex flex-col space-y-0', className)} {...rest}>
 					{label && (
 						<FormLabel className={cn('text-black', labelClassName)}>
 							{label} {require && <span className="text-Error">*</span>}
@@ -49,7 +49,7 @@ const FormItem = (props: FormItemProps) => {
 					)}
 					{description && <FormDescription className={`text-xs text-gray-400 ${descriptionClassName}`}>{description}</FormDescription>}
 					<FormControl>{renderItem && renderItem(field)}</FormControl>
-					<FormMessage className={errorClassName} />
+					<FormMessage className={cn('w-full pt-2 text-Primary/Red', errorClassName)} />
 				</FormGroup>
 			)}
 		/>
