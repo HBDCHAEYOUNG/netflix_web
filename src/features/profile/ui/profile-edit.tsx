@@ -10,7 +10,7 @@ export function ProfileEdit({ image, name, onClick }: ProfileUserProps) {
 	return (
 		<div
 			key={name}
-			className="flex-col gap-4 flex-center [&:hover]:cursor-pointer [&>div:hover]:outline [&>div:hover]:outline-Grey/Grey-200 [&>p]:hover:text-Primary/White"
+			className="flex-col gap-4 flex-center [&:hover]:cursor-pointer [&>div]:hover:outline [&>div]:hover:outline-Grey/Grey-200 [&>p]:hover:text-Grey/Grey-20"
 			onClick={onClick}
 		>
 			<div className="relative aspect-square w-[144px] rounded-sm flex-center">

@@ -29,22 +29,22 @@ export function Profiles() {
 		console.log('onClickProfile')
 	}
 
-	const onClickAddProfile = () => {
+	const onClickManageProfile = () => {
 		router('/manager-profiles')
 	}
 
 	return (
 		<div className="h-screen flex-col gap-[67px] flex-center">
-			<h1 className="!text-center Regular-LargeTitle">Select the profile you want to watch Netflix on.</h1>
+			<h1 className="px-6 !text-center Regular-LargeTitle">Select the profile you want to watch Netflix on.</h1>
 
 			<div className="grid grid-cols-3 gap-7 sm:flex">
 				{profiles.map((profile) => (
 					<Profile key={profile.id} image={profile.image} name={profile.name} onClick={onClickProfile} />
 				))}
-				<ProfileAdd image={<PlusIcon />} name="Add Profile" onClick={onClickAddProfile} className="col-span-3 w-full" />
+				<ProfileAdd image={<PlusIcon />} name="Add Profile" onClick={onClickManageProfile} className="col-span-3 w-full" />
 			</div>
-			<Button theme="outline" className="h-[42px] w-[178px] Regular-Headline">
-				Manage Profiles
+			<Button theme="outline" className="h-[42px] w-[178px] Regular-Headline" onClick={onClickManageProfile}>
+				Manage Your Profile
 			</Button>
 		</div>
 	)

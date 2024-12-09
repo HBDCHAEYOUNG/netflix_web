@@ -12,7 +12,7 @@ export function ProfileAdd({ image, name, onClick, className }: ProfileAddProps)
 		<div
 			key={name}
 			className={cn(
-				'flex-col gap-4 flex-center [&:hover]:cursor-pointer [&>div]:hover:bg-Primary/White [&>p]:hover:text-Primary/White [&_path]:hover:fill-white',
+				'flex-col gap-4 flex-center [&:hover]:cursor-pointer [&>div]:hover:bg-Grey/Grey-20 [&>p]:hover:text-Grey/Grey-20 [&_path]:hover:fill-white',
 				className,
 			)}
 			onClick={onClick}
