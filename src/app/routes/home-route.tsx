@@ -11,7 +11,7 @@ export const HomeRoute = {
 		{ index: true, element: <Home /> },
 		{ path: 'login', element: <Login /> },
 		{ path: 'profiles', element: <Profiles /> },
-		{ path: 'manage-profiles', element: <ManagerProfiles /> },
+		{ path: 'manager-profiles', element: <ManagerProfiles /> },
 	],
 	errorElement: <ErrorLayout />,
 }

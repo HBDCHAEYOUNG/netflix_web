@@ -1,6 +1,7 @@
-import { Profile } from '@features/profile'
+import { Profile, ProfileAdd } from '@features/profile'
 import PlusIcon from '@icons/circle-plus.svg?react'
 import profileImage from '@images/profile.png'
+import Button from '@ui/button/button'
 import { useNavigate } from 'react-router-dom'
 
 const profiles = [
@@ -23,27 +24,28 @@ const profiles = [
 
 export function Profiles() {
 	const router = useNavigate()
+
 	const onClickProfile = () => {
 		console.log('onClickProfile')
 	}
 
 	const onClickAddProfile = () => {
-		router('/manage-profiles')
+		router('/manager-profiles')
 	}
 
 	return (
 		<div className="h-screen flex-col gap-[67px] flex-center">
-			<h1 className="Regular-LargeTitle">Who’s watching?</h1>
+			<h1 className="!text-center Regular-LargeTitle">Select the profile you want to watch Netflix on.</h1>
 
 			<div className="grid grid-cols-3 gap-7 sm:flex">
 				{profiles.map((profile) => (
 					<Profile key={profile.id} image={profile.image} name={profile.name} onClick={onClickProfile} />
 				))}
-				<Profile image={<PlusIcon />} name="Add Profile" onClick={onClickAddProfile} />
+				<ProfileAdd image={<PlusIcon />} name="Add Profile" onClick={onClickAddProfile} className="col-span-3 w-full" />
 			</div>
-			<p className="h-[42px] w-[178px] cursor-pointer border border-Grey/Grey-200 p-[10px] text-Grey/Grey-200 flex-center Regular-Headline hover:border-Primary/White hover:text-Primary/White">
+			<Button theme="outline" className="h-[42px] w-[178px] Regular-Headline">
 				Manage Profiles
-			</p>
+			</Button>
 		</div>
 	)
 }
