@@ -345,7 +345,7 @@ export default {
 				},
 				'.Bold-Title2': {
 					fontFamily: 'Netflix Sans',
-					fontSize: '20px',
+					fontSize: '32px',
 					fontWeight: '700',
 					lineHeight: '30px',
 					textAlign: 'left',
