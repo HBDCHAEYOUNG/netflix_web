@@ -58,7 +58,7 @@ export function ManagerProfiles() {
 		<div className="mx-auto h-screen max-w-[80%] place-content-center gap-[67px] text-center">
 			<div>
 				<h1 className="px-6 !text-center Regular-Title1 sm:Regular-LargeTitle">Select the profile you want to watch Netflix on.</h1>
-				<ul className="my-2 inline-block [&>li]:inline-block">
+				<div className="my-2 inline-block [&>li]:inline-block">
 					{profiles.map((profile) => (
 						<Drawer>
 							<DrawerTrigger>
@@ -128,7 +128,7 @@ export function ManagerProfiles() {
 							</DrawerFooter>
 						</DrawerContent>
 					</Drawer>
-				</ul>
+				</div>
 
 				<Button theme="outline" className="mx-auto h-[42px] max-w-[178px] Regular-Headline" onClick={onClickSave}>
 					Complete
