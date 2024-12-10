@@ -34,7 +34,7 @@ export function Profiles() {
 
 	return (
 		<div className="mx-auto h-screen max-w-[80%] place-content-center gap-[67px] text-center">
-			<div className="">
+			<div>
 				<h1 className="px-6 !text-center Regular-Title1 sm:Regular-LargeTitle">Select the profile you want to watch Netflix on.</h1>
 
 				<ul className="my-2 inline-block [&>li]:inline-block">
