@@ -29,7 +29,7 @@ export function Profiles() {
 	}
 
 	const onClickManageProfile = () => {
-		router('/manager-profiles')
+		router('/profiles/manage')
 	}
 
 	return (
