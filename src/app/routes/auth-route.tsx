@@ -1,10 +1,10 @@
 import CommonLayout from '@app/layouts/common-layout'
 import ErrorLayout from '@app/layouts/error-layout'
-import Home from '@pages/home/ui/home'
+import Login from '@pages/login/ui/login'
 
-export const HomeRoute = {
-	path: '/',
+export const AuthRoute = {
+	path: '/auth',
 	element: <CommonLayout />,
-	children: [{ index: true, element: <Home /> }],
+	children: [{ path: 'login', element: <Login /> }],
 	errorElement: <ErrorLayout />,
 }
