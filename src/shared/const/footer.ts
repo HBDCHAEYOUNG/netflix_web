@@ -1,4 +1,4 @@
-export const link = [
+export const footerLink = [
 	{
 		title: 'Frequently Asked Questions',
 		url: 'https://help.netflix.com/ko/node/412',

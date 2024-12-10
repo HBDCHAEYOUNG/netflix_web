@@ -3,19 +3,15 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import ArrowIcon from '@icons/arrow-right.svg?react'
 import HeroImage from '@images/bg1.png'
 import shadow from '@images/shadow.png'
+import Button from '@ui/button/button'
 import Form from '@ui/form/form'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, InputText } from '@ui/index'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
 import { faq, sections } from '../const/home'
-import Button from '@ui/button/button'
+import { EmailSchema, emailSchema } from '../const/home.type'
 
 function Home() {
-	const emailSchema = z.object({
-		email: z.string().email('Please enter a valid email address'),
-	})
-
-	const form = useForm<z.infer<typeof emailSchema>>({
+	const form = useForm<EmailSchema>({
 		resolver: zodResolver(emailSchema),
 	})
 

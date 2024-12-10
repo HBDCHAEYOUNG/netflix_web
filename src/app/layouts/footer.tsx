@@ -1,5 +1,5 @@
-import { link } from '@pages/home'
 import { Link } from 'react-router-dom'
+import { footerLink } from 'src/shared/const/footer'
 
 function Footer() {
 	return (
@@ -10,7 +10,7 @@ function Footer() {
 					<u className="cursor-pointer">1-844-505-2993</u>
 				</p>
 				<nav className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-					{link.map((item, index) => (
+					{footerLink.map((item, index) => (
 						<Link to={item.url} key={index} className="text-Grey/Grey-100 Regular-body underline">
 							{item.title}
 						</Link>
