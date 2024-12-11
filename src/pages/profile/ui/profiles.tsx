@@ -33,20 +33,18 @@ export function Profiles() {
 	}
 
 	return (
-		<div className="mx-auto h-screen max-w-[80%] place-content-center gap-[67px] text-center">
-			<div>
-				<h1 className="px-6 !text-center Regular-Title1 sm:Regular-LargeTitle">Select the profile you want to watch Netflix on.</h1>
+		<div className="mx-auto h-screen max-w-[80%] place-content-center text-center">
+			<h1 className="px-6 !text-center Regular-Title1 sm:Regular-LargeTitle">Select the profile you want to watch Netflix on.</h1>
 
-				<ul className="my-2 inline-block [&>li]:inline-block">
-					{profiles.map((profile) => (
-						<Profile key={profile.id} image={profile.image} name={profile.name} onClick={onClickProfile} />
-					))}
-					<ProfileAdd onClick={onClickManageProfile} />
-				</ul>
-				<Button theme="outline" className="mx-auto h-[42px] max-w-[178px] Regular-Headline" onClick={onClickManageProfile}>
-					Manage Your Profile
-				</Button>
+			<div className="my-[2vw] flex-wrap gap-[2vw] flex-center">
+				{profiles.map((profile) => (
+					<Profile key={profile.id} image={profile.image} name={profile.name} onClick={onClickProfile} />
+				))}
+				<ProfileAdd onClick={onClickManageProfile} />
 			</div>
+			<Button theme="outline" className="mx-auto h-[42px] max-w-[178px] Regular-Headline" onClick={onClickManageProfile}>
+				Manage Your Profile
+			</Button>
 		</div>
 	)
 }

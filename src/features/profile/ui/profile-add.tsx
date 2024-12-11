@@ -10,13 +10,13 @@ export function ProfileAdd({ onClick, className }: ProfileAddProps) {
 	return (
 		<div
 			className={cn(
-				'[&:hover]:cursor-pointer [&>div]:hover:bg-Grey/Grey-20 [&>p]:hover:text-Grey/Grey-20 [&_path]:hover:fill-white',
+				'flex-col flex-center [&:hover]:cursor-pointer [&>div]:hover:bg-Grey/Grey-20 [&>p]:hover:text-Grey/Grey-20 [&_path]:hover:fill-white',
 				className,
 			)}
 			onClick={onClick}
 		>
-			<div className="relative aspect-square w-[10vw] min-w-[50px] max-w-[200px] rounded-sm flex-center">
-				<div className="mx-auto aspect-square w-[10vw] min-w-[50px] max-w-[200px] rounded-sm flex-center">
+			<div className="relative aspect-square h-[10vw] max-h-[200px] min-h-[84px] w-[10vw] min-w-[84px] max-w-[200px] rounded-sm flex-center">
+				<div className="mx-auto aspect-square rounded-sm flex-center">
 					<PlusIcon />
 				</div>
 			</div>

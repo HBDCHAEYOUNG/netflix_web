@@ -1,23 +1,14 @@
 import { ProfileAdd, ProfileEdit } from '@features/profile'
 import profileImage from '@images/profile.png'
 import Button from '@ui/button/button'
+import { Switch } from '@ui/button/switch'
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@ui/dialog/dialog'
 import Form from '@ui/form/form'
-import {
-	Drawer,
-	DrawerClose,
-	DrawerContent,
-	DrawerDescription,
-	DrawerFooter,
-	DrawerHeader,
-	DrawerTitle,
-	DrawerTrigger,
-	InputText,
-} from '@ui/index'
+import { DrawerFooter, InputText } from '@ui/index'
 import { ProfileImg } from '@ui/profile/profileImg'
+import { Select } from '@ui/select/select'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import CloseIcon from '@icons/plus-wide.svg?react'
-import { Switch } from '@ui/button/switch'
 
 const profiles = [
 	{
@@ -53,67 +44,63 @@ export function ManagerProfiles() {
 	const handleSubmit = () => {
 		console.log('handleSubmit')
 	}
-
+	console.log(form.watch())
 	return (
 		<div className="mx-auto h-screen max-w-[80%] place-content-center gap-[67px] text-center">
 			<div>
 				<h1 className="px-6 !text-center Regular-Title1 sm:Regular-LargeTitle">Select the profile you want to watch Netflix on.</h1>
-				<div className="my-2 inline-block [&>li]:inline-block">
+				<div className="my-[2vw] flex-wrap gap-[2vw] flex-center">
 					{profiles.map((profile) => (
-						<Drawer>
-							<DrawerTrigger>
+						<Dialog>
+							<DialogTrigger>
 								<ProfileEdit image={profile.image} name={profile.name} onClick={onClickProfile} />
-							</DrawerTrigger>
-							<DrawerContent>
+							</DialogTrigger>
+							<DialogContent>
 								<Form form={form} onSubmit={handleSubmit} className="flex-col gap-7 flex-center">
-									<DrawerHeader>
-										<DrawerClose className="my-4 flex w-full justify-end">
-											<CloseIcon className="h-12 w-12 rotate-45" />
-										</DrawerClose>
-										<DrawerTitle className="!text-center">Add Profile</DrawerTitle>
-										<DrawerDescription className="Regular-Body">Add a profile to register other users to watch Netflix.</DrawerDescription>
-									</DrawerHeader>
+									<DialogHeader>
+										<DialogTitle className="!text-center">Change profile</DialogTitle>
+									</DialogHeader>
 
-									<ProfileImg image={profileImage} className="w-16" />
-									<Form.Item name="name" className="w-full" renderItem={(field) => <InputText name="name" label="Name" {...field} />} />
-									<Form.Item
-										name="child"
-										className="w-full"
-										renderItem={(field) => (
-											<Switch
-												name="child"
-												label="Kides Profile"
-												description="Show only children's series and movies"
-												id="child"
-												{...field}
+									<div className="w-full gap-2 flex-center">
+										<ProfileImg image={profileImage} className="" />
+										<div className="flex flex-1 flex-col gap-2">
+											<Form.Item
+												name="name"
+												renderItem={(field) => (
+													<InputText name="name" label="Name" {...field} className="bg-Grey/Grey-850 text-Primary/White" />
+												)}
 											/>
-										)}
-									/>
+											<Form.Item
+												name="gender"
+												renderItem={(field) => <Select label="Gender" items={['Male', 'Female', 'Other']} {...field} />}
+											/>
+										</div>
+									</div>
 								</Form>
 								<DrawerFooter>
 									<Button theme="white">save</Button>
 									<Button theme="transparent">Cancellation</Button>
 								</DrawerFooter>
-							</DrawerContent>
-						</Drawer>
+							</DialogContent>
+						</Dialog>
 					))}
-
-					<Drawer>
-						<DrawerTrigger>
+					<Dialog>
+						<DialogTrigger>
 							<ProfileAdd onClick={onClickAddProfile} />
-						</DrawerTrigger>
-						<DrawerContent>
+						</DialogTrigger>
+						<DialogContent>
 							<Form form={form} onSubmit={handleSubmit} className="flex-col gap-7 flex-center">
-								<DrawerHeader>
-									<DrawerClose className="my-4 flex w-full justify-end">
-										<CloseIcon className="h-12 w-12 rotate-45" />
-									</DrawerClose>
-									<DrawerTitle className="!text-center">Add Profile</DrawerTitle>
-									<DrawerDescription className="Regular-Body">Add a profile to register other users to watch Netflix.</DrawerDescription>
-								</DrawerHeader>
+								<DialogHeader>
+									<DialogTitle className="!text-center">Add Profile</DialogTitle>
+									<DialogDescription className="Regular-Body">Add a profile to register other users to watch Netflix.</DialogDescription>
+								</DialogHeader>
 
 								<ProfileImg image={profileImage} className="w-16" />
-								<Form.Item name="name" className="w-full" renderItem={(field) => <InputText name="name" label="Name" {...field} />} />
+								<Form.Item
+									name="name"
+									className="w-full"
+									renderItem={(field) => <InputText name="name" label="Name" className="bg-Grey/Grey-850" {...field} />}
+								/>
 								<Form.Item
 									name="child"
 									className="w-full"
@@ -122,12 +109,12 @@ export function ManagerProfiles() {
 									)}
 								/>
 							</Form>
-							<DrawerFooter>
+							<DialogFooter>
 								<Button theme="white">save</Button>
 								<Button theme="transparent">Cancellation</Button>
-							</DrawerFooter>
-						</DrawerContent>
-					</Drawer>
+							</DialogFooter>
+						</DialogContent>
+					</Dialog>
 				</div>
 
 				<Button theme="outline" className="mx-auto h-[42px] max-w-[178px] Regular-Headline" onClick={onClickSave}>

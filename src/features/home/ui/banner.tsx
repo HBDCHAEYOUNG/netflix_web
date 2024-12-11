@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 export function Banner() {
 	return (
-		<div className="absolute left-1/2 top-[-72px] h-[144px] w-[1292px] -translate-x-1/2 gap-8 rounded-md flex-center gradient1">
+		<div className="absolute left-1/2 top-[-72px] aspect-[1292/144] max-h-[144px] w-full max-w-[1292px] -translate-x-1/2 gap-8 rounded-md flex-center gradient1">
 			<img src={popcorn} alt="popcorn" className="opacity-75" />
 			<div>
 				<p className="mb-1 Medium-Headline">The Netflix you love for just $6.99.</p>
