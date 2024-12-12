@@ -44,7 +44,6 @@ export function ManagerProfiles() {
 	const handleSubmit = () => {
 		console.log('handleSubmit')
 	}
-	console.log(form.watch())
 	return (
 		<div className="mx-auto h-screen max-w-[80%] place-content-center gap-[67px] text-center">
 			<div>
