@@ -4,7 +4,7 @@ import Home from '@pages/home/ui/home'
 
 export const HomeRoute = {
 	path: '/',
-	element: <CommonLayout />,
+	element: <CommonLayout headerType="home" />,
 	children: [{ index: true, element: <Home /> }],
 	errorElement: <ErrorLayout />,
 }

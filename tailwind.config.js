@@ -119,8 +119,11 @@ export default {
 	plugins: [
 		({ addUtilities }) => {
 			addUtilities({
-				'.max-width-desktop': {
-					maxWidth: '1104px',
+				'.max-w-base': {
+					maxWidth: '1200px',
+				},
+				'.min-w-base': {
+					minWidth: '1000px',
 				},
 				'.mobile-padding': {
 					paddingLeft: '12px',

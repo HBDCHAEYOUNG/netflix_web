@@ -4,7 +4,7 @@ import { footerLink } from 'src/shared/const/footer'
 function Footer() {
 	return (
 		<footer className="z-10 w-full bg-TransparentBlack/60% py-[72px]">
-			<div className="mx-auto w-full max-width-desktop">
+			<div className="mx-auto w-full max-w-base">
 				<p className="mb-6 Regular-Body">
 					Questions? Call
 					<u className="cursor-pointer">1-844-505-2993</u>
