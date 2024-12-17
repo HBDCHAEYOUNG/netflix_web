@@ -6,6 +6,7 @@ import Info from '@icons/info.svg?react'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@ui/_shardcn/carousel'
 import { movies } from '../const/home'
 import { VideoCard } from '@features/home/ui/video-card'
+import smallmovie from '@images/movie-card-small.png'
 
 function Home() {
 	return (
@@ -44,6 +45,22 @@ function Home() {
 					<CarouselNext className="absolute right-0 top-1/2 -translate-y-1/2" />
 				</Carousel>
 			</div>
+			<section className="flex">
+				{[...Array(10)].map((_, index) => (
+					<div key={index} className="relative">
+						<p className="relative mr-24 inline-block size-fit text-[154px] font-extrabold" data-content={index + 1}>
+							<img src={smallmovie} alt="smallmovie" className="absolute left-3/4 top-1/2 z-20 -translate-y-1/2" />
+							<span className="z-10 text-Primary/Black">{index + 1}</span>
+							<span
+								className="absolute left-0 top-0 z-0 text-transparent [-webkit-text-stroke:4px_rgba(255,255,255,0.3)]"
+								aria-hidden="true"
+							>
+								{index + 1}
+							</span>
+						</p>
+					</div>
+				))}
+			</section>
 		</div>
 	)
 }
