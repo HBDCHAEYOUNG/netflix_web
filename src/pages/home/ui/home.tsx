@@ -1,18 +1,17 @@
-import movie from '@images/movie.png'
-import movietitle from '@images/movie-title.png'
-import Button from '@ui/button/button'
-import Play from '@icons/play.svg?react'
-import Info from '@icons/info.svg?react'
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@ui/_shardcn/carousel'
-import { movies } from '../const/home'
 import { VideoCard } from '@features/home/ui/video-card'
+import Info from '@icons/info.svg?react'
+import Play from '@icons/play.svg?react'
 import smallmovie from '@images/movie-card-small.png'
-
+import movietitle from '@images/movie-title.png'
+import movie from '@images/movie.png'
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@ui/_shardcn/carousel'
+import Button from '@ui/button/button'
+import { movies } from '../const/home'
 function Home() {
 	return (
 		<div className="flex flex-col">
 			<section>
-				<img src={movie} alt="movieimage:House of ninjas" className="w-full" />
+				<img src={movie} alt="movieimage:House of ninjas" className="w-fit" />
 				<div className="absolute left-[20px] top-1/2 max-w-[518px] -translate-y-1/2">
 					<img src={movietitle} alt="movietitle:House of ninjas" />
 					<p className="mt-4">
@@ -47,9 +46,8 @@ function Home() {
 			</div>
 			<section className="flex">
 				{[...Array(10)].map((_, index) => (
-					<div key={index} className="relative">
-						<p className="relative mr-24 inline-block size-fit text-[154px] font-extrabold" data-content={index + 1}>
-							<img src={smallmovie} alt="smallmovie" className="absolute left-3/4 top-1/2 z-20 -translate-y-1/2" />
+					<div key={index} className="relative mr-16">
+						<div className="relative w-[154px] text-[200px] font-extrabold" data-content={index + 1}>
 							<span className="z-10 text-Primary/Black">{index + 1}</span>
 							<span
 								className="absolute left-0 top-0 z-0 text-transparent [-webkit-text-stroke:4px_rgba(255,255,255,0.3)]"
@@ -57,7 +55,8 @@ function Home() {
 							>
 								{index + 1}
 							</span>
-						</p>
+						</div>
+						<img src={smallmovie} alt="smallmovie" className="absolute left-2/3 top-1/2 z-20 -translate-y-1/2" />
 					</div>
 				))}
 			</section>
