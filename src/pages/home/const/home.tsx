@@ -44,4 +44,44 @@ export const movies = [
 		releaseDate: '2023-04-05',
 		rating: '19',
 	},
+	{
+		image: card4,
+		title: 'One Piece',
+		description:
+			"One Piece is a Japanese manga series written and illustrated by Eiichiro Oda. It has been serialized in Shueisha's Weekly Shōnen Jump magazine since July 1997, with its individual chapters compiled into 109 tankobon volumes as of December 2024.",
+		duration: '1 hours 30 minutes',
+		genre: 'Action, Adventure, Comedy',
+		releaseDate: '2023-04-05',
+		rating: '19',
+	},
+	{
+		image: card4,
+		title: 'One Piece',
+		description:
+			"One Piece is a Japanese manga series written and illustrated by Eiichiro Oda. It has been serialized in Shueisha's Weekly Shōnen Jump magazine since July 1997, with its individual chapters compiled into 109 tankobon volumes as of December 2024.",
+		duration: '1 hours 30 minutes',
+		genre: 'Action, Adventure, Comedy',
+		releaseDate: '2023-04-05',
+		rating: '19',
+	},
+	{
+		image: card4,
+		title: 'One Piece',
+		description:
+			"One Piece is a Japanese manga series written and illustrated by Eiichiro Oda. It has been serialized in Shueisha's Weekly Shōnen Jump magazine since July 1997, with its individual chapters compiled into 109 tankobon volumes as of December 2024.",
+		duration: '1 hours 30 minutes',
+		genre: 'Action, Adventure, Comedy',
+		releaseDate: '2023-04-05',
+		rating: '19',
+	},
+	{
+		image: card4,
+		title: 'One Piece',
+		description:
+			"One Piece is a Japanese manga series written and illustrated by Eiichiro Oda. It has been serialized in Shueisha's Weekly Shōnen Jump magazine since July 1997, with its individual chapters compiled into 109 tankobon volumes as of December 2024.",
+		duration: '1 hours 30 minutes',
+		genre: 'Action, Adventure, Comedy',
+		releaseDate: '2023-04-05',
+		rating: '19',
+	},
 ]

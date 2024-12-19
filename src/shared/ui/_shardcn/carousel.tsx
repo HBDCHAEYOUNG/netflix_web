@@ -2,8 +2,8 @@ import * as React from 'react'
 import useEmblaCarousel, { type UseEmblaCarouselType } from 'embla-carousel-react'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 
-import { Button } from '@ui/_shardcn/button'
 import { cn } from '@lib/utils'
+import { Button } from '@ui/_shardcn/button'
 
 type CarouselApi = UseEmblaCarouselType[1]
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>
@@ -135,7 +135,7 @@ const CarouselContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HT
 	const { carouselRef, orientation } = useCarousel()
 
 	return (
-		<div ref={carouselRef} className="overflow-hidden">
+		<div ref={carouselRef}>
 			<div ref={ref} className={cn('flex', orientation === 'horizontal' ? '-ml-4' : '-mt-4 flex-col', className)} {...props} />
 		</div>
 	)
@@ -167,7 +167,7 @@ const CarouselPrevious = React.forwardRef<HTMLButtonElement, React.ComponentProp
 				variant={variant}
 				size={size}
 				className={cn(
-					'absolute h-8 w-8 rounded-full',
+					'absolute border-none outline-none',
 					orientation === 'horizontal' ? '-left-12 top-1/2 -translate-y-1/2' : '-top-12 left-1/2 -translate-x-1/2 rotate-90',
 					className,
 				)}
@@ -193,7 +193,7 @@ const CarouselNext = React.forwardRef<HTMLButtonElement, React.ComponentProps<ty
 				variant={variant}
 				size={size}
 				className={cn(
-					'absolute h-8 w-8 rounded-full',
+					'absolute border-none outline-none',
 					orientation === 'horizontal' ? '-right-12 top-1/2 -translate-y-1/2' : '-bottom-12 left-1/2 -translate-x-1/2 rotate-90',
 					className,
 				)}
