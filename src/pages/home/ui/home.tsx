@@ -53,15 +53,15 @@ function Home() {
 						{[...Array(10)].map((_, index) => (
 							<CarouselItem key={index} className="relative basis-auto pl-16">
 								<div className="relative w-[154px] text-[200px] font-extrabold" data-content={index + 1}>
-									<span className="z-10 text-Primary/Black">{index + 1}</span>
-									<span
+									<p
 										className="absolute left-0 top-0 z-0 text-transparent [-webkit-text-stroke:4px_rgba(255,255,255,0.3)]"
 										aria-hidden="true"
 									>
 										{index + 1}
-									</span>
+									</p>
+									{/* <p className="z-10 text-Primary/Black">{index + 1}</p> */}
+									<img src={smallmovie} alt="smallmovie" className="absolute left-2/3 top-1/2 z-20 -translate-y-1/2" />
 								</div>
-								<img src={smallmovie} alt="smallmovie" className="absolute left-2/3 top-1/2 z-20 -translate-y-1/2" />
 							</CarouselItem>
 						))}
 					</CarouselContent>

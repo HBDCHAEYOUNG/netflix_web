@@ -9,7 +9,7 @@ body {
 * {
 	box-sizing: border-box;
 	color: white;
-	font: Netflix Sans;
+	font-family: Netflix Sans;
 }
 /* 
 @layer base {
