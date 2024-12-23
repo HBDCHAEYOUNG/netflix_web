@@ -1,14 +1,10 @@
 import CommonLayout from '@app/layouts/common-layout'
 import ErrorLayout from '@app/layouts/error-layout'
 import Home from '@pages/home/ui/home'
-import Login from '@pages/login/ui/login'
 
 export const HomeRoute = {
 	path: '/',
-	element: <CommonLayout />,
-	children: [
-		{ index: true, element: <Home /> },
-		{ path: 'auth', element: <Login /> },
-	],
+	element: <CommonLayout headerType="home" />,
+	children: [{ index: true, element: <Home /> }],
 	errorElement: <ErrorLayout />,
 }

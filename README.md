@@ -8,5 +8,8 @@
    eslint + prettier
    husky + lint-staged
    axios->ky
-
 4. index 자동화
+
+checkout
+
+Q1. 화면 뒤 배경도 검정색 어떻게 하지?
