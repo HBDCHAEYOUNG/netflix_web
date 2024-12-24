@@ -47,21 +47,19 @@ function Home() {
 					<CarouselNext className="absolute right-0 top-1/2 h-full w-[4vw] -translate-y-1/2 cursor-pointer bg-black/50" />
 				</Carousel>
 			</div>
+
 			<div>
 				<Carousel opts={{ loop: true, slidesToScroll: 'auto' }}>
-					<CarouselContent>
-						{[...Array(10)].map((_, index) => (
-							<CarouselItem key={index} className="relative basis-auto pl-16">
-								<div className="relative w-[154px] text-[200px] font-extrabold" data-content={index + 1}>
-									<p
-										className="absolute left-0 top-0 z-0 text-transparent [-webkit-text-stroke:4px_rgba(255,255,255,0.3)]"
-										aria-hidden="true"
-									>
-										{index + 1}
-									</p>
-									{/* <p className="z-10 text-Primary/Black">{index + 1}</p> */}
-									<img src={smallmovie} alt="smallmovie" className="absolute left-2/3 top-1/2 z-20 -translate-y-1/2" />
-								</div>
+					<CarouselContent className="relative">
+						{[...Array(9)].map((_, index) => (
+							<CarouselItem key={index} className="basis-auto pl-24">
+								<p
+									className="text-[215px] font-extrabold text-transparent [-webkit-text-stroke:4px_rgba(255,255,255,0.3)]"
+									aria-hidden="true"
+								>
+									{index + 1}
+								</p>
+								<img src={smallmovie} alt="smallmovie" className="absolute left-[82%] top-1/2 z-20 -translate-y-[63%]" />
 							</CarouselItem>
 						))}
 					</CarouselContent>
