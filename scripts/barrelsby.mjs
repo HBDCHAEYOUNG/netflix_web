@@ -11,7 +11,9 @@ const barrelsByOptions = {
 	singleQuotes: true,
 	noHeader: true,
 	verbose: true,
-	exclude: ['index.ts', '.*\\.stories\\..*'], // 제외 파일
+	noSemicolon: true,
+	flat: true,
+	exclude: ['index.ts', '.*\\.stories\\..*'], // 제외할 파일
 }
 
 dirsToProcess.forEach((dir) => {

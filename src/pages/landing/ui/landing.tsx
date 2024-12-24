@@ -29,8 +29,8 @@ function Landing() {
 				<div className="relative w-full flex-col">
 					<h1 className="mx-auto mb-4 w-fit Bold-Title1">Unlimited movies, TV shows, and more</h1>
 					<p className="mx-auto mb-6 w-fit Regular-Title2">Watch anywhere. Cancel anytime.</p>
-
 					<p className="mx-auto mb-4 w-fit Regular-Title4">Ready to watch? Enter your email to create or restart your membership. test</p>
+
 					<Form form={form} onSubmit={handleSubmit} className="flex justify-center gap-2">
 						<Form.Item
 							name="email"
@@ -65,7 +65,7 @@ function Landing() {
 					))}
 				</Accordion>
 
-				<label className="mb-4 mt-12 Regular-Title4">Create or restart your membership</label>
+				<p className="mb-4 mt-12 Regular-Title4">Create or restart your membership</p>
 				<Button className="h-[56px] w-[208px] flex-center Medium-Title3">Get Started</Button>
 			</section>
 		</div>
