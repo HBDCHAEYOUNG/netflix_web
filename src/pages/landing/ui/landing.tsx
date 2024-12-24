@@ -32,10 +32,9 @@ function Landing() {
 					<p className="mx-auto mb-4 w-fit Regular-Title4">Ready to watch? Enter your email to create or restart your membership. test</p>
 
 					<Form form={form} onSubmit={handleSubmit} className="flex justify-center gap-2">
-						<Form.Item
-							name="email"
-							renderItem={(field) => <InputText name="email" label="Email address" className="h-[56px] w-[368px]" {...field} />}
-						/>
+						<Form.Item name="email">
+							<InputText name="email" label="Email address" className="h-[56px] w-[368px]" />
+						</Form.Item>
 						<Button className="h-[56px] w-[208px] flex-center Medium-Title3" rightIcon={<ArrowIcon className="ml-4" />}>
 							Get Started
 						</Button>

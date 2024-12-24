@@ -27,22 +27,18 @@ function Login() {
 			<div className="relative h-[708px] w-[450px] bg-TransparentBlack/60% px-[68px] py-[48px]">
 				<h1 className="mb-7 Bold-Title1">Sign In</h1>
 				<Form form={form} onSubmit={handleSubmit} className="flex w-full flex-col items-center gap-4">
-					<Form.Item
-						name="email"
-						renderItem={(field) => <InputText name="email" label="Email Address" className="h-[56px] w-[314px]" {...field} />}
-					/>
-					<Form.Item
-						name="password"
-						renderItem={(field) => <InputText name="password" label="Password" className="h-[56px] w-[314px]" {...field} />}
-					/>
+					<Form.Item name="email">
+						<InputText name="email" label="Email Address" className="h-[56px] w-[314px]" />
+					</Form.Item>
+					<Form.Item name="password">
+						<InputText name="password" label="Password" className="h-[56px] w-[314px]" />
+					</Form.Item>
 					<Button className="h-[56px] w-[314px] flex-center Medium-Title3" rightIcon={<ArrowIcon className="ml-4" />}>
 						Sign In
 					</Button>
-					<Form.Item
-						name="remember"
-						className="mt-1 w-full"
-						renderItem={(field) => <CheckboxBasic label="Remember me" labelClassName="Regular-Body" {...field} />}
-					/>
+					<Form.Item name="remember" className="mt-1 w-full">
+						<CheckboxBasic label="Remember me" labelClassName="Regular-Body" />
+					</Form.Item>
 				</Form>
 				<p className="mt-4 text-gray-400 Regular-Body">
 					Don't have an account?{' '}
