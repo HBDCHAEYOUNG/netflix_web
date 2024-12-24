@@ -1,6 +1,6 @@
 import { HTMLAttributes, PropsWithChildren, ReactNode } from 'react'
 import { FieldValues, UseFormProps, UseFormReturn, useFormContext } from 'react-hook-form'
-
+import { Slot } from '@radix-ui/react-slot'
 import { cn } from '@lib/utils'
 
 import {
@@ -29,12 +29,12 @@ interface FormItemProps extends HTMLAttributes<HTMLDivElement> {
 	descriptionClassName?: string // 설명 css 스타일
 	errorClassName?: string // 에러 메시지 css 스타일
 	require?: boolean // 필수 css
-	renderItem?: (field: any) => ReactNode // 폼 아이템 렌더링 함수
+	children?: ReactNode
 }
 
 const FormItem = (props: FormItemProps) => {
 	const { control } = useFormContext()
-	const { renderItem, name, label, require, className, labelClassName, description, descriptionClassName, errorClassName, ...rest } = props
+	const { name, label, require, className, labelClassName, description, descriptionClassName, errorClassName, children, ...rest } = props
 
 	return (
 		<FormField
@@ -48,7 +48,9 @@ const FormItem = (props: FormItemProps) => {
 						</FormLabel>
 					)}
 					{description && <FormDescription className={`text-xs text-gray-400 ${descriptionClassName}`}>{description}</FormDescription>}
-					<FormControl>{renderItem && renderItem(field)}</FormControl>
+					<FormControl>
+						<Slot {...field}>{children}</Slot>
+					</FormControl>
 					<FormMessage className={cn('w-full pt-2 text-Primary/Red', errorClassName)} />
 				</FormGroup>
 			)}
