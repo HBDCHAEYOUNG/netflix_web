@@ -1,61 +1,26 @@
-import TransferIcon from '@icons/account.svg?react'
-import PencilIcon from '@icons/pencil.svg?react'
-import PersonIcon from '@icons/person.svg?react'
-import ServiceIcon from '@icons/question.svg?react'
 import SearchIcon from '@icons/search.svg?react'
 import netflixLogo from '@images/logo.png'
-import post from '@images/post.png'
 import { cn } from '@lib/utils'
 import { AuthStore } from '@store/auth-store'
 import Button from '@ui/button/button'
 import { Menu, MenuBell } from '@ui/index'
 import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { HeaderType } from './common-layout'
+import { headerItems, HeaderType, menuBellItems, menuItems } from 'src/shared/const'
 
 interface HeaderProps {
 	headerType?: HeaderType
 }
 
-const headerItems = [
-	{ title: 'home', path: '/' },
-	{ title: 'seiries', path: '/tv' },
-	{ title: 'movie', path: '/movies' },
-	{ title: 'New!The latest tranding content', path: 'latest' },
-	{ title: 'My List', path: 'my-list' },
-]
-
-const menuBellItems = [
-	{ image: post, title: 'New Content', description: 'Watch The Garfield Movie | Netflix', at: '2024-12-10T07:10:27.951Z' },
-	{ image: post, title: 'New Content', description: 'Watch The Garfield Movie | Netflix', at: '2024-12-10T07:10:27.951Z' },
-	{ image: post, title: 'New Content', description: 'Watch The Garfield Movie | Netflix', at: '2024-12-10T07:10:27.951Z' },
-]
-
 export function Header({ headerType = 'landing' }: HeaderProps) {
-	const { setLogin, setLogout } = AuthStore()
-	const isLogin = true
+	const { setLogin } = AuthStore()
 
-	const menuItems = [
-		{
-			icon: <PencilIcon />,
-			title: 'Manage Your Profile',
-		},
-		{
-			icon: <TransferIcon />,
-			title: 'Profile Transfer',
-		},
-		{
-			title: 'Account',
-			icon: <PersonIcon />,
-		},
-		{ title: 'Customer Service Center', icon: <ServiceIcon /> },
-		{ title: 'Log out Of Netflix', onClick: setLogout, className: 'mt-2 justify-center border-t border-Grey/Grey-200 pr-0' },
-	]
+	const isLogin = false
 
 	const [isSearch, setIsSearch] = useState(false)
 
 	const inputRef = useRef<HTMLInputElement>(null)
-	console.log(isSearch, inputRef)
+
 	return (
 		<header
 			className={cn(
@@ -63,8 +28,8 @@ export function Header({ headerType = 'landing' }: HeaderProps) {
 				headerType === 'landing' && 'absolute left-1/2 top-0 -translate-x-1/2 translate-y-0',
 			)}
 		>
-			<div className="flex w-full justify-between px-5">
-				<Link to="/">
+			<div className="flex w-full items-center justify-between px-5">
+				<Link to={isLogin ? '/' : '/landing'}>
 					<img src={netflixLogo} alt="netflix" className="cursor-pointer" />
 				</Link>
 
