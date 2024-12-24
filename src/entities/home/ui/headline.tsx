@@ -5,9 +5,9 @@ interface HeadlineProps {
 
 export function Headline({ title, description }: HeadlineProps) {
 	return (
-		<p className="whitespace-pre-line Regular-Title2">
-			<h3 className="Bold-Title1">{title}</h3>
+		<h3 className="whitespace-pre-line Regular-Title2">
+			<p className="Bold-Title1">{title}</p>
 			{description}
-		</p>
+		</h3>
 	)
 }

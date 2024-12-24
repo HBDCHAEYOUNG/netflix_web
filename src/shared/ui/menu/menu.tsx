@@ -25,6 +25,8 @@ interface MenuProps {
 }
 
 export const Menu = React.forwardRef<HTMLDivElement, MenuProps>(({ label, items, className, ...props }, ref) => {
+	// const { setLogout } = AuthStore()
+
 	return (
 		<NavigationMenu ref={ref} className={className} {...props}>
 			<NavigationMenuList>
