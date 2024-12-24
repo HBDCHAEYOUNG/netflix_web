@@ -63,16 +63,12 @@ export function ManagerProfiles() {
 									<div className="w-full gap-2 flex-center">
 										<ProfileImg image={profileImage} className="" />
 										<div className="flex flex-1 flex-col gap-2">
-											<Form.Item
-												name="name"
-												renderItem={(field) => (
-													<InputText name="name" label="Name" {...field} className="bg-Grey/Grey-850 text-Primary/White" />
-												)}
-											/>
-											<Form.Item
-												name="gender"
-												renderItem={(field) => <Select label="Gender" items={['Male', 'Female', 'Other']} {...field} />}
-											/>
+											<Form.Item name="name">
+												<InputText name="name" label="Name" className="bg-Grey/Grey-850 text-Primary/White" />
+											</Form.Item>
+											<Form.Item name="gender">
+												<Select label="Gender" items={['Male', 'Female', 'Other']} />
+											</Form.Item>
 										</div>
 									</div>
 								</Form>
@@ -95,18 +91,12 @@ export function ManagerProfiles() {
 								</DialogHeader>
 
 								<ProfileImg image={profileImage} className="w-16" />
-								<Form.Item
-									name="name"
-									className="w-full"
-									renderItem={(field) => <InputText name="name" label="Name" className="bg-Grey/Grey-850" {...field} />}
-								/>
-								<Form.Item
-									name="child"
-									className="w-full"
-									renderItem={(field) => (
-										<Switch name="child" label="Kides Profile" description="Show only children's series and movies" id="child" {...field} />
-									)}
-								/>
+								<Form.Item name="name" className="w-full">
+									<InputText name="name" label="Name" className="bg-Grey/Grey-850" />
+								</Form.Item>
+								<Form.Item name="child" className="w-full">
+									<Switch name="child" label="Kides Profile" description="Show only children's series and movies" id="child" />
+								</Form.Item>
 							</Form>
 							<DialogFooter>
 								<Button theme="white">save</Button>

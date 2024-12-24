@@ -12,7 +12,6 @@ const barrelsByOptions = {
 	noHeader: true,
 	verbose: true,
 	noSemicolon: true,
-	flat: true,
 	exclude: ['index.ts', '.*\\.stories\\..*'], // 제외할 파일
 }
 
