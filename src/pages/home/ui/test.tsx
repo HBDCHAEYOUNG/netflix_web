@@ -5,17 +5,21 @@ import Button from '@ui/button/button'
 import Play from '@icons/play.svg?react'
 import TvMa from '@icons/tv-ma.svg?react'
 import Hd from '@icons/hd.svg?react'
+import { Select } from '@ui/index'
 const movie = {
 	image: post,
-	title: title,
+	title: 'The Super Mario Bros. Movie',
+	titleImg: title,
 	description:
 		'The Super Mario Bros. Movie is an upcoming American computer-animated action-adventure comedy film produced by Illumination and distributed by Universal Pictures.',
 	duration: '1 hours 30 minutes',
 	genre: 'Action, Adventure, Comedy',
+	director: 'Chris Pratt, Anya Taylor-Joy, Charlie Day, Jack Black',
 	cast: 'Chris Pratt, Anya Taylor-Joy, Charlie Day, Jack Black',
 	etc: 'Exciting, Thrilling, Heartwarming, Family-friendly',
 	releaseDate: '2023-04-05',
 	rating: 'tv-ma',
+	maturity: '12',
 	season: 3,
 	videoQuality: 'hd',
 }
@@ -35,7 +39,7 @@ export function Test() {
 				/>
 
 				<div className="relative h-[480px] w-[850px] place-content-end px-12 pb-16">
-					<img src={movie.title} alt={movie.title} />
+					<img src={movie.titleImg} alt={movie.title} />
 
 					<nav>
 						<Button theme="white" className="mt-6 h-[43px] w-[119px] gap-2 flex-center Medium-Body">
@@ -54,7 +58,7 @@ export function Test() {
 								{movie.videoQuality === 'hd' && <Hd />}
 							</p>
 							{movie.rating === 'tv-ma' && <TvMa />}
-							<span className="mt-6 block Medium-Body">{movie.description}</span>
+							<span className="mt-4 block Medium-Body">{movie.description}</span>
 						</div>
 
 						<p>
@@ -64,6 +68,54 @@ export function Test() {
 						</p>
 					</div>
 				</div>
+
+				<div className="flex items-center justify-between gap-2 px-12 py-6 Medium-Title3">
+					회차
+					<Select items={['season 1', 'season 2', 'season 3']} className="h-12 w-40 px-4 Regular-Headline" />
+				</div>
+
+				<ul className="px-12 pb-6">
+					{[{ ...movie }, { ...movie }, { ...movie }].map((item, index) => (
+						<li key={index} className="flex items-center gap-4 border-b border-Grey/Grey-450 py-4 pl-4 pr-12 first:bg-Grey/Grey-450">
+							<p className="Regular-Title2">{index + 1}</p>
+							<img src={item.image} alt={item.title} className="w-32" />
+							<p className="text-Grey/Grey-25 Regular-Smallbody">
+								<span className="flex justify-between pb-2 Regular-Body">
+									<h3>{item.title}</h3>
+									{item.duration}
+								</span>
+								{item.description}
+							</p>
+						</li>
+					))}
+				</ul>
+
+				<div className="px-12 py-6 Medium-Title3">회차</div>
+				<ol className="grid grid-cols-3 gap-4 px-12 pb-6">
+					{[{ ...movie }, { ...movie }, { ...movie }, { ...movie }, { ...movie }, { ...movie }].map((item, index) => (
+						<li key={index} className="w-60 rounded-md bg-Grey/Grey-450">
+							<img src={item.image} alt={item.title} className="w-60" />
+							<div className="p-3 pb-12">
+								<div className="flex items-center gap-2 py-4">
+									<span className="aspect-square size-9 rounded-sm bg-Secondary/Yellow-100 p-1 text-3xl font-extrabold">
+										{item.maturity}
+									</span>
+									{item.videoQuality === 'hd' && <Hd />}
+									{item.releaseDate.slice(0, 4)}
+								</div>
+								<p className="Regular-Body">{item.description}</p>
+							</div>
+						</li>
+					))}
+				</ol>
+
+				<div className="px-12 py-6 Medium-Title3">About {movie.title}</div>
+				<p className="px-12 pb-6 Regular-Body">
+					director : {movie.director}
+					cast : {movie.cast}
+					genre : {movie.genre}
+					etc : {movie.etc}
+				</p>
 			</div>
 		</div>
 	)

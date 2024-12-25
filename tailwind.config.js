@@ -13,6 +13,7 @@ export default {
 				'Secondary/Blue-100': '#0071EB',
 				'Secondary/Blue-200': '#448EF4',
 				'Secondary/Blue-300': '#54B9C5',
+				'Secondary/Yellow-100': '#DFB039',
 				'Grey/Grey-20': '#DCDCDC',
 				'Grey/Grey-25': '#D2D2D2',
 				'Grey/Grey-50': '#BCBCBC',
