@@ -12,7 +12,7 @@ interface SelectProps {
 
 export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(({ label, items, value, onChange, className }, ref) => {
 	return (
-		<SelectShardcn value={value} onValueChange={onChange}>
+		<SelectShardcn value={value} onValueChange={onChange} defaultValue={items[0]}>
 			<SelectTrigger
 				ref={ref}
 				className={cn('flex h-14 w-full items-center rounded-md border border-[#808080] px-3 !text-Grey/Grey-50', className)}
@@ -20,7 +20,7 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(({ label,
 				{value ? (
 					<div className="flex w-full flex-col">
 						<span className="text-left text-xs">{label}</span>
-						<SelectValue />
+						<SelectValue placeholder={value} />
 					</div>
 				) : (
 					<SelectValue placeholder={label} />

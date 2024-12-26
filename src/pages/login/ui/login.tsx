@@ -42,7 +42,7 @@ function Login() {
 				</Form>
 				<p className="mt-4 text-gray-400 Regular-Body">
 					Don't have an account?{' '}
-					<Link to="#" className="font-bold text-white">
+					<Link to="/landing" className="font-bold text-white">
 						Sign up
 					</Link>
 				</p>

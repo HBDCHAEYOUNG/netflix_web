@@ -35,7 +35,7 @@ function Home() {
 
 			<div>
 				<h2 className="my-4">Matched to You</h2>
-				<Carousel opts={{ loop: true, slidesToScroll: 4, watchDrag: false }}>
+				<Carousel opts={{ loop: true, slidesToScroll: 'auto', dragFree: true }}>
 					<CarouselContent className="-ml-[4vw]">
 						{movies.map((movie, index) => (
 							<CarouselItem key={index} className={cn('w-1/4 basis-1/4 cursor-pointer pl-[0.2vw] hover:!scale-150')}>

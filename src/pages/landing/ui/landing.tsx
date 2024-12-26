@@ -9,15 +9,22 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, InputText
 import { useForm } from 'react-hook-form'
 import { faq, sections } from '../const/landing'
 import { EmailSchema, emailSchema } from '../const/landing.type'
+import { useNavigate } from 'react-router-dom'
+
+const userEmail = ['test@test.com', 'testtest@test.com']
 
 function Landing() {
+	const navigate = useNavigate()
 	const form = useForm<EmailSchema>({
 		resolver: zodResolver(emailSchema),
 	})
 
 	const handleSubmit = () => {
-		console.log('submit')
-		console.log(form.watch('email'))
+		if (userEmail.find((email) => email === form.watch('email'))) {
+			navigate('/auth/login')
+		} else {
+			navigate('/auth/signup')
+		}
 	}
 
 	return (
