@@ -1,6 +1,7 @@
 export * from './_shardcn/button'
 export * from './_shardcn/carousel'
 export * from './_shardcn/checkbox'
+export * from './_shardcn/dialog'
 export * from './_shardcn/form'
 export * from './_shardcn/label'
 export * from './_shardcn/navigation-menu'
