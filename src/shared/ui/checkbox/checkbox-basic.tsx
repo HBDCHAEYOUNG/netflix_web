@@ -1,13 +1,18 @@
 import { Checkbox } from '@ui/_shardcn/checkbox'
-import { CheckboxBasicProps } from './checkbos.types'
-import { useId } from 'react'
+import { HTMLAttributes, useId } from 'react'
 import { cn } from '@lib/utils'
 
-export function CheckboxBasic({ label, labelClassName, ...rest }: CheckboxBasicProps) {
+interface CheckboxBasicProps extends HTMLAttributes<HTMLDivElement> {
+	label: string
+	labelClassName?: string
+	size?: string
+}
+
+export function CheckboxBasic({ label, size, labelClassName, ...rest }: CheckboxBasicProps) {
 	const id = useId()
 	return (
 		<div className="flex items-center space-x-2" {...rest}>
-			<Checkbox id={id} />
+			<Checkbox id={id} className={cn('', size)} />
 			<div className="grid gap-1.5 leading-none">
 				<label
 					htmlFor={id}
