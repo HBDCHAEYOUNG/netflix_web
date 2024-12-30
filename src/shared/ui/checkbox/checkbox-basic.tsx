@@ -6,12 +6,13 @@ interface CheckboxBasicProps extends HTMLAttributes<HTMLDivElement> {
 	label: string
 	labelClassName?: string
 	size?: string
+	className?: string
 }
 
-export function CheckboxBasic({ label, size, labelClassName, ...rest }: CheckboxBasicProps) {
+export function CheckboxBasic({ label, size, labelClassName, className, ...rest }: CheckboxBasicProps) {
 	const id = useId()
 	return (
-		<div className="flex items-center space-x-2" {...rest}>
+		<div className={cn('flex items-center space-x-2', className)} {...rest}>
 			<Checkbox id={id} className={cn('', size)} />
 			<div className="grid gap-1.5 leading-none">
 				<label

@@ -72,27 +72,55 @@ export function Signup() {
 			</p>
 			{step === 0 && (
 				<div>
-					<h1 className="pb-6 pt-2 !text-center Medium-LargeTitle">계정 설정 마무리하기</h1>
-					<p className="w-[280px] !text-center !font-light Regular-Title3">
-						맞춤형 콘텐츠 서비스, 넷플릭스! 비밀번호를 설정하고 넷플릭스를 시청하세요.
+					<h1 className="pb-6 pt-2 !text-center Medium-LargeTitle">Finish setting up your account</h1>
+					<p className="!text-center !font-light Regular-Title3">
+						Customized content service, Netflix! <br /> Set a password and watch Netflix.
 					</p>
 				</div>
 			)}
 			{step === 1 && (
-				<div>
-					<h1 className="pb-6 pt-2 Medium-LargeTitle">계정 등록</h1>
-					<p className="w-[280px] !text-center !font-light Regular-Title3">
-						맞춤형 콘텐츠 서비스, 넷플릭스! 비밀번호를 설정하고 넷플릭스를 시청하세요.
+				<div className="w-[440px]">
+					<h1 className="pb-6 pt-2 Medium-LargeTitle">
+						Start your membership by
+						<br /> setting a password
+					</h1>
+					<p className="mb-6 !font-light Regular-Title3">
+						Complete your Netflix subscription in just a few more steps! <br />
+						All the complicated steps are gone.
 					</p>
+					<Form form={form} onSubmit={() => {}} className="flex flex-col gap-2">
+						<Form.Item name="email">
+							<InputText name="email" label="Email" className="h-[56px] w-[415px]" />
+						</Form.Item>
+						<Form.Item name="password">
+							<InputText name="password" label="Add Your Password" className="h-[56px] w-[415px]" />
+						</Form.Item>
+						<Form.Item name="poricyAgreement" className="pt-6">
+							<CheckboxBasic
+								label="Yes, I agree to the collection and use of my personal information in accordance with the Netflix Privacy Policy."
+								labelClassName="Regular-Headline"
+								size="!size-8"
+								className="items-start"
+							/>
+						</Form.Item>
+						<Form.Item name="termsAgreement" className="pt-6">
+							<CheckboxBasic
+								label="Yes, please send me emails notifying me of Netflix special offers. (Optional)"
+								labelClassName="Regular-Headline"
+								size="!size-8"
+								className="items-start"
+							/>
+						</Form.Item>
+					</Form>
 				</div>
 			)}
 			{step === 2 && (
 				<div className="flex-col flex-center">
-					<h1 className="w-[230px] pb-6 pt-2 !text-center Medium-LargeTitle">원하는 멤버십을 선택하세요.</h1>
+					<h1 className="w-[350px] pb-6 pt-2 !text-center Medium-LargeTitle">Please select the membership you want.</h1>
 					{[
-						'無약정, 無위약금. 해지도 쿨하게 언제든지.',
-						'하나의 요금으로 즐기는 끝없는 콘텐츠의 세계.',
-						'가지고 계신 모든 디바이스에서 넷플릭스를 즐겨보세요.',
+						'No contract, no penalty. Cancel anytime, coolly.',
+						'A world of endless content for one price.',
+						'Enjoy Netflix on all your devices.',
 					].map((text, index) => (
 						<p key={index} className="mb-4 flex w-[280px] !font-light Regular-Title3">
 							<Checkmark className="mr-4 size-10 [&>path]:fill-Primary/Red" />
@@ -103,7 +131,7 @@ export function Signup() {
 			)}
 			{step === 3 && (
 				<div className="w-[580px]">
-					<h1 className="pb-6 pt-2 Medium-LargeTitle">원하는 멤버십을 선택하세요.</h1>
+					<h1 className="pb-6 pt-2 Medium-LargeTitle">Please select the membership you want.</h1>
 
 					<Tabs defaultValue="account" className="flex-col flex-center">
 						<TabsList className="flex w-full gap-2 pb-14 pt-10">
@@ -199,7 +227,7 @@ export function Signup() {
 				</div>
 			)}
 			{step === 5 && (
-				<div className="flex-col flex-center">
+				<div className="w-[415px] flex-col flex-center">
 					<h1 className="pb-6 pt-2 Medium-LargeTitle">Register a credit or check card</h1>
 					<Form form={form} onSubmit={() => {}} className="flex flex-col gap-2">
 						<Form.Item name="cardNumber">
@@ -220,19 +248,52 @@ export function Signup() {
 								{payment === 'premium' ? '17,000' : payment === 'standard' ? '13,500' : '5,500'}won per month
 								<p className="mt-1 text-Grey/Grey-25 Regular-Body">{payment}</p>
 							</span>
-							<p className="text-Secondary/Blue-200 Regular-Headline">change</p>
+							<p className="cursor-pointer text-Secondary/Blue-200 Regular-Headline" onClick={() => setStep(3)}>
+								change
+							</p>
 						</div>
 
-						<Form.Item name="agreement">
-							<CheckboxBasic label="I agree to the terms and conditions" labelClassName="Medium-Headline" size="!size-20" />
+						<Form.Item name="allAgreement" className="border-b border-Grey/Grey-250 py-6">
+							<CheckboxBasic
+								label="I am 19 years of age or older and agree to all of the terms and conditions below."
+								labelClassName="Regular-Headline"
+								size="!size-8"
+								className="items-start"
+							/>
+						</Form.Item>
+						<Form.Item name="termsAgreement" className="pt-6">
+							<CheckboxBasic
+								label="I to the Netflix terms of use and Privacy Policy."
+								labelClassName="Regular-Headline"
+								size="!size-8"
+								className="items-start"
+							/>
+						</Form.Item>
+						<Form.Item name="privacyAgreement" className="pt-2">
+							<CheckboxBasic
+								label="I agree to provide my personal information to third parties"
+								labelClassName="Regular-Headline"
+								size="!size-8"
+								className="items-start"
+							/>
+						</Form.Item>
+						<Form.Item name="marketingAgreement" className="pt-2">
+							<CheckboxBasic
+								label="If you do not cancel your membership, your Netflix membership will automatically continue, and the membership fee (currently 17,000 won) will be charged monthly to your registered payment method. You can cancel your membership at any time on the 'Account' page of www.netflix.com. In this case, your membership will be canceled at the end of the billing cycle, and you will continue to use the service for the remaining period. However, if you cancel your membership immediately without using Netflix content through your account within 7 days of the billing date, you can request a full refund of the membership fee charged for that billing cycle."
+								labelClassName="Regular-Headline"
+								size="!size-8"
+								className="items-start"
+							/>
 						</Form.Item>
 					</Form>
 				</div>
 			)}
 
-			<Button onClick={onClickNext} className="mt-6 h-16 w-[340px] Medium-Title2">
-				다음
-			</Button>
+			{step !== 4 && (
+				<Button onClick={onClickNext} className="mt-6 h-16 w-[340px] Medium-Title2">
+					{step === 2 ? 'agree and continue' : step === 5 ? 'Start Paid Membership' : 'next'}
+				</Button>
+			)}
 		</div>
 	)
 }
