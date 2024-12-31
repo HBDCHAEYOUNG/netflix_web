@@ -2,6 +2,9 @@ import Button from '@ui/button/button'
 import { useState } from 'react'
 import Checkmark from '@icons/checkmark.svg?react'
 import ArrowRight from '@icons/arrow-right.svg?react'
+import Devices from '@icons/devices.svg?react'
+import CheckRing from '@icons/check-ring.svg?react'
+import Lock from '@icons/lock.svg?react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/_shardcn/tabs'
 import { cn } from '@lib/utils'
 import Form from '@ui/form/form'
@@ -66,6 +69,10 @@ export function Signup() {
 
 	return (
 		<div className={cn('h-full min-h-screen flex-col flex-center', step === 5 && 'pt-24')}>
+			{step === 0 && <Devices className="mb-6" />}
+			{step === 2 && <CheckRing className="mb-6" />}
+			{step === 4 && <Lock className="mb-6" />}
+
 			<p>
 				{step === 0 || step === 1 ? 1 : step === 2 || step === 3 ? 2 : step === 4 || step === 5 ? 3 : 0}
 				/3 단계
@@ -133,18 +140,18 @@ export function Signup() {
 				<div className="w-[580px]">
 					<h1 className="pb-6 pt-2 Medium-LargeTitle">Please select the membership you want.</h1>
 
-					<Tabs defaultValue="account" className="flex-col flex-center">
+					<Tabs defaultValue="premium" className="flex-col flex-center">
 						<TabsList className="flex w-full gap-2 pb-14 pt-10">
 							<TabsTrigger
 								value="advertising"
-								className="flex-1 !rounded-xl border border-Grey/Grey-250 p-6"
+								className="flex-1 !rounded-xl border border-Grey/Grey-250 p-6 data-[state=active]:gradient2"
 								onClick={() => setPayment('advertising')}
 							>
 								Advertising Standard <br /> 1080p
 							</TabsTrigger>
 							<TabsTrigger
 								value="standard"
-								className="flex-1 !rounded-xl border border-Grey/Grey-250 p-6"
+								className="flex-1 !rounded-xl border border-Grey/Grey-250 p-6 data-[state=active]:gradient3"
 								onClick={() => setPayment('standard')}
 							>
 								Standard <br />
@@ -152,7 +159,7 @@ export function Signup() {
 							</TabsTrigger>
 							<TabsTrigger
 								value="premium"
-								className="flex-1 !rounded-xl border border-Grey/Grey-250 p-6"
+								className="flex-1 !rounded-xl border border-Grey/Grey-250 p-6 data-[state=active]:gradient4"
 								onClick={() => setPayment('premium')}
 							>
 								premium <br />
@@ -175,13 +182,13 @@ export function Signup() {
 					</Tabs>
 
 					<p className="whitespace-pre-wrap pt-6 Regular-Smallbody">
-						{`광고형 멤버십에 대해 자세히 알아보세요. 광고형 멤버십을 선택하면, 맞춤형 광고와 Netflix의 개인정보 처리방침에 부합하는 기타 목적을 위해 생년월일을 제공해 주셔야 합니다.
+						{`Learn more about our advertising memberships . If you choose an advertising membership, you will be asked to provide your date of birth to serve you personalized ads and for other purposes consistent with Netflix’s Privacy Policy .
 
-풀 HD(1080p), UHD(4K), HDR 화질 제공 여부는 사용하는 인터넷 서비스와 디바이스의 성능에 따라 달라질 수 있습니다. 모든 콘텐츠가 모든 화질로 제공되지는 않습니다. 자세한 내용은 이용 약관을 확인하세요.
+Availability of Full HD (1080p), UHD (4K), and HDR picture quality may vary depending on the Internet service and device performance used. Not all content is available in all picture quality levels. For more information, see Terms of Use .
 
-함께 거주하는 사람들만 계정을 함께 이용할 수 있습니다. 스탠다드 멤버십은 추가 회원을 1명, 프리미엄은 최대 2명까지 등록할 수 있습니다. 자세히 알아보기. 프리미엄 멤버십은 동시접속 4명, 스탠다드 또는 광고형 스탠다드는 2명까지 가능합니다.
+Only people who live together can use the account together. Standard membership allows 1 additional member, Premium allows up to 2 additional members. Learn more . Premium membership allows 4 simultaneous connections, Standard or Advertising Standard allows 2 simultaneous connections.
 
-라이브 이벤트는 모든 넷플릭스 멤버십으로 이용 가능하며 광고가 포함됩니다.`}
+Live events are available to all Netflix members and include ads.`}
 					</p>
 				</div>
 			)}

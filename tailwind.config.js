@@ -6,7 +6,7 @@ export default {
 		extend: {
 			colors: {
 				'Primary/Black': '#000000',
-				'Primary/Red': 'rgb(229, 9, 20)',
+				'Primary/Red': '#e50914',
 				'Primary/White': '#ffffff',
 				'Secondary/Red-100': '#EB3942',
 				'Secondary/Red-200': '#C11119',
@@ -174,6 +174,18 @@ export default {
 					background: 'rgb(0,4,19)',
 					background:
 						'linear-gradient(90deg, rgba(0,4,19,0.6209077380952381) 0%, rgba(14,27,79,0.590095413165266) 25%, rgba(229,9,20,0.5956976540616247) 50%, rgba(14,27,79,0.6012998949579832) 75%, rgba(14,27,79,0.22875087535014005) 100%)',
+				},
+				'.gradient2': {
+					background: 'rgb(29, 82, 157)',
+					background: 'linear-gradient(135deg,rgba(74, 42, 150,0.7) 30%, rgba(109, 59, 227,1) 100%)',
+				},
+				'.gradient3': {
+					background: 'rgb(29, 82, 157)',
+					background: 'linear-gradient(135deg,rgba(74, 42, 150,0.7) 0%, rgba(176, 56, 220,1) 100%)',
+				},
+				'.gradient4': {
+					background: 'rgb(14,27,79)',
+					background: 'linear-gradient(135deg, rgba(14,27,79,1) 10%, rgba(229,9,20,0.7) 100%)',
 				},
 				'.Regular-Caption2': {
 					fontFamily: 'Netflix Sans',
