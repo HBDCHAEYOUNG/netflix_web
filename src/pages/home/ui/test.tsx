@@ -1,9 +1,9 @@
-import { Detail } from '@widgets/home'
+import { SignupTest } from '@pages/signup/ui/signup-test'
 
 export function Test() {
 	return (
-		<div>
-			<Detail />
+		<div className="flex-col flex-center">
+			<SignupTest />
 		</div>
 	)
 }
