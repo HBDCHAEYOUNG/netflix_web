@@ -7,7 +7,7 @@ interface StepOne1Props {
 
 export function StepOne1({ onClickNext }: StepOne1Props) {
 	return (
-		<div>
+		<div className="min-h-screen w-fit flex-col flex-center">
 			<Devices className="mb-6" />
 			<p>1/3 단계</p>
 			<h1 className="my-2 Medium-LargeTitle">
