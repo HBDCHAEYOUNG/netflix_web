@@ -1,4 +1,4 @@
-import { StepTwo1 } from '@widgets/signup/ui/step-two-1'
+import Button from '@ui/button/button'
 import { useState } from 'react'
 
 export function SignupTest() {
@@ -14,8 +14,10 @@ export function SignupTest() {
 	}
 
 	return (
-		<div className="min-h-screen w-fit flex-col flex-center">
-			<StepTwo1 onClickNext={onClickNext} />
+		<div className="flex min-h-screen w-fit flex-col pt-24">
+			<Button onClick={onClickNext} className="mt-6 h-16 w-full Medium-Title2">
+				next
+			</Button>
 		</div>
 	)
 }
