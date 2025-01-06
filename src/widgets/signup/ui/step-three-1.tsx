@@ -12,6 +12,7 @@ export function StepThree1({ setStep }: StepThree1Props) {
 	return (
 		<div className="min-h-screen w-fit flex-col flex-center">
 			<Lock />
+			<p>3/3 단계</p>
 			<h1 className="py-6 Medium-LargeTitle">Select payment method</h1>
 			<p className="pb-6 !text-center !font-light text-TransparentWhite/50% Regular-Title3">
 				Your payment information is encrypted and you can <br /> change your payment method at any time.

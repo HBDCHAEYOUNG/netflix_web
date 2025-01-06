@@ -19,11 +19,11 @@ Only people who live together can use the account together. Standard membership 
 Live events are available to all Netflix members and include ads.`
 
 interface StepTwo2Props {
-	setPayment: (value: string) => void
+	setMembership: (value: string) => void
 	onClickNext: () => void
 }
 
-export function StepTwo2({ setPayment, onClickNext }: StepTwo2Props) {
+export function StepTwo2({ setMembership, onClickNext }: StepTwo2Props) {
 	return (
 		<div className="flex min-h-screen w-fit max-w-[560px] flex-col pt-24">
 			<p>2/3 단계</p>
@@ -36,7 +36,7 @@ export function StepTwo2({ setPayment, onClickNext }: StepTwo2Props) {
 							key={value}
 							value={value}
 							className={`${COMMON_TAB_CLASSES} data-[state=active]:${gradient}`}
-							onClick={() => setPayment(value)}
+							onClick={() => setMembership(value)}
 						>
 							{label} <br /> {quality}
 						</TabsTrigger>
