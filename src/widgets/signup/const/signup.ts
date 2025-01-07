@@ -1,4 +1,4 @@
-const membership = [
+const memberships = [
 	{
 		type: 'advertising',
 		price: '5,500 won',
@@ -42,4 +42,4 @@ const fields = [
 	{ label: 'Advertisement', key: 'advertisement' },
 ]
 
-export { membership, fields }
+export { memberships, fields }

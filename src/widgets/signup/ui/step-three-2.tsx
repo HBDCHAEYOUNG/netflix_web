@@ -14,7 +14,8 @@ const checkboxItems = [
 	{
 		name: 'allAgreement',
 		label: 'I am 19 years of age or older and agree to all of the terms and conditions below.',
-		className: 'border-b border-Grey/Grey-250 py-6',
+		className: 'border-y border-Grey/Grey-250 py-6',
+		labelClassName: 'text-Primary/White',
 	},
 	{
 		name: 'termsAgreement',
@@ -30,7 +31,7 @@ const checkboxItems = [
 		name: 'marketingAgreement',
 		label:
 			"If you do not cancel your membership, your Netflix membership will automatically continue, and the membership fee (currently 17,000 won) will be charged monthly to your registered payment method. You can cancel your membership at any time on the 'Account' page of www.netflix.com. In this case, your membership will be canceled at the end of the billing cycle, and you will continue to use the service for the remaining period. However, if you cancel your membership immediately without using Netflix content through your account within 7 days of the billing date, you can request a full refund of the membership fee charged for that billing cycle.",
-		className: 'pt-2',
+		className: 'py-2 ',
 	},
 ]
 
@@ -44,7 +45,7 @@ export function StepThree2({ membership, setStep, onClickNext }: StepThree2Props
 	const form = useForm()
 
 	return (
-		<div className="flex min-h-screen w-fit max-w-[440px] flex-col">
+		<div className="flex min-h-screen w-fit max-w-[440px] flex-col pb-40 pt-24">
 			<p>3/3 단계</p>
 			<h1 className="pb-6 pt-2 Medium-LargeTitle">Register a credit or check card</h1>
 			<Form form={form} onSubmit={() => {}} className="flex flex-col gap-2">
@@ -54,7 +55,7 @@ export function StepThree2({ membership, setStep, onClickNext }: StepThree2Props
 					</Form.Item>
 				))}
 
-				<div className="flex w-full items-center justify-between rounded-md bg-Grey/Grey-850 px-4 py-4">
+				<div className="mb-6 flex w-full items-center justify-between rounded-md bg-Grey/Grey-850 px-4 py-4">
 					<span className="flex flex-col Medium-Headline">
 						{membership === 'premium' ? '17,000' : membership === 'standard' ? '13,500' : '5,500'}won per month
 						<p className="mt-1 text-Grey/Grey-25 Regular-Body">{membership}</p>
@@ -68,14 +69,14 @@ export function StepThree2({ membership, setStep, onClickNext }: StepThree2Props
 					<Form.Item key={item.name} name={item.name} className={item.className}>
 						<CheckboxBasic
 							label={item.label}
-							labelClassName="Regular-Headline text-TransparentWhite/70%"
+							labelClassName={`Regular-Headline text-TransparentWhite/70% ${item.labelClassName}`}
 							size="!size-8"
 							className="items-start"
 						/>
 					</Form.Item>
 				))}
 			</Form>
-			<Button onClick={onClickNext} className="mt-6 h-16 w-[340px] Medium-Title2">
+			<Button onClick={onClickNext} className="mt-6 h-16 w-full Medium-Title2">
 				Start Paid Membership
 			</Button>
 		</div>

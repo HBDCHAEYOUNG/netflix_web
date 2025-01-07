@@ -1,14 +1,12 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/index'
-import { fields, membership } from '@pages/signup/const/signup'
+import { fields, memberships } from '@widgets/signup/const/signup'
 import Button from '@ui/button/button'
 
-const MEMBERSHIP_TYPES = [
+const membershipTypes = [
 	{ value: 'advertising', label: 'Advertising Standard', quality: '1080p', gradient: 'gradient2' },
 	{ value: 'standard', label: 'Standard', quality: '1080p', gradient: 'gradient3' },
 	{ value: 'premium', label: 'Premium', quality: '4K + HDR', gradient: 'gradient4' },
 ]
-
-const COMMON_TAB_CLASSES = 'flex-1 !rounded-xl border border-Grey/Grey-250 p-6'
 
 const infoText = `Learn more about our advertising memberships . If you choose an advertising membership, you will be asked to provide your date of birth to serve you personalized ads and for other purposes consistent with Netflix’s Privacy Policy .
 
@@ -19,30 +17,31 @@ Only people who live together can use the account together. Standard membership 
 Live events are available to all Netflix members and include ads.`
 
 interface StepTwo2Props {
+	membership: string
 	setMembership: (value: string) => void
 	onClickNext: () => void
 }
 
-export function StepTwo2({ setMembership, onClickNext }: StepTwo2Props) {
+export function StepTwo2({ membership, setMembership, onClickNext }: StepTwo2Props) {
 	return (
-		<div className="flex min-h-screen w-fit max-w-[560px] flex-col pt-24">
+		<div className="flex min-h-screen w-fit max-w-[560px] flex-col pb-40 pt-24">
 			<p>2/3 단계</p>
 			<h1 className="pb-6 pt-2 Medium-LargeTitle">Please select the membership you want.</h1>
 
-			<Tabs defaultValue="premium" className="flex-col flex-center">
-				<TabsList className="w-full gap-2 pb-14 pt-10">
-					{MEMBERSHIP_TYPES.map(({ value, label, quality, gradient }) => (
+			<Tabs defaultValue={membership} className="flex-col flex-center">
+				<TabsList className="flex w-full gap-2 pb-14 pt-10">
+					{membershipTypes.map(({ value, label, quality, gradient }) => (
 						<TabsTrigger
 							key={value}
 							value={value}
-							className={`${COMMON_TAB_CLASSES} data-[state=active]:${gradient}`}
+							className={`flex-1 !rounded-xl border border-Grey/Grey-250 p-6 data-[state=active]:${gradient}`}
 							onClick={() => setMembership(value)}
 						>
 							{label} <br /> {quality}
 						</TabsTrigger>
 					))}
 				</TabsList>
-				{membership.map((membership, index) => (
+				{memberships.map((membership, index) => (
 					<TabsContent key={index} value={membership.type} className="w-full">
 						{fields.map(
 							(field) =>

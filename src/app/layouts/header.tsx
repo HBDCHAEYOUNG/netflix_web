@@ -28,7 +28,7 @@ export function Header({ headerType = 'landing' }: HeaderProps) {
 				headerType === 'landing' && 'absolute left-1/2 top-0 -translate-x-1/2 translate-y-0',
 			)}
 		>
-			<div className="flex w-full items-center justify-between px-5">
+			<div className="flex w-full items-center justify-between">
 				<Link to={isLogin ? '/' : '/landing'}>
 					<img src={netflixLogo} alt="netflix" className="cursor-pointer" />
 				</Link>

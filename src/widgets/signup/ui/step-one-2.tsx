@@ -24,7 +24,7 @@ const formLabels = {
 export function StepOne2({ onClickNext }: StepOne2Props) {
 	const form = useForm()
 	return (
-		<div>
+		<div className="flex min-h-screen w-fit flex-col justify-center">
 			<p>1/3 단계</p>
 			<div className="w-[440px]">
 				<h1 className="pb-6 pt-2 Medium-LargeTitle">Start your membership by setting a password</h1>
