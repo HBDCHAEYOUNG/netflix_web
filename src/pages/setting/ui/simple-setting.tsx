@@ -1,4 +1,4 @@
-import { StepZero } from '@widgets/setting/ui/step-zero'
+import { StepOne, StepZero } from '@widgets/setting'
 import { useState } from 'react'
 
 export function SimpleSetting() {
@@ -8,7 +8,8 @@ export function SimpleSetting() {
 	}
 	return (
 		<div className="flex-center">
-			<StepZero onClickNext={onClickNext} />
+			{step === 0 && <StepZero onClickNext={onClickNext} />}
+			{step === 1 && <StepOne onClickNext={onClickNext} />}
 		</div>
 	)
 }
