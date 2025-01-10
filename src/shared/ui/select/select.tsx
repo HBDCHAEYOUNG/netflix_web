@@ -23,7 +23,7 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(({ label,
 						<SelectValue placeholder={value} />
 					</div>
 				) : (
-					<SelectValue placeholder={label} />
+					<span className="text-left text-xs">{label}</span>
 				)}
 			</SelectTrigger>
 			<SelectContent>

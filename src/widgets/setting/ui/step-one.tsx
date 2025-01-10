@@ -40,7 +40,7 @@ export function StepOne({ onClickNext }: StepOneProps) {
 				))}
 			</Form>
 			<div className="my-6 w-full rounded-md bg-Grey/Grey-800 px-4 py-4">Only people who live together can use your account</div>
-			<Button onClick={onClickNext} className="h-16 w-full Medium-Title2">
+			<Button onClick={onClickNext} className="my-6 h-16 w-full Medium-Title2">
 				next
 			</Button>
 		</div>
