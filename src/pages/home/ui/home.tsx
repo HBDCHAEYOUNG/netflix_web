@@ -3,7 +3,6 @@ import Info from '@icons/info.svg?react'
 import Play from '@icons/play.svg?react'
 import smallmovie from '@images/movie-card-small.png'
 import movietitle from '@images/movie-title.png'
-import movie from '@images/movie.png'
 import { cn } from '@lib/utils'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@ui/_shardcn/carousel'
 import Button from '@ui/button/button'
@@ -11,12 +10,15 @@ import { movies } from '../const/home'
 
 function Home() {
 	return (
-		<div className="flex flex-col">
+		<div className="flex min-w-full flex-col">
 			<section>
-				<img src={movie} alt="movieimage:House of ninjas" className="w-full" />
-				<div className="absolute left-[20px] top-1/2 max-w-[518px] -translate-y-1/2">
-					<img src={movietitle} alt="movietitle:House of ninjas" />
-					<p className="mt-4">
+				<video autoPlay loop muted className="absolute max-w-[1562px]">
+					<source src="https://videos.pexels.com/video-files/9140346/9140346-uhd_2560_1440_25fps.mp4" type="video/mp4" />
+				</video>
+
+				<div className="relative h-[712px] content-end pb-12 common-padding">
+					<img src={movietitle} alt="movietitle:House of ninjas" className="w-[450px]" />
+					<p className="mt-4 w-[518px] Regular-Title4">
 						Years after retiring from their formidable ninja lives, a dysfunctional family must return to shadowy missions to counteract a
 						string of looming threats.
 					</p>
@@ -34,11 +36,11 @@ function Home() {
 			</section>
 
 			<div>
-				<h2 className="my-4">Matched to You</h2>
-				<Carousel opts={{ loop: true, slidesToScroll: 'auto', dragFree: true }}>
+				<h2 className="relative mb-4 common-padding Medium-Title3">Matched to You</h2>
+				<Carousel opts={{ loop: true, slidesToScroll: 'auto', dragFree: true }} className="ml-14">
 					<CarouselContent className="-ml-[4vw]">
 						{movies.map((movie, index) => (
-							<CarouselItem key={index} className={cn('w-1/4 basis-1/4 cursor-pointer pl-[0.2vw] hover:!scale-150')}>
+							<CarouselItem key={index} className={cn('w-1/5 basis-1/5 cursor-pointer pl-2 hover:!scale-150')}>
 								<VideoCard movie={movie} />
 							</CarouselItem>
 						))}
@@ -49,7 +51,7 @@ function Home() {
 			</div>
 
 			<div>
-				<Carousel opts={{ loop: true, slidesToScroll: 'auto' }}>
+				<Carousel opts={{ loop: true, slidesToScroll: 'auto' }} className="ml-14">
 					<CarouselContent className="relative">
 						{[...Array(9)].map((_, index) => (
 							<CarouselItem key={index} className="basis-auto pl-24">

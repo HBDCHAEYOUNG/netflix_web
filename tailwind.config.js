@@ -126,17 +126,12 @@ export default {
 				'.min-w-base': {
 					minWidth: '1000px',
 				},
-				'.mobile-padding': {
-					paddingLeft: '12px',
-					paddingRight: '12px',
+				'.max-w-wide': {
+					maxWidth: '1400px',
 				},
-				'.tablet-padding': {
-					paddingLeft: '30px',
-					paddingRight: '30px',
-				},
-				'.desktop-padding': {
-					paddingLeft: '60px',
-					paddingRight: '60px',
+				'.common-padding': {
+					paddingLeft: '56px',
+					paddingRight: '56px',
 				},
 				'.common-margin': {
 					marginTop: '3vw',

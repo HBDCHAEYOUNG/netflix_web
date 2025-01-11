@@ -4,7 +4,7 @@ import { cn } from '@lib/utils'
 import { AuthStore } from '@store/auth-store'
 import Button from '@ui/button/button'
 import { Menu, MenuBell } from '@ui/index'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { headerItems, HeaderType, menuBellItems, menuItems } from 'src/shared/const'
 
@@ -18,19 +18,31 @@ export function Header({ headerType = 'landing' }: HeaderProps) {
 	const isLogin = false
 
 	const [isSearch, setIsSearch] = useState(false)
+	const [scrolled, setScrolled] = useState(false)
 
 	const inputRef = useRef<HTMLInputElement>(null)
+
+	useEffect(() => {
+		const handleScroll = () => {
+			const isScrolled = window.scrollY > 0
+			setScrolled(isScrolled)
+		}
+
+		window.addEventListener('scroll', handleScroll)
+		return () => window.removeEventListener('scroll', handleScroll)
+	}, [])
 
 	return (
 		<header
 			className={cn(
-				'fixed left-1/2 z-10 flex w-full -translate-x-1/2 flex-col items-center justify-between py-6 max-w-base',
-				headerType === 'landing' && 'absolute left-1/2 top-0 -translate-x-1/2 translate-y-0',
+				'fixed left-1/2 z-10 flex w-full -translate-x-1/2 flex-col items-center justify-between py-6 transition-colors duration-300 common-padding',
+				headerType === 'landing' && 'absolute left-1/2 top-0 -translate-x-1/2 translate-y-0 max-w-base',
+				scrolled && 'bg-Primary/Black',
 			)}
 		>
 			<div className="flex w-full items-center justify-between">
 				<Link to={isLogin ? '/' : '/landing'}>
-					<img src={netflixLogo} alt="netflix" className="cursor-pointer" />
+					<img src={netflixLogo} alt="netflix" className="h-[32px] cursor-pointer" />
 				</Link>
 
 				{isLogin ? (
