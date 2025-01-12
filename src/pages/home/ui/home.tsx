@@ -50,7 +50,9 @@ function Home() {
 				</Carousel>
 			</div>
 
-			<div>
+			<div className="relative mt-8">
+				<h2 className="absolute left-0 top-2 common-padding Medium-Title3">Today's Top 10 Series in South Korea</h2>
+
 				<Carousel opts={{ loop: true, slidesToScroll: 'auto' }} className="ml-14">
 					<CarouselContent className="relative">
 						{[...Array(9)].map((_, index) => (

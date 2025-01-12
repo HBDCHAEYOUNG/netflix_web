@@ -9,7 +9,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, InputText
 import { useForm } from 'react-hook-form'
 import { faq, sections } from '../const/landing'
 import { EmailSchema, emailSchema } from '../const/landing.type'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const userEmail = ['test@test.com', 'testtest@test.com']
 
@@ -72,7 +72,9 @@ function Landing() {
 				</Accordion>
 
 				<p className="mb-4 mt-12 Regular-Title4">Create or restart your membership</p>
-				<Button className="h-[56px] w-[208px] flex-center Medium-Title3">Get Started</Button>
+				<Button className="h-[56px] w-[208px] flex-center Medium-Title3">
+					<Link to="/auth/login">Get Started</Link>
+				</Button>
 			</section>
 		</div>
 	)

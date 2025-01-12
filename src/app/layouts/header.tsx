@@ -36,8 +36,9 @@ export function Header({ headerType = 'landing' }: HeaderProps) {
 		<header
 			className={cn(
 				'fixed left-1/2 z-10 flex w-full -translate-x-1/2 flex-col items-center justify-between py-6 transition-colors duration-300 common-padding',
-				headerType === 'landing' && 'absolute left-1/2 top-0 -translate-x-1/2 translate-y-0 max-w-base',
 				scrolled && 'bg-Primary/Black',
+				(headerType === 'landing' || headerType === 'auth') &&
+					'absolute left-1/2 top-0 -translate-x-1/2 translate-y-0 bg-transparent !px-0 max-w-base',
 			)}
 		>
 			<div className="flex w-full items-center justify-between">

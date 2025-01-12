@@ -1,6 +1,7 @@
 import CommonLayout from '@app/layouts/common-layout'
 import ErrorLayout from '@app/layouts/error-layout'
 import Login from '@pages/login/ui/login'
+import { SimpleSetting } from '@pages/setting'
 import { Signup } from '@pages/signup/ui/signup'
 
 export const AuthRoute = {
@@ -9,6 +10,7 @@ export const AuthRoute = {
 	children: [
 		{ path: 'login', element: <Login /> },
 		{ path: 'signup', element: <Signup /> },
+		{ path: 'simple-setting', element: <SimpleSetting /> },
 	],
 	errorElement: <ErrorLayout />,
 }
