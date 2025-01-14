@@ -51,36 +51,18 @@ function Home() {
 				<Carousel opts={{ slidesToScroll: 'auto', dragFree: true }}>
 					<CarouselContent className="px-14">
 						{movies.map((movie, index) => (
-							<CarouselItem key={index} className={cn('w-1/5 basis-1/5 cursor-pointer hover:!scale-150')}>
+							<CarouselItem key={index} className={cn('w-1/5 basis-1/5 cursor-pointer transition-all duration-300 hover:!scale-125')}>
 								<VideoCard movie={movie} />
 							</CarouselItem>
 						))}
 					</CarouselContent>
 					<CarouselPrevious className="absolute left-0 top-1/2 z-10 h-full w-[4vw] -translate-y-1/2 cursor-pointer hover:scale-150 hover:bg-black/50" />
-					<CarouselNext className="absolute right-0 top-1/2 h-full w-[4vw] -translate-y-1/2 cursor-pointer hover:scale-150 hover:bg-black/50" />
+					<CarouselNext className="absolute right-0 top-1/2 h-full w-14 -translate-y-1/2 cursor-pointer hover:scale-150 hover:bg-black/50" />
 				</Carousel>
 			</div>
 
 			<div className="relative mt-8">
 				<h2 className="mb-4 common-padding Medium-Title3">Today's Top 10 Series in South Korea</h2>
-
-				{/* <Carousel opts={{ slidesToScroll: 'auto' }}>
-					<CarouselContent className="relative px-[4vw]">
-						{[...Array(9)].map((_, index) => (
-							<CarouselItem key={index} className="w-1/5 basis-1/5 cursor-pointer">
-								<p
-									className="text-[260px] font-extrabold text-transparent [-webkit-text-stroke:4px_rgba(255,255,255,0.3)]"
-									aria-hidden="true"
-								>
-									{index + 1}
-								</p>
-								<img src={smallmovie} alt="smallmovie" className="absolute left-[85%] top-1/2 z-20 h-[184px] -translate-y-[61%]" />
-							</CarouselItem>
-						))}
-					</CarouselContent>
-					<CarouselPrevious className="absolute left-0 top-1/2 z-10 h-full w-[4vw] -translate-y-1/2 cursor-pointer hover:scale-150 hover:bg-black/50" />
-					<CarouselNext className="absolute right-0 top-1/2 h-full w-[4vw] -translate-y-1/2 cursor-pointer hover:scale-150 hover:bg-black/50" />
-				</Carousel> */}
 
 				<Carousel opts={{ slidesToScroll: 'auto' }}>
 					<CarouselContent>
