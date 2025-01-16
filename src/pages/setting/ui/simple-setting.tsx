@@ -6,6 +6,7 @@ export function SimpleSetting() {
 	const onClickNext = () => {
 		if (step === 3) return
 		setStep(step + 1)
+		scrollTo({ top: 0, behavior: 'smooth' })
 	}
 	return (
 		<div className="flex-center">

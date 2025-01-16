@@ -14,7 +14,6 @@ export function StepThree() {
 			setLikeContents((prev) => prev.filter((prev) => content !== prev))
 		}
 	}
-	console.log(likeContents)
 	return (
 		<div className="flex min-h-screen w-full flex-col justify-center pt-24">
 			<h1 className="mx-auto max-w-base Medium-LargeTitle">WooHyuk, choose your 3 favorite contents</h1>

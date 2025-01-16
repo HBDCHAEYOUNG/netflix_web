@@ -9,6 +9,7 @@ export function Signup() {
 			setStep(0)
 		} else {
 			setStep(step + 1)
+			scrollTo({ top: 0, behavior: 'smooth' })
 		}
 	}
 	return (

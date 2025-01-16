@@ -2,6 +2,7 @@ import Button from '@ui/button/button'
 import Form from '@ui/form/form'
 import { CheckboxBasic, InputText } from '@ui/index'
 import { useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
 
 const inputItems = [
 	{ name: 'cardNumber', label: 'Card Number' },
@@ -77,7 +78,7 @@ export function StepThree2({ membership, setStep, onClickNext }: StepThree2Props
 				))}
 			</Form>
 			<Button onClick={onClickNext} className="mt-6 h-16 w-full Medium-Title2">
-				Start Paid Membership
+				<Link to="/auth/simple-setting">Start Paid Membership</Link>
 			</Button>
 		</div>
 	)

@@ -34,7 +34,7 @@ export function StepTwo2({ membership, setMembership, onClickNext }: StepTwo2Pro
 						<TabsTrigger
 							key={value}
 							value={value}
-							className={`flex-1 !rounded-xl border border-Grey/Grey-250 p-6 data-[state=active]:${gradient}`}
+							className={`flex-1 !rounded-xl border border-Grey/Grey-250 p-6 !data-[state=active]:${gradient}`}
 							onClick={() => setMembership(value)}
 						>
 							{label} <br /> {quality}
@@ -46,13 +46,13 @@ export function StepTwo2({ membership, setMembership, onClickNext }: StepTwo2Pro
 						{fields.map(
 							(field) =>
 								membership[field.key as keyof typeof membership] && (
-									<p
+									<div
 										className="flex justify-between whitespace-pre-wrap border-b border-Grey/Grey-250 py-5 text-TransparentWhite/70% Medium-Body [&:last-child]:border-b-0"
 										key={field.key}
 									>
 										{field.label}
 										<p className="Regular-Headline">{membership[field.key as keyof typeof membership]}</p>
-									</p>
+									</div>
 								),
 						)}
 					</TabsContent>

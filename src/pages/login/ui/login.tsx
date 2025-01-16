@@ -24,7 +24,7 @@ function Login() {
 		<section className="relative h-screen flex-col flex-center">
 			<img src={HeroImage} alt="hero-image" className="absolute h-full w-full object-cover opacity-50" />
 
-			<div className="relative h-[708px] w-[450px] bg-TransparentBlack/60% px-[68px] py-[48px]">
+			<div className="relative h-[680px] w-[450px] bg-TransparentBlack/60% px-[68px] py-[48px]">
 				<h1 className="mb-7 Bold-Title1">Sign In</h1>
 				<Form form={form} onSubmit={handleSubmit} className="flex w-full flex-col items-center gap-4">
 					<Form.Item name="email">

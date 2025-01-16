@@ -22,7 +22,7 @@ import Number10 from '@icons/number10.svg?react'
 function Home() {
 	return (
 		<div className="flex min-w-full flex-col">
-			<section>
+			<section className="relative">
 				<video autoPlay loop muted className="absolute max-w-[1512px]">
 					<source src="https://videos.pexels.com/video-files/9140346/9140346-uhd_2560_1440_25fps.mp4" type="video/mp4" />
 				</video>
@@ -44,6 +44,7 @@ function Home() {
 						</Button>
 					</nav>
 				</div>
+				<div className="absolute bottom-[-150px] left-0 h-[150px] w-full bg-gradient-to-b from-transparent to-Primary/Black"></div>
 			</section>
 
 			<div>

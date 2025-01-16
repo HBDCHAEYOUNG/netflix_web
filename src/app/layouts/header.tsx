@@ -5,7 +5,7 @@ import { AuthStore } from '@store/auth-store'
 import Button from '@ui/button/button'
 import { Menu, MenuBell } from '@ui/index'
 import { useEffect, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { headerItems, HeaderType, menuBellItems, menuItems } from 'src/shared/const'
 
 interface HeaderProps {
@@ -13,8 +13,9 @@ interface HeaderProps {
 }
 
 export function Header({ headerType = 'landing' }: HeaderProps) {
-	const { setLogin } = AuthStore()
+	const { pathname } = useLocation()
 
+	const { setLogin } = AuthStore()
 	const isLogin = true
 
 	const [isSearch, setIsSearch] = useState(false)
@@ -35,7 +36,7 @@ export function Header({ headerType = 'landing' }: HeaderProps) {
 	return (
 		<header
 			className={cn(
-				'fixed left-1/2 z-10 flex w-full -translate-x-1/2 flex-col items-center justify-between py-6 transition-colors duration-300 common-padding',
+				'fixed left-1/2 z-10 flex w-full -translate-x-1/2 flex-col items-center justify-between bg-gradient-to-b from-Primary/Black to-transparent py-6 transition-colors duration-300 common-padding',
 				scrolled && 'bg-Primary/Black',
 				(headerType === 'landing' || headerType === 'auth') &&
 					'absolute left-1/2 top-0 -translate-x-1/2 translate-y-0 bg-transparent !px-0 max-w-base',
@@ -48,9 +49,16 @@ export function Header({ headerType = 'landing' }: HeaderProps) {
 				</Link>
 
 				{isLogin ? (
-					<div className="ml-4 flex w-full items-center gap-4">
+					<div className={cn('ml-12 flex w-full items-center gap-6', headerType === 'auth' && 'hidden')}>
 						{headerItems.map((item, index) => (
-							<Link to={item.path} key={index} className="min-w-max Regular-Body">
+							<Link
+								to={item.path}
+								key={index}
+								className={cn(
+									'min-w-max cursor-pointer text-Grey/Grey-20 transition-colors duration-300 Regular-Body hover:text-Grey/Grey-50',
+									pathname === item.path && 'cursor-default text-Primary/White hover:text-Primary/White',
+								)}
+							>
 								{item.title}
 							</Link>
 						))}
