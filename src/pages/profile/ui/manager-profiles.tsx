@@ -45,10 +45,10 @@ export function ManagerProfiles() {
 		console.log('handleSubmit')
 	}
 	return (
-		<div className="mx-auto h-screen max-w-[80%] place-content-center gap-[67px] text-center">
+		<div className="mx-auto h-screen place-content-center max-w-wide">
 			<div>
-				<h1 className="px-6 !text-center Regular-Title1 sm:Regular-LargeTitle">Select the profile you want to watch Netflix on.</h1>
-				<div className="my-[2vw] flex-wrap gap-[2vw] flex-center">
+				<h1 className="!text-center Regular-LargeTitle">Manage your profile</h1>
+				<div className="my-12 flex-wrap gap-8 flex-center">
 					{profiles.map((profile) => (
 						<Dialog>
 							<DialogTrigger>

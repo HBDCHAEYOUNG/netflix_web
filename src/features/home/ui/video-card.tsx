@@ -25,9 +25,13 @@ interface VideoCardProps {
 export function VideoCard({ movie }: VideoCardProps) {
 	const [isHovered, setIsHovered] = useState(false)
 	return (
-		<div className="aspect-video w-full transition-all">
+		<div
+			className="relative aspect-video w-full transition-all"
+			onMouseOver={() => setIsHovered(true)}
+			onMouseLeave={() => setIsHovered(false)}
+		>
 			{isHovered ? (
-				<div className="flex w-[240px] flex-col gap-4 rounded-md bg-Grey/Grey-900" onMouseLeave={() => setIsHovered(false)}>
+				<div className="flex w-[240px] flex-col gap-4 rounded-md bg-Grey/Grey-900">
 					<img src={movie.image} alt={`movieimage:${movietitle}`} className="w-full" />
 					<div className="mx-4 flex gap-2 [&>svg]:h-8 [&>svg]:w-8 [&>svg]:rounded-full [&>svg]:border [&>svg]:border-white [&>svg]:p-2">
 						<PlayIcon />
@@ -70,13 +74,7 @@ export function VideoCard({ movie }: VideoCardProps) {
 					<p className="mx-4 mb-4">{movie.genre}</p>
 				</div>
 			) : (
-				<img
-					src={movie.image}
-					alt={movie.title}
-					className="aspect-video w-full"
-					onMouseOver={() => setIsHovered(true)}
-					onMouseLeave={() => setIsHovered(false)}
-				/>
+				<img src={movie.image} alt={movie.title} className="aspect-video w-full" />
 			)}
 		</div>
 	)

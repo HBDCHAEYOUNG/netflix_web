@@ -33,10 +33,10 @@ export function Profiles() {
 	}
 
 	return (
-		<div className="mx-auto h-screen max-w-[80%] place-content-center text-center">
-			<h1 className="px-6 !text-center Regular-Title1 sm:Regular-LargeTitle">Select the profile you want to watch Netflix on.</h1>
+		<div className="mx-auto h-screen place-content-center text-center max-w-wide">
+			<h1 className="px-6 !text-center Regular-LargeTitle">Select the profile you want to watch Netflix on.</h1>
 
-			<div className="my-[2vw] flex-wrap gap-[2vw] flex-center">
+			<div className="my-12 flex-wrap gap-8 flex-center">
 				{profiles.map((profile) => (
 					<Profile key={profile.id} image={profile.image} name={profile.name} onClick={onClickProfile} />
 				))}

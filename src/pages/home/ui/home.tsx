@@ -51,7 +51,7 @@ function Home() {
 				<Carousel opts={{ slidesToScroll: 'auto', dragFree: true }}>
 					<CarouselContent className="px-14">
 						{movies.map((movie, index) => (
-							<CarouselItem key={index} className={cn('w-1/5 basis-1/5 cursor-pointer transition-all duration-300 hover:!scale-125')}>
+							<CarouselItem key={index} className={cn('w-1/5 basis-1/5 cursor-pointer transition-all duration-700 hover:!scale-125')}>
 								<VideoCard movie={movie} />
 							</CarouselItem>
 						))}
@@ -61,12 +61,12 @@ function Home() {
 				</Carousel>
 			</div>
 
-			<div className="relative mt-8">
+			<div className="mt-8">
 				<h2 className="mb-4 common-padding Medium-Title3">Today's Top 10 Series in South Korea</h2>
 
 				<Carousel opts={{ slidesToScroll: 'auto' }}>
 					<CarouselContent>
-						<CarouselItem className="relative w-1/5 basis-1/5 cursor-pointer">
+						<CarouselItem className="relative mr-6 w-1/5 basis-1/5 cursor-pointer">
 							<Number1 className="h-52" />
 							<img src={smallmovie} alt="smallmovie" className="absolute left-[77%] top-0 h-[208px]" />
 						</CarouselItem>

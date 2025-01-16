@@ -15,7 +15,7 @@ interface HeaderProps {
 export function Header({ headerType = 'landing' }: HeaderProps) {
 	const { setLogin } = AuthStore()
 
-	const isLogin = false
+	const isLogin = true
 
 	const [isSearch, setIsSearch] = useState(false)
 	const [scrolled, setScrolled] = useState(false)
@@ -39,6 +39,7 @@ export function Header({ headerType = 'landing' }: HeaderProps) {
 				scrolled && 'bg-Primary/Black',
 				(headerType === 'landing' || headerType === 'auth') &&
 					'absolute left-1/2 top-0 -translate-x-1/2 translate-y-0 bg-transparent !px-0 max-w-base',
+				headerType === 'none' && 'hidden',
 			)}
 		>
 			<div className="flex w-full items-center justify-between">
@@ -49,7 +50,7 @@ export function Header({ headerType = 'landing' }: HeaderProps) {
 				{isLogin ? (
 					<div className="ml-4 flex w-full items-center gap-4">
 						{headerItems.map((item, index) => (
-							<Link to={item.path} key={index} className="min-w-max Regular-Smallbody">
+							<Link to={item.path} key={index} className="min-w-max Regular-Body">
 								{item.title}
 							</Link>
 						))}
@@ -58,6 +59,7 @@ export function Header({ headerType = 'landing' }: HeaderProps) {
 							<input
 								ref={inputRef}
 								name="search"
+								placeholder="Title, people, genres"
 								className="ml-auto h-[38px] w-[250px] rounded-none border !border-Primary/White bg-TransparentBlack/30% px-4 text-Primary/White !outline-none"
 								onBlur={() => {
 									setIsSearch(false)
@@ -81,7 +83,7 @@ export function Header({ headerType = 'landing' }: HeaderProps) {
 					</div>
 				) : (
 					<Link to="/auth/login">
-						<Button className="h-[32px] w-[77px]" onClick={setLogin}>
+						<Button className="h-[32px] w-[77px] Regular-Body" onClick={setLogin}>
 							Login
 						</Button>
 					</Link>

@@ -5,14 +5,15 @@ import { HeaderType } from 'src/shared/const'
 
 interface CommonLayoutProps {
 	headerType: HeaderType
+	footerType?: 'home' | 'landing' | 'none'
 }
 
-function CommonLayout({ headerType }: CommonLayoutProps) {
+function CommonLayout({ headerType, footerType }: CommonLayoutProps) {
 	return (
 		<div className="min-h-screen w-full bg-Primary/Black min-w-base">
 			<Header headerType={headerType} />
 			<Outlet />
-			<Footer />
+			<Footer footerType={footerType} />
 		</div>
 	)
 }

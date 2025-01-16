@@ -12,7 +12,7 @@ export function Profile({ image, name, onClick }: ProfileUserProps) {
 		<Link
 			to="#"
 			key={name}
-			className="w-[10vw] min-w-[84px] max-w-[200px] [&:hover]:cursor-pointer [&>div]:hover:outline [&>div]:hover:outline-Primary/White [&>p]:hover:text-Primary/White"
+			className="w-[154px] [&:hover]:cursor-pointer [&>div]:hover:outline [&>div]:hover:outline-Primary/White [&>p]:hover:text-Primary/White"
 			onClick={onClick}
 		>
 			<ProfileImg image={image} />

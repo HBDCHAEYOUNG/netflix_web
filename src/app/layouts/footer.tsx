@@ -1,9 +1,14 @@
+import { cn } from '@lib/utils'
 import { Link } from 'react-router-dom'
 import { footerLink } from 'src/shared/const/footer'
 
-function Footer() {
+interface footerProps {
+	footerType?: 'home' | 'landing' | 'none'
+}
+
+function Footer({ footerType }: footerProps) {
 	return (
-		<footer className="z-10 mx-auto my-20 w-full bg-TransparentBlack/60% max-w-base">
+		<footer className={cn('z-10 mx-auto my-20 w-full bg-TransparentBlack/60% max-w-base', footerType === 'none' && 'hidden')}>
 			<div className="mx-auto w-full max-w-base">
 				<p className="mb-6 text-Grey/Grey-50 Regular-Body">
 					Questions? Call

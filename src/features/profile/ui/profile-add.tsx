@@ -8,14 +8,8 @@ interface ProfileAddProps {
 
 export function ProfileAdd({ onClick, className }: ProfileAddProps) {
 	return (
-		<div
-			className={cn(
-				'flex-col flex-center [&:hover]:cursor-pointer [&>div]:hover:bg-Grey/Grey-20 [&>p]:hover:text-Grey/Grey-20 [&_path]:hover:fill-white',
-				className,
-			)}
-			onClick={onClick}
-		>
-			<div className="relative aspect-square h-[10vw] max-h-[200px] min-h-[84px] w-[10vw] min-w-[84px] max-w-[200px] rounded-sm flex-center">
+		<div className={cn('flex-col flex-center [&:hover]:cursor-pointer [&>p]:hover:text-Grey/Grey-20', className)} onClick={onClick}>
+			<div className="relative aspect-square w-[154px] rounded-sm flex-center hover:bg-Grey/Grey-20 [&_path]:hover:fill-white">
 				<div className="mx-auto aspect-square rounded-sm flex-center">
 					<PlusIcon />
 				</div>
