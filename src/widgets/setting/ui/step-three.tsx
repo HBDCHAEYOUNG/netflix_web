@@ -40,7 +40,7 @@ export function StepThree() {
 				<CarouselNext className="absolute right-0 z-10 h-full w-8 hover:scale-150 hover:bg-TransparentBlack/30%" />
 			</Carousel>
 			<Button theme={likeContents.length > 2 ? 'primary' : 'secondary'} className="mx-auto my-12 h-16 w-[400px] Medium-Title2">
-				{likeContents.length > 2 ? <Link to="/">Complete!</Link> : 'Select 3 contents'}
+				{likeContents.length > 2 ? <Link to="/profiles">Complete!</Link> : 'Select 3 contents'}
 			</Button>
 		</div>
 	)

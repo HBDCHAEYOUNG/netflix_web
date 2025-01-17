@@ -1,14 +1,13 @@
-import { useState } from 'react'
-import PlusIcon from '@icons/plus.svg?react'
-import PlayIcon from '@icons/play.svg?react'
-import ThumbIcon from '@icons/thumb-up.svg?react'
 import ArrowIcon from '@icons/arrowdown.svg?react'
 import HdIcon from '@icons/hd.svg?react'
-import { Rating } from '@ui/label/rating'
-import { Popover, PopoverContent, PopoverTrigger } from '@ui/_shardcn/popover'
-import Button from '@ui/button/button'
-import Play from '@icons/play.svg?react'
+import PlayIcon from '@icons/play.svg?react'
+import PlusIcon from '@icons/plus.svg?react'
+import ThumbIcon from '@icons/thumb-up.svg?react'
 import movietitle from '@images/movie-title.png'
+import { Dialog, DialogContent, DialogTrigger } from '@ui/dialog/dialog'
+import { Rating } from '@ui/label/rating'
+import { Detail } from '@widgets/home'
+import { useState } from 'react'
 
 interface VideoCardProps {
 	movie: {
@@ -37,34 +36,14 @@ export function VideoCard({ movie }: VideoCardProps) {
 						<PlayIcon />
 						<PlusIcon />
 						<ThumbIcon className="mr-auto" />
-						<Popover>
-							<PopoverTrigger>
+						<Dialog>
+							<DialogTrigger>
 								<ArrowIcon />
-							</PopoverTrigger>
-							<PopoverContent className="w-calc(100vw-224px) relative mx-28 bg-Primary/Black">
-								<img src={movie.image} alt={`movieimage:${movie.title}`} className="w-full" />
-								<div className="absolute left-[20px] top-1/2 max-w-[518px]">
-									<img src={movietitle} alt="movietitle:House of ninjas" className="w-40" />
-									<nav className="mt-4 gap-4 flex-center">
-										<Button theme="white" className="max-w-[119px]">
-											<Play className="[&>path]:fill-black" />
-											reproduction
-										</Button>
-										<PlusIcon />
-										<ThumbIcon className="mr-auto" />
-									</nav>
-								</div>
-								<div className="flex">
-									<div className="basis-2/3">
-										<p>{movie.releaseDate.slice(0, 4)}</p>
-										<p>{movie.description}</p>
-									</div>
-									<div className="basis-1/3">
-										<p>{movie.genre}</p>
-									</div>
-								</div>
-							</PopoverContent>
-						</Popover>
+							</DialogTrigger>
+							<DialogContent className="w-calc(100vw-224px) relative mx-28 bg-Primary/Black">
+								<Detail />
+							</DialogContent>
+						</Dialog>
 					</div>
 					<div className="mx-4 flex items-center gap-2 [&>svg]:h-4 [&>svg]:w-4">
 						<Rating rating={movie.rating} />

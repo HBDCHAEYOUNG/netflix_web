@@ -1,7 +1,7 @@
 import { Profile, ProfileAdd } from '@features/profile'
 import profileImage from '@images/profile.png'
 import Button from '@ui/button/button'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const profiles = [
 	{
@@ -22,28 +22,18 @@ const profiles = [
 ]
 
 export function Profiles() {
-	const router = useNavigate()
-
-	const onClickProfile = () => {
-		console.log('onClickProfile')
-	}
-
-	const onClickManageProfile = () => {
-		router('/profiles/manage')
-	}
-
 	return (
 		<div className="mx-auto h-screen place-content-center text-center max-w-wide">
 			<h1 className="px-6 !text-center Regular-LargeTitle">Select the profile you want to watch Netflix on.</h1>
 
 			<div className="my-12 flex-wrap gap-8 flex-center">
 				{profiles.map((profile) => (
-					<Profile key={profile.id} image={profile.image} name={profile.name} onClick={onClickProfile} />
+					<Profile key={profile.id} image={profile.image} name={profile.name} />
 				))}
-				<ProfileAdd onClick={onClickManageProfile} />
+				<ProfileAdd />
 			</div>
-			<Button theme="outline" className="mx-auto h-[42px] max-w-[178px] Regular-Headline" onClick={onClickManageProfile}>
-				Manage Your Profile
+			<Button theme="outline" className="mx-auto h-[42px] max-w-[178px] Regular-Headline">
+				<Link to="manage">Manage Your Profile</Link>
 			</Button>
 		</div>
 	)

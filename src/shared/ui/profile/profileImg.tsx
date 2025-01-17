@@ -7,7 +7,7 @@ interface ProfileImgProps {
 
 export function ProfileImg({ image, className }: ProfileImgProps) {
 	return (
-		<div className={cn('aspect-square flex-center', className)}>
+		<div className={cn('aspect-square rounded-md flex-center', className)}>
 			<img src={image} alt="ProfileImg" className="aspect-square w-full" />
 		</div>
 	)

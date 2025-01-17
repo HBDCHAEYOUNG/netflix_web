@@ -8,7 +8,7 @@ import { DrawerFooter, InputText } from '@ui/index'
 import { ProfileImg } from '@ui/profile/profileImg'
 import { Select } from '@ui/select/select'
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const profiles = [
 	{
@@ -29,18 +29,8 @@ const profiles = [
 ]
 
 export function ManagerProfiles() {
-	const router = useNavigate()
 	const form = useForm()
 
-	const onClickProfile = () => {
-		console.log('onClickProfile')
-	}
-	const onClickAddProfile = () => {
-		console.log('onClickAddProfile')
-	}
-	const onClickSave = () => {
-		router('/profiles')
-	}
 	const handleSubmit = () => {
 		console.log('handleSubmit')
 	}
@@ -52,7 +42,7 @@ export function ManagerProfiles() {
 					{profiles.map((profile) => (
 						<Dialog>
 							<DialogTrigger>
-								<ProfileEdit image={profile.image} name={profile.name} onClick={onClickProfile} />
+								<ProfileEdit image={profile.image} name={profile.name} />
 							</DialogTrigger>
 							<DialogContent>
 								<Form form={form} onSubmit={handleSubmit} className="flex-col gap-7 flex-center">
@@ -81,7 +71,7 @@ export function ManagerProfiles() {
 					))}
 					<Dialog>
 						<DialogTrigger>
-							<ProfileAdd onClick={onClickAddProfile} />
+							<ProfileAdd />
 						</DialogTrigger>
 						<DialogContent>
 							<Form form={form} onSubmit={handleSubmit} className="flex-col gap-7 flex-center">
@@ -106,8 +96,8 @@ export function ManagerProfiles() {
 					</Dialog>
 				</div>
 
-				<Button theme="outline" className="mx-auto h-[42px] max-w-[178px] Regular-Headline" onClick={onClickSave}>
-					Complete
+				<Button theme="outline" className="mx-auto h-[42px] max-w-[178px] Regular-Headline">
+					<Link to="/profiles">Complete</Link>
 				</Button>
 			</div>
 		</div>

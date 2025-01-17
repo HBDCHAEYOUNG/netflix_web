@@ -1,4 +1,3 @@
-import post from '@images/movie.png'
 import title from '@images/movie-title-small.png'
 
 import Button from '@ui/button/button'
@@ -7,7 +6,8 @@ import TvMa from '@icons/tv-ma.svg?react'
 import Hd from '@icons/hd.svg?react'
 import { Select } from '@ui/index'
 const movie = {
-	image: post,
+	image:
+		'https://images.unsplash.com/photo-1705418181762-1a52ab82ddf5?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
 	title: 'The Super Mario Bros. Movie',
 	titleImg: title,
 	description:

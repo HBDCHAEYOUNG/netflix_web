@@ -4,12 +4,11 @@ import { ProfileImg } from '@ui/index'
 interface ProfileUserProps {
 	image: string
 	name: string
-	onClick: () => void
 }
 
-export function ProfileEdit({ image, name, onClick }: ProfileUserProps) {
+export function ProfileEdit({ image, name }: ProfileUserProps) {
 	return (
-		<div key={name} className="mx-auto w-[154px] [&:hover]:cursor-pointer [&>p]:hover:text-Grey/Grey-20" onClick={onClick}>
+		<div key={name} className="mx-auto w-[154px] [&:hover]:cursor-pointer [&>p]:hover:text-Grey/Grey-20">
 			<div className="relative rounded-md hover:border-[3px] hover:border-Grey/Grey-200">
 				<div className="absolute z-10 h-full w-full bg-black/50" />
 				<ProfileImg image={image} className="relative" />
