@@ -18,6 +18,8 @@ import Number7 from '@icons/number7.svg?react'
 import Number8 from '@icons/number8.svg?react'
 import Number9 from '@icons/number9.svg?react'
 import Number10 from '@icons/number10.svg?react'
+import { Dialog, DialogContent, DialogTrigger } from '@ui/dialog/dialog'
+import { Detail } from '@widgets/home'
 
 function Home() {
 	return (
@@ -112,6 +114,19 @@ function Home() {
 					<CarouselNext className="absolute right-0 top-1/2 h-full w-[4vw] -translate-y-1/2 cursor-pointer hover:scale-150 hover:bg-black/50" />
 				</Carousel>
 			</div>
+
+			<Dialog>
+				<DialogTrigger>
+					<img
+						src="https://images.unsplash.com/photo-1705418181762-1a52ab82ddf5?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+						alt="아델리펭귄"
+						className="] w-[200px]"
+					/>
+				</DialogTrigger>
+				<DialogContent>
+					<Detail />
+				</DialogContent>
+			</Dialog>
 		</div>
 	)
 }

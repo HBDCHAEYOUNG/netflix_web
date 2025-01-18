@@ -71,7 +71,7 @@ export function Detail() {
 
 				<div className="flex items-center justify-between gap-2 px-12 py-6 Medium-Title3">
 					회차
-					<Select items={['season 1', 'season 2', 'season 3']} className="h-12 w-40 px-4 Regular-Headline" />
+					<Select items={['season 1', 'season 2', 'season 3']} type="video" className="h-12 w-40 px-4 Regular-Headline" />
 				</div>
 
 				<ul className="px-12 pb-6">
