@@ -7,6 +7,7 @@ import {
 	NavigationMenuTrigger,
 } from '../_shardcn/navigation-menu'
 import { cn } from '@lib/utils'
+import { AuthStore } from '@store/auth-store'
 
 interface MenuItem {
 	icon?: React.ReactNode
@@ -25,8 +26,7 @@ interface MenuProps {
 }
 
 export const Menu = React.forwardRef<HTMLDivElement, MenuProps>(({ label, items, className, ...props }, ref) => {
-	// const { setLogout } = AuthStore()
-
+	const { setLogout } = AuthStore()
 	return (
 		<NavigationMenu ref={ref} className={className} {...props}>
 			<NavigationMenuList>
@@ -43,8 +43,13 @@ export const Menu = React.forwardRef<HTMLDivElement, MenuProps>(({ label, items,
 									{item.image && <img src={item.image} alt={item.title} className="h-8 w-8 object-cover" />}
 									{item.icon && <div className="mr-2 flex h-6 w-6 items-center justify-center">{item.icon}</div>}
 									<div>
-										<div className="text-nowrap text-sm font-medium">{item.title}</div>
-										{item.description && <p className="text-sm text-muted-foreground">{item.description}</p>}
+										{item.title === 'Log out Of Netflix' ? (
+											<div className="text-nowrap text-sm font-medium" onClick={setLogout}>
+												{item.title}
+											</div>
+										) : (
+											<div className="text-nowrap text-sm font-medium">{item.title}</div>
+										)}
 									</div>
 								</li>
 							))}

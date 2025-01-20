@@ -1,4 +1,3 @@
-import { VideoCard } from '@features/home/ui/video-card'
 import Info from '@icons/info.svg?react'
 import Play from '@icons/play.svg?react'
 import smallmovie from '@images/movie-card-small.png'
@@ -9,6 +8,7 @@ import Button from '@ui/button/button'
 import { movies } from '../const/home'
 
 import Number1 from '@icons/number1.svg?react'
+import Number10 from '@icons/number10.svg?react'
 import Number2 from '@icons/number2.svg?react'
 import Number3 from '@icons/number3.svg?react'
 import Number4 from '@icons/number4.svg?react'
@@ -17,14 +17,16 @@ import Number6 from '@icons/number6.svg?react'
 import Number7 from '@icons/number7.svg?react'
 import Number8 from '@icons/number8.svg?react'
 import Number9 from '@icons/number9.svg?react'
-import Number10 from '@icons/number10.svg?react'
 import { Dialog, DialogContent, DialogTrigger } from '@ui/dialog/dialog'
 import { Detail } from '@widgets/home'
+import { useState } from 'react'
 
 function Home() {
+	const [isHovered, setIsHovered] = useState(false)
+	console.log(isHovered)
 	return (
 		<div className="flex min-w-full flex-col">
-			<section className="relative">
+			<section className="max-w-screen relative overflow-hidden">
 				<video autoPlay loop muted className="absolute max-w-[1512px]">
 					<source src="https://videos.pexels.com/video-files/9140346/9140346-uhd_2560_1440_25fps.mp4" type="video/mp4" />
 				</video>
@@ -49,13 +51,29 @@ function Home() {
 				<div className="absolute bottom-[-150px] left-0 h-[150px] w-full bg-gradient-to-b from-transparent to-Primary/Black"></div>
 			</section>
 
-			<div>
+			<div className="w-full max-w-[100vw] overflow-hidden">
 				<h2 className="relative mb-4 common-padding Medium-Title3">Matched to You</h2>
 				<Carousel opts={{ slidesToScroll: 'auto', dragFree: true }}>
 					<CarouselContent className="px-14">
 						{movies.map((movie, index) => (
-							<CarouselItem key={index} className={cn('w-1/5 basis-1/5 cursor-pointer transition-all duration-700 hover:!scale-125')}>
-								<VideoCard movie={movie} />
+							<CarouselItem
+								onMouseOver={() => setIsHovered(true)}
+								onMouseLeave={() => setIsHovered(false)}
+								key={index}
+								className={cn('w-1/5 basis-1/5 cursor-pointer transition-all duration-700')}
+							>
+								<Dialog>
+									<DialogTrigger>
+										<img
+											// src="https://images.unsplash.com/photo-1705418181762-1a52ab82ddf5?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+											src={movie.image}
+											alt="아델리펭귄"
+										/>
+									</DialogTrigger>
+									<DialogContent>
+										<Detail />
+									</DialogContent>
+								</Dialog>
 							</CarouselItem>
 						))}
 					</CarouselContent>
@@ -69,43 +87,43 @@ function Home() {
 
 				<Carousel opts={{ slidesToScroll: 'auto' }}>
 					<CarouselContent>
-						<CarouselItem className="relative mr-6 w-1/5 basis-1/5 cursor-pointer">
-							<Number1 className="h-52" />
-							<img src={smallmovie} alt="smallmovie" className="absolute left-[77%] top-0 h-[208px]" />
+						<CarouselItem className="relative mr-6 w-1/5 basis-1/5 cursor-pointer overflow-hidden rounded">
+							<Number1 className="absolute left-0 top-0 w-1/2" />
+							<img src={smallmovie} alt="smallmovie" className="absolute left-auto right-0 top-0 h-[208px] w-1/2" />
 						</CarouselItem>
-						<CarouselItem className="relative w-1/5 basis-1/5 cursor-pointer">
-							<Number2 className="h-52" />
-							<img src={smallmovie} alt="smallmovie" className="absolute left-[77%] top-0 h-[208px]" />
+						<CarouselItem className="relative w-1/5 basis-1/5 cursor-pointer overflow-hidden rounded">
+							<Number2 className="absolute left-0 top-0 w-1/2" />
+							<img src={smallmovie} alt="smallmovie" className="absolute left-auto right-0 top-0 h-[208px] w-1/2" />
 						</CarouselItem>
-						<CarouselItem className="relative w-1/5 basis-1/5 cursor-pointer">
-							<Number3 className="h-52" />
-							<img src={smallmovie} alt="smallmovie" className="absolute left-[77%] top-0 h-[208px]" />
+						<CarouselItem className="relative w-1/5 basis-1/5 cursor-pointer overflow-hidden rounded">
+							<Number3 className="absolute left-0 top-0 w-1/2" />
+							<img src={smallmovie} alt="smallmovie" className="absolute left-auto right-0 top-0 h-[208px] w-1/2" />
 						</CarouselItem>
-						<CarouselItem className="relative w-1/5 basis-1/5 cursor-pointer">
-							<Number4 className="h-52" />
-							<img src={smallmovie} alt="smallmovie" className="absolute left-[77%] top-0 h-[208px]" />
+						<CarouselItem className="relative w-1/5 basis-1/5 cursor-pointer overflow-hidden rounded">
+							<Number4 className="absolute left-0 top-0 w-1/2" />
+							<img src={smallmovie} alt="smallmovie" className="absolute left-auto right-0 top-0 h-[208px] w-1/2" />
 						</CarouselItem>
-						<CarouselItem className="relative w-1/5 basis-1/5 cursor-pointer">
-							<Number5 className="h-52" />
-							<img src={smallmovie} alt="smallmovie" className="absolute left-[77%] top-0 h-[208px]" />
+						<CarouselItem className="relative w-1/5 basis-1/5 cursor-pointer overflow-hidden rounded">
+							<Number5 className="absolute left-0 top-0 w-1/2" />
+							<img src={smallmovie} alt="smallmovie" className="absolute left-auto right-0 top-0 h-[208px] w-1/2" />
 						</CarouselItem>
-						<CarouselItem className="relative w-1/5 basis-1/5 cursor-pointer">
-							<Number6 className="h-52" />
-							<img src={smallmovie} alt="smallmovie" className="absolute left-[77%] top-0 h-[208px]" />
+						<CarouselItem className="relative w-1/5 basis-1/5 cursor-pointer overflow-hidden rounded">
+							<Number6 className="absolute left-0 top-0 w-1/2" />
+							<img src={smallmovie} alt="smallmovie" className="absolute left-auto right-0 top-0 h-[208px] w-1/2" />
 						</CarouselItem>
-						<CarouselItem className="relative w-1/5 basis-1/5 cursor-pointer">
-							<Number7 className="h-52" />
-							<img src={smallmovie} alt="smallmovie" className="absolute left-[77%] top-0 h-[208px]" />
+						<CarouselItem className="relative w-1/5 basis-1/5 cursor-pointer overflow-hidden rounded">
+							<Number7 className="absolute left-0 top-0 w-1/2" />
+							<img src={smallmovie} alt="smallmovie" className="absolute left-auto right-0 top-0 h-[208px] w-1/2" />
 						</CarouselItem>
-						<CarouselItem className="relative w-1/5 basis-1/5 cursor-pointer">
-							<Number8 className="h-52" />
-							<img src={smallmovie} alt="smallmovie" className="absolute left-[77%] top-0 h-[208px]" />
+						<CarouselItem className="relative w-1/5 basis-1/5 cursor-pointer overflow-hidden rounded">
+							<Number8 className="absolute left-0 top-0 w-1/2" />
+							<img src={smallmovie} alt="smallmovie" className="absolute left-auto right-0 top-0 h-[208px] w-1/2" />
 						</CarouselItem>
-						<CarouselItem className="relative w-1/5 basis-1/5 cursor-pointer">
-							<Number9 className="h-52" />
-							<img src={smallmovie} alt="smallmovie" className="absolute left-[77%] top-0 h-[208px]" />
+						<CarouselItem className="relative w-1/5 basis-1/5 cursor-pointer overflow-hidden rounded">
+							<Number9 className="absolute left-0 top-0 w-1/2" />
+							<img src={smallmovie} alt="smallmovie" className="absolute left-auto right-0 top-0 h-[208px] w-1/2" />
 						</CarouselItem>
-						<CarouselItem className="relative w-1/5 basis-1/5 cursor-pointer content-center">
+						<CarouselItem className="relative mr-[150px] w-1/5 basis-1/5 cursor-pointer content-center rounded">
 							<Number10 className="h-40" />
 							<img src={smallmovie} alt="smallmovie" className="absolute left-[77%] top-0 h-[208px]" />
 						</CarouselItem>
@@ -114,19 +132,6 @@ function Home() {
 					<CarouselNext className="absolute right-0 top-1/2 h-full w-[4vw] -translate-y-1/2 cursor-pointer hover:scale-150 hover:bg-black/50" />
 				</Carousel>
 			</div>
-
-			<Dialog>
-				<DialogTrigger>
-					<img
-						src="https://images.unsplash.com/photo-1705418181762-1a52ab82ddf5?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-						alt="아델리펭귄"
-						className="] w-[200px]"
-					/>
-				</DialogTrigger>
-				<DialogContent>
-					<Detail />
-				</DialogContent>
-			</Dialog>
 		</div>
 	)
 }

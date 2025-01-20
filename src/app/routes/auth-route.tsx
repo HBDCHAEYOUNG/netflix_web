@@ -11,6 +11,7 @@ export const AuthRoute = {
 		{ path: 'login', element: <Login /> },
 		{ path: 'signup', element: <Signup /> },
 		{ path: 'simple-setting', element: <SimpleSetting /> },
+		// { path: 'logout', element: <Logout /> },
 	],
 	errorElement: <ErrorLayout />,
 }

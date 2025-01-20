@@ -12,6 +12,8 @@ interface AuthProps extends Auth {
 
 const INIT = {
 	isLogin: false,
+	nickname: '',
+	profile: '',
 }
 
 export const AuthStore = create(

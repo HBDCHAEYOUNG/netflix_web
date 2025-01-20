@@ -15,8 +15,7 @@ interface HeaderProps {
 export function Header({ headerType = 'landing' }: HeaderProps) {
 	const { pathname } = useLocation()
 
-	const { setLogin } = AuthStore()
-	const isLogin = true
+	const { isLogin, setLogin } = AuthStore()
 
 	const [isSearch, setIsSearch] = useState(false)
 	const [scrolled, setScrolled] = useState(false)
