@@ -1,9 +1,8 @@
 import title from '@images/movie-title-small.png'
 
-import Button from '@ui/button/button'
-import Play from '@icons/play.svg?react'
-import TvMa from '@icons/tv-ma.svg?react'
+import ButtonPlay from '@features/video/ui/button-play'
 import Hd from '@icons/hd.svg?react'
+import TvMa from '@icons/tv-ma.svg?react'
 import { Select } from '@ui/index'
 const movie = {
 	image:
@@ -41,11 +40,8 @@ export function Detail() {
 				<div className="relative h-[480px] w-[850px] place-content-end px-12 pb-16">
 					<img src={movie.titleImg} alt={movie.title} />
 
-					<nav>
-						<Button theme="white" className="mt-6 h-[43px] w-[119px] gap-2 flex-center Medium-Body">
-							<Play className="[&>path]:fill-black" />
-							Play
-						</Button>
+					<nav className="mt-6">
+						<ButtonPlay />
 						{/* 아이콘 추가 */}
 					</nav>
 				</div>

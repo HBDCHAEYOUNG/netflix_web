@@ -6,6 +6,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import Button from '@ui/button/button'
 import { movies } from '../const/home'
 
+import ButtonPlay from '@features/video/ui/button-play'
 import Number1 from '@icons/number1.svg?react'
 import Number10 from '@icons/number10.svg?react'
 import Number2 from '@icons/number2.svg?react'
@@ -18,12 +19,8 @@ import Number8 from '@icons/number8.svg?react'
 import Number9 from '@icons/number9.svg?react'
 import { Dialog, DialogContent, DialogTrigger } from '@ui/dialog/dialog'
 import { Detail } from '@widgets/home'
-import { useState } from 'react'
-import ButtonPlay from '@features/video/ui/button-play'
 
 function Home() {
-	const [isHovered, setIsHovered] = useState(false)
-	console.log(isHovered)
 	return (
 		<div className="flex min-w-full flex-col">
 			<section className="max-w-screen relative overflow-hidden pb-4">
@@ -38,7 +35,7 @@ function Home() {
 						string of looming threats.
 					</p>
 					<nav className="mt-4 flex gap-4">
-						<ButtonPlay onClick={() => {}} />
+						<ButtonPlay />
 						<Dialog>
 							<DialogTrigger>
 								<Button theme="secondary" className="w-[161px]">
@@ -60,12 +57,7 @@ function Home() {
 				<Carousel opts={{ slidesToScroll: 'auto', dragFree: true }}>
 					<CarouselContent className="px-14">
 						{movies.map((movie, index) => (
-							<CarouselItem
-								onMouseOver={() => setIsHovered(true)}
-								onMouseLeave={() => setIsHovered(false)}
-								key={index}
-								className={cn('w-1/5 basis-1/5 cursor-pointer transition-all duration-700')}
-							>
+							<CarouselItem key={index} className={cn('w-1/5 basis-1/5 cursor-pointer transition-all duration-700')}>
 								<Dialog>
 									<DialogTrigger>
 										<img
