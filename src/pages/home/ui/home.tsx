@@ -26,7 +26,7 @@ function Home() {
 	console.log(isHovered)
 	return (
 		<div className="flex min-w-full flex-col">
-			<section className="max-w-screen relative overflow-hidden">
+			<section className="max-w-screen relative overflow-hidden pb-4">
 				<video autoPlay loop muted className="absolute max-w-[1512px]">
 					<source src="https://videos.pexels.com/video-files/9140346/9140346-uhd_2560_1440_25fps.mp4" type="video/mp4" />
 				</video>
@@ -51,7 +51,7 @@ function Home() {
 				<div className="absolute bottom-[-150px] left-0 h-[150px] w-full bg-gradient-to-b from-transparent to-Primary/Black"></div>
 			</section>
 
-			<div className="w-full max-w-[100vw] overflow-hidden">
+			<div className="mt-8 w-full max-w-[100vw] overflow-hidden">
 				<h2 className="relative mb-4 common-padding Medium-Title3">Matched to You</h2>
 				<Carousel opts={{ slidesToScroll: 'auto', dragFree: true }}>
 					<CarouselContent className="px-14">
@@ -86,7 +86,7 @@ function Home() {
 				<h2 className="mb-4 common-padding Medium-Title3">Today's Top 10 Series in South Korea</h2>
 
 				<Carousel opts={{ slidesToScroll: 'auto' }}>
-					<CarouselContent>
+					<CarouselContent className="px-14">
 						<CarouselItem className="relative mr-6 w-1/5 basis-1/5 cursor-pointer overflow-hidden rounded">
 							<Number1 className="absolute left-0 top-0 w-1/2" />
 							<img src={smallmovie} alt="smallmovie" className="absolute left-auto right-0 top-0 h-[208px] w-1/2" />

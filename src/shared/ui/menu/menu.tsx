@@ -1,4 +1,6 @@
+import { cn } from '@lib/utils'
 import * as React from 'react'
+import { Link } from 'react-router-dom'
 import {
 	NavigationMenu,
 	NavigationMenuContent,
@@ -6,8 +8,6 @@ import {
 	NavigationMenuList,
 	NavigationMenuTrigger,
 } from '../_shardcn/navigation-menu'
-import { cn } from '@lib/utils'
-import { AuthStore } from '@store/auth-store'
 
 interface MenuItem {
 	icon?: React.ReactNode
@@ -26,7 +26,6 @@ interface MenuProps {
 }
 
 export const Menu = React.forwardRef<HTMLDivElement, MenuProps>(({ label, items, className, ...props }, ref) => {
-	const { setLogout } = AuthStore()
 	return (
 		<NavigationMenu ref={ref} className={className} {...props}>
 			<NavigationMenuList>
@@ -44,9 +43,9 @@ export const Menu = React.forwardRef<HTMLDivElement, MenuProps>(({ label, items,
 									{item.icon && <div className="mr-2 flex h-6 w-6 items-center justify-center">{item.icon}</div>}
 									<div>
 										{item.title === 'Log out Of Netflix' ? (
-											<div className="text-nowrap text-sm font-medium" onClick={setLogout}>
+											<Link to="/auth/logout" className="text-nowrap text-sm font-medium">
 												{item.title}
-											</div>
+											</Link>
 										) : (
 											<div className="text-nowrap text-sm font-medium">{item.title}</div>
 										)}

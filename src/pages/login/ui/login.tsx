@@ -7,16 +7,22 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import Button from '@ui/button/button'
 import ArrowIcon from '@icons/arrow-right.svg?react'
 import { Accordion, AccordionItem, CheckboxBasic, InputText } from '@ui/index'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { AccordionContent, AccordionTrigger } from '@radix-ui/react-accordion'
+import { AuthStore } from '@store/auth-store'
 
 function Login() {
+	const { setLogin } = AuthStore()
+	const navigate = useNavigate()
+
 	const form = useForm<z.infer<typeof loginSchema>>({
 		resolver: zodResolver(loginSchema),
 	})
 
 	const handleSubmit = (data: z.infer<typeof loginSchema>) => {
 		console.log(data)
+		setLogin()
+		navigate('/')
 	}
 
 	console.log(form.watch())
