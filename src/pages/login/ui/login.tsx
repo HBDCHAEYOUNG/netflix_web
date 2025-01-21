@@ -22,7 +22,7 @@ function Login() {
 	const handleSubmit = (data: z.infer<typeof loginSchema>) => {
 		console.log(data)
 		setLogin()
-		navigate('/')
+		navigate('/profiles')
 	}
 
 	console.log(form.watch())

@@ -1,5 +1,4 @@
 import Info from '@icons/info.svg?react'
-import Play from '@icons/play.svg?react'
 import smallmovie from '@images/movie-card-small.png'
 import movietitle from '@images/movie-title.png'
 import { cn } from '@lib/utils'
@@ -20,6 +19,7 @@ import Number9 from '@icons/number9.svg?react'
 import { Dialog, DialogContent, DialogTrigger } from '@ui/dialog/dialog'
 import { Detail } from '@widgets/home'
 import { useState } from 'react'
+import ButtonPlay from '@features/video/ui/button-play'
 
 function Home() {
 	const [isHovered, setIsHovered] = useState(false)
@@ -38,14 +38,18 @@ function Home() {
 						string of looming threats.
 					</p>
 					<nav className="mt-4 flex gap-4">
-						<Button theme="white" className="max-w-[119px]">
-							<Play className="mr-3 [&>path]:fill-black" />
-							Play
-						</Button>
-						<Button theme="secondary" className="max-w-[161px]">
-							<Info className="mr-3" />
-							More info
-						</Button>
+						<ButtonPlay onClick={() => {}} />
+						<Dialog>
+							<DialogTrigger>
+								<Button theme="secondary" className="w-[161px]">
+									<Info className="mr-3" />
+									More info
+								</Button>
+							</DialogTrigger>
+							<DialogContent>
+								<Detail />
+							</DialogContent>
+						</Dialog>
 					</nav>
 				</div>
 				<div className="absolute bottom-[-150px] left-0 h-[150px] w-full bg-gradient-to-b from-transparent to-Primary/Black"></div>
