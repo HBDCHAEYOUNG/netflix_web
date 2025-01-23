@@ -1,11 +1,14 @@
 import SearchIcon from '@icons/search.svg?react'
 import netflixLogo from '@images/logo.png'
+import Close from '@icons/cross.svg?react'
 import { cn } from '@lib/utils'
 import { AuthStore } from '@store/auth-store'
 import Button from '@ui/button/button'
+import Form from '@ui/form/form'
 import { Menu, MenuBell } from '@ui/index'
 import { useEffect, useRef, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { headerItems, HeaderType, menuBellItems, menuItems } from 'src/shared/const'
 
 interface HeaderProps {
@@ -20,7 +23,22 @@ export function Header({ headerType = 'landing' }: HeaderProps) {
 	const [isSearch, setIsSearch] = useState(false)
 	const [scrolled, setScrolled] = useState(false)
 
+	const form = useForm()
+	const navigate = useNavigate()
+
 	const inputRef = useRef<HTMLInputElement>(null)
+	console.log(inputRef.current)
+
+	const onSubmitSearch = () => {
+		if (form.watch('keyword').trim() === '') return
+		const value = form.watch('keyword')
+		navigate(`/search?keyword=${value}`)
+	}
+
+	const onClickClose = () => {
+		navigate('/')
+		setIsSearch(false)
+	}
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -63,16 +81,23 @@ export function Header({ headerType = 'landing' }: HeaderProps) {
 						))}
 
 						{isSearch ? (
-							<input
-								ref={inputRef}
-								name="search"
-								placeholder="Title, people, genres"
-								className="ml-auto h-[38px] w-[250px] rounded-none border !border-Primary/White bg-TransparentBlack/30% px-4 text-Primary/White !outline-none"
-								onBlur={() => {
-									setIsSearch(false)
-									inputRef.current?.blur()
-								}}
-							/>
+							<Form form={form} onSubmit={onSubmitSearch} className="relative ml-auto flex-center">
+								<Form.Item name="keyword">
+									<input
+										ref={inputRef}
+										name="keyword"
+										placeholder="Title, people, genres"
+										className="h-[38px] w-[250px] rounded-none border !border-Primary/White bg-TransparentBlack/30% px-4 text-Primary/White !outline-none"
+										onBlur={() => {
+											if (inputRef.current?.value !== '') return
+											if (inputRef.current?.value === '') navigate('/')
+											setIsSearch(false)
+											inputRef.current?.blur()
+										}}
+									/>
+								</Form.Item>
+								<Close className="absolute right-2" onClick={onClickClose} />
+							</Form>
 						) : (
 							<SearchIcon
 								className="ml-auto cursor-pointer"
