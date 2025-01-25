@@ -2,7 +2,8 @@ import title from '@images/movie-title-small.png'
 import ButtonPlay from '@features/video/ui/button-play'
 import Hd from '@icons/hd.svg?react'
 import TvMa from '@icons/tv-ma.svg?react'
-
+import ThumbsUp from '@icons/thumb-up.svg?react'
+import CirclePlus from '@icons/plus-thin.svg?react'
 import { Select } from '@ui/index'
 
 const movie = {
@@ -41,9 +42,10 @@ export function Detail() {
 				<div className="relative h-[480px] w-[850px] place-content-end px-12 pb-16">
 					<img src={movie.titleImg} alt={movie.title} />
 
-					<nav className="mt-6">
+					<nav className="mt-6 flex items-center gap-2">
 						<ButtonPlay />
-
+						<CirclePlus className="h-10 w-10 cursor-pointer rounded-full border-2 border-TransparentWhite/35% p-2 hover:border-Primary/White hover:bg-TransparentWhite/20%" />
+						<ThumbsUp className="h-10 w-10 rounded-full border-2 border-TransparentWhite/35% p-1 hover:border-Primary/White hover:bg-TransparentWhite/20%" />
 						{/* 아이콘 추가 */}
 					</nav>
 				</div>
