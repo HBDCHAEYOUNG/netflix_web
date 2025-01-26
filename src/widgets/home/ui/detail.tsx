@@ -2,9 +2,12 @@ import title from '@images/movie-title-small.png'
 import ButtonPlay from '@features/video/ui/button-play'
 import Hd from '@icons/hd.svg?react'
 import TvMa from '@icons/tv-ma.svg?react'
+import ThumbsDown from '@icons/thumb-down.svg?react'
 import ThumbsUp from '@icons/thumb-up.svg?react'
+import ThumbsUpFill from '@icons/thumb-up-fill.svg?react'
 import CirclePlus from '@icons/plus-thin.svg?react'
 import { Select } from '@ui/index'
+import { useState } from 'react'
 
 const movie = {
 	image:
@@ -26,6 +29,9 @@ const movie = {
 }
 
 export function Detail() {
+	const [isLike, setIsLike] = useState(false)
+	const [isHate, setIsHate] = useState(false)
+	console.log(isLike)
 	return (
 		<div className="fixed left-1/2 top-1/2 z-50 my-4 h-[calc(100vh-32px)] w-[850px] -translate-x-1/2 -translate-y-1/2 overflow-y-scroll rounded-md">
 			<div className="relative w-[850px] bg-Grey/Grey-850">
@@ -44,9 +50,37 @@ export function Detail() {
 
 					<nav className="mt-6 flex items-center gap-2">
 						<ButtonPlay />
-						<CirclePlus className="h-10 w-10 cursor-pointer rounded-full border-2 border-TransparentWhite/35% p-2 hover:border-Primary/White hover:bg-TransparentWhite/20%" />
-						<ThumbsUp className="h-10 w-10 rounded-full border-2 border-TransparentWhite/35% p-1 hover:border-Primary/White hover:bg-TransparentWhite/20%" />
-						{/* 아이콘 추가 */}
+						<CirclePlus className="h-10 w-10 rounded-full border-2 border-Grey/Grey-200 p-2 hover:border-Primary/White hover:bg-Grey/Grey-200" />
+						<ThumbsUp className="h-10 w-10 rounded-full border-2 border-Grey/Grey-200 p-1 hover:z-0 hover:border-Primary/White hover:bg-Grey/Grey-200" />
+						<div className="relative flex h-11 w-24 items-center justify-evenly rounded-full bg-Grey/Grey-700 transition-all duration-200">
+							{isLike ? (
+								<ThumbsUpFill onClick={() => setIsLike(false)} className="h-8 w-8 rounded-full p-1 hover:bg-Grey/Grey-150" />
+							) : (
+								<ThumbsUp
+									onClick={() => {
+										setIsLike(true)
+										setIsHate(false)
+									}}
+									className="h-8 w-8 rounded-full hover:bg-Grey/Grey-150"
+								/>
+							)}
+							{isHate ? (
+								<ThumbsUpFill
+									onClick={() => {
+										setIsHate(false)
+									}}
+									className="h-8 w-8 rotate-180 rounded-full p-1 hover:bg-Grey/Grey-150"
+								/>
+							) : (
+								<ThumbsDown
+									onClick={() => {
+										setIsHate(true)
+										setIsLike(false)
+									}}
+									className="h-8 w-8 rounded-full hover:bg-Grey/Grey-150"
+								/>
+							)}
+						</div>
 					</nav>
 				</div>
 
