@@ -1,1 +1,1 @@
-export * from './ui/admine'
+export * from './ui/admin'

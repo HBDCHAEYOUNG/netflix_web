@@ -1,4 +1,4 @@
-export * from './admine-route'
+export * from './admin-route'
 export * from './auth-route'
 export * from './home-route'
 export * from './landing-route'
