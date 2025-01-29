@@ -9,7 +9,7 @@ const Menubar = MenubarPrimitive.Root
 const MenubarItem = React.forwardRef<
 	React.ElementRef<typeof MenubarPrimitive.Item>,
 	React.ComponentPropsWithoutRef<typeof MenubarPrimitive.Item>
->(({ className, ...props }, ref) => <MenubarPrimitive.Item ref={ref} className={cn('Regular-Headline', className)} {...props} />)
+>(({ className, ...props }, ref) => <MenubarPrimitive.Item ref={ref} className={cn('Regular-Body', className)} {...props} />)
 MenubarItem.displayName = 'MenubarItem'
 
 const MenubarTrigger = React.forwardRef<
@@ -20,14 +20,14 @@ const MenubarTrigger = React.forwardRef<
 		<MenubarPrimitive.Trigger
 			ref={ref}
 			className={cn(
-				'm-1 flex h-12 flex-1 items-center justify-between rounded-md px-8 text-Primary/Black transition-all hover:bg-TransparentBlack/30% [&[data-state=open]>svg]:rotate-45',
+				'm-1 flex h-10 flex-1 items-center rounded-md px-8 text-Primary/Black transition-all duration-700 hover:bg-TransparentBlack/30% [&[data-state=open]>svg]:rotate-45',
 				className,
 			)}
 			{...props}
 		>
 			{children}
 
-			<Plus className="h-5 w-5 shrink-0 transition-transform duration-200 [&>path]:stroke-Primary/Black" />
+			<Plus className="ml-auto h-5 w-5 shrink-0 transition-transform duration-200 [&>path]:stroke-Primary/Black" />
 		</MenubarPrimitive.Trigger>
 	</MenubarPrimitive.Header>
 ))
@@ -39,11 +39,14 @@ const MenubarContent = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
 	<MenubarPrimitive.Content
 		ref={ref}
-		className="data-[state=closed]:animate-Menubar-up data-[state=open]:animate-Menubar-down overflow-hidden transition-all"
+		className="data-[state=closed]:animate-Menubar-up data-[state=open]:animate-Menubar-down overflow-hidden bg-[#f7f7f7] transition-all"
 		{...props}
 	>
 		<div
-			className={cn('m-1 flex h-12 items-center rounded-md px-8 text-Primary/Black Regular-Body hover:bg-TransparentBlack/30%', className)}
+			className={cn(
+				'mx-1 flex h-10 items-center rounded-md px-[68px] text-Primary/Black Regular-Body hover:bg-TransparentBlack/30%',
+				className,
+			)}
 		>
 			{children}
 		</div>

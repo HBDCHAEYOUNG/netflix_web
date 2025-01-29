@@ -4,7 +4,7 @@ import { AdminHeader } from './admin-header'
 
 function AdminLayout() {
 	return (
-		<div className="flex min-h-screen bg-[#f3f3f3]">
+		<div className="flex min-h-screen flex-col bg-[#f3f3f3]">
 			<AdminHeader />
 			<AdminMenubar />
 			<Outlet />
