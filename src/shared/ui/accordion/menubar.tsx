@@ -14,20 +14,22 @@ MenubarItem.displayName = 'MenubarItem'
 
 const MenubarTrigger = React.forwardRef<
 	React.ElementRef<typeof MenubarPrimitive.Trigger>,
-	React.ComponentPropsWithoutRef<typeof MenubarPrimitive.Trigger>
->(({ className, children, ...props }, ref) => (
+	React.ComponentPropsWithoutRef<typeof MenubarPrimitive.Trigger> & { showPlus?: boolean }
+>(({ className, children, showPlus = true, ...props }, ref) => (
 	<MenubarPrimitive.Header className="flex">
 		<MenubarPrimitive.Trigger
 			ref={ref}
 			className={cn(
-				'm-1 flex h-10 flex-1 items-center rounded-md px-8 text-Primary/Black transition-all duration-700 hover:bg-TransparentBlack/30% [&[data-state=open]>svg]:rotate-45',
+				'm-1 flex h-10 flex-1 items-center rounded-md px-8 text-Primary/Black transition-all duration-700 hover:bg-TransparentBlack/30% [&[data-state=open]>svg[data-icon="plus"]]:rotate-45',
 				className,
 			)}
 			{...props}
 		>
 			{children}
 
-			<Plus className="ml-auto h-5 w-5 shrink-0 transition-transform duration-200 [&>path]:stroke-Primary/Black" />
+			{showPlus && (
+				<Plus data-icon="plus" className="ml-auto h-5 w-5 shrink-0 transition-transform duration-200 [&>path]:stroke-Primary/Black" />
+			)}
 		</MenubarPrimitive.Trigger>
 	</MenubarPrimitive.Header>
 ))
@@ -44,7 +46,7 @@ const MenubarContent = React.forwardRef<
 	>
 		<div
 			className={cn(
-				'mx-1 flex h-10 items-center rounded-md px-[68px] text-Primary/Black Regular-Body hover:bg-TransparentBlack/30%',
+				'mx-1 flex h-10 cursor-pointer items-center rounded-md px-[68px] text-Primary/Black Regular-Body hover:bg-TransparentBlack/30%',
 				className,
 			)}
 		>
