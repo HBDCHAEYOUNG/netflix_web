@@ -41,7 +41,7 @@ const MenubarContent = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
 	<MenubarPrimitive.Content
 		ref={ref}
-		className="data-[state=closed]:animate-Menubar-up data-[state=open]:animate-Menubar-down overflow-hidden bg-[#f7f7f7] transition-all"
+		className="data-[state=closed]:animate-Menubar-up data-[state=open]:animate-Menubar-down overflow-hidden bg-[#f7f7f7] pb-1 transition-all"
 		{...props}
 	>
 		<div
