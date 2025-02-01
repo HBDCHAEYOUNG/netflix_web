@@ -20,7 +20,7 @@ const MenubarTrigger = React.forwardRef<
 		<MenubarPrimitive.Trigger
 			ref={ref}
 			className={cn(
-				'm-1 flex h-10 flex-1 items-center rounded-md px-8 text-Primary/Black transition-all duration-700 hover:bg-TransparentBlack/30% [&[data-state=open]>svg[data-icon="plus"]]:rotate-45',
+				'm-1 flex h-10 flex-1 items-center px-8 text-Primary/Black transition-all duration-700 hover:bg-TransparentBlack/30% [&[data-state=open]>svg[data-icon="plus"]]:rotate-45',
 				className,
 			)}
 			{...props}
@@ -46,7 +46,7 @@ const MenubarContent = React.forwardRef<
 	>
 		<div
 			className={cn(
-				'mx-1 flex h-10 cursor-pointer items-center rounded-md px-[68px] text-Primary/Black Regular-Body hover:bg-TransparentBlack/30%',
+				'mx-1 flex h-10 cursor-pointer items-center px-[68px] text-Primary/Black Regular-Body hover:bg-TransparentBlack/30%',
 				className,
 			)}
 		>

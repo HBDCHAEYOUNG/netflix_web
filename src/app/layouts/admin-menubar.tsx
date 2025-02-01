@@ -23,7 +23,7 @@ export function AdminMenubar() {
 						onClick={() => {
 							navigate(`/admin?${'movie'}`)
 						}}
-						className={cn(currentMenu === 'movie' && 'bg-Primary/Red/80 hover:bg-Primary/Red/80')}
+						className={cn(currentMenu === 'movie' && 'bg-Primary/Black text-Primary/White hover:bg-Primary/Black')}
 					>
 						Movie
 					</MenubarContent>
@@ -31,7 +31,7 @@ export function AdminMenubar() {
 						onClick={() => {
 							navigate(`/admin?${'series'}`)
 						}}
-						className={cn(currentMenu === 'series' && 'bg-Primary/Red/80 hover:bg-Primary/Red/80')}
+						className={cn(currentMenu === 'series' && 'bg-Primary/Black text-Primary/White hover:bg-Primary/Black')}
 					>
 						Series
 					</MenubarContent>
@@ -42,7 +42,7 @@ export function AdminMenubar() {
 						onClick={() => {
 							navigate(`/admin?${'director'}`)
 						}}
-						className={cn(currentMenu === 'director' && 'bg-Primary/Red/80 hover:bg-Primary/Red/80')}
+						className={cn(currentMenu === 'director' && 'bg-Primary/Black text-Primary/White hover:bg-Primary/Black')}
 					>
 						<Director className="w-8 pr-2" />
 						Director
@@ -54,7 +54,7 @@ export function AdminMenubar() {
 						onClick={() => {
 							navigate(`/admin?${'category'}`)
 						}}
-						className={cn(currentMenu === 'category' && 'bg-Primary/Red/80 hover:bg-Primary/Red/80')}
+						className={cn(currentMenu === 'category' && 'bg-Primary/Black text-Primary/White hover:bg-Primary/Black')}
 					>
 						<Category className="w-8 pr-2" />
 						Category
@@ -66,7 +66,7 @@ export function AdminMenubar() {
 						onClick={() => {
 							navigate(`/admin?${'user'}`)
 						}}
-						className={cn(currentMenu === 'user' && 'bg-Primary/Red/80 hover:bg-Primary/Red/80')}
+						className={cn(currentMenu === 'user' && 'bg-Primary/Black text-Primary/White hover:bg-Primary/Black')}
 					>
 						<User className="w-8 pr-2" />
 						User

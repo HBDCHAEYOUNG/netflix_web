@@ -1,3 +1,4 @@
+import { AdminTable } from '@ui/table/admin-table'
 import { useSearchParams } from 'react-router-dom'
 
 export function Admin() {
@@ -5,8 +6,9 @@ export function Admin() {
 	const currentMenu = searchParams.toString().replace('=', '')
 
 	return (
-		<div className="pl-80 [&>*]:text-Primary/Black">
-			<h1 className="p-10 pt-[90px] Bold-Title2">{currentMenu}</h1>
+		<div className="pl-80 [&_*]:text-Primary/Black">
+			<h1 className="px-10 pb-4 pt-[84px] Bold-Title2">{currentMenu}</h1>
+			<AdminTable />
 		</div>
 	)
 }
