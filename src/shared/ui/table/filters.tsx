@@ -15,13 +15,13 @@ export function Filters({ className, columnFilters, setColumnFilters }: FiltersP
 		setColumnFilters([{ id, value }])
 	}
 	return (
-		<div className={cn('flex w-fit items-center gap-3 rounded-sm border border-Grey/Grey-20 bg-Primary/White px-3 py-2', className)}>
+		<div className={cn('flex w-fit items-center gap-3 rounded-sm border border-Grey/Grey-20 bg-Primary/White px-3 py-1', className)}>
 			<Search className="h-4 w-4 [&_*]:stroke-Primary/Black" />
 			<input
 				type="text"
 				value={taskName}
 				onChange={(e) => onFilterChange('title', e.target.value)}
-				className="bg-transparent outline-none focus-within:outline-Primary/Black"
+				className="focus-within:outline-Primary/Black.. bg-transparent outline-none"
 			/>
 		</div>
 	)

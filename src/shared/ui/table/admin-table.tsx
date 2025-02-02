@@ -1,9 +1,11 @@
+import Sort from '@icons/sort.svg?react'
 import {
 	ColumnDef,
 	ColumnFiltersState,
 	flexRender,
 	getCoreRowModel,
 	getFilteredRowModel,
+	getPaginationRowModel,
 	getSortedRowModel,
 	SortingState,
 	useReactTable,
@@ -12,7 +14,6 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { useState } from 'react'
 import { DATA } from 'src/shared/const/data'
 import { Filters } from './filters'
-import Sort from '@icons/sort.svg?react'
 
 type TableData = (typeof DATA)[0]
 
@@ -27,6 +28,10 @@ export function AdminTable() {
 	const [data, setData] = useState(DATA)
 	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
 	const [sorting, setSorting] = useState<SortingState>([])
+	const [pagination, setPagination] = useState({
+		pageIndex: 0, //initial page index
+		pageSize: 6, //default page size
+	})
 
 	const table = useReactTable({
 		data,
@@ -34,16 +39,19 @@ export function AdminTable() {
 		getCoreRowModel: getCoreRowModel(),
 		getFilteredRowModel: getFilteredRowModel(),
 		getSortedRowModel: getSortedRowModel(),
+		getPaginationRowModel: getPaginationRowModel(),
 		state: {
 			columnFilters,
 			sorting,
+			pagination,
 		},
 		onSortingChange: setSorting,
+		onPaginationChange: setPagination,
 	})
 	console.log(setData)
 	return (
-		<div className="px-10">
-			<Filters columnFilters={columnFilters} setColumnFilters={setColumnFilters} />
+		<div className="px-10 pb-20">
+			<Filters columnFilters={columnFilters} setColumnFilters={setColumnFilters} className="absolute right-10 top-[84px]" />
 			<Table className="mt-2 overflow-hidden rounded-lg [&_*]:text-base">
 				<TableHeader className="h-16">
 					{table.getHeaderGroups().map((headerGroup) => (
@@ -70,7 +78,23 @@ export function AdminTable() {
 					))}
 				</TableBody>
 			</Table>
-			<p>{table.getState().pagination.pageIndex}</p>
+			<div className="mt-4 flex items-center">
+				Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
+				<button
+					className="ml-auto mr-1 cursor-pointer border border-Grey/Grey-20 bg-Primary/White px-2 py-1"
+					onClick={() => table.previousPage()}
+					disabled={!table.getCanPreviousPage()}
+				>
+					Previous
+				</button>
+				<button
+					className="w-fit cursor-pointer border border-Grey/Grey-20 bg-Primary/White px-2 py-1"
+					onClick={() => table.nextPage()}
+					disabled={!table.getCanNextPage()}
+				>
+					Next
+				</button>
+			</div>
 		</div>
 	)
 }
