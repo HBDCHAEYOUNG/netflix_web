@@ -1,4 +1,4 @@
-import { AdminTable } from '@ui/table/admin-table'
+import { AdminTable } from '@ui/index'
 import { useSearchParams } from 'react-router-dom'
 
 export function Admin() {

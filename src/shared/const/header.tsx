@@ -1,4 +1,3 @@
-import TransferIcon from '@icons/account.svg?react'
 import PencilIcon from '@icons/pencil.svg?react'
 import PersonIcon from '@icons/person.svg?react'
 import ServiceIcon from '@icons/question.svg?react'
@@ -22,17 +21,15 @@ export const menuBellItems = [
 
 export const menuItems = [
 	{
-		icon: <PencilIcon />,
 		title: 'Manage Your Profile',
-	},
-	{
-		icon: <TransferIcon />,
-		title: 'Profile Transfer',
+		icon: <PencilIcon />,
+		to: '#',
 	},
 	{
 		title: 'Account',
 		icon: <PersonIcon />,
+		to: '#',
 	},
-	{ title: 'Customer Service Center', icon: <ServiceIcon /> },
-	{ title: 'Log out Of Netflix', className: 'mt-2 justify-center border-t border-Grey/Grey-200 pr-0' },
+	{ title: 'Customer Service Center', icon: <ServiceIcon />, to: '#' },
+	{ title: 'Log out Of Netflix', className: 'mt-2 justify-center border-t border-Grey/Grey-200 pr-0', to: '/auth/logout' },
 ]

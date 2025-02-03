@@ -13,10 +13,8 @@ interface MenuItem {
 	icon?: React.ReactNode
 	title: string
 	image?: string
-	href?: string
-	description?: string
-	onClick?: () => void
 	className?: string
+	to: string
 }
 
 interface MenuProps {
@@ -34,22 +32,13 @@ export const Menu = React.forwardRef<HTMLDivElement, MenuProps>(({ label, items,
 					<NavigationMenuContent>
 						<ul className="grid bg-Primary/Black py-2">
 							{items.map((item, index) => (
-								<li
-									key={index}
-									className={cn('flex cursor-pointer items-center px-4 py-2 pr-12 hover:underline', item.className)}
-									onClick={item.onClick}
-								>
+								<li key={index} className={cn('flex cursor-pointer items-center px-4 py-2 pr-12 hover:underline', item.className)}>
 									{item.image && <img src={item.image} alt={item.title} className="h-8 w-8 object-cover" />}
 									{item.icon && <div className="mr-2 flex h-6 w-6 items-center justify-center">{item.icon}</div>}
-									<div>
-										{item.title === 'Log out Of Netflix' ? (
-											<Link to="/auth/logout" className="text-nowrap text-sm font-medium">
-												{item.title}
-											</Link>
-										) : (
-											<div className="text-nowrap text-sm font-medium">{item.title}</div>
-										)}
-									</div>
+
+									<Link to={item.to} className="text-nowrap text-sm font-medium">
+										{item.title}
+									</Link>
 								</li>
 							))}
 						</ul>
