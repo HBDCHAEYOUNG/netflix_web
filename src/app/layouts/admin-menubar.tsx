@@ -12,7 +12,7 @@ export function AdminMenubar() {
 	const currentMenu = searchParams.toString().replace('=', '')
 
 	return (
-		<div className="fixed left-0 top-14 h-screen w-80 bg-Primary/White pt-5 shadow-lg">
+		<div className="fixed left-0 top-14 h-screen w-72 bg-Primary/White pt-5 shadow-lg">
 			<Menubar type="multiple">
 				<MenubarItem value="a">
 					<MenubarTrigger>

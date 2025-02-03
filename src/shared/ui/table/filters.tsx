@@ -4,13 +4,10 @@ import { ColumnFiltersState } from '@tanstack/react-table'
 
 interface FiltersProps {
 	className?: string
-	columnFilters: ColumnFiltersState
 	setColumnFilters: React.Dispatch<React.SetStateAction<ColumnFiltersState>>
 }
 
-export function Filters({ className, columnFilters, setColumnFilters }: FiltersProps) {
-	const taskName = columnFilters.find((f) => f.id === 'title')?.value ?? ''
-
+export function Filters({ className, setColumnFilters }: FiltersProps) {
 	const onFilterChange = (id: string, value: string) => {
 		setColumnFilters([{ id, value }])
 	}
@@ -19,7 +16,7 @@ export function Filters({ className, columnFilters, setColumnFilters }: FiltersP
 			<Search className="h-4 w-4 [&_*]:stroke-Primary/Black" />
 			<input
 				type="text"
-				value={taskName}
+				placeholder="title..."
 				onChange={(e) => onFilterChange('title', e.target.value)}
 				className="focus-within:outline-Primary/Black.. bg-transparent outline-none"
 			/>
