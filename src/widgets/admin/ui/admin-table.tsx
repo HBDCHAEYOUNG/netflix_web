@@ -61,7 +61,7 @@ export function AdminTable() {
 							{headerGroup.headers.map((header) => (
 								<TableHead key={header.id} className="text-base">
 									<div className="gap-2 flex-center">
-										{header.column.columnDef.header}
+										{header.id}
 										{header.column.getCanSort() && (
 											<Sort className="h-4 w-4 cursor-pointer" onClick={header.column.getToggleSortingHandler()} />
 										)}

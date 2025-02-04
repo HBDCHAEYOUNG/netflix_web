@@ -2,9 +2,9 @@ import PencilIcon from '@icons/pencil.svg?react'
 import PersonIcon from '@icons/person.svg?react'
 import ServiceIcon from '@icons/question.svg?react'
 
-export type HeaderType = 'home' | 'landing' | 'auth' | 'none'
+export type HeaderType = 'home' | 'landing' | 'auth' | 'none' | 'admin'
 
-export const menuItems = [
+export const userMenuItems = [
 	{
 		title: 'Manage Your Profile',
 		icon: <PencilIcon />,
@@ -17,4 +17,12 @@ export const menuItems = [
 	},
 	{ title: 'Customer Service Center', icon: <ServiceIcon />, to: '#' },
 	{ title: 'Log out Of Netflix', className: 'mt-2 justify-center border-t border-Grey/Grey-200 pr-0', to: '/auth/logout' },
+]
+
+export const adminMenuItems = [
+	{
+		title: 'Account',
+		icon: <PersonIcon />,
+		to: '#',
+	},
 ]

@@ -1,11 +1,11 @@
 import { Outlet } from 'react-router-dom'
 import { AdminMenubar } from './admin-menubar'
-import { AdminHeader } from './admin-header'
+import { Header } from './header'
 
 function AdminLayout() {
 	return (
 		<div className="flex min-h-screen flex-col bg-[#f3f3f3]">
-			<AdminHeader />
+			<Header headerType="admin" />
 			<AdminMenubar />
 			<Outlet />
 		</div>
