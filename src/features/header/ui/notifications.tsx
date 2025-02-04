@@ -5,27 +5,17 @@ import {
 	NavigationMenuItem,
 	NavigationMenuList,
 	NavigationMenuTrigger,
-} from '../_shardcn/navigation-menu'
+} from '../../../shared/ui/_shardcn/navigation-menu'
 import { cn } from '@lib/utils'
 import BellIcon from '@icons/notification.svg?react'
 import { format } from 'timeago.js'
+import { notifications } from '../const/notifications'
 
-interface MenuItem {
-	icon?: React.ReactNode
-	title: string
-	image: string
-	href?: string
-	description: string
-	className?: string
-	at: string
-}
-
-interface MenuProps {
-	items: MenuItem[]
+interface NotificationsProps {
 	className?: string
 }
 
-export const MenuBell = React.forwardRef<HTMLDivElement, MenuProps>(({ items, className, ...props }, ref) => {
+export const Notifications = React.forwardRef<HTMLDivElement, NotificationsProps>(({ className, ...props }, ref) => {
 	return (
 		<NavigationMenu ref={ref} className={className} {...props}>
 			<NavigationMenuList>
@@ -35,12 +25,11 @@ export const MenuBell = React.forwardRef<HTMLDivElement, MenuProps>(({ items, cl
 					</NavigationMenuTrigger>
 					<NavigationMenuContent>
 						<ul className="grid w-[410px] bg-Primary/Black py-2">
-							{items.map((item, index) => (
+							{notifications.map((item, index) => (
 								<li
 									key={index}
 									className={cn(
 										'flex cursor-pointer items-center gap-2 border-b border-Grey/Grey-200 px-4 py-4 last:border-b-0 hover:brightness-90',
-										item.className,
 									)}
 								>
 									<img src={item.image} alt={item.title} className="basis-3/10 mb-auto w-[110px] rounded-md object-cover" />
@@ -60,4 +49,4 @@ export const MenuBell = React.forwardRef<HTMLDivElement, MenuProps>(({ items, cl
 	)
 })
 
-MenuBell.displayName = 'MenuBell'
+Notifications.displayName = 'Notifications'

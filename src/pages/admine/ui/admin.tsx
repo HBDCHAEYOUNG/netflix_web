@@ -1,4 +1,4 @@
-import { AdminTable } from '@ui/index'
+import { AdminTable } from '@widgets/admin'
 import { useSearchParams } from 'react-router-dom'
 
 export function Admin() {

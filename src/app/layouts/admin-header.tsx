@@ -1,6 +1,6 @@
-import logo from '@images/logo.png'
-import { Menu } from '@ui/index'
+import { AccountMenu } from '@features/header'
 import PersonIcon from '@icons/person.svg?react'
+import logo from '@images/logo.png'
 import { Link } from 'react-router-dom'
 
 export function AdminHeader() {
@@ -8,6 +8,7 @@ export function AdminHeader() {
 		{
 			title: 'Account',
 			icon: <PersonIcon />,
+			to: '#',
 		},
 	]
 	return (
@@ -19,7 +20,7 @@ export function AdminHeader() {
 				|<h1 className="pl-3 text-xl font-light">Admin</h1>
 			</div>
 			{/* <h1 className="pl-60">헤더</h1> */}
-			<Menu label="admin1" items={menuItems} className="ml-auto" />
+			<AccountMenu label="admin1" items={menuItems} className="ml-auto" />
 		</header>
 	)
 }

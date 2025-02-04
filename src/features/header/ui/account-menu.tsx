@@ -7,9 +7,9 @@ import {
 	NavigationMenuItem,
 	NavigationMenuList,
 	NavigationMenuTrigger,
-} from '../_shardcn/navigation-menu'
+} from '../../../shared/ui/_shardcn/navigation-menu'
 
-interface MenuItem {
+interface AccountMenuItems {
 	icon?: React.ReactNode
 	title: string
 	image?: string
@@ -17,13 +17,13 @@ interface MenuItem {
 	to: string
 }
 
-interface MenuProps {
+interface AccountMenuProps {
 	label: string
-	items: MenuItem[]
+	items: AccountMenuItems[]
 	className?: string
 }
 
-export const Menu = React.forwardRef<HTMLDivElement, MenuProps>(({ label, items, className, ...props }, ref) => {
+export const AccountMenu = React.forwardRef<HTMLDivElement, AccountMenuProps>(({ label, items, className, ...props }, ref) => {
 	return (
 		<NavigationMenu ref={ref} className={className} {...props}>
 			<NavigationMenuList>
@@ -49,4 +49,4 @@ export const Menu = React.forwardRef<HTMLDivElement, MenuProps>(({ label, items,
 	)
 })
 
-Menu.displayName = 'Menu'
+AccountMenu.displayName = 'AccountMenu'
