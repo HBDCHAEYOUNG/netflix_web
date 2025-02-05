@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 
 export const menuItems = [
 	{ title: 'home', path: '/' },
-	{ title: 'seiries', path: '/tv' },
+	{ title: 'seiries', path: '/series' },
 	{ title: 'movie', path: '/movies' },
 	{ title: 'New!The latest tranding content', path: 'latest' },
 	{ title: 'My List', path: 'my-list' },

@@ -23,6 +23,8 @@ interface VideoCardProps {
 export function VideoCard({ movie }: VideoCardProps) {
 	const [isHovered, setIsHovered] = useState(false)
 	return (
+		//비디오 리스트 호버시 뜨는 비디오 카드 컴포넌트
+		//지금 안쓰고 있음!
 		<div
 			className="relative aspect-video w-full transition-all"
 			onMouseOver={() => setIsHovered(true)}
