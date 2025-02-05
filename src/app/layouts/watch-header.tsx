@@ -1,7 +1,7 @@
 import ArrowBackIcon from '@icons/arrow-left.svg?react'
 import { useNavigate } from 'react-router-dom'
 
-export function PlayHeader() {
+export function WatchHeader() {
 	const navigate = useNavigate()
 	return (
 		<div className="fixed left-0 top-0 z-10 px-12 py-9">

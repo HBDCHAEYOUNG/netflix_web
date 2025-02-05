@@ -1,1 +1,5 @@
+export * from './ui/carousel-btn'
 export * from './ui/headline'
+export * from './ui/moreinfo-img'
+export * from './ui/moreinfo-number'
+export * from './ui/moreinfo'

@@ -1,4 +1,4 @@
-export function Video() {
+export function Watch() {
 	return (
 		<div className="h-screen">
 			<video controls autoPlay className="mx-auto h-full object-contain">

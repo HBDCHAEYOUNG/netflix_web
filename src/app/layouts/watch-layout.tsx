@@ -1,13 +1,13 @@
 import { Outlet } from 'react-router-dom'
-import { PlayHeader } from './play-header'
+import { WatchHeader } from './watch-header'
 
-function PlayLayout() {
+function WatchLayout() {
 	return (
 		<div className="min-h-screen w-full bg-Primary/Black min-w-base">
-			<PlayHeader />
+			<WatchHeader />
 			<Outlet />
 		</div>
 	)
 }
 
-export default PlayLayout
+export default WatchLayout

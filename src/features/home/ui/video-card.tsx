@@ -6,7 +6,6 @@ import ThumbIcon from '@icons/thumb-up.svg?react'
 import movietitle from '@images/movie-title.png'
 import { Dialog, DialogContent, DialogTrigger } from '@ui/dialog/dialog'
 import { Rating } from '@ui/label/rating'
-import { Detail } from '@widgets/home'
 import { useState } from 'react'
 
 interface VideoCardProps {
@@ -40,9 +39,7 @@ export function VideoCard({ movie }: VideoCardProps) {
 							<DialogTrigger>
 								<ArrowIcon />
 							</DialogTrigger>
-							<DialogContent className="w-calc(100vw-224px) relative mx-28 bg-Primary/Black">
-								<Detail />
-							</DialogContent>
+							<DialogContent className="w-calc(100vw-224px) relative mx-28 bg-Primary/Black">{/* <Detail /> */}</DialogContent>
 						</Dialog>
 					</div>
 					<div className="mx-4 flex items-center gap-2 [&>svg]:h-4 [&>svg]:w-4">

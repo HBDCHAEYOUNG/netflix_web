@@ -1,3 +1,4 @@
+import { movieDetail } from '@pages/home'
 import { Dialog, DialogContent, DialogTrigger } from '@ui/dialog/dialog'
 import { Detail } from '@widgets/home'
 import { useSearchParams } from 'react-router-dom'
@@ -23,7 +24,7 @@ export function Search() {
 							<img src={item.imageUrl} alt={item.alt} className="aspect-video h-auto w-full rounded-md" />
 						</DialogTrigger>
 						<DialogContent>
-							<Detail />
+							<Detail movieDetail={movieDetail} />
 						</DialogContent>
 					</Dialog>
 				))}

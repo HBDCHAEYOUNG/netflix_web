@@ -36,6 +36,7 @@ export function AdminMenubar() {
 						Series
 					</MenubarContent>
 				</MenubarItem>
+
 				<MenubarItem value="b">
 					<MenubarTrigger
 						showPlus={false}
@@ -48,6 +49,7 @@ export function AdminMenubar() {
 						Director
 					</MenubarTrigger>
 				</MenubarItem>
+
 				<MenubarItem value="c">
 					<MenubarTrigger
 						showPlus={false}
@@ -60,6 +62,7 @@ export function AdminMenubar() {
 						Category
 					</MenubarTrigger>
 				</MenubarItem>
+
 				<MenubarItem value="d">
 					<MenubarTrigger
 						showPlus={false}
