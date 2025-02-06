@@ -1,6 +1,7 @@
 import { SelectGenres } from '@features/header'
 import { cn } from '@lib/utils'
 import { useEffect, useState } from 'react'
+import { Link, useSearchParams } from 'react-router-dom'
 
 const genres = [
 	'Korean Drama',
@@ -11,19 +12,11 @@ const genres = [
 	'animated film',
 	'comedy',
 	'romance',
-	'drama genere',
-	'Action',
-	'Adventure',
-	'Fantasy',
-	'Horror',
-	'Mystery',
-	'Sci-Fi',
-	'Thriller',
-	'Western',
 ]
 
 export function SubHeader({ path }: { path: string }) {
 	const [scrolled, setScrolled] = useState(false)
+	const [searchParams] = useSearchParams()
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -41,8 +34,19 @@ export function SubHeader({ path }: { path: string }) {
 				scrolled && 'bg-Primary/Black',
 			)}
 		>
-			<h1 className="mr-10 text-4xl font-bold">{path}</h1>
-			<SelectGenres items={genres} label="Genre" />
+			<h1 className={cn('mr-10 flex items-center gap-3 text-4xl font-bold', searchParams.get('genre') && 'hidden')}>{path}</h1>
+			{searchParams.get('genre') && (
+				<>
+					<Link to="/series" className="flex cursor-pointer items-center gap-3 text-xl font-thin text-Grey/Grey-25">
+						{path}
+
+						<p className="text-xl font-thin text-Grey/Grey-25"> |</p>
+					</Link>
+					<span className="ml-3 text-4xl font-bold">{searchParams.get('genre')}</span>
+				</>
+			)}
+
+			{!searchParams.get('genre') && <SelectGenres items={genres} label="Genre" />}
 		</header>
 	)
 }
