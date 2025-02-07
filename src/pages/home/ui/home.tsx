@@ -34,8 +34,8 @@ function Home() {
 							<CarouselItem
 								key={index}
 								className={cn(
-									'relative w-1/6 basis-1/6 cursor-pointer rounded',
-									index === 0 && 'mr-6',
+									'relative w-1/5 basis-1/5 cursor-pointer rounded',
+									index === 0 && 'mr-2',
 									index === 9 ? 'content-center' : 'overflow-hiddenn',
 								)}
 							>

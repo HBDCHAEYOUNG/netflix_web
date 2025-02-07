@@ -12,7 +12,6 @@ export const SelectGenres = React.forwardRef<HTMLButtonElement, SelectGenresProp
 	const navigate = useNavigate()
 
 	const handleGenreSelect = (selectedGenre: string) => {
-		console.log('Selected genre:', selectedGenre)
 		navigate(`?genre=${selectedGenre}`)
 	}
 

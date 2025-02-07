@@ -33,7 +33,7 @@ export function MoreinfoNumber({ index, smallmovie, movieDetail }: MoreinfoNumbe
 				<img
 					src={smallmovie}
 					alt="smallmovie"
-					className={cn('absolute top-0 h-[168px] rounded-sm', index === 9 ? 'left-[46%]' : 'left-auto right-1')}
+					className={cn('absolute top-0 h-[168px] rounded-sm', index === 9 ? 'left-[52%]' : 'left-auto right-1')}
 				/>
 			</DialogTrigger>
 			<DialogContent>

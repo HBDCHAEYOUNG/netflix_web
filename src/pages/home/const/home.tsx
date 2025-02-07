@@ -1,12 +1,9 @@
-import card1 from '@images/movie-card-1.png'
-import card2 from '@images/movie-card-2.png'
-import card3 from '@images/movie-card-3.png'
-import card4 from '@images/movie-card-4.png'
 import title from '@images/movie-title-small.png'
 
 export const movies = [
 	{
-		image: card1,
+		image:
+			'https://occ-0-1361-325.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABT-QluA7qJRE6WnLFefO6LrzXTCJSNDrG50CONz6Lz8DI9-z3SAValsqr6Dm3hTk0jbPYikgRMNakph2QIgZqUKybkGl8STwXZYsEwO8lrqR0LE_FMHIEvS16oJfy727U65K.jpg?r=169',
 		title: 'The Supper Mario Bros',
 		description:
 			'The Super Mario Bros. Movie is an upcoming American computer-animated action-adventure comedy film produced by Illumination and distributed by Universal Pictures.',
@@ -16,7 +13,8 @@ export const movies = [
 		rating: '19',
 	},
 	{
-		image: card2,
+		image:
+			'https://occ-0-1361-325.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABY87mMs5K38TNOM6TMwTWuUWP6JeOjdgrFhtUbWcgQpvytYSJetl0MF4-i5tqsS0rGYxCzldcthbV3csVRECYWFiQ7XBdQB1tXPLumEHIf9OW0qcqvZqDnlzErY8EIkDudv8.jpg?r=95f',
 		title: 'Spider Man : Across the Spiderverse',
 		description:
 			'Spider-Man: Across the Spider-Verse is an upcoming American computer-animated action-adventure comedy film produced by Illumination and distributed by Universal Pictures.',
@@ -26,7 +24,8 @@ export const movies = [
 		rating: '12',
 	},
 	{
-		image: card3,
+		image:
+			'https://occ-0-1361-325.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABReR5-yGo9x_UKrAcY1auHI15eko6fZKRsZMlOCjtVLz5Xqx57QvvlO3AZYAPydiY9_umoC8UitQQ84rF9CLz8UXxkqaqwXR41SbQdIDuZ3bDo9MSlJ6ighJCd6bgumWmkK1.jpg?r=881',
 		title: 'The Glory',
 		description:
 			'The Glory is a South Korean television series that aired on tvN from January 10, 2022, to February 22, 2022, on Mondays and Tuesdays at 21:50 (KST).',
@@ -36,7 +35,8 @@ export const movies = [
 		rating: '19',
 	},
 	{
-		image: card4,
+		image:
+			'https://occ-0-1361-325.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABRXRzGEn3eZOrxNgftloQtXl4YhmL5WPwH2_MM2mt_vw5G5R9Qn2wAd3OL593QHQ1wlRnm8C_obStz_Jka1D19fU-AxDf7kkVi0.webp?r=296',
 		title: 'One Piece',
 		description:
 			"One Piece is a Japanese manga series written and illustrated by Eiichiro Oda. It has been serialized in Shueisha's Weekly Shōnen Jump magazine since July 1997, with its individual chapters compiled into 109 tankobon volumes as of December 2024.",
@@ -46,7 +46,8 @@ export const movies = [
 		rating: '19',
 	},
 	{
-		image: card4,
+		image:
+			'https://occ-0-1361-325.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABa4OnrcgIREQ1hWjncxaNxJ8k-hBR1d496LaujfbOTjEiTff7KpD9qwM5iASENp2CXvJs8XvSOO9SpLTF6Uc5GKrd__lPo8np58.webp?r=f3e',
 		title: 'One Piece',
 		description:
 			"One Piece is a Japanese manga series written and illustrated by Eiichiro Oda. It has been serialized in Shueisha's Weekly Shōnen Jump magazine since July 1997, with its individual chapters compiled into 109 tankobon volumes as of December 2024.",
@@ -56,7 +57,8 @@ export const movies = [
 		rating: '19',
 	},
 	{
-		image: card4,
+		image:
+			'https://occ-0-1361-325.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABa4OnrcgIREQ1hWjncxaNxJ8k-hBR1d496LaujfbOTjEiTff7KpD9qwM5iASENp2CXvJs8XvSOO9SpLTF6Uc5GKrd__lPo8np58.webp?r=f3e',
 		title: 'One Piece',
 		description:
 			"One Piece is a Japanese manga series written and illustrated by Eiichiro Oda. It has been serialized in Shueisha's Weekly Shōnen Jump magazine since July 1997, with its individual chapters compiled into 109 tankobon volumes as of December 2024.",
@@ -66,7 +68,8 @@ export const movies = [
 		rating: '19',
 	},
 	{
-		image: card4,
+		image:
+			'https://occ-0-1361-325.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABa4OnrcgIREQ1hWjncxaNxJ8k-hBR1d496LaujfbOTjEiTff7KpD9qwM5iASENp2CXvJs8XvSOO9SpLTF6Uc5GKrd__lPo8np58.webp?r=f3e',
 		title: 'One Piece',
 		description:
 			"One Piece is a Japanese manga series written and illustrated by Eiichiro Oda. It has been serialized in Shueisha's Weekly Shōnen Jump magazine since July 1997, with its individual chapters compiled into 109 tankobon volumes as of December 2024.",
@@ -76,7 +79,8 @@ export const movies = [
 		rating: '19',
 	},
 	{
-		image: card4,
+		image:
+			'https://occ-0-1361-325.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABa4OnrcgIREQ1hWjncxaNxJ8k-hBR1d496LaujfbOTjEiTff7KpD9qwM5iASENp2CXvJs8XvSOO9SpLTF6Uc5GKrd__lPo8np58.webp?r=f3e',
 		title: 'One Piece',
 		description:
 			"One Piece is a Japanese manga series written and illustrated by Eiichiro Oda. It has been serialized in Shueisha's Weekly Shōnen Jump magazine since July 1997, with its individual chapters compiled into 109 tankobon volumes as of December 2024.",
@@ -86,7 +90,8 @@ export const movies = [
 		rating: '19',
 	},
 	{
-		image: card4,
+		image:
+			'https://occ-0-1361-325.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABa4OnrcgIREQ1hWjncxaNxJ8k-hBR1d496LaujfbOTjEiTff7KpD9qwM5iASENp2CXvJs8XvSOO9SpLTF6Uc5GKrd__lPo8np58.webp?r=f3e',
 		title: 'One Piece',
 		description:
 			"One Piece is a Japanese manga series written and illustrated by Eiichiro Oda. It has been serialized in Shueisha's Weekly Shōnen Jump magazine since July 1997, with its individual chapters compiled into 109 tankobon volumes as of December 2024.",
@@ -98,6 +103,7 @@ export const movies = [
 ]
 
 export const movieDetail = {
+	id: 1,
 	image:
 		'https://images.unsplash.com/photo-1705418181762-1a52ab82ddf5?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
 	title: 'The Super Mario Bros. Movie',

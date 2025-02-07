@@ -60,10 +60,7 @@ export function Header({ headerType = 'landing' }: HeaderProps) {
 							<Notifications />
 						</div>
 					)}
-					<AccountMenu
-						label={headerType === 'admin' ? 'Admin' : 'Profile'}
-						items={headerType === 'admin' ? adminMenuItems : userMenuItems}
-					/>
+					<AccountMenu label={headerType === 'admin' ? 'admin' : 'user'} items={headerType === 'admin' ? adminMenuItems : userMenuItems} />
 				</nav>
 			) : (
 				<Link to="/auth/login" className={cn(headerType === 'auth' && 'hidden')}>

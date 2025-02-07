@@ -1,5 +1,4 @@
 import Button from '@ui/button/button'
-import likeMovie from '@images/likemovie.jpg'
 import { useState } from 'react'
 import ThumbUp from '@icons/thumb-up-fill.svg?react'
 import { Link } from 'react-router-dom'
@@ -25,7 +24,7 @@ export function StepThree() {
 					{Array.from({ length: 12 }).map((_, index) => (
 						<CarouselItem key={index} className="relative w-[10%] basis-[10%]">
 							<img
-								src={likeMovie}
+								src="https://occ-0-1361-325.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABXXuSKJKuMesBLmtpX9tbK-YO0hHcPpP314H0bPrpyHpLHwFb1Tkg3n1obTF3ocuV0eokxDXc9T_2tpWcmEI08BF2-JV-qZgc80DbeAFMC7hRoAK7GQgIbZFFB4UZFP6eMzrNlngzuzLoOMDQH11jshkxWausRtUsntiOp6aCeTpvGn61RBeBq-KzZ7N9CoCxtfYCpgY1uiMu0NCJHj1fkHSpNY3OOVCK0wfZfN2Rf7HZpg1l02IaxKkhAEhKI0ZXnVrlc8QsS99MnPF2qsPXtr4pGJsoIaUGUqRvpl_ZgiVAoD4x0rVlE7tEL6xymnsMLIrI2SsKN0ZWrnJdqMS8R1_HO4HxQklE5Jc_3y5QhaC9I4Ew_zfEx_kewfobIE1mFILgGy7Ds2BrAwcblgRnQg34eAdwBuA_N8O_DLlaSa9aS1Zp2RvrOnjCjqRZqeTy0wQfQP1EWaHGAWTlC7XLkrjTNr31qklA0sSRA.jpg?r=eec"
 								alt={`content${index + 1}`}
 								className={`${likeContents.find((content) => content === `content${index + 1}`) && 'opacity-60'} cursor-pointer hover:opacity-40`}
 								onClick={() => onClickContent(`content${index + 1}`)}

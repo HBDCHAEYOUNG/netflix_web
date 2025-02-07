@@ -24,7 +24,7 @@ export const Notifications = React.forwardRef<HTMLDivElement, NotificationsProps
 						<BellIcon />
 					</NavigationMenuTrigger>
 					<NavigationMenuContent>
-						<ul className="mr-6 grid w-[410px] bg-Primary/Black py-2">
+						<ul className="grid w-[410px] bg-Primary/Black py-2">
 							{notifications.map((item, index) => (
 								<li
 									key={index}

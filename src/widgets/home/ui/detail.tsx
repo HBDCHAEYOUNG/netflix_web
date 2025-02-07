@@ -16,7 +16,6 @@ interface DetailProps {
 export function Detail({ movieDetail }: DetailProps) {
 	const [isLike, setIsLike] = useState(false)
 	const [isHate, setIsHate] = useState(false)
-	console.log(isLike)
 	return (
 		<div className="fixed left-1/2 top-1/2 z-50 my-4 h-[calc(100vh-32px)] w-[850px] -translate-x-1/2 -translate-y-1/2 overflow-y-scroll rounded-md">
 			<div className="relative w-[850px] bg-Grey/Grey-850">
