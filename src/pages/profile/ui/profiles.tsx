@@ -1,25 +1,8 @@
-import { Profile, ProfileAdd } from '@features/profile'
-import profileImage from '@images/profile.png'
+import { Profile } from '@features/profile'
 import Button from '@ui/button/button'
+import { AddProfile } from '@widgets/profile'
 import { Link } from 'react-router-dom'
-
-const profiles = [
-	{
-		id: 1,
-		name: 'Profile 1',
-		image: profileImage,
-	},
-	{
-		id: 2,
-		name: 'Profile 2',
-		image: profileImage,
-	},
-	{
-		id: 3,
-		name: 'Profile 3',
-		image: profileImage,
-	},
-]
+import { profiles } from '../const/profiles'
 
 export function Profiles() {
 	return (
@@ -30,7 +13,7 @@ export function Profiles() {
 				{profiles.map((profile) => (
 					<Profile key={profile.id} image={profile.image} name={profile.name} />
 				))}
-				<ProfileAdd />
+				<AddProfile />
 			</div>
 			<Button theme="outline" className="mx-auto h-[42px] max-w-[178px] Regular-Headline">
 				<Link to="manage">Manage Your Profile</Link>

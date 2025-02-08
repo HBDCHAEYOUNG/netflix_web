@@ -1,32 +1,14 @@
-import { ProfileAdd, ProfileEdit } from '@features/profile'
-import profileImage from '@images/profile.png'
+import { ProfileEdit } from '@features/profile'
 import Button from '@ui/button/button'
-import { Switch } from '@ui/button/switch'
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@ui/dialog/dialog'
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@ui/dialog/dialog'
 import Form from '@ui/form/form'
 import { DrawerFooter, InputText } from '@ui/index'
 import { ProfileImg } from '@ui/profile/profileImg'
 import { Select } from '@ui/select/select'
-import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
-
-const profiles = [
-	{
-		id: 1,
-		name: 'Profile 1',
-		image: profileImage,
-	},
-	{
-		id: 2,
-		name: 'Profile 2',
-		image: profileImage,
-	},
-	{
-		id: 3,
-		name: 'Profile 3',
-		image: profileImage,
-	},
-]
+import { profiles } from '../const/profiles'
+import { useForm } from 'react-hook-form'
+import { AddProfile } from '@widgets/profile'
 
 export function ManagerProfiles() {
 	const form = useForm()
@@ -51,7 +33,7 @@ export function ManagerProfiles() {
 									</DialogHeader>
 
 									<div className="w-full gap-2 flex-center">
-										<ProfileImg image={profileImage} className="" />
+										<ProfileImg image={profile.image} className="" />
 										<div className="flex flex-1 flex-col gap-2">
 											<Form.Item name="name">
 												<InputText name="name" label="Name" className="bg-Grey/Grey-850 text-Primary/White" />
@@ -69,31 +51,7 @@ export function ManagerProfiles() {
 							</DialogContent>
 						</Dialog>
 					))}
-					<Dialog>
-						<DialogTrigger>
-							<ProfileAdd />
-						</DialogTrigger>
-						<DialogContent>
-							<Form form={form} onSubmit={handleSubmit} className="flex-col gap-7 flex-center">
-								<DialogHeader>
-									<DialogTitle className="!text-center">Add Profile</DialogTitle>
-									<DialogDescription className="Regular-Body">Add a profile to register other users to watch Netflix.</DialogDescription>
-								</DialogHeader>
-
-								<ProfileImg image={profileImage} className="w-16" />
-								<Form.Item name="name" className="w-full">
-									<InputText name="name" label="Name" className="bg-Grey/Grey-850" />
-								</Form.Item>
-								<Form.Item name="child" className="w-full">
-									<Switch name="child" label="Kides Profile" description="Show only children's series and movies" id="child" />
-								</Form.Item>
-							</Form>
-							<DialogFooter>
-								<Button theme="white">save</Button>
-								<Button theme="transparent">Cancellation</Button>
-							</DialogFooter>
-						</DialogContent>
-					</Dialog>
+					<AddProfile />
 				</div>
 
 				<Button theme="outline" className="mx-auto h-[42px] max-w-[178px] Regular-Headline">
