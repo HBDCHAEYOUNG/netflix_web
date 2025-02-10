@@ -14,7 +14,7 @@ function CommonLayout({ headerType, footerType }: CommonLayoutProps) {
 	const { pathname } = useLocation()
 	const path = pathname.slice(1)
 	return (
-		<div className="min-h-screen w-full bg-Primary/Black min-w-base">
+		<div className="min-h-screen w-full bg-Primary/Black min-w-base [&_*]:text-white">
 			<ScrollToTop />
 			<Header headerType={headerType} />
 			{(path === 'series' || path === 'movie') && <SubHeader path={path} />}

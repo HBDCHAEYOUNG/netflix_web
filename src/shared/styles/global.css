@@ -8,7 +8,7 @@ body {
 }
 * {
 	box-sizing: border-box;
-	color: white;
+	/* color: white; */
 	font-family: Netflix Sans;
 }
 /* 
@@ -77,7 +77,7 @@ body {
 	}
 } */
 @layer base {
-  :root {
+	:root {
 		--sidebar-background: 0 0% 98%;
 		--sidebar-foreground: 240 5.3% 26.1%;
 		--sidebar-primary: 240 5.9% 10%;
@@ -87,7 +87,7 @@ body {
 		--sidebar-border: 220 13% 91%;
 		--sidebar-ring: 217.2 91.2% 59.8%;
 	}
-  .dark {
+	.dark {
 		--sidebar-background: 240 5.9% 10%;
 		--sidebar-foreground: 240 4.8% 95.9%;
 		--sidebar-primary: 224.3 76.3% 48%;
@@ -99,10 +99,10 @@ body {
 	}
 }
 @layer base {
-  * {
-    @apply border-border;
+	* {
+		@apply border-border;
 	}
-  body {
-    @apply bg-background text-foreground;
+	body {
+		@apply bg-background text-foreground;
 	}
 }
