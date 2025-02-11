@@ -59,13 +59,15 @@ class Movie<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
 	 * @summary 영화 상세 조회
 	 * @request GET:/movie/{id}
 	 * @secure
-	 * @response `200` `MovieControllerFindOneDataDto`
+	 * @response `200` `MovieControllerFindOneDataDto` 영화 상세 조회 성공
+	 * @response `400` `void` 잘못된 영화 ID 입력
 	 */
 	movieControllerFindOne = (id: number, params: RequestParams = {}) =>
-		this.request<MovieControllerFindOneDataDto, any>({
+		this.request<MovieControllerFindOneDataDto, void>({
 			path: `/movie/${id}`,
 			method: 'GET',
 			secure: true,
+			format: 'json',
 			...params,
 		})
 	/**

@@ -1,10 +1,16 @@
 import AdminLayout from '@app/layouts/admin-layout'
 import ErrorLayout from '@app/layouts/error-layout'
-import { Admin } from '@pages/admine'
+import { Director } from '@pages/admin/ui/director'
+import { Genre } from '@pages/admin/ui/genre'
+import { Movie } from '@pages/admin/ui/movie'
 
 export const AdminRoute = {
 	path: '/admin',
 	element: <AdminLayout />,
-	children: [{ index: true, element: <Admin /> }],
+	children: [
+		{ path: 'movie', element: <Movie /> },
+		{ path: 'director', element: <Director /> },
+		{ path: 'genre', element: <Genre /> },
+	],
 	errorElement: <ErrorLayout />,
 }

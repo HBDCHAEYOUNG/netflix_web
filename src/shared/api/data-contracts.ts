@@ -149,6 +149,40 @@ export interface GenreDto {
 	name: string
 }
 
+export interface GetMovieResDtoDto {
+	/**
+	 * 출연진
+	 * @example "레오나르도 디카프리오"
+	 */
+	actor: string
+	/**
+	 * 감독
+	 * @example "크리스토퍼 놀란"
+	 */
+	director: string
+	/**
+	 * 영화 ID
+	 * @example 1
+	 */
+	id: number
+	/**
+	 * 찜 여부
+	 * @example true
+	 */
+	isWish: boolean
+	/**
+	 * 개봉일
+	 * @format date-time
+	 * @example "2010-07-21"
+	 */
+	releasedAt: string
+	/**
+	 * 영화 제목
+	 * @example "인셉션"
+	 */
+	title: string
+}
+
 export interface GetMoviesBannerResDtoDto {
 	/**
 	 * 영화 생성 일자
@@ -283,7 +317,7 @@ export interface MovieControllerFindAllParamsDto {
 	title?: string
 }
 
-export type MovieControllerFindOneDataDto = any
+export type MovieControllerFindOneDataDto = GetMovieResDtoDto
 
 export type MovieControllerRemoveDataDto = number
 

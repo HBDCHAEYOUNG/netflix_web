@@ -74,7 +74,8 @@ export namespace Movie {
 	 * @summary 영화 상세 조회
 	 * @request GET:/movie/{id}
 	 * @secure
-	 * @response `200` `MovieControllerFindOneDataDto`
+	 * @response `200` `MovieControllerFindOneDataDto` 영화 상세 조회 성공
+	 * @response `400` `void` 잘못된 영화 ID 입력
 	 */
 	export namespace MovieControllerFindOne {
 		export type RequestParams = {
