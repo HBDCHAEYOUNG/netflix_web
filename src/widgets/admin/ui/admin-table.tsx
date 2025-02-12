@@ -71,7 +71,7 @@ export function AdminTable({ data, currentMenu, columns, handleDetail }: AdminTa
 					</TableHeader>
 					<TableBody>
 						{table.getRowModel().rows.map((row) => (
-							<TableRow key={row.id} onClick={handleDetail(row.original.detail.id)} className="cursor-pointer hover:bg-gray-50">
+							<TableRow key={row.id} onClick={handleDetail(row.original.id)} className="cursor-pointer hover:bg-gray-50">
 								{row.getVisibleCells().map((cell) => (
 									<TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
 								))}

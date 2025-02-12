@@ -1,11 +1,32 @@
 import { AddModal } from '@features/admin/ui/add-modal'
+import { EditModal } from '@features/admin/ui/edit-modal'
 import { AdminTable } from '@widgets/admin'
 import { directorColumns } from '@widgets/admin/const/director-columns'
-import { useFetchDirectors, usePostDirector } from 'src/shared/models'
+import { useState } from 'react'
+import { flushSync } from 'react-dom'
+import { useDeleteDirector, useFetchDirector, useFetchDirectors, usePatchDirector, usePostDirector } from 'src/shared/models'
+
+const directorModal = {
+	currentMenu: 'director',
+	formItems: ['name', 'dob', 'nationality'],
+}
 
 export function Director() {
+	const [open, setOpen] = useState(false)
+
+	const [directorId, setDirectorId] = useState(1)
+
 	const { data: directorsData, isLoading } = useFetchDirectors()
-	const { mutateAsync } = usePostDirector()
+	const { data: directorData, isLoading: directorLoading, refetch: refetchDirector } = useFetchDirector(directorId)
+	const { mutateAsync: postDirector } = usePostDirector()
+	const { mutateAsync: patchDirector } = usePatchDirector()
+	const { mutateAsync: deleteDirector } = useDeleteDirector()
+
+	const handleDetail = (id: string) => async () => {
+		flushSync(() => setDirectorId(Number(id)))
+		refetchDirector()
+		setOpen(true)
+	}
 
 	return (
 		<div className="pl-72 [&_*]:text-Primary/Black">
@@ -15,10 +36,28 @@ export function Director() {
 			) : !directorsData ? (
 				<div>No data</div>
 			) : (
-				<AdminTable currentMenu="director" data={directorsData} inputItems={['name']} columns={directorColumns} />
+				<AdminTable
+					currentMenu="director"
+					inputItems={['name', 'dob', 'nationality']}
+					data={directorsData}
+					columns={directorColumns}
+					handleDetail={handleDetail}
+				/>
 			)}
 
-			<AddModal mutateAsync={mutateAsync} currentMenu="director" formItems={['name', 'dob', 'nationality']} />
+			<AddModal mutateAsync={postDirector} {...directorModal} />
+			{directorLoading ? (
+				<div>Loading...</div>
+			) : (
+				<EditModal
+					data={directorData}
+					open={open}
+					setOpen={setOpen}
+					mutateAsync={patchDirector}
+					deleteAsync={deleteDirector}
+					{...directorModal}
+				/>
+			)}
 		</div>
 	)
 }

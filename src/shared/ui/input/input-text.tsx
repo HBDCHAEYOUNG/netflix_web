@@ -32,7 +32,7 @@ export const InputText = React.forwardRef<HTMLInputElement, InputProps>(
 
 		return (
 			<div ref={inputRef}>
-				{isFocused ? (
+				{isFocused || props.value ? (
 					<div
 						className={cn(
 							'flex h-14 w-full flex-col justify-center rounded-md border border-[#808080] bg-Primary/Black px-3 text-Grey/Grey-50 outline outline-Primary/White Medium-Caption2',

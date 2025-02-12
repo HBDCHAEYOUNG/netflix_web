@@ -1,29 +1,37 @@
 import { AddModal } from '@features/admin/ui/add-modal'
 import { EditModal } from '@features/admin/ui/edit-modal'
+import { ReadModal } from '@features/admin/ui/read-modal'
 import { AdminTable } from '@widgets/admin'
 import { movieColumns } from '@widgets/admin/const/movie-columns'
 import { useState } from 'react'
 import { flushSync } from 'react-dom'
-import { useFetchMovie, useFetchMovies, usePatchMovie, usePostMovie } from 'src/shared/models'
+import { useDeleteMovie, useFetchMovie, useFetchMovies, usePatchMovie, usePostMovie } from 'src/shared/models'
 
-const movieModal = {
+const movieReadModal = {
+	currentMenu: 'movie',
+	formItems: ['title', 'director', 'genre', 'movieFile'],
+}
+
+const movieEditModal = {
 	currentMenu: 'movie',
 	formItems: ['title', 'director', 'genre', 'movieFile'],
 }
 
 export function Movie() {
-	const [open, setOpen] = useState(false)
+	const [openRead, setOpenRead] = useState(false)
+	const [openEdit, setOpenEdit] = useState(false)
 	const [movieId, setMovieId] = useState(0)
 
 	const { data: moviesData, isLoading } = useFetchMovies(0, 6)
 	const { data: movieData, isLoading: movieLoading, refetch: refetchMovie } = useFetchMovie(movieId)
 	const { mutateAsync: postMovie } = usePostMovie()
 	const { mutateAsync: patchMovie } = usePatchMovie()
+	const { mutateAsync: deleteMovie } = useDeleteMovie()
 
 	const handleDetail = (id: string) => async () => {
 		flushSync(() => setMovieId(Number(id)))
 		refetchMovie()
-		setOpen(true)
+		setOpenRead(true)
 	}
 
 	return (
@@ -43,11 +51,21 @@ export function Movie() {
 				/>
 			)}
 
-			<AddModal mutateAsync={postMovie} {...movieModal} />
+			<AddModal mutateAsync={postMovie} {...movieEditModal} />
 			{movieLoading ? (
 				<div>Loading...</div>
 			) : (
-				<EditModal data={movieData} open={open} setOpen={setOpen} mutateAsync={patchMovie} {...movieModal} />
+				<>
+					<ReadModal data={movieData} {...movieReadModal} open={openRead} setOpen={setOpenRead} setOpenEdit={setOpenEdit} />
+					<EditModal
+						data={movieData}
+						open={openEdit}
+						setOpen={setOpenEdit}
+						mutateAsync={patchMovie}
+						deleteAsync={deleteMovie}
+						{...movieEditModal}
+					/>
+				</>
 			)}
 		</div>
 	)

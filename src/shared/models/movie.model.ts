@@ -61,3 +61,13 @@ export const usePatchMovie = () => {
 		},
 	})
 }
+
+export const useDeleteMovie = () => {
+	const queryClient = useQueryClient()
+	return useMutation({
+		mutationFn: (id: number) => movie.movieControllerRemove(id),
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: movieQueryKey._def })
+		},
+	})
+}
