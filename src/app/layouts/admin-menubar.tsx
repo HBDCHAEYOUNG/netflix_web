@@ -3,19 +3,12 @@ import Director from '@icons/director.svg?react'
 import Movie from '@icons/movie.svg?react'
 import { cn } from '@lib/utils'
 import { Menubar, MenubarItem, MenubarTrigger } from '@ui/accordion/menubar'
-import { useEffect } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 export function AdminMenubar() {
 	const navigate = useNavigate()
-	const [searchParams] = useSearchParams()
-	const currentMenu = searchParams.toString().replace('=', '')
-
-	useEffect(() => {
-		if (!searchParams.toString()) {
-			navigate('/admin/movie')
-		}
-	}, [searchParams, navigate])
+	const { pathname } = useLocation()
+	const currentPath = pathname.split('admin/')[1]
 
 	const menuItems = [
 		{ value: 'a', path: 'movie', icon: Movie, label: 'Movie' },
@@ -33,9 +26,14 @@ export function AdminMenubar() {
 							onClick={() => {
 								navigate(`/admin/${path}`)
 							}}
-							className={cn(currentMenu === path && 'bg-Primary/Black text-Primary/White hover:bg-Primary/Black')}
+							className={cn(path === currentPath && 'bg-Primary/Black text-Primary/White hover:bg-Primary/Black')}
 						>
-							<Icon className="w-8 pr-2" />
+							<Icon
+								className={cn(
+									path === currentPath && '[&_path]:fill-Primary/White',
+									'w-8 pr-2 [&_path]:transition-[fill] [&_path]:duration-700',
+								)}
+							/>
 							{label}
 						</MenubarTrigger>
 					</MenubarItem>

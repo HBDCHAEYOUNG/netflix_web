@@ -34,7 +34,7 @@ export function Header({ headerType = 'landing' }: HeaderProps) {
 		<header
 			className={cn(
 				'fixed top-0 z-20 flex h-[68px] w-full items-center justify-between',
-				headerType === 'admin' && 'bg-Primary/Black px-10',
+				headerType === 'admin' && 'bg-Primary/Black px-10 text-Primary/White',
 				headerType === 'home' &&
 					'z-10 items-center bg-gradient-to-b from-Primary/Black to-transparent transition-colors duration-500 common-padding',
 				scrolled && 'bg-Primary/Black',
