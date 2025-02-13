@@ -1,21 +1,26 @@
 import { createQueryKeys } from '@lukemorales/query-key-factory'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import movie from '../api/movie'
+import { MovieControllerFindAllParamsDto } from '../api/data-contracts'
 
 export const movieQueryKey = createQueryKeys('movie', {
-	fetchMovies: (start: number, perPage: number) => [start, perPage],
+	fetchMovies: (take: number, cursor: string) => [take, cursor],
 	fetchMovie: (id: number) => [id],
 })
 
-export const useFetchMovies = (start: number, perPage: number) =>
-	useQuery({
-		queryKey: movieQueryKey.fetchMovies(start, perPage).queryKey,
-		queryFn: () =>
-			movie.movieControllerFindAll({
-				order: ['id_DESC'],
-				take: 5,
-			}),
+export const useFetchMovies = (take: number, cursor: string) => {
+	const query: MovieControllerFindAllParamsDto = {
+		order: ['id_DESC'],
+		take,
+	}
+
+	if (cursor) Object.assign(query, { cursor })
+
+	return useQuery({
+		queryKey: movieQueryKey.fetchMovies(take, cursor).queryKey,
+		queryFn: () => movie.movieControllerFindAll(query),
 	})
+}
 
 export const useFetchMovie = (id: number) =>
 	useQuery({

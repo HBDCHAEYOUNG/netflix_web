@@ -34,10 +34,10 @@ export function Genre() {
 			) : !genresData ? (
 				<div>No data</div>
 			) : (
-				<AdminTable currentMenu="genre" data={genresData} inputItems={['name']} columns={genreColumns} handleDetail={handleDetail} />
+				<AdminTable data={genresData} currentMenu="genre" columns={genreColumns} handleDetail={handleDetail} />
 			)}
 
-			<AddModal mutateAsync={postGenre} currentMenu="genre" formItems={['name']} />
+			<AddModal mutateAsync={postGenre} {...genreModal} />
 
 			{genreLoading ? (
 				<div>Loading...</div>

@@ -17,19 +17,20 @@ import { useState } from 'react'
 
 interface AdminTableProps {
 	data: any[]
-	currentMenu: 'movie' | 'director' | 'genre'
-	inputItems: string[]
+	currentMenu: 'movie' | 'director' | 'genre' | 'user'
 	columns: ColumnDef<any>[]
+	count: number
 	handleDetail: (id: string) => () => void
+	handleNext: () => void
 }
 
-export function AdminTable({ data, currentMenu, columns, handleDetail }: AdminTableProps) {
+export function AdminTable({ data, currentMenu, columns, handleDetail, handleNext, count }: AdminTableProps) {
 	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
 	const [sorting, setSorting] = useState<SortingState>([])
-	const [pagination, setPagination] = useState({
-		pageIndex: 0, //initial page index
-		pageSize: 6, //default page size
-	})
+	// const [pagination, setPagination] = useState({
+	// 	pageIndex: 0, //initial page index
+	// 	pageSize: 6, //default page size
+	// })
 
 	const table = useReactTable({
 		data,
@@ -41,10 +42,10 @@ export function AdminTable({ data, currentMenu, columns, handleDetail }: AdminTa
 		state: {
 			columnFilters,
 			sorting,
-			pagination,
+			// pagination,
 		},
 		onSortingChange: setSorting,
-		onPaginationChange: setPagination,
+		// onPaginationChange: setPagination,
 	})
 
 	return (
@@ -90,9 +91,9 @@ export function AdminTable({ data, currentMenu, columns, handleDetail }: AdminTa
 						Previous
 					</button>
 					<button
-						className="w-fit cursor-pointer border border-Grey/Grey-20 bg-Primary/White px-2 py-1"
-						onClick={() => table.nextPage()}
-						disabled={!table.getCanNextPage()}
+						className="w-fit cursor-pointer border border-Grey/Grey-20 bg-Primary/White px-2 py-1 disabled:cursor-not-allowed disabled:bg-Grey/Grey-20 disabled:text-Grey/Grey-150"
+						onClick={handleNext}
+						disabled={count <= data.length}
 					>
 						Next
 					</button>

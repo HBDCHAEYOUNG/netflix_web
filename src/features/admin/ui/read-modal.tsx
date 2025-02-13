@@ -32,16 +32,13 @@ export function ReadModal({ data, currentMenu, formItems, open, setOpen, setOpen
 				detail: data.detail.detail,
 			})
 		}
-		if (currentMenu === 'director' && data) {
+		if (currentMenu === 'user' && data) {
 			form.reset({
-				name: data.name,
-				dob: data.dob,
-				nationality: data.nationality,
-			})
-		}
-		if (currentMenu === 'genre' && data) {
-			form.reset({
-				name: data.name,
+				email: data.email,
+				role: data.role,
+				profileCount: data.profiles.length,
+				createdAt: data.createdAt,
+				id: data.id,
 			})
 		}
 	}, [currentMenu, data, form])
@@ -55,7 +52,7 @@ export function ReadModal({ data, currentMenu, formItems, open, setOpen, setOpen
 				<Form form={form} onSubmit={onSubmitRead} className="flex flex-col gap-1">
 					{formItems.map((item) => (
 						<Form.Item key={item} name={item}>
-							<InputText label={item} className="border-Grey/Grey-20 bg-transparent" />
+							<InputText readOnly label={item} className="border-Grey/Grey-20 bg-transparent" />
 						</Form.Item>
 					))}
 					{currentMenu === 'movie' && (
@@ -65,6 +62,7 @@ export function ReadModal({ data, currentMenu, formItems, open, setOpen, setOpen
 									detail
 								</label>
 								<textarea
+									readOnly
 									{...form.register('detail')}
 									id="detail"
 									className="min-h-60 w-full rounded-md border border-Grey/Grey-20 p-3 pt-6 focus:outline-black"

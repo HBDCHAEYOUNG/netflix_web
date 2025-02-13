@@ -61,6 +61,11 @@ export function EditModal({ data, currentMenu, formItems, open, setOpen, mutateA
 				name: data.name,
 			})
 		}
+		if (currentMenu === 'user' && data) {
+			form.reset({
+				role: data.role,
+			})
+		}
 	}, [currentMenu, data, form])
 
 	return (

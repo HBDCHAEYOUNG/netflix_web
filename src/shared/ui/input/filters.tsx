@@ -18,7 +18,9 @@ export function Filters({ className, setColumnFilters, currentMenu }: FiltersPro
 			<Search className="h-4 w-4 [&_*]:stroke-Primary/Black" />
 			<input
 				type="text"
-				placeholder={currentMenu === 'movie' ? 'title...' : currentMenu === 'director' ? 'name...' : 'genre...'}
+				placeholder={
+					currentMenu === 'movie' ? 'title...' : currentMenu === 'director' ? 'name...' : currentMenu === 'user' ? 'email...' : 'genre...'
+				}
 				onChange={(e) => onFilterChange('title', e.target.value)}
 				className="focus-within:outline-Primary/Black.. bg-transparent outline-none"
 			/>

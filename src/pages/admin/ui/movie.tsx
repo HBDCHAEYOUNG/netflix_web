@@ -21,8 +21,10 @@ export function Movie() {
 	const [openRead, setOpenRead] = useState(false)
 	const [openEdit, setOpenEdit] = useState(false)
 	const [movieId, setMovieId] = useState(0)
+	const [nextCursor, setNextCursor] = useState('')
 
-	const { data: moviesData, isLoading } = useFetchMovies(0, 6)
+	const { data: moviesData, isLoading } = useFetchMovies(3, nextCursor)
+	console.log('nextCursor', nextCursor)
 	const { data: movieData, isLoading: movieLoading, refetch: refetchMovie } = useFetchMovie(movieId)
 	const { mutateAsync: postMovie } = usePostMovie()
 	const { mutateAsync: patchMovie } = usePatchMovie()
@@ -32,6 +34,15 @@ export function Movie() {
 		flushSync(() => setMovieId(Number(id)))
 		refetchMovie()
 		setOpenRead(true)
+	}
+
+	const handleNext = () => {
+		console.log(123)
+		// table.nextPage()
+		setNextCursor((moviesData as any)?.nextCursor)
+		// console.log(123, data)
+		console.log(moviesData)
+		// setNextCursor(moviesData?.data.nextCursor)
 	}
 
 	return (
@@ -45,9 +56,11 @@ export function Movie() {
 				<AdminTable
 					currentMenu="movie"
 					data={moviesData?.data}
-					inputItems={['title', 'director', 'genre', 'movieFile']}
 					columns={movieColumns}
 					handleDetail={handleDetail}
+					handleNext={handleNext}
+					count={(moviesData as any)?.count}
+					// setNextCursor={setNextCursor}
 				/>
 			)}
 

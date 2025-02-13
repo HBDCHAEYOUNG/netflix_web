@@ -1,6 +1,7 @@
 import Category from '@icons/category.svg?react'
 import Director from '@icons/director.svg?react'
 import Movie from '@icons/movie.svg?react'
+import User from '@icons/user.svg?react'
 import { cn } from '@lib/utils'
 import { Menubar, MenubarItem, MenubarTrigger } from '@ui/accordion/menubar'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -14,6 +15,7 @@ export function AdminMenubar() {
 		{ value: 'a', path: 'movie', icon: Movie, label: 'Movie' },
 		{ value: 'b', path: 'director', icon: Director, label: 'Director' },
 		{ value: 'c', path: 'genre', icon: Category, label: 'Genre' },
+		{ value: 'd', path: 'user', icon: User, label: 'User' },
 	]
 
 	return (
