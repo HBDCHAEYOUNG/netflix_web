@@ -1,13 +1,15 @@
-import { movieDetail } from '@pages/home'
 import { Dialog, DialogContent, DialogTrigger } from '@ui/dialog/dialog'
 import { Detail } from '@widgets/home'
+import { useFetchMovie } from 'src/shared/models'
 
 interface MoreInfoImgProps {
 	movieImage: string
-	movieDetail: typeof movieDetail
+	movieId: number
 }
 
-export function MoreinfoImg({ movieImage, movieDetail }: MoreInfoImgProps) {
+export function MoreinfoImg({ movieId, movieImage }: MoreInfoImgProps) {
+	const { data } = useFetchMovie(movieId)
+
 	return (
 		<Dialog>
 			<DialogTrigger>
@@ -18,7 +20,7 @@ export function MoreinfoImg({ movieImage, movieDetail }: MoreInfoImgProps) {
 				/>
 			</DialogTrigger>
 			<DialogContent>
-				<Detail movieDetail={movieDetail} />
+				<Detail movieDetail={data} />
 			</DialogContent>
 		</Dialog>
 	)

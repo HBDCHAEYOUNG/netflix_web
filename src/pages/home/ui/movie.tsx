@@ -1,11 +1,13 @@
 import { Billboard } from '@widgets/home'
-import movietitle from '@images/movie-title.png'
+import { useFetchBanner } from 'src/shared/models'
 import { movieDetail } from '../const/home'
 
 export function Movie() {
+	const { data, isLoading } = useFetchBanner()
+
 	return (
 		<div>
-			<Billboard movietitle={movietitle} movieDetail={movieDetail} />
+			<Billboard movieDetail={movieDetail} isLoading={isLoading} bannerData={data} />
 		</div>
 	)
 }

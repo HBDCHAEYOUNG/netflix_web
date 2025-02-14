@@ -3,9 +3,9 @@ import { Link, useLocation } from 'react-router-dom'
 
 export const menuItems = [
 	{ title: 'home', path: '/' },
-	{ title: 'seiries', path: '/series' },
+	// { title: 'seiries', path: '/series' },
 	{ title: 'movie', path: '/movie' },
-	{ title: 'New!The latest tranding content', path: '/trend' },
+	// { title: 'New!The latest tranding content', path: '/trend' },
 	{ title: 'My List', path: '/my-list' },
 ]
 

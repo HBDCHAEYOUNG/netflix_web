@@ -26,7 +26,7 @@ export const useFetchMovie = (id: number) =>
 	useQuery({
 		queryKey: movieQueryKey.fetchMovie(id).queryKey,
 		queryFn: () => movie.movieControllerFindOne(id),
-		enabled: false,
+		enabled: !!id,
 	})
 
 export const usePostMovie = () => {

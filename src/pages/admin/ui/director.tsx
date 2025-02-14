@@ -28,6 +28,10 @@ export function Director() {
 		setOpen(true)
 	}
 
+	const handleNext = () => {
+		console.log(123)
+	}
+
 	return (
 		<div className="pl-72 [&_*]:text-Primary/Black">
 			<h1 className="px-10 pb-4 pt-[84px] Bold-Title2">director</h1>
@@ -38,10 +42,11 @@ export function Director() {
 			) : (
 				<AdminTable
 					currentMenu="director"
-					inputItems={['name', 'dob', 'nationality']}
 					data={directorsData}
 					columns={directorColumns}
 					handleDetail={handleDetail}
+					count={directorsData.length}
+					handleNext={handleNext}
 				/>
 			)}
 

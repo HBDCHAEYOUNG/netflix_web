@@ -21,7 +21,7 @@ export const SelectGenres = React.forwardRef<HTMLButtonElement, SelectGenresProp
 				<span className="text-left text-xs">{label}</span>
 			</SelectTrigger>
 
-			<SelectContent className="rounded-none bg-black">
+			<SelectContent className="rounded-none bg-black text-Primary/White">
 				{items.map((item) => (
 					<SelectItem key={item} value={item} className="cursor-pointer">
 						{item}
