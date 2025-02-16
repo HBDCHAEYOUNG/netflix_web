@@ -1,5 +1,5 @@
-import { CommonControllerCreatedVideoDataDto } from './data-contracts'
-import { HttpClient, RequestParams } from './http-client'
+import { CommonControllerCreatedVideoDataDto, CommonControllerCreatedVideoPayloadDto } from './data-contracts'
+import { ContentType, HttpClient, RequestParams } from './http-client'
 
 class Common<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
 	/**
@@ -12,11 +12,13 @@ class Common<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
 	 * @secure
 	 * @response `201` `CommonControllerCreatedVideoDataDto`
 	 */
-	commonControllerCreatedVideo = (params: RequestParams = {}) =>
+	commonControllerCreatedVideo = (data: CommonControllerCreatedVideoPayloadDto, params: RequestParams = {}) =>
 		this.request<CommonControllerCreatedVideoDataDto, any>({
 			path: `/common/video`,
 			method: 'POST',
+			body: data,
 			secure: true,
+			type: ContentType.FormData,
 			...params,
 		})
 }

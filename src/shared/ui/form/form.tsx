@@ -33,7 +33,7 @@ interface FormItemProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const FormItem = (props: FormItemProps) => {
-	const { control } = useFormContext()
+	const { control, setFocus } = useFormContext()
 	const { name, label, require, className, labelClassName, description, descriptionClassName, errorClassName, children, ...rest } = props
 
 	return (
@@ -48,10 +48,10 @@ const FormItem = (props: FormItemProps) => {
 						</FormLabel>
 					)}
 					{description && <FormDescription className={`text-xs text-gray-400 ${descriptionClassName}`}>{description}</FormDescription>}
-					<FormControl>
+					<FormControl onClick={() => setFocus(name)}>
 						<Slot {...field}>{children}</Slot>
 					</FormControl>
-					<FormMessage className={cn('w-full pt-2 text-Primary/Red', errorClassName)} />
+					<FormMessage className={cn('w-full pt-2 !text-Primary/Red', errorClassName)} />
 				</FormGroup>
 			)}
 		/>

@@ -3,10 +3,10 @@ import { Dialog, DialogContent, DialogTrigger } from '@ui/dialog/dialog'
 import { Detail } from '@widgets/home'
 
 import InfoIcon from '@icons/info.svg?react'
-import { movieDetail } from '@pages/home'
+import { GetMoviesBannerResDtoDto } from 'src/shared/api/data-contracts'
 
 interface MoreinfoProps {
-	movieDetail: typeof movieDetail
+	movieDetail: GetMoviesBannerResDtoDto
 }
 
 export function Moreinfo({ movieDetail }: MoreinfoProps) {

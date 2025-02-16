@@ -80,7 +80,7 @@ class Director<SecurityDataType = unknown> extends HttpClient<SecurityDataType> 
 		this.request<DirectorControllerUpdateDataDto, any>({
 			path: `/director/${id}`,
 			method: 'PATCH',
-			body: data ? JSON.stringify(data) : undefined,
+			body: data,
 			secure: true,
 			type: ContentType.Json,
 			format: 'json',

@@ -21,10 +21,11 @@ export function AddModal({ currentMenu, formItems, mutateAsync }: AddModalProps)
 	const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files?.[0]
 		if (file) {
-			const reader = new FileReader()
-			reader.onload = async () => {
-				const video = await postVideo(file)
-				console.log(video)
+			try {
+				const video = await postVideo({ video: file })
+				form.setValue('movieFileName', video.fileName)
+			} catch (error) {
+				console.error('Upload error:', error)
 			}
 		}
 	}

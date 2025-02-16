@@ -20,6 +20,14 @@ export type AuthControllerRotateAccessTokenDataDto = TokenAccessResDtoDto
 
 export type CommonControllerCreatedVideoDataDto = any
 
+export interface CommonControllerCreatedVideoPayloadDto {
+	/**
+	 * MP4 비디오 파일
+	 * @format binary
+	 */
+	video?: File
+}
+
 export interface CreateDirectorDtoDto {
 	/**
 	 * 감독 생년월일
@@ -190,6 +198,8 @@ export interface GetMoviesBannerResDtoDto {
 	 * @example "2025-02-02T04:57:00.700Z"
 	 */
 	createdAt: string
+	/** 영화 상세 */
+	detail: MovieDetailDto
 	/**
 	 * 영화 싫어요 수
 	 * @example 0

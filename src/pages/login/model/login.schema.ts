@@ -1,6 +1,8 @@
 import { z } from 'zod'
 
 export const loginSchema = z.object({
-	email: z.string().email('Please enter a valid email address'),
-	password: z.string().min(6, 'Password must be at least 8 characters long'),
+	email: z.string().email('이메일 형식으로 입력 바랍니다.'),
+	password: z.string().min(6, '비밀번호는 최소 6자 이상이어야 합니다.'),
 })
+
+export type LoginSchemaType = z.infer<typeof loginSchema>

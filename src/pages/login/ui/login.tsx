@@ -1,7 +1,7 @@
 import HeroImage from '@images/bg1.png'
 import Form from '@ui/form/form'
 import { useForm } from 'react-hook-form'
-import { loginSchema } from '../model/login.schema'
+import { loginSchema, LoginSchemaType } from '../model/login.schema'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Button from '@ui/button/button'
@@ -10,22 +10,37 @@ import { Accordion, AccordionItem, CheckboxBasic, InputText } from '@ui/index'
 import { Link, useNavigate } from 'react-router-dom'
 import { AccordionContent, AccordionTrigger } from '@radix-ui/react-accordion'
 import { AuthStore } from '@store/auth-store'
+import auth from 'src/shared/api/auth'
 
 function Login() {
 	const { setLogin } = AuthStore()
 	const navigate = useNavigate()
 
-	const form = useForm<z.infer<typeof loginSchema>>({
+	const form = useForm<LoginSchemaType>({
 		resolver: zodResolver(loginSchema),
+		mode: 'all',
 	})
 
-	const handleSubmit = (data: z.infer<typeof loginSchema>) => {
-		console.log(data)
-		setLogin()
-		navigate('/profiles')
+	const handleSubmit = async (data: z.infer<typeof loginSchema>) => {
+		const { email, password } = data
+
+		const token = btoa(`${email}:${password}`)
+
+		try {
+			const response = await auth.authControllerLogin({
+				headers: {
+					Authorization: `Basic ${token}`,
+					'Content-Type': 'application/json',
+				},
+			})
+			setLogin(response.accessToken, response.refreshToken)
+			navigate('/profiles')
+		} catch (error) {
+			form.setError('password', { message: '이메일 또는 비밀번호가 올바르지 않습니다.' })
+			console.log(error)
+		}
 	}
 
-	console.log(form.watch())
 	return (
 		<section className="relative h-screen flex-col flex-center">
 			<img src={HeroImage} alt="hero-image" className="absolute h-full w-full object-cover opacity-50" />
@@ -37,7 +52,7 @@ function Login() {
 						<InputText name="email" label="Email Address" className="h-[56px] w-[314px]" />
 					</Form.Item>
 					<Form.Item name="password">
-						<InputText name="password" label="Password" className="h-[56px] w-[314px]" />
+						<InputText name="password" label="Password" className="h-[56px] w-[314px]" type="password" />
 					</Form.Item>
 					<Button className="h-[56px] w-[314px] flex-center Medium-Title3" rightIcon={<ArrowIcon className="ml-4" />}>
 						Sign In

@@ -1,4 +1,4 @@
-import { CommonControllerCreatedVideoDataDto } from './data-contracts'
+import { CommonControllerCreatedVideoDataDto, CommonControllerCreatedVideoPayloadDto } from './data-contracts'
 
 export namespace Common {
 	/**
@@ -13,7 +13,7 @@ export namespace Common {
 	export namespace CommonControllerCreatedVideo {
 		export type RequestParams = {}
 		export type RequestQuery = {}
-		export type RequestBody = never
+		export type RequestBody = CommonControllerCreatedVideoPayloadDto
 		export type RequestHeaders = {}
 		export type ResponseBody = CommonControllerCreatedVideoDataDto
 	}

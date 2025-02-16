@@ -10,7 +10,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 export const InputText = React.forwardRef<HTMLInputElement, InputProps>(
-	({ className, type, label, icon, defaultFocused = false, ...props }, ref) => {
+	({ className, type, label, defaultFocused = false, ...props }, ref) => {
 		const [isFocused, setIsFocused] = React.useState(defaultFocused)
 		const inputRef = useRef<HTMLDivElement>(null)
 
@@ -31,34 +31,34 @@ export const InputText = React.forwardRef<HTMLInputElement, InputProps>(
 		}, [])
 
 		return (
-			<div ref={inputRef}>
-				{isFocused || props.value ? (
+			<fieldset className="relative">
+				{/* {isFocused || props.value ? (
 					<div
 						className={cn(
 							'flex h-14 w-full flex-col justify-center rounded-md border border-[#808080] bg-Primary/Black px-3 text-Grey/Grey-50 outline outline-Primary/White Medium-Caption2',
 							className,
 						)}
 					>
-						<label className="text-left text-xs text-Grey/Grey-50">{label}</label>
-						<div className="flex items-center gap-2">
-							{icon && <span className="flex items-center">{icon}</span>}
-							<input className={cn('w-full bg-transparent Medium-Body focus:outline-none')} type={type} ref={ref} {...props} />
-						</div>
+					<div className="flex items-center gap-2">
+					{icon && <span className="flex items-center">{icon}</span>}
+					<input className={cn('w-full bg-transparent Medium-Body focus:outline-none')} type={type} ref={ref} {...props} />
 					</div>
-				) : (
-					<input
-						placeholder={label}
-						type={type}
-						onFocus={() => setIsFocused(true)}
-						className={cn(
-							'h-14 w-full rounded-md border border-[#808080] bg-Primary/Black px-3 text-Grey/Grey-50 focus:outline-none',
-							className,
-						)}
-						ref={ref}
-						{...props}
-					/>
-				)}
-			</div>
+					</div>
+					) : (
+						)} */}
+				{isFocused && !!props.value && <label className="absolute left-2 top-2 text-left text-xs text-Grey/Grey-50">{label}</label>}
+				<input
+					placeholder={label}
+					type={type}
+					onFocus={() => setIsFocused(true)}
+					className={cn(
+						'h-14 w-full rounded-md border border-[#808080] bg-Primary/Black px-3 text-Grey/Grey-50 focus:outline-none',
+						className,
+					)}
+					ref={ref}
+					{...props}
+				/>
+			</fieldset>
 		)
 	},
 )

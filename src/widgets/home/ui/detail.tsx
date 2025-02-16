@@ -12,7 +12,8 @@ interface DetailProps {
 export function Detail({ movieDetail }: DetailProps) {
 	const [isLike, setIsLike] = useState(false)
 	const [isHate, setIsHate] = useState(false)
-	console.log(movieDetail)
+
+	console.log('movieDetail', movieDetail)
 	return (
 		<div className="fixed left-1/2 top-1/2 z-50 my-4 h-[calc(100vh-32px)] w-[850px] -translate-x-1/2 -translate-y-1/2 overflow-y-scroll rounded-md [&_*]:text-Primary/White">
 			<div className="relative w-[850px] bg-Grey/Grey-850">
@@ -29,7 +30,7 @@ export function Detail({ movieDetail }: DetailProps) {
 				<div className="relative h-[480px] w-[850px] place-content-end px-12 pb-16">
 					<h1 className="text-3xl font-extrabold">{movieDetail.title}</h1>
 					<nav className="mt-6 flex items-center gap-2">
-						<ButtonPlay />
+						<ButtonPlay movieId={movieDetail.id} />
 						<CirclePlus className="h-10 w-10 rounded-full border-2 border-Grey/Grey-200 p-2 hover:border-Primary/White hover:bg-Grey/Grey-200" />
 						<ThumbsUp className="h-10 w-10 rounded-full border-2 border-Grey/Grey-200 p-1 hover:z-0 hover:border-Primary/White hover:bg-Grey/Grey-200" />
 						<div className="relative flex h-11 w-24 items-center justify-evenly rounded-full bg-Grey/Grey-700 transition-all duration-200">

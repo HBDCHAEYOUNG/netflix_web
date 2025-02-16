@@ -4,5 +4,5 @@ import { Watch } from '@pages/watch/ui/watch'
 export const WatchRoute = {
 	path: '/watch',
 	element: <WatchLayout />,
-	children: [{ index: true, element: <Watch /> }],
+	children: [{ path: '/watch/:movieId', element: <Watch /> }],
 }

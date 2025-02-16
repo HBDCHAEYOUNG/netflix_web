@@ -33,10 +33,10 @@ export function Header({ headerType = 'landing' }: HeaderProps) {
 	return (
 		<header
 			className={cn(
-				'fixed top-0 z-20 flex h-[68px] w-full items-center justify-between',
+				'fixed top-0 z-50 flex h-[68px] w-full items-center justify-between',
 				headerType === 'admin' && 'bg-Primary/Black px-10 text-Primary/White',
 				headerType === 'home' &&
-					'z-10 items-center bg-gradient-to-b from-Primary/Black to-transparent transition-colors duration-500 common-padding',
+					'z-50 items-center bg-gradient-to-b from-Primary/Black to-transparent transition-colors duration-500 common-padding',
 				scrolled && 'bg-Primary/Black',
 				(headerType === 'landing' || headerType === 'auth') &&
 					'absolute left-1/2 top-0 -translate-x-1/2 translate-y-0 bg-transparent !px-0 max-w-base',
@@ -44,7 +44,7 @@ export function Header({ headerType = 'landing' }: HeaderProps) {
 				(path === 'series' || path === 'movie') && 'bg-Primary/Black',
 			)}
 		>
-			<div className="flex items-center">
+			<div className="z-30 flex items-center">
 				<Link to={isLogin ? '/' : '/landing'}>
 					<img src={netflixLogo} alt="netflix" className="w-24 cursor-pointer" />
 				</Link>

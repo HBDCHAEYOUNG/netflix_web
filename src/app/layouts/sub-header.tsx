@@ -30,7 +30,7 @@ export function SubHeader({ path }: { path: string }) {
 	return (
 		<header
 			className={cn(
-				'fixed top-16 z-20 flex h-[68px] w-full items-center transition-colors duration-700 common-padding',
+				'fixed top-16 z-50 flex h-[68px] w-full items-center transition-colors duration-700 common-padding',
 				scrolled && 'bg-Primary/Black',
 			)}
 		>

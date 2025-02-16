@@ -14,30 +14,36 @@ import Number7 from '@icons/number7.svg?react'
 import Number8 from '@icons/number8.svg?react'
 import Number9 from '@icons/number9.svg?react'
 import { cn } from '@lib/utils'
+import { useFetchMovie } from 'src/shared/models'
 
 export const numbers = [Number1, Number2, Number3, Number4, Number5, Number6, Number7, Number8, Number9, Number10]
 
 interface MoreinfoNumberProps {
 	index: number
-	smallmovie: string
-	movieDetail: any
+	thumbnail: string
+	rankId: number
 }
 
-export function MoreinfoNumber({ index, smallmovie, movieDetail }: MoreinfoNumberProps) {
+export function MoreinfoNumber({ index, thumbnail, rankId }: MoreinfoNumberProps) {
 	const NumberComponent = numbers[index]
-
+	const { data } = useFetchMovie(rankId)
 	return (
 		<Dialog>
 			<DialogTrigger>
-				<NumberComponent className={index === 9 ? 'h-40 py-4 pr-20' : 'absolute left-0 top-0 w-1/2'} />
+				<NumberComponent
+					className={cn(
+						index === 8 ? 'h-40 py-4 pr-20' : 'absolute left-0 top-0 w-1/2',
+						//index === 9 ? 'h-40 py-4 pr-20' : 'absolute left-0 top-0 w-1/2',
+					)}
+				/>
 				<img
-					src={smallmovie}
+					src={thumbnail}
 					alt="smallmovie"
 					className={cn('absolute top-0 h-[168px] rounded-sm', index === 9 ? 'left-[52%]' : 'left-auto right-1')}
 				/>
 			</DialogTrigger>
 			<DialogContent>
-				<Detail movieDetail={movieDetail} />
+				<Detail movieDetail={data} />
 			</DialogContent>
 		</Dialog>
 	)
