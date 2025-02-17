@@ -9,7 +9,13 @@ import {
 } from './data-contracts'
 import { ContentType, HttpClient, RequestParams } from './http-client'
 
-class Director<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
+class Director<SecurityDataType = unknown> {
+	http: HttpClient<SecurityDataType>
+
+	constructor(http: HttpClient<SecurityDataType>) {
+		this.http = http
+	}
+
 	/**
 	 * No description
 	 *
@@ -21,7 +27,7 @@ class Director<SecurityDataType = unknown> extends HttpClient<SecurityDataType> 
 	 * @response `200` `DirectorControllerFindAllDataDto`
 	 */
 	directorControllerFindAll = (params: RequestParams = {}) =>
-		this.request<DirectorControllerFindAllDataDto, any>({
+		this.http.request<DirectorControllerFindAllDataDto, any>({
 			path: `/director`,
 			method: 'GET',
 			secure: true,
@@ -39,7 +45,7 @@ class Director<SecurityDataType = unknown> extends HttpClient<SecurityDataType> 
 	 * @response `201` `DirectorControllerCreateDataDto`
 	 */
 	directorControllerCreate = (data: CreateDirectorDtoDto, params: RequestParams = {}) =>
-		this.request<DirectorControllerCreateDataDto, any>({
+		this.http.request<DirectorControllerCreateDataDto, any>({
 			path: `/director`,
 			method: 'POST',
 			body: data,
@@ -59,7 +65,7 @@ class Director<SecurityDataType = unknown> extends HttpClient<SecurityDataType> 
 	 * @response `200` `DirectorControllerFindOneDataDto`
 	 */
 	directorControllerFindOne = (id: number, params: RequestParams = {}) =>
-		this.request<DirectorControllerFindOneDataDto, any>({
+		this.http.request<DirectorControllerFindOneDataDto, any>({
 			path: `/director/${id}`,
 			method: 'GET',
 			secure: true,
@@ -77,7 +83,7 @@ class Director<SecurityDataType = unknown> extends HttpClient<SecurityDataType> 
 	 * @response `200` `DirectorControllerUpdateDataDto`
 	 */
 	directorControllerUpdate = (id: number, data: UpdateDirectorDtoDto, params: RequestParams = {}) =>
-		this.request<DirectorControllerUpdateDataDto, any>({
+		this.http.request<DirectorControllerUpdateDataDto, any>({
 			path: `/director/${id}`,
 			method: 'PATCH',
 			body: data,
@@ -97,7 +103,7 @@ class Director<SecurityDataType = unknown> extends HttpClient<SecurityDataType> 
 	 * @response `200` `DirectorControllerRemoveDataDto`
 	 */
 	directorControllerRemove = (id: number, params: RequestParams = {}) =>
-		this.request<DirectorControllerRemoveDataDto, any>({
+		this.http.request<DirectorControllerRemoveDataDto, any>({
 			path: `/director/${id}`,
 			method: 'DELETE',
 			secure: true,
@@ -106,6 +112,9 @@ class Director<SecurityDataType = unknown> extends HttpClient<SecurityDataType> 
 		})
 }
 
-export default new Director({
+const httpClient = new HttpClient({
 	baseUrl: import.meta.env.VITE_BASE_URL,
 })
+
+// Banner 인스턴스 생성 시 HTTP 클라이언트 전달
+export default new Director(httpClient)

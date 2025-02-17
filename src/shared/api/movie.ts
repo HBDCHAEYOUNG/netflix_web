@@ -10,7 +10,13 @@ import {
 } from './data-contracts'
 import { ContentType, HttpClient, RequestParams } from './http-client'
 
-class Movie<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
+class Movie<SecurityDataType = unknown> {
+	http: HttpClient<SecurityDataType>
+
+	constructor(http: HttpClient<SecurityDataType>) {
+		this.http = http
+	}
+
 	/**
 	 * No description
 	 *
@@ -23,7 +29,7 @@ class Movie<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
 	 * @response `400` `void` pagination 데이터 잘못 입력
 	 */
 	movieControllerFindAll = (query: MovieControllerFindAllParamsDto, params: RequestParams = {}) =>
-		this.request<MovieControllerFindAllDataDto, void>({
+		this.http.request<MovieControllerFindAllDataDto, void>({
 			path: `/movie`,
 			method: 'GET',
 			query: query,
@@ -42,7 +48,7 @@ class Movie<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
 	 * @response `201` `MovieControllerCreateDataDto`
 	 */
 	movieControllerCreate = (data: CreateMovieDtoDto, params: RequestParams = {}) =>
-		this.request<MovieControllerCreateDataDto, any>({
+		this.http.request<MovieControllerCreateDataDto, any>({
 			path: `/movie`,
 			method: 'POST',
 			body: data,
@@ -63,7 +69,7 @@ class Movie<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
 	 * @response `400` `void` 잘못된 영화 ID 입력
 	 */
 	movieControllerFindOne = (id: number, params: RequestParams = {}) =>
-		this.request<MovieControllerFindOneDataDto, void>({
+		this.http.request<MovieControllerFindOneDataDto, void>({
 			path: `/movie/${id}`,
 			method: 'GET',
 			secure: true,
@@ -81,7 +87,7 @@ class Movie<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
 	 * @response `200` `MovieControllerUpdateDataDto`
 	 */
 	movieControllerUpdate = (id: number, data: UpdateMovieDtoDto, params: RequestParams = {}) =>
-		this.request<MovieControllerUpdateDataDto, any>({
+		this.http.request<MovieControllerUpdateDataDto, any>({
 			path: `/movie/${id}`,
 			method: 'PATCH',
 			body: data,
@@ -101,7 +107,7 @@ class Movie<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
 	 * @response `200` `MovieControllerRemoveDataDto`
 	 */
 	movieControllerRemove = (id: number, params: RequestParams = {}) =>
-		this.request<MovieControllerRemoveDataDto, any>({
+		this.http.request<MovieControllerRemoveDataDto, any>({
 			path: `/movie/${id}`,
 			method: 'DELETE',
 			secure: true,
@@ -110,6 +116,9 @@ class Movie<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
 		})
 }
 
-export default new Movie({
+const httpClient = new HttpClient({
 	baseUrl: import.meta.env.VITE_BASE_URL,
 })
+
+// Banner 인스턴스 생성 시 HTTP 클라이언트 전달
+export default new Movie(httpClient)

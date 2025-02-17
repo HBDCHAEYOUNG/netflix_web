@@ -1,7 +1,13 @@
 import { MovieControllerCreateMovieDislikeDataDto, MovieControllerCreateMovieLikeDataDto } from './data-contracts'
 import { HttpClient, RequestParams } from './http-client'
 
-class Like<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
+class Like<SecurityDataType = unknown> {
+	http: HttpClient<SecurityDataType>
+
+	constructor(http: HttpClient<SecurityDataType>) {
+		this.http = http
+	}
+
 	/**
 	 * No description
 	 *
@@ -13,7 +19,7 @@ class Like<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
 	 * @response `201` `MovieControllerCreateMovieLikeDataDto`
 	 */
 	movieControllerCreateMovieLike = (id: number, params: RequestParams = {}) =>
-		this.request<MovieControllerCreateMovieLikeDataDto, any>({
+		this.http.request<MovieControllerCreateMovieLikeDataDto, any>({
 			path: `/movie/${id}/like`,
 			method: 'POST',
 			secure: true,
@@ -30,7 +36,7 @@ class Like<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
 	 * @response `201` `MovieControllerCreateMovieDislikeDataDto`
 	 */
 	movieControllerCreateMovieDislike = (id: number, params: RequestParams = {}) =>
-		this.request<MovieControllerCreateMovieDislikeDataDto, any>({
+		this.http.request<MovieControllerCreateMovieDislikeDataDto, any>({
 			path: `/movie/${id}/dislike`,
 			method: 'POST',
 			secure: true,
@@ -38,6 +44,9 @@ class Like<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
 		})
 }
 
-export default new Like({
+const httpClient = new HttpClient({
 	baseUrl: import.meta.env.VITE_BASE_URL,
 })
+
+// Banner 인스턴스 생성 시 HTTP 클라이언트 전달
+export default new Like(httpClient)

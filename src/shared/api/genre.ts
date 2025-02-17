@@ -9,7 +9,13 @@ import {
 } from './data-contracts'
 import { ContentType, HttpClient, RequestParams } from './http-client'
 
-class Genre<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
+class Genre<SecurityDataType = unknown> {
+	http: HttpClient<SecurityDataType>
+
+	constructor(http: HttpClient<SecurityDataType>) {
+		this.http = http
+	}
+
 	/**
 	 * No description
 	 *
@@ -21,7 +27,7 @@ class Genre<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
 	 * @response `200` `GenreControllerFindAllDataDto`
 	 */
 	genreControllerFindAll = (params: RequestParams = {}) =>
-		this.request<GenreControllerFindAllDataDto, any>({
+		this.http.request<GenreControllerFindAllDataDto, any>({
 			path: `/genre`,
 			method: 'GET',
 			secure: true,
@@ -39,7 +45,7 @@ class Genre<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
 	 * @response `201` `GenreControllerCreateDataDto`
 	 */
 	genreControllerCreate = (data: CreateGenreDtoDto, params: RequestParams = {}) =>
-		this.request<GenreControllerCreateDataDto, any>({
+		this.http.request<GenreControllerCreateDataDto, any>({
 			path: `/genre`,
 			method: 'POST',
 			body: data,
@@ -59,7 +65,7 @@ class Genre<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
 	 * @response `200` `GenreControllerFindOneDataDto`
 	 */
 	genreControllerFindOne = (id: number, params: RequestParams = {}) =>
-		this.request<GenreControllerFindOneDataDto, any>({
+		this.http.request<GenreControllerFindOneDataDto, any>({
 			path: `/genre/${id}`,
 			method: 'GET',
 			secure: true,
@@ -77,7 +83,7 @@ class Genre<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
 	 * @response `200` `GenreControllerUpdateDataDto`
 	 */
 	genreControllerUpdate = (id: number, data: UpdateGenreDtoDto, params: RequestParams = {}) =>
-		this.request<GenreControllerUpdateDataDto, any>({
+		this.http.request<GenreControllerUpdateDataDto, any>({
 			path: `/genre/${id}`,
 			method: 'PATCH',
 			body: data,
@@ -97,7 +103,7 @@ class Genre<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
 	 * @response `200` `GenreControllerRemoveDataDto`
 	 */
 	genreControllerRemove = (id: number, params: RequestParams = {}) =>
-		this.request<GenreControllerRemoveDataDto, any>({
+		this.http.request<GenreControllerRemoveDataDto, any>({
 			path: `/genre/${id}`,
 			method: 'DELETE',
 			secure: true,
@@ -106,6 +112,9 @@ class Genre<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
 		})
 }
 
-export default new Genre({
+const httpClient = new HttpClient({
 	baseUrl: import.meta.env.VITE_BASE_URL,
 })
+
+// Banner 인스턴스 생성 시 HTTP 클라이언트 전달
+export default new Genre(httpClient)

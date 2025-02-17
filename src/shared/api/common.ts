@@ -1,7 +1,13 @@
 import { CommonControllerCreatedVideoDataDto, CommonControllerCreatedVideoPayloadDto } from './data-contracts'
 import { ContentType, HttpClient, RequestParams } from './http-client'
 
-class Common<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
+class Common<SecurityDataType = unknown> {
+	http: HttpClient<SecurityDataType>
+
+	constructor(http: HttpClient<SecurityDataType>) {
+		this.http = http
+	}
+
 	/**
 	 * No description
 	 *
@@ -13,7 +19,7 @@ class Common<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
 	 * @response `201` `CommonControllerCreatedVideoDataDto`
 	 */
 	commonControllerCreatedVideo = (data: CommonControllerCreatedVideoPayloadDto, params: RequestParams = {}) =>
-		this.request<CommonControllerCreatedVideoDataDto, any>({
+		this.http.request<CommonControllerCreatedVideoDataDto, any>({
 			path: `/common/video`,
 			method: 'POST',
 			body: data,
@@ -23,6 +29,9 @@ class Common<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
 		})
 }
 
-export default new Common({
+const httpClient = new HttpClient({
 	baseUrl: import.meta.env.VITE_BASE_URL,
 })
+
+// Banner 인스턴스 생성 시 HTTP 클라이언트 전달
+export default new Common(httpClient)

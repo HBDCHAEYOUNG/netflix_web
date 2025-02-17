@@ -1,7 +1,13 @@
 import { MovieControllerFindAllMovieRankDataDto } from './data-contracts'
 import { HttpClient, RequestParams } from './http-client'
 
-class Rank<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
+class Rank<SecurityDataType = unknown> {
+	http: HttpClient<SecurityDataType>
+
+	constructor(http: HttpClient<SecurityDataType>) {
+		this.http = http
+	}
+
 	/**
 	 * No description
 	 *
@@ -13,7 +19,7 @@ class Rank<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
 	 * @response `200` `MovieControllerFindAllMovieRankDataDto`
 	 */
 	movieControllerFindAllMovieRank = (params: RequestParams = {}) =>
-		this.request<MovieControllerFindAllMovieRankDataDto, any>({
+		this.http.request<MovieControllerFindAllMovieRankDataDto, any>({
 			path: `/movie/rank`,
 			method: 'GET',
 			secure: true,
@@ -22,6 +28,9 @@ class Rank<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
 		})
 }
 
-export default new Rank({
+const httpClient = new HttpClient({
 	baseUrl: import.meta.env.VITE_BASE_URL,
 })
+
+// Banner 인스턴스 생성 시 HTTP 클라이언트 전달
+export default new Rank(httpClient)

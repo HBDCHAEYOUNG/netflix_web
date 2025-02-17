@@ -3,6 +3,10 @@ import { persist } from 'zustand/middleware'
 
 interface Auth {
 	isLogin: boolean
+	accessToken: string
+	refreshToken: string
+	nickname: string
+	profile: string
 }
 
 interface AuthProps extends Auth {

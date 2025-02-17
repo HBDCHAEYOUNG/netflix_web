@@ -1,7 +1,13 @@
 import { MovieControllerCreateMovieWishDataDto, MovieControllerFindAllMovieWishDataDto } from './data-contracts'
 import { HttpClient, RequestParams } from './http-client'
 
-class Wishlist<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
+class Wishlist<SecurityDataType = unknown> {
+	http: HttpClient<SecurityDataType>
+
+	constructor(http: HttpClient<SecurityDataType>) {
+		this.http = http
+	}
+
 	/**
 	 * No description
 	 *
@@ -13,7 +19,7 @@ class Wishlist<SecurityDataType = unknown> extends HttpClient<SecurityDataType> 
 	 * @response `200` `MovieControllerFindAllMovieWishDataDto`
 	 */
 	movieControllerFindAllMovieWish = (params: RequestParams = {}) =>
-		this.request<MovieControllerFindAllMovieWishDataDto, any>({
+		this.http.request<MovieControllerFindAllMovieWishDataDto, any>({
 			path: `/movie/wishlist`,
 			method: 'GET',
 			secure: true,
@@ -31,7 +37,7 @@ class Wishlist<SecurityDataType = unknown> extends HttpClient<SecurityDataType> 
 	 * @response `201` `MovieControllerCreateMovieWishDataDto`
 	 */
 	movieControllerCreateMovieWish = (id: number, params: RequestParams = {}) =>
-		this.request<MovieControllerCreateMovieWishDataDto, any>({
+		this.http.request<MovieControllerCreateMovieWishDataDto, any>({
 			path: `/movie/${id}/wishlist`,
 			method: 'POST',
 			secure: true,
@@ -39,6 +45,9 @@ class Wishlist<SecurityDataType = unknown> extends HttpClient<SecurityDataType> 
 		})
 }
 
-export default new Wishlist({
+const httpClient = new HttpClient({
 	baseUrl: import.meta.env.VITE_BASE_URL,
 })
+
+// Banner 인스턴스 생성 시 HTTP 클라이언트 전달
+export default new Wishlist(httpClient)

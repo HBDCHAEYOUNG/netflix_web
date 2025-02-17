@@ -11,7 +11,13 @@ import {
 } from './data-contracts'
 import { ContentType, HttpClient, RequestParams } from './http-client'
 
-class User<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
+class User<SecurityDataType = unknown> {
+	http: HttpClient<SecurityDataType>
+
+	constructor(http: HttpClient<SecurityDataType>) {
+		this.http = http
+	}
+
 	/**
 	 * No description
 	 *
@@ -23,7 +29,7 @@ class User<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
 	 * @response `200` `UserControllerFindAllDataDto`
 	 */
 	userControllerFindAll = (params: RequestParams = {}) =>
-		this.request<UserControllerFindAllDataDto, any>({
+		this.http.request<UserControllerFindAllDataDto, any>({
 			path: `/user`,
 			method: 'GET',
 			secure: true,
@@ -41,7 +47,7 @@ class User<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
 	 * @response `200` `UserControllerFindOneDataDto`
 	 */
 	userControllerFindOne = (id: number, params: RequestParams = {}) =>
-		this.request<UserControllerFindOneDataDto, any>({
+		this.http.request<UserControllerFindOneDataDto, any>({
 			path: `/user/${id}`,
 			method: 'GET',
 			secure: true,
@@ -59,7 +65,7 @@ class User<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
 	 * @response `200` `UserControllerUpdateDataDto`
 	 */
 	userControllerUpdate = (id: number, data: UpdateUserDtoDto, params: RequestParams = {}) =>
-		this.request<UserControllerUpdateDataDto, any>({
+		this.http.request<UserControllerUpdateDataDto, any>({
 			path: `/user/${id}`,
 			method: 'PATCH',
 			body: data,
@@ -78,7 +84,7 @@ class User<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
 	 * @response `200` `UserControllerRemoveDataDto`
 	 */
 	userControllerRemove = (id: number, params: RequestParams = {}) =>
-		this.request<UserControllerRemoveDataDto, any>({
+		this.http.request<UserControllerRemoveDataDto, any>({
 			path: `/user/${id}`,
 			method: 'DELETE',
 			secure: true,
@@ -95,7 +101,7 @@ class User<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
 	 * @response `201` `UserControllerCreateUserProfileDataDto`
 	 */
 	userControllerCreateUserProfile = (id: number, data: CreateUserProfileDtoDto, params: RequestParams = {}) =>
-		this.request<UserControllerCreateUserProfileDataDto, any>({
+		this.http.request<UserControllerCreateUserProfileDataDto, any>({
 			path: `/user/${id}/profile`,
 			method: 'POST',
 			body: data,
@@ -115,7 +121,7 @@ class User<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
 	 * @response `200` `UserControllerUpdateUserProfileDataDto`
 	 */
 	userControllerUpdateUserProfile = (id: string, profileId: string, data: UpdateUserProfileDtoDto, params: RequestParams = {}) =>
-		this.request<UserControllerUpdateUserProfileDataDto, any>({
+		this.http.request<UserControllerUpdateUserProfileDataDto, any>({
 			path: `/user/${id}/profile/${profileId}`,
 			method: 'PATCH',
 			body: data,
@@ -126,6 +132,9 @@ class User<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
 		})
 }
 
-export default new User({
+const httpClient = new HttpClient({
 	baseUrl: import.meta.env.VITE_BASE_URL,
 })
+
+// Banner 인스턴스 생성 시 HTTP 클라이언트 전달
+export default new User(httpClient)

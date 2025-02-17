@@ -27,6 +27,11 @@ class <%= apiClassName %><SecurityDataType = unknown><% if (!config.singleHttpCl
     <% } %>
 }
 
-export default new <%= apiClassName %>({
-  baseUrl: import.meta.env.VITE_BASE_URL,
+
+
+const httpClient = new HttpClient({
+	baseUrl: import.meta.env.VITE_BASE_URL,
 })
+
+// Banner 인스턴스 생성 시 HTTP 클라이언트 전달
+export default new <%= apiClassName %>(httpClient)

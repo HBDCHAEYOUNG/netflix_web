@@ -1,3 +1,5 @@
+import { AuthStore } from '@store/auth-store'
+
 export type QueryParamsType = Record<string | number, any>
 export type ResponseFormat = keyof Omit<Body, 'body' | 'bodyUsed'>
 
@@ -29,7 +31,7 @@ export interface ApiConfig<SecurityDataType = unknown> {
 	customFetch?: typeof fetch
 }
 
-export interface HttpResponse<D, E = unknown> extends Response {
+export interface HttpResponse<D, E> extends Response {
 	data: D
 	error: E
 }
@@ -167,12 +169,17 @@ export class HttpClient<SecurityDataType = unknown> {
 		const payloadFormatter = this.contentFormatters[type || ContentType.Json]
 		const responseFormat = format || requestParams.format
 
+		// 토큰 추가
+		const accessToken = AuthStore.getState().accessToken
+		const headers = {
+			...(type && type !== ContentType.FormData ? { 'Content-Type': type } : {}),
+			...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+			...(requestParams.headers || {}),
+		}
+
 		return this.customFetch(`${baseUrl || this.baseUrl || ''}${path}${queryString ? `?${queryString}` : ''}`, {
 			...requestParams,
-			headers: {
-				...(requestParams.headers || {}),
-				...(type && type !== ContentType.FormData ? { 'Content-Type': type } : {}),
-			},
+			headers,
 			signal: (cancelToken ? this.createAbortSignal(cancelToken) : requestParams.signal) || null,
 			body: typeof body === 'undefined' || body === null ? null : payloadFormatter(body),
 		}).then(async (response) => {

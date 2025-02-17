@@ -21,7 +21,8 @@ generateApi({
 	typeSuffix: 'Dto', //타입 뒤에 붙일 문자열
 	modular: true, //모듈 단위로 코드 생성할지 여부,각각의 서비스나 컨트롤러를 개별 파일로 생성
 	extractEnums: true, //swagger 문서의 enum(열거형) 타입을 추출할지 여부
-	singleHttpClient: false, //단일 http 클라이언트를 생성할지 여부
+	singleHttpClient: true, //단일 http 클라이언트를 생성할지 여부
+
 	extractRequestParams: true, //요청 파라미터를 별도의 타입으로 추출할지 여부
 	extractRequestBody: true, //요청 body를 별도의 타입으로 추출할지 여부
 	extractResponseBody: true, //응답 body를 별도의 타입으로 추출할지 여부

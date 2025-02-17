@@ -7,7 +7,13 @@ import {
 } from './data-contracts'
 import { HttpClient, RequestParams } from './http-client'
 
-class Auth<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
+class Auth<SecurityDataType = unknown> {
+	http: HttpClient<SecurityDataType>
+
+	constructor(http: HttpClient<SecurityDataType>) {
+		this.http = http
+	}
+
 	/**
 	 * No description
 	 *
@@ -20,7 +26,7 @@ class Auth<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
 	 * @response `401` `void` 인증 실패
 	 */
 	authControllerRegisterUser = (params: RequestParams = {}) =>
-		this.request<AuthControllerRegisterUserDataDto, void>({
+		this.http.request<AuthControllerRegisterUserDataDto, void>({
 			path: `/auth/register`,
 			method: 'POST',
 			secure: true,
@@ -39,10 +45,9 @@ class Auth<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
 	 * @response `401` `void` 인증 실패
 	 */
 	authControllerLogin = (params: RequestParams = {}) =>
-		this.request<AuthControllerLoginDataDto, void>({
+		this.http.request<AuthControllerLoginDataDto, void>({
 			path: `/auth/login`,
 			method: 'POST',
-			secure: true,
 			format: 'json',
 			...params,
 		})
@@ -57,7 +62,7 @@ class Auth<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
 	 * @response `201` `AuthControllerBlockTokenDataDto`
 	 */
 	authControllerBlockToken = (params: RequestParams = {}) =>
-		this.request<AuthControllerBlockTokenDataDto, any>({
+		this.http.request<AuthControllerBlockTokenDataDto, any>({
 			path: `/auth/token/block`,
 			method: 'POST',
 			secure: true,
@@ -75,7 +80,7 @@ class Auth<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
 	 * @response `201` `void`
 	 */
 	authControllerRotateAccessToken = (params: RequestParams = {}) =>
-		this.request<AuthControllerRotateAccessTokenDataDto, any>({
+		this.http.request<AuthControllerRotateAccessTokenDataDto, any>({
 			path: `/auth/token/access`,
 			method: 'POST',
 			secure: true,
@@ -93,7 +98,7 @@ class Auth<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
 	 * @response `200` `AuthControllerPrivateDataDto` 유저 정보
 	 */
 	authControllerPrivate = (params: RequestParams = {}) =>
-		this.request<AuthControllerPrivateDataDto, any>({
+		this.http.request<AuthControllerPrivateDataDto, any>({
 			path: `/auth/me`,
 			method: 'GET',
 			secure: true,
@@ -102,6 +107,9 @@ class Auth<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
 		})
 }
 
-export default new Auth({
+const httpClient = new HttpClient({
 	baseUrl: import.meta.env.VITE_BASE_URL,
 })
+
+// Banner 인스턴스 생성 시 HTTP 클라이언트 전달
+export default new Auth(httpClient)
