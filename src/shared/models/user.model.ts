@@ -18,6 +18,7 @@ export const useFetchUser = (id: number) => {
 	return useQuery({
 		queryKey: userQueryKey.fetchUser(id).queryKey,
 		queryFn: () => user.userControllerFindOne(id),
+		enabled: !!id,
 	})
 }
 
