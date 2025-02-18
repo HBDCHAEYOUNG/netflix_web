@@ -30,7 +30,7 @@ export const AuthStore = create(
 				console.log(accessToken, refreshToken)
 				return set(() => ({ isLogin: true, accessToken, refreshToken }))
 			},
-			setLogout: () => set(() => ({ isLogin: false })),
+			setLogout: () => set(() => ({ ...INIT })),
 		}),
 		{ name: 'auth' },
 	),

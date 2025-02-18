@@ -5,7 +5,7 @@ import { AuthStore } from '@store/auth-store'
 import Button from '@ui/button/button'
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { adminMenuItems, HeaderType, userMenuItems } from 'src/shared/const'
+import { HeaderType } from 'src/shared/const'
 
 interface HeaderProps {
 	headerType?: HeaderType
@@ -13,12 +13,11 @@ interface HeaderProps {
 
 export function Header({ headerType = 'landing' }: HeaderProps) {
 	const { pathname } = useLocation()
-
-	const { isLogin, setLogin } = AuthStore()
+	const path = pathname.slice(1)
 
 	const [scrolled, setScrolled] = useState(false)
 
-	const path = pathname.slice(1)
+	const { isLogin } = AuthStore()
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -60,13 +59,11 @@ export function Header({ headerType = 'landing' }: HeaderProps) {
 							<Notifications />
 						</div>
 					)}
-					<AccountMenu label={headerType === 'admin' ? 'admin' : 'user'} items={headerType === 'admin' ? adminMenuItems : userMenuItems} />
+					<AccountMenu label={headerType === 'admin' ? 'admin' : 'user'} />
 				</nav>
 			) : (
 				<Link to="/auth/login" className={cn(headerType === 'auth' && 'hidden')}>
-					<Button className="h-[32px] w-[77px] Regular-Body" onClick={setLogin}>
-						Login
-					</Button>
+					<Button className="h-[32px] w-[77px] Regular-Body">Login</Button>
 				</Link>
 			)}
 		</header>

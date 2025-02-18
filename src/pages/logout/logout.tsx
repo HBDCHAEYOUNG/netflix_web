@@ -15,7 +15,9 @@ export function Logout() {
 					className="rounded-sm bg-Secondary/Blue-100 py-6 Regular-Title4 hover:bg-Secondary/Blue-100 hover:outline hover:outline-Secondary/Blue-100"
 					onClick={setLogout}
 				>
-					<Link to="/landing">지금 이동</Link>
+					<Link to="/landing" onClick={setLogout}>
+						지금 이동
+					</Link>
 				</Button>
 			</div>
 		</div>

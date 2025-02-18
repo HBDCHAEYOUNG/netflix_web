@@ -5,9 +5,6 @@ import { Link } from 'react-router-dom'
 import { useFetchAuth } from 'src/shared/models/auth.model'
 import { useFetchUser } from 'src/shared/models/user.model'
 
-const img =
-	'https://occ-0-1361-325.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABfjwXqIYd3kCEU6KWsiHSHvkft8VhZg0yyD50a_pHXku4dz9VgxWwfA2ontwogStpj1NE9NJMt7sCpSKFEY2zmgqqQfcw1FMWwB9.png?r=229&quot'
-
 export function Profiles() {
 	const { data } = useFetchAuth()
 	const id = data?.id
@@ -22,7 +19,7 @@ export function Profiles() {
 				{/* {profiles.map((profile) => (
 					<Profile key={profile.id} image={profile.image} name={profile.name} />
 				))} */}
-				{profiles?.map((profile) => <Profile key={profile.id} image={profile.image || img} name={profile.name} />)}
+				{profiles?.map((profile) => <Profile key={profile.id} image={profile.image} name={profile.name} />)}
 				<AddProfile />
 			</div>
 			<Button theme="outline" className="mx-auto h-[42px] max-w-[178px] Regular-Headline">

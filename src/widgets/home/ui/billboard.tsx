@@ -25,7 +25,7 @@ export function Billboard() {
 					<div className="absolute bottom-1/2 z-10 translate-y-1/2 common-padding">
 						<h1 className="w-[300px] text-6xl font-extrabold [text-shadow:_3px_3px_3px_#000000ab]">{bannerData?.title}</h1>
 						<p className="mt-4 w-[518px] Regular-Title4">{bannerData?.detail.detail}</p>
-						<nav className="mt-4 flex gap-4">
+						<nav className="mt-6 flex gap-4">
 							<ButtonPlay movieId={bannerData?.id} />
 							<Moreinfo movieDetail={bannerData!} />
 						</nav>

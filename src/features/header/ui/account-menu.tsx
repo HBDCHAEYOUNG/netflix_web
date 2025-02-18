@@ -1,6 +1,8 @@
 import { cn } from '@lib/utils'
 import * as React from 'react'
 import { Link } from 'react-router-dom'
+import { userMenuItems } from 'src/shared/const/header'
+import { useFetchAuth } from 'src/shared/models/auth.model'
 import {
 	NavigationMenu,
 	NavigationMenuContent,
@@ -9,36 +11,39 @@ import {
 	NavigationMenuTrigger,
 } from '../../../shared/ui/_shardcn/navigation-menu'
 
-interface AccountMenuItems {
-	icon?: React.ReactNode
-	title: string
-	image?: string
-	className?: string
-	to: string
-}
-
 interface AccountMenuProps {
 	label: string
-	items: AccountMenuItems[]
 	className?: string
 }
 
-export const AccountMenu = React.forwardRef<HTMLDivElement, AccountMenuProps>(({ label, items, className, ...props }, ref) => {
+export const AccountMenu = React.forwardRef<HTMLDivElement, AccountMenuProps>(({ label, className, ...props }, ref) => {
+	const { data } = useFetchAuth()
 	return (
 		<NavigationMenu ref={ref} className={className} {...props}>
 			<NavigationMenuList>
 				<NavigationMenuItem>
 					<NavigationMenuTrigger>
 						{label === 'admin' && 'admin'}
-						{label === 'user' && <img src={items[0].image} alt={items[0].title} className="h-8 w-8 rounded-sm object-cover" />}
+						{label === 'user' && (
+							<img src={data?.profiles[0]?.avatar} alt={data?.profiles[0]?.name} className="h-8 w-8 rounded-sm object-cover" />
+						)}
 					</NavigationMenuTrigger>
 					<NavigationMenuContent>
 						<ul className="grid bg-Primary/Black py-2">
-							{items.map((item, index) => (
-								<li key={index} className={cn('flex cursor-pointer items-center px-4 py-2 pr-12 hover:underline', item.className)}>
-									{item.image && <img src={item.image} alt={item.title} className="mr-3 h-8 w-8 object-cover" />}
+							{data?.profiles?.map((profile, index) => (
+								<li key={`profile-${index}`} className="flex cursor-pointer items-center px-4 py-2 pr-12 hover:underline">
+									<img src={profile.avatar} alt={profile.name} className="mr-3 h-8 w-8 object-cover" />
+									<Link to={`/profile/${profile.id}`} className="text-nowrap text-sm font-medium">
+										{profile.name}
+									</Link>
+								</li>
+							))}
+							{userMenuItems.map((item, index) => (
+								<li
+									key={`menu-${index}`}
+									className={cn('flex cursor-pointer items-center px-4 py-2 pr-12 hover:underline', item.className)}
+								>
 									{item.icon && <div className="mr-3 flex h-8 w-8 items-center justify-center">{item.icon}</div>}
-
 									<Link to={item.to} className="text-nowrap text-sm font-medium">
 										{item.title}
 									</Link>

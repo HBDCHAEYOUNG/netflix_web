@@ -11,9 +11,6 @@ import { Link } from 'react-router-dom'
 import { useFetchAuth } from 'src/shared/models/auth.model'
 import { useFetchUser, usePatchProfile } from 'src/shared/models/user.model'
 
-const img =
-	'https://occ-0-1361-325.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABfjwXqIYd3kCEU6KWsiHSHvkft8VhZg0yyD50a_pHXku4dz9VgxWwfA2ontwogStpj1NE9NJMt7sCpSKFEY2zmgqqQfcw1FMWwB9.png?r=229&quot'
-
 export function ManagerProfiles() {
 	const form = useForm()
 	const [selectedProfileId, setSelectedProfileId] = useState<string>('')
@@ -63,7 +60,7 @@ export function ManagerProfiles() {
 					{profiles?.map((profile) => (
 						<Dialog key={profile.id} open={open} onOpenChange={setOpen}>
 							<DialogTrigger onClick={() => setSelectedProfileId(profile.id.toString())}>
-								<ProfileEdit image={profile.image || img} name={profile.name} />
+								<ProfileEdit image={profile.image} name={profile.name} />
 							</DialogTrigger>
 							<DialogContent>
 								<Form form={form} onSubmit={handleSubmit} className="flex-col gap-7 flex-center">

@@ -32,27 +32,14 @@ export const InputText = React.forwardRef<HTMLInputElement, InputProps>(
 
 		return (
 			<fieldset className="relative">
-				{/* {isFocused || props.value ? (
-					<div
-						className={cn(
-							'flex h-14 w-full flex-col justify-center rounded-md border border-[#808080] bg-Primary/Black px-3 text-Grey/Grey-50 outline outline-Primary/White Medium-Caption2',
-							className,
-						)}
-					>
-					<div className="flex items-center gap-2">
-					{icon && <span className="flex items-center">{icon}</span>}
-					<input className={cn('w-full bg-transparent Medium-Body focus:outline-none')} type={type} ref={ref} {...props} />
-					</div>
-					</div>
-					) : (
-						)} */}
-				{isFocused && !!props.value && <label className="absolute left-2 top-2 text-left text-xs text-Grey/Grey-50">{label}</label>}
+				{isFocused && !!props.value && <label className="absolute left-3 top-2 text-left text-xs text-Grey/Grey-50">{label}</label>}
 				<input
 					placeholder={label}
 					type={type}
 					onFocus={() => setIsFocused(true)}
 					className={cn(
 						'h-14 w-full rounded-md border border-[#808080] bg-Primary/Black px-3 text-Grey/Grey-50 focus:outline-none',
+						isFocused && !!props.value && 'pt-4',
 						className,
 					)}
 					ref={ref}
