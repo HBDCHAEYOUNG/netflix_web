@@ -1,4 +1,5 @@
 import { ProfileEdit } from '@features/profile'
+import { zodResolver } from '@hookform/resolvers/zod'
 import Button from '@ui/button/button'
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@ui/dialog/dialog'
 import Form from '@ui/form/form'
@@ -9,39 +10,31 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { useFetchAuth } from 'src/shared/models/auth.model'
-import { useDeleteProfile, useFetchUser, usePatchProfile } from 'src/shared/models/user.model'
+import { useDeleteProfile, usePatchProfile } from 'src/shared/models/user.model'
+import { z } from 'zod'
 
 export function ManagerProfiles() {
-	const form = useForm()
+	const form = useForm({
+		resolver: zodResolver(
+			z.object({
+				name: z.string().max(5, { message: '5글자 이하로 입력해주세요' }),
+			}),
+		),
+	})
 	const [selectedProfileId, setSelectedProfileId] = useState<string>('')
 
 	const [open, setOpen] = useState(false)
 
 	const { data } = useFetchAuth()
 	const id = data?.id
-	const { data: user } = useFetchUser(id!)
-	const profiles = user?.profiles
 	const { mutate: patchProfile } = usePatchProfile()
 	const { mutate: deleteProfile } = useDeleteProfile()
 
-	const handleDeleteProfile = () => {
-		alert('삭제할거야?')
-		try {
-			deleteProfile({ id: id!, profileId: Number(selectedProfileId) })
-		} catch (e: any) {
-			alert(e.error.message)
-			console.log('에러에러')
-		}
-	}
-
 	const handleSubmit = () => {
-		const profile = profiles?.find((profile) => profile.id.toString() === selectedProfileId)
-
-		console.log(1111, id, profile)
 		try {
 			patchProfile({
+				profileId: Number(selectedProfileId),
 				id: id!,
-				profileId: profile.id,
 				data: {
 					name: form.getValues('name'),
 				},
@@ -53,23 +46,34 @@ export function ManagerProfiles() {
 		}
 	}
 
+	const handleDeleteProfile = () => {
+		if (confirm('삭제할거야?')) {
+			try {
+				deleteProfile({ id: id!, profileId: Number(selectedProfileId) })
+			} catch (e: any) {
+				alert(e.error.message)
+				console.log('에러에러')
+			}
+		}
+	}
+
 	useEffect(() => {
-		if (profiles && selectedProfileId) {
-			const selectedProfile = profiles.find((profile) => profile.id.toString() === selectedProfileId)
+		if (data?.profiles && selectedProfileId) {
+			const selectedProfile = data?.profiles.find((profile) => profile.id.toString() === selectedProfileId)
 			if (selectedProfile) {
 				form.reset({
 					name: selectedProfile.name,
 				})
 			}
 		}
-	}, [profiles, selectedProfileId, form])
+	}, [data?.profiles, selectedProfileId, form])
 
 	return (
 		<div className="mx-auto h-screen place-content-center max-w-wide">
 			<div>
 				<h1 className="!text-center Regular-LargeTitle">Manage your profile</h1>
 				<div className="my-12 flex-wrap gap-8 flex-center">
-					{profiles?.map((profile) => (
+					{data?.profiles?.map((profile) => (
 						<Dialog key={profile.id} open={open} onOpenChange={setOpen}>
 							<DialogTrigger onClick={() => setSelectedProfileId(profile.id.toString())}>
 								<ProfileEdit image={profile.image} name={profile.name} />
@@ -88,15 +92,23 @@ export function ManagerProfiles() {
 											</Form.Item>
 										</div>
 									</div>
-									<DialogFooter>
+									<DialogFooter className="w-full">
+										<div className="flex gap-2">
+											<DialogClose asChild>
+												<Button type="submit" theme="white">
+													save
+												</Button>
+											</DialogClose>
+											<DialogClose asChild>
+												<Button theme="primary" className="!text-Primary/White" onClick={handleDeleteProfile}>
+													profile delete
+												</Button>
+											</DialogClose>
+										</div>
+
 										<DialogClose asChild>
-											<Button theme="primary" className="mb-2 !text-Primary/White" onClick={handleDeleteProfile}>
-												profile delete
-											</Button>
-										</DialogClose>
-										<DialogClose asChild>
-											<Button theme="secondary" className="!text-Primary/White">
-												save
+											<Button theme="secondary" className="!text-Primary/White" onClick={() => form.reset()}>
+												Cancellation
 											</Button>
 										</DialogClose>
 									</DialogFooter>

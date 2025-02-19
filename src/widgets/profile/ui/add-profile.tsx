@@ -70,7 +70,7 @@ export function AddProfile() {
 							</Button>
 						</DialogClose>
 						<DialogClose asChild>
-							<Button theme="transparent" className="mt-2 !text-Primary/White" onClick={() => form.reset()}>
+							<Button theme="secondary" className="!text-Primary/White" onClick={() => form.reset()}>
 								Cancellation
 							</Button>
 						</DialogClose>

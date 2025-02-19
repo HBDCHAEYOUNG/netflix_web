@@ -19,6 +19,7 @@ interface AccountMenuProps {
 export const AccountMenu = React.forwardRef<HTMLDivElement, AccountMenuProps>(({ label, className, ...props }, ref) => {
 	const { data } = useFetchAuth()
 	const menuItems = label === 'admin' ? adminMenuItems : userMenuItems
+
 	return (
 		<NavigationMenu ref={ref} className={className} {...props}>
 			<NavigationMenuList>
@@ -33,24 +34,24 @@ export const AccountMenu = React.forwardRef<HTMLDivElement, AccountMenuProps>(({
 						<ul className="grid bg-Primary/Black py-2">
 							{label === 'user' &&
 								data?.profiles?.map((profile, index) => (
-									<li key={`profile-${index}`} className="flex cursor-pointer items-center px-4 py-2 pr-12 hover:underline">
-										<img src={profile.avatar} alt={profile.name} className="mr-3 h-8 w-8 object-cover" />
-										<Link to={`/profile/${profile.id}`} className="text-nowrap text-sm font-medium">
-											{profile.name}
-										</Link>
-									</li>
+									<Link to={`/profile/${profile.id}`}>
+										<li key={`profile-${index}`} className="flex cursor-pointer items-center px-4 py-2 pr-12 hover:underline">
+											<img src={profile.avatar} alt={profile.name} className="mr-3 h-8 w-8 object-cover" />
+											<p className="text-nowrap text-sm font-medium">{profile.name}</p>
+										</li>
+									</Link>
 								))}
 
 							{menuItems.map((item, index) => (
-								<li
-									key={`menu-${index}`}
-									className={cn('flex cursor-pointer items-center px-4 py-2 pr-12 hover:underline', item.className)}
-								>
-									{item.icon && <div className="mr-3 flex h-8 w-8 items-center justify-center">{item.icon}</div>}
-									<Link to={item.to} className="text-nowrap text-sm font-medium">
-										{item.title}
-									</Link>
-								</li>
+								<Link to={item.to}>
+									<li
+										key={`menu-${index}`}
+										className={cn('flex cursor-pointer items-center px-4 py-2 pr-12 hover:underline', item.className)}
+									>
+										{item.icon && <div className="mr-3 flex h-8 w-8 items-center justify-center">{item.icon}</div>}
+										<p className="text-nowrap text-sm font-medium">{item.title}</p>
+									</li>
+								</Link>
 							))}
 						</ul>
 					</NavigationMenuContent>

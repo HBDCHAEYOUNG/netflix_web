@@ -8,7 +8,7 @@ export const userMenuItems = [
 	{
 		title: 'Manage Your Profile',
 		icon: <PencilIcon />,
-		to: '#',
+		to: '/profiles',
 	},
 	{
 		title: 'Account',
