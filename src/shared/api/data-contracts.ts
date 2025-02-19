@@ -77,6 +77,11 @@ export interface CreateMovieDtoDto {
 	 */
 	movieFileName: string
 	/**
+	 * 영화 썸네일 파일
+	 * @example "aaa-bbbb-cccc.png"
+	 */
+	thumbnail: string
+	/**
 	 * 영화 제목
 	 * @example "스파이더맨"
 	 */
@@ -159,36 +164,71 @@ export interface GenreDto {
 
 export interface GetMovieResDtoDto {
 	/**
-	 * 출연진
-	 * @example "레오나르도 디카프리오"
+	 * 작성자 정보
+	 * @example {"id":4,"email":"test@naver.com","role":"0"}
 	 */
-	actor: string
+	creator: UserDto
+	detail: {
+		detail: string
+		id: number
+	}
+	director: {
+		/** @format date-time */
+		dob: string
+		id: number
+		name: string
+		nationality: string
+	}
 	/**
-	 * 감독
-	 * @example "크리스토퍼 놀란"
+	 * 싫어요 수
+	 * @example 0
 	 */
-	director: string
+	disLikeCount: number
+	/**
+	 * 장르 목록
+	 * @example [{"id":4,"name":"transmitter"}]
+	 */
+	genres: GenreDto[]
 	/**
 	 * 영화 ID
 	 * @example 1
 	 */
 	id: number
 	/**
-	 * 찜 여부
-	 * @example true
+	 * 좋아요 수
+	 * @example 2
 	 */
-	isWish: boolean
+	likeCount: number
 	/**
-	 * 개봉일
-	 * @format date-time
-	 * @example "2010-07-21"
+	 * 좋아요한 사용자 목록
+	 * @example [{"userId":4,"movieId":1,"isLike":true}]
 	 */
-	releasedAt: string
+	likedUsers: string[]
+	/**
+	 * 영화 파일 경로
+	 * @example "public/movie/example.mp4"
+	 */
+	movieFilePath: string
+	/**
+	 * 추천 영화 목록 (좋아요가 많은 상위 10개 영화)
+	 * @example [{"id":3,"title":"panel optical m","movieFilePath":"http://example.com/movie.mp4","thumbnail":"http://example.com/thumbnail.jpg","likeCount":2,"disLikeCount":0,"viewCount":0,"genres":[{"id":1,"name":"firewall"}]}]
+	 */
+	recommendations: MovieDto[]
 	/**
 	 * 영화 제목
-	 * @example "인셉션"
+	 * @example "monitor bluetooth d"
 	 */
 	title: string
+	/**
+	 * 조회수
+	 * @example 19
+	 */
+	viewCount: number
+	/**
+	 * 찜 목록
+	 * @example [{"userId":4,"movieId":1,"isWish":true}]
+	 */
+	wishList: string[]
 }
 
 export interface GetMoviesBannerResDtoDto {
@@ -376,6 +416,11 @@ export interface MovieDto {
 	 */
 	movieFilePath: string
 	/**
+	 * 영화 썸네일 파일
+	 * @example "aaa-bbbb-cccc.png"
+	 */
+	thumbnail: string
+	/**
 	 * 영화 제목
 	 * @example "스파이더맨"
 	 */
@@ -483,6 +528,11 @@ export interface UpdateMovieDtoDto {
 	 */
 	movieFileName?: string
 	/**
+	 * 영화 썸네일 파일
+	 * @example "aaa-bbbb-cccc.png"
+	 */
+	thumbnail?: string
+	/**
 	 * 영화 제목
 	 * @example "스파이더맨"
 	 */
@@ -523,6 +573,8 @@ export interface UpdateUserProfileDtoDto {
 }
 
 export type UserControllerCreateUserProfileDataDto = UserProfileDto
+
+export type UserControllerDeleteUserProfileDataDto = number
 
 export type UserControllerFindAllDataDto = UserDto[]
 

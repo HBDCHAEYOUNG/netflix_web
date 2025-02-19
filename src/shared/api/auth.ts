@@ -48,6 +48,7 @@ class Auth<SecurityDataType = unknown> {
 		this.http.request<AuthControllerLoginDataDto, void>({
 			path: `/auth/login`,
 			method: 'POST',
+			secure: true,
 			format: 'json',
 			...params,
 		})

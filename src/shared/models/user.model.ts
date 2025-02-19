@@ -60,8 +60,18 @@ export const usePostProfile = () => {
 export const usePatchProfile = () => {
 	const queryClient = useQueryClient()
 	return useMutation({
-		mutationFn: ({ id, profileId, data }: { id: string; profileId: string; data: UpdateUserProfileDtoDto }) =>
-			user.userControllerUpdateUserProfile(id, profileId, data),
+		mutationFn: ({ id, profileId, data }: { profileId: number; id: number; data: UpdateUserProfileDtoDto }) =>
+			user.userControllerUpdateUserProfile(profileId, id, data),
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: userQueryKey._def })
+		},
+	})
+}
+
+export const useDeleteProfile = () => {
+	const queryClient = useQueryClient()
+	return useMutation({
+		mutationFn: ({ id, profileId }: { id: number; profileId: number }) => user.userControllerDeleteUserProfile(id, profileId),
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: userQueryKey._def })
 		},

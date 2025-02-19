@@ -3,6 +3,7 @@ import {
 	UpdateUserDtoDto,
 	UpdateUserProfileDtoDto,
 	UserControllerCreateUserProfileDataDto,
+	UserControllerDeleteUserProfileDataDto,
 	UserControllerFindAllDataDto,
 	UserControllerFindOneDataDto,
 	UserControllerRemoveDataDto,
@@ -120,13 +121,31 @@ class User<SecurityDataType = unknown> {
 	 * @secure
 	 * @response `200` `UserControllerUpdateUserProfileDataDto`
 	 */
-	userControllerUpdateUserProfile = (id: string, profileId: string, data: UpdateUserProfileDtoDto, params: RequestParams = {}) =>
+	userControllerUpdateUserProfile = (profileId: number, id: number, data: UpdateUserProfileDtoDto, params: RequestParams = {}) =>
 		this.http.request<UserControllerUpdateUserProfileDataDto, any>({
 			path: `/user/${id}/profile/${profileId}`,
 			method: 'PATCH',
 			body: data,
 			secure: true,
 			type: ContentType.Json,
+			format: 'json',
+			...params,
+		})
+	/**
+	 * No description
+	 *
+	 * @tags user
+	 * @name UserControllerDeleteUserProfile
+	 * @summary 유저 프로필 삭제
+	 * @request DELETE:/user/{id}/profile/{profileId}
+	 * @secure
+	 * @response `200` `UserControllerDeleteUserProfileDataDto`
+	 */
+	userControllerDeleteUserProfile = (id: number, profileId: number, params: RequestParams = {}) =>
+		this.http.request<UserControllerDeleteUserProfileDataDto, any>({
+			path: `/user/${id}/profile/${profileId}`,
+			method: 'DELETE',
+			secure: true,
 			format: 'json',
 			...params,
 		})

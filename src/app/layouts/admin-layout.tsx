@@ -1,3 +1,4 @@
+import { WithAuth } from '@hooks/with-auth'
 import { Outlet } from 'react-router-dom'
 import { AdminMenubar } from './admin-menubar'
 import { Header } from './header'
@@ -12,4 +13,4 @@ function AdminLayout() {
 	)
 }
 
-export default AdminLayout
+export default WithAuth(AdminLayout, 0)

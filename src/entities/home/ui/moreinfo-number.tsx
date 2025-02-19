@@ -30,16 +30,11 @@ export function MoreinfoNumber({ index, thumbnail, rankId }: MoreinfoNumberProps
 	return (
 		<Dialog>
 			<DialogTrigger>
-				<NumberComponent
-					className={cn(
-						index === 8 ? 'h-40 py-4 pr-20' : 'absolute left-0 top-0 w-1/2',
-						//index === 9 ? 'h-40 py-4 pr-20' : 'absolute left-0 top-0 w-1/2',
-					)}
-				/>
+				<NumberComponent className={cn(index === 9 ? 'h-40 py-4 pr-20' : 'absolute left-0 top-0 w-1/2')} />
 				<img
 					src={thumbnail}
 					alt="smallmovie"
-					className={cn('absolute top-0 h-[168px] rounded-sm', index === 9 ? 'left-[52%]' : 'left-auto right-1')}
+					className={cn('absolute top-0 aspect-[5/7] h-[168px] rounded-sm object-cover', index === 9 ? 'left-[52%]' : 'left-auto right-1')}
 				/>
 			</DialogTrigger>
 			<DialogContent>

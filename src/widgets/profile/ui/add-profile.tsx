@@ -18,6 +18,7 @@ export function AddProfile() {
 				name: z.string().max(5, { message: '5자 이내로 입력해주세요.' }),
 			}),
 		),
+		mode: 'all',
 	})
 
 	const { data } = useFetchAuth()
@@ -25,17 +26,23 @@ export function AddProfile() {
 	const { mutate: postProfile } = usePostProfile()
 
 	const handleSubmit = () => {
-		postProfile({
-			id: id!,
-			data: {
-				name: form.getValues('name'),
-				avatar:
-					'https://occ-0-1361-325.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABfjwXqIYd3kCEU6KWsiHSHvkft8VhZg0yyD50a_pHXku4dz9VgxWwfA2ontwogStpj1NE9NJMt7sCpSKFEY2zmgqqQfcw1FMWwB9.png?r=229&quot',
-			},
-		})
-		form.reset()
+		console.log('프로필 추가 시작')
+		try {
+			postProfile({
+				id: id!,
+				data: {
+					name: form.getValues('name'),
+					avatar:
+						'https://occ-0-1361-325.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABfjwXqIYd3kCEU6KWsiHSHvkft8VhZg0yyD50a_pHXku4dz9VgxWwfA2ontwogStpj1NE9NJMt7sCpSKFEY2zmgqqQfcw1FMWwB9.png?r=229&quot',
+				},
+			})
+			form.reset()
+			alert('프로필 추가 완료')
+		} catch (e: any) {
+			alert(e.error.message)
+			console.log('에러에러')
+		}
 	}
-
 	return (
 		<div>
 			<Dialog>
@@ -55,13 +62,14 @@ export function AddProfile() {
 						<Form.Item name="name" className="w-full">
 							<InputText name="name" label="Name" className="bg-Grey/Grey-850" />
 						</Form.Item>
-						{/* <Form.Item name="child" className="w-full">
-							<Switch name="child" label="Kides Profile" description="Show only children's series and movies" id="child" />
-						</Form.Item> */}
 					</Form>
 					<DialogFooter>
-						<DialogClose>
-							<Button theme="white">save</Button>
+						<DialogClose asChild>
+							<Button type="submit" theme="white" onClick={handleSubmit}>
+								save
+							</Button>
+						</DialogClose>
+						<DialogClose asChild>
 							<Button theme="transparent" className="mt-2 !text-Primary/White" onClick={() => form.reset()}>
 								Cancellation
 							</Button>

@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { useFetchAuth } from 'src/shared/models/auth.model'
-import { useFetchUser, usePatchProfile } from 'src/shared/models/user.model'
+import { useDeleteProfile, useFetchUser, usePatchProfile } from 'src/shared/models/user.model'
 
 export function ManagerProfiles() {
 	const form = useForm()
@@ -22,14 +22,26 @@ export function ManagerProfiles() {
 	const { data: user } = useFetchUser(id!)
 	const profiles = user?.profiles
 	const { mutate: patchProfile } = usePatchProfile()
+	const { mutate: deleteProfile } = useDeleteProfile()
+
+	const handleDeleteProfile = () => {
+		alert('삭제할거야?')
+		try {
+			deleteProfile({ id: id!, profileId: Number(selectedProfileId) })
+		} catch (e: any) {
+			alert(e.error.message)
+			console.log('에러에러')
+		}
+	}
 
 	const handleSubmit = () => {
 		const profile = profiles?.find((profile) => profile.id.toString() === selectedProfileId)
 
+		console.log(1111, id, profile)
 		try {
 			patchProfile({
-				id: id!.toString(),
-				profileId: profile.id.toString(),
+				id: id!,
+				profileId: profile.id,
 				data: {
 					name: form.getValues('name'),
 				},
@@ -69,25 +81,26 @@ export function ManagerProfiles() {
 									</DialogHeader>
 
 									<div className="w-full gap-2 flex-center">
-										<ProfileImg image={profile.image || img} className="size-12" />
+										<ProfileImg image={profile.image} className="size-12" />
 										<div className="flex flex-1 flex-col gap-2">
 											<Form.Item name="name">
 												<InputText name="name" label="Name" className="bg-Grey/Grey-850 text-Primary/White" />
 											</Form.Item>
-											{/* <Form.Item name="gender">
-												<Select label="Gender" items={['Male', 'Female', 'Other']} />
-											</Form.Item> */}
 										</div>
 									</div>
+									<DialogFooter>
+										<DialogClose asChild>
+											<Button theme="primary" className="mb-2 !text-Primary/White" onClick={handleDeleteProfile}>
+												profile delete
+											</Button>
+										</DialogClose>
+										<DialogClose asChild>
+											<Button theme="secondary" className="!text-Primary/White">
+												save
+											</Button>
+										</DialogClose>
+									</DialogFooter>
 								</Form>
-								<DialogFooter>
-									<DialogClose>
-										<Button theme="white">save</Button>
-										<Button theme="transparent" className="mt-2 !text-Primary/White">
-											Cancellation
-										</Button>
-									</DialogClose>
-								</DialogFooter>
 							</DialogContent>
 						</Dialog>
 					))}

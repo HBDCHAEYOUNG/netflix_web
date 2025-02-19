@@ -1074,7 +1074,24 @@
 			"patch": {
 				"operationId": "UserController_updateUserProfile",
 				"summary": "유저 프로필 수정",
-				"parameters": [],
+				"parameters": [
+					{
+						"name": "profileId",
+						"required": true,
+						"in": "path",
+						"schema": {
+							"type": "number"
+						}
+					},
+					{
+						"name": "id",
+						"required": true,
+						"in": "path",
+						"schema": {
+							"type": "number"
+						}
+					}
+				],
 				"requestBody": {
 					"required": true,
 					"content": {
@@ -1103,17 +1120,62 @@
 						"bearer": []
 					}
 				]
+			},
+			"delete": {
+				"operationId": "UserController_deleteUserProfile",
+				"summary": "유저 프로필 삭제",
+				"parameters": [
+					{
+						"name": "id",
+						"required": true,
+						"in": "path",
+						"schema": {
+							"type": "number"
+						}
+					},
+					{
+						"name": "profileId",
+						"required": true,
+						"in": "path",
+						"schema": {
+							"type": "number"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "number"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["user"],
+				"security": [
+					{
+						"bearer": []
+					}
+				]
 			}
 		}
 	},
 	"info": {
-		"title": "Netflix Movie",
-		"description": "Netflix Movie API",
-		"version": "1.0",
+		"title": "Netflix API",
+		"description": "Netflix API\n\nAPI 문서를 JSON 형식으로 보려면 다음 링크를 사용하세요\n- [API JSON](http://localhost:3000/doc-json)",
+		"version": "1.0.0",
 		"contact": {}
 	},
 	"tags": [],
-	"servers": [],
+	"servers": [
+		{
+			"url": "http://localhost:3000",
+			"description": "로컬 테스트 서버"
+		}
+	],
 	"components": {
 		"securitySchemes": {
 			"basic": {
@@ -1367,6 +1429,11 @@
 							}
 						]
 					},
+					"thumbnail": {
+						"type": "string",
+						"description": "영화 썸네일 파일",
+						"example": "aaa-bbbb-cccc.png"
+					},
 					"movieFilePath": {
 						"type": "string",
 						"description": "영화 파일 경로",
@@ -1433,6 +1500,7 @@
 					"id",
 					"title",
 					"creator",
+					"thumbnail",
 					"movieFilePath",
 					"likeCount",
 					"disLikeCount",
@@ -1526,32 +1594,158 @@
 					},
 					"title": {
 						"type": "string",
-						"example": "인셉션",
+						"example": "monitor bluetooth d",
 						"description": "영화 제목"
 					},
+					"movieFilePath": {
+						"type": "string",
+						"example": "public/movie/example.mp4",
+						"description": "영화 파일 경로"
+					},
+					"likeCount": {
+						"type": "number",
+						"example": 2,
+						"description": "좋아요 수"
+					},
+					"disLikeCount": {
+						"type": "number",
+						"example": 0,
+						"description": "싫어요 수"
+					},
+					"viewCount": {
+						"type": "number",
+						"example": 19,
+						"description": "조회수"
+					},
+					"detail": {
+						"type": "object",
+						"properties": {
+							"id": {
+								"required": true,
+								"type": "number"
+							},
+							"detail": {
+								"required": true,
+								"type": "string"
+							}
+						}
+					},
 					"director": {
-						"type": "string",
-						"example": "크리스토퍼 놀란",
-						"description": "감독"
+						"type": "object",
+						"properties": {
+							"id": {
+								"required": true,
+								"type": "number"
+							},
+							"name": {
+								"required": true,
+								"type": "string"
+							},
+							"dob": {
+								"format": "date-time",
+								"required": true,
+								"type": "string"
+							},
+							"nationality": {
+								"required": true,
+								"type": "string"
+							}
+						}
 					},
-					"actor": {
-						"type": "string",
-						"example": "레오나르도 디카프리오",
-						"description": "출연진"
+					"genres": {
+						"example": [
+							{
+								"id": 4,
+								"name": "transmitter"
+							}
+						],
+						"description": "장르 목록",
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/Genre"
+						}
 					},
-					"isWish": {
-						"type": "boolean",
-						"example": true,
-						"description": "찜 여부"
+					"creator": {
+						"example": {
+							"id": 4,
+							"email": "test@naver.com",
+							"role": "0"
+						},
+						"description": "작성자 정보",
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/User"
+							}
+						]
 					},
-					"releasedAt": {
-						"format": "date-time",
-						"type": "string",
-						"example": "2010-07-21",
-						"description": "개봉일"
+					"wishList": {
+						"example": [
+							{
+								"userId": 4,
+								"movieId": 1,
+								"isWish": true
+							}
+						],
+						"description": "찜 목록",
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"likedUsers": {
+						"example": [
+							{
+								"userId": 4,
+								"movieId": 1,
+								"isLike": true
+							}
+						],
+						"description": "좋아요한 사용자 목록",
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"recommendations": {
+						"example": [
+							{
+								"id": 3,
+								"title": "panel optical m",
+								"movieFilePath": "http://example.com/movie.mp4",
+								"thumbnail": "http://example.com/thumbnail.jpg",
+								"likeCount": 2,
+								"disLikeCount": 0,
+								"viewCount": 0,
+								"genres": [
+									{
+										"id": 1,
+										"name": "firewall"
+									}
+								]
+							}
+						],
+						"description": "추천 영화 목록 (좋아요가 많은 상위 10개 영화)",
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/Movie"
+						}
 					}
 				},
-				"required": ["id", "title", "director", "actor", "isWish", "releasedAt"]
+				"required": [
+					"id",
+					"title",
+					"movieFilePath",
+					"likeCount",
+					"disLikeCount",
+					"viewCount",
+					"detail",
+					"director",
+					"genres",
+					"creator",
+					"wishList",
+					"likedUsers",
+					"recommendations"
+				]
 			},
 			"CreateMovieDto": {
 				"type": "object",
@@ -1583,9 +1777,14 @@
 						"type": "string",
 						"description": "영화 파일 이름",
 						"example": "aaa-bbbb-cccc.jpg"
+					},
+					"thumbnail": {
+						"type": "string",
+						"description": "영화 썸네일 파일",
+						"example": "aaa-bbbb-cccc.png"
 					}
 				},
-				"required": ["title", "detail", "directorId", "genreIds", "movieFileName"]
+				"required": ["title", "detail", "directorId", "genreIds", "movieFileName", "thumbnail"]
 			},
 			"UpdateMovieDto": {
 				"type": "object",
@@ -1617,6 +1816,11 @@
 						"type": "string",
 						"description": "영화 파일 이름",
 						"example": "aaa-bbbb-cccc.jpg"
+					},
+					"thumbnail": {
+						"type": "string",
+						"description": "영화 썸네일 파일",
+						"example": "aaa-bbbb-cccc.png"
 					}
 				}
 			},

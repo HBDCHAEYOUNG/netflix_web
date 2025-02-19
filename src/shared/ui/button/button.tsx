@@ -13,7 +13,7 @@ const color: Record<PrimaryButtonTheme, string> = {
 	transparent,
 	white,
 }
-interface ButtonProps {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	theme?: PrimaryButtonTheme
 	children: React.ReactNode
 	className?: string

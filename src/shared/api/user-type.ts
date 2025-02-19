@@ -3,6 +3,7 @@ import {
 	UpdateUserDtoDto,
 	UpdateUserProfileDtoDto,
 	UserControllerCreateUserProfileDataDto,
+	UserControllerDeleteUserProfileDataDto,
 	UserControllerFindAllDataDto,
 	UserControllerFindOneDataDto,
 	UserControllerRemoveDataDto,
@@ -115,12 +116,32 @@ export namespace User {
 	 */
 	export namespace UserControllerUpdateUserProfile {
 		export type RequestParams = {
-			id: string
-			profileId: string
+			id: number
+			profileId: number
 		}
 		export type RequestQuery = {}
 		export type RequestBody = UpdateUserProfileDtoDto
 		export type RequestHeaders = {}
 		export type ResponseBody = UserControllerUpdateUserProfileDataDto
+	}
+
+	/**
+	 * No description
+	 * @tags user
+	 * @name UserControllerDeleteUserProfile
+	 * @summary 유저 프로필 삭제
+	 * @request DELETE:/user/{id}/profile/{profileId}
+	 * @secure
+	 * @response `200` `UserControllerDeleteUserProfileDataDto`
+	 */
+	export namespace UserControllerDeleteUserProfile {
+		export type RequestParams = {
+			id: number
+			profileId: number
+		}
+		export type RequestQuery = {}
+		export type RequestBody = never
+		export type RequestHeaders = {}
+		export type ResponseBody = UserControllerDeleteUserProfileDataDto
 	}
 }
