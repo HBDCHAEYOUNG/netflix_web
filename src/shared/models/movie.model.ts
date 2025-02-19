@@ -5,21 +5,22 @@ import { MovieControllerFindAllParamsDto } from '../api/data-contracts'
 import wishlist from '../api/wishlist'
 
 export const movieQueryKey = createQueryKeys('movie', {
-	fetchMovies: (take: number, cursor: string) => [take, cursor],
+	fetchMovies: (take: number, cursor: string, title?: string) => [take, cursor, title],
 	fetchMovie: (id: number) => [id],
 	fetchWishlist: () => ['whislist'],
 })
 
-export const useFetchMovies = (take: number, cursor: string) => {
+export const useFetchMovies = (take: number, cursor: string, title?: string) => {
 	const query: MovieControllerFindAllParamsDto = {
 		order: ['id_DESC'],
 		take,
+		title,
 	}
 
 	if (cursor) Object.assign(query, { cursor })
-
+	if (title) Object.assign(query, { title })
 	return useQuery({
-		queryKey: movieQueryKey.fetchMovies(take, cursor).queryKey,
+		queryKey: movieQueryKey.fetchMovies(take, cursor, title).queryKey,
 		queryFn: () => movie.movieControllerFindAll(query),
 	})
 }

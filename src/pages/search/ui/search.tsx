@@ -6,9 +6,9 @@ import { useFetchMovies } from 'src/shared/models'
 export function Search() {
 	const [searchParams] = useSearchParams()
 	const query = searchParams.get('keyword')
-
-	const { data } = useFetchMovies(0, '')
-	if (!data) return <div>loading...</div>
+	const { data } = useFetchMovies(10, '', query || '')
+	if (!query || !data) return <div>loading...</div>
+	console.log(data)
 	return (
 		<div className="pt-32 common-padding">
 			<h2 className="text-center">"{query}" 검색결과입니다.</h2>
@@ -16,7 +16,7 @@ export function Search() {
 				{data.data.map((item, index) => (
 					<Dialog key={index}>
 						<DialogTrigger>
-							<img src={item.thumbnailb} alt={item.title} className="aspect-video h-auto w-full rounded-md" />
+							<img src={item.thumbnail} alt={item.title} className="aspect-video h-auto w-full rounded-md object-cover" />
 						</DialogTrigger>
 						<DialogContent>
 							<Detail movieId={item.id} />
