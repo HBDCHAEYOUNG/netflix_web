@@ -18,3 +18,7 @@ export const userMenuItems = [
 	{ title: 'Customer Service Center', icon: <ServiceIcon />, to: '#' },
 	{ title: 'Log out Of Netflix', className: 'mt-2 justify-center border-t border-Grey/Grey-200 pr-0', to: '/auth/logout' },
 ]
+
+export const adminMenuItems = [
+	{ title: 'Log out Of Admin', className: 'mt-2 justify-center border-t border-Grey/Grey-200 pr-3', to: '/auth/logout' },
+]

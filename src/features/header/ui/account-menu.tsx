@@ -1,7 +1,7 @@
 import { cn } from '@lib/utils'
 import * as React from 'react'
 import { Link } from 'react-router-dom'
-import { userMenuItems } from 'src/shared/const/header'
+import { adminMenuItems, userMenuItems } from 'src/shared/const/header'
 import { useFetchAuth } from 'src/shared/models/auth.model'
 import {
 	NavigationMenu,
@@ -18,6 +18,7 @@ interface AccountMenuProps {
 
 export const AccountMenu = React.forwardRef<HTMLDivElement, AccountMenuProps>(({ label, className, ...props }, ref) => {
 	const { data } = useFetchAuth()
+	const menuItems = label === 'admin' ? adminMenuItems : userMenuItems
 	return (
 		<NavigationMenu ref={ref} className={className} {...props}>
 			<NavigationMenuList>
@@ -30,15 +31,17 @@ export const AccountMenu = React.forwardRef<HTMLDivElement, AccountMenuProps>(({
 					</NavigationMenuTrigger>
 					<NavigationMenuContent>
 						<ul className="grid bg-Primary/Black py-2">
-							{data?.profiles?.map((profile, index) => (
-								<li key={`profile-${index}`} className="flex cursor-pointer items-center px-4 py-2 pr-12 hover:underline">
-									<img src={profile.avatar} alt={profile.name} className="mr-3 h-8 w-8 object-cover" />
-									<Link to={`/profile/${profile.id}`} className="text-nowrap text-sm font-medium">
-										{profile.name}
-									</Link>
-								</li>
-							))}
-							{userMenuItems.map((item, index) => (
+							{label === 'user' &&
+								data?.profiles?.map((profile, index) => (
+									<li key={`profile-${index}`} className="flex cursor-pointer items-center px-4 py-2 pr-12 hover:underline">
+										<img src={profile.avatar} alt={profile.name} className="mr-3 h-8 w-8 object-cover" />
+										<Link to={`/profile/${profile.id}`} className="text-nowrap text-sm font-medium">
+											{profile.name}
+										</Link>
+									</li>
+								))}
+
+							{menuItems.map((item, index) => (
 								<li
 									key={`menu-${index}`}
 									className={cn('flex cursor-pointer items-center px-4 py-2 pr-12 hover:underline', item.className)}
