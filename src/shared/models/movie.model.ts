@@ -2,10 +2,12 @@ import { createQueryKeys } from '@lukemorales/query-key-factory'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import movie from '../api/movie'
 import { MovieControllerFindAllParamsDto } from '../api/data-contracts'
+import wishlist from '../api/wishlist'
 
 export const movieQueryKey = createQueryKeys('movie', {
 	fetchMovies: (take: number, cursor: string) => [take, cursor],
 	fetchMovie: (id: number) => [id],
+	fetchWishlist: () => ['whislist'],
 })
 
 export const useFetchMovies = (take: number, cursor: string) => {
@@ -73,6 +75,26 @@ export const useDeleteMovie = () => {
 		mutationFn: (id: number) => movie.movieControllerRemove(id),
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: movieQueryKey._def })
+		},
+	})
+}
+
+export const useFetchWishlist = () => {
+	return useQuery({
+		queryKey: movieQueryKey.fetchWishlist().queryKey,
+		queryFn: () => wishlist.movieControllerFindAllMovieWish(),
+	})
+}
+
+export const usePostWishlist = () => {
+	const queryClient = useQueryClient()
+	return useMutation({
+		mutationFn: (id: number) => wishlist.movieControllerCreateMovieWish(id),
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: movieQueryKey.fetchWishlist().queryKey })
+		},
+		onError: (error) => {
+			console.log(error)
 		},
 	})
 }
