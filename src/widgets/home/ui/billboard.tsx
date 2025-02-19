@@ -27,7 +27,7 @@ export function Billboard() {
 						<p className="mt-4 w-[518px] Regular-Title4">{bannerData?.detail.detail}</p>
 						<nav className="mt-6 flex gap-4">
 							<ButtonPlay movieId={bannerData?.id} />
-							<Moreinfo movieDetail={bannerData!} />
+							{bannerData?.id && <Moreinfo movieId={bannerData?.id} />}
 						</nav>
 					</div>
 				</section>

@@ -4,21 +4,23 @@ import ThumbsDown from '@icons/thumb-down.svg?react'
 import ThumbsUpFill from '@icons/thumb-up-fill.svg?react'
 import ThumbsUp from '@icons/thumb-up.svg?react'
 import { useState } from 'react'
+import { useFetchMovie } from 'src/shared/models'
 
 interface DetailProps {
-	movieDetail: any
+	movieId: number
 }
 
-export function Detail({ movieDetail }: DetailProps) {
+export function Detail({ movieId }: DetailProps) {
 	const [isLike, setIsLike] = useState(false)
 	const [isHate, setIsHate] = useState(false)
 
+	const { data } = useFetchMovie(movieId)
 	return (
 		<div className="fixed left-1/2 top-1/2 z-50 my-4 h-[calc(100vh-32px)] w-[850px] -translate-x-1/2 -translate-y-1/2 overflow-y-scroll rounded-md [&_*]:text-Primary/White">
 			<div className="relative w-[850px] bg-Grey/Grey-850">
 				<img
 					src="https://images.unsplash.com/photo-1705418181762-1a52ab82ddf5?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-					alt={movieDetail.title}
+					alt={data?.title}
 					className="mask-linear-gradient absolute left-0 top-0 z-0 w-full"
 					style={{
 						maskImage: 'linear-gradient(to bottom, black, transparent)',
@@ -27,9 +29,9 @@ export function Detail({ movieDetail }: DetailProps) {
 				/>
 
 				<div className="relative h-[480px] w-[850px] place-content-end px-12 pb-16">
-					<h1 className="text-3xl font-extrabold">{movieDetail.title}</h1>
+					<h1 className="text-3xl font-extrabold">{data?.title}</h1>
 					<nav className="mt-6 flex items-center gap-2">
-						<ButtonPlay movieId={movieDetail.id} />
+						<ButtonPlay movieId={data?.id} />
 						<CirclePlus className="h-10 w-10 rounded-full border-2 border-Grey/Grey-200 p-2 hover:border-Primary/White hover:bg-Grey/Grey-200" />
 						<ThumbsUp className="h-10 w-10 rounded-full border-2 border-Grey/Grey-200 p-1 hover:z-0 hover:border-Primary/White hover:bg-Grey/Grey-200" />
 						<div className="relative flex h-11 w-24 items-center justify-evenly rounded-full bg-Grey/Grey-700 transition-all duration-200">
@@ -65,10 +67,10 @@ export function Detail({ movieDetail }: DetailProps) {
 				</div>
 
 				<div className="px-12">
-					<p className="!text-Grey/Grey-50">release : {movieDetail.createdAt.slice(0, 4)}</p>
-					<span className="Medium-Body">{movieDetail.detail.detail}</span>
+					<p className="!text-Grey/Grey-50">release : {data?.createdAt.slice(0, 4)}</p>
+					<span className="Medium-Body">{data?.detail.detail}</span>
 
-					<p>genre : {movieDetail.genres.map((genre: any) => genre.name).join(', ')}</p>
+					<p>genre : {data?.genres.map((genre: any) => genre.name).join(', ')}</p>
 				</div>
 
 				{/* <div className="flex items-center justify-between gap-2 px-12 py-6 Medium-Title3">
@@ -113,10 +115,10 @@ export function Detail({ movieDetail }: DetailProps) {
 					)}
 				</ol> */}
 
-				<div className="px-12 pb-6 pt-12 Medium-Title3">About {movieDetail.title}</div>
+				<div className="px-12 pb-6 pt-12 Medium-Title3">About {data?.title}</div>
 				<p className="px-12 pb-6 Regular-Body">
-					director : {movieDetail.director.name}
-					genre : {movieDetail.genres.map((genre: any) => genre.name).join(', ')}
+					director : {data?.director.name}
+					genre : {data?.genres.map((genre: any) => genre.name).join(', ')}
 					{/* etc : {movieDetail.etc} */}
 				</p>
 			</div>

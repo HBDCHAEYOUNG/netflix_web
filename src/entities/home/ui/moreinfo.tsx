@@ -3,13 +3,12 @@ import { Dialog, DialogContent, DialogTrigger } from '@ui/dialog/dialog'
 import { Detail } from '@widgets/home'
 
 import InfoIcon from '@icons/info.svg?react'
-import { GetMoviesBannerResDtoDto } from 'src/shared/api/data-contracts'
 
 interface MoreinfoProps {
-	movieDetail: GetMoviesBannerResDtoDto
+	movieId: number
 }
 
-export function Moreinfo({ movieDetail }: MoreinfoProps) {
+export function Moreinfo({ movieId }: MoreinfoProps) {
 	return (
 		<Dialog>
 			<DialogTrigger>
@@ -19,7 +18,7 @@ export function Moreinfo({ movieDetail }: MoreinfoProps) {
 				</Button>
 			</DialogTrigger>
 			<DialogContent>
-				<Detail movieDetail={movieDetail} />
+				<Detail movieId={movieId} />
 			</DialogContent>
 		</Dialog>
 	)
