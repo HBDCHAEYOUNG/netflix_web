@@ -6,19 +6,20 @@ import ThumbsUpFill from '@icons/thumb-up-fill.svg?react'
 import ThumbsUp from '@icons/thumb-up.svg?react'
 import { cn } from '@lib/utils'
 import { useState } from 'react'
-import { useFetchMovie, usePostWishlist } from 'src/shared/models'
+import { useFetchMovie, usePostDislikeMovie, usePostLikeMovie, usePostWishlist } from 'src/shared/models'
 
 interface DetailProps {
 	movieId: number
 }
 
 export function Detail({ movieId }: DetailProps) {
-	const [isLike, setIsLike] = useState(false)
-	const [isHate, setIsHate] = useState(false)
 	const [show, setShow] = useState(false)
-	console.log(show)
+
 	const { data } = useFetchMovie(movieId)
 	const { mutateAsync: postWishlist } = usePostWishlist()
+	const { mutateAsync: postLike } = usePostLikeMovie()
+	const { mutateAsync: postDislike } = usePostDislikeMovie()
+
 	const handleClickWish = async () => {
 		try {
 			await postWishlist(movieId)
@@ -26,6 +27,24 @@ export function Detail({ movieId }: DetailProps) {
 			console.log(error)
 		}
 	}
+
+	const handleClickLike = async () => {
+		try {
+			await postLike(movieId)
+		} catch (error) {
+			console.log(error)
+		}
+	}
+
+	const handleClickDislike = async () => {
+		try {
+			await postDislike(movieId)
+		} catch (error) {
+			console.log(error)
+		}
+	}
+
+	console.log(data?.likedUsers?.[0]?.isLike)
 	return (
 		<div className="fixed left-1/2 top-1/2 z-50 my-4 h-[calc(100vh-32px)] w-[850px] -translate-x-1/2 -translate-y-1/2 overflow-y-scroll rounded-md [&_*]:text-Primary/White">
 			<div className="relative w-[850px] bg-Grey/Grey-850">
@@ -44,55 +63,57 @@ export function Detail({ movieId }: DetailProps) {
 					<nav className="mt-6 flex items-center gap-2">
 						<ButtonPlay movieId={data?.id} />
 						<div>
-							{data?.wishlist ? (
+							{data?.wishList && data?.wishList?.length > 0 ? (
 								<CirclePlus
-									className="h-10 w-10 rounded-full border-2 border-Grey/Grey-200 p-2 hover:border-Primary/White hover:bg-Grey/Grey-200"
+									className="relative z-10 h-10 w-10 cursor-pointer rounded-full border-2 border-Grey/Grey-200 p-2 hover:border-Primary/White hover:bg-Grey/Grey-200"
 									onClick={handleClickWish}
 								/>
 							) : (
-								<CircleCheck className="h-10 w-10 rounded-full border-2 border-Grey/Grey-200 p-2 hover:border-Primary/White hover:bg-Grey/Grey-200" />
+								<CircleCheck
+									onClick={handleClickWish}
+									className="relative z-10 h-10 w-10 cursor-pointer rounded-full border-2 border-Grey/Grey-200 p-2 hover:border-Primary/White hover:bg-Grey/Grey-200"
+								/>
 							)}
 						</div>
-						<ThumbsUp
-							onMouseEnter={() => setShow(true)}
-							className="z-10 h-10 w-10 rounded-full border-2 border-Grey/Grey-200 p-1 hover:border-Primary/White hover:bg-Grey/Grey-200"
-						/>
+
+						{data?.likedUsers?.[0]?.isLike === true && (
+							<ThumbsUpFill
+								onMouseEnter={() => setShow(true)}
+								className="z-10 h-10 w-10 rounded-full border-2 border-Grey/Grey-200 p-2 hover:border-Primary/White hover:bg-Grey/Grey-200"
+							/>
+						)}
+						{data?.likedUsers?.length === 0 && (
+							<ThumbsUp
+								onMouseEnter={() => setShow(true)}
+								className="z-10 h-10 w-10 rounded-full border-2 border-Grey/Grey-200 p-1 hover:border-Primary/White hover:bg-Grey/Grey-200"
+							/>
+						)}
+						{data?.likedUsers?.[0]?.isLike === false && (
+							<ThumbsUpFill
+								onMouseEnter={() => setShow(true)}
+								className="z-10 h-10 w-10 rotate-180 rounded-full border-2 border-Grey/Grey-200 p-2 hover:border-Primary/White hover:bg-Grey/Grey-200"
+							/>
+						)}
+
 						<div
 							onMouseLeave={() => setShow(false)}
 							className={cn(
-								'absolute left-48 z-0 flex h-11 w-24 items-center justify-evenly rounded-full transition-all duration-500 [&_path]:fill-transparent',
-								show && 'z-20 bg-Grey/Grey-700 [&_path]:fill-Primary/White',
+								'absolute left-48 z-0 flex h-11 w-24 scale-50 items-center justify-evenly rounded-full transition-all duration-500 [&_path]:fill-transparent',
+								show && 'z-20 scale-100 bg-Grey/Grey-700 [&_path]:fill-Primary/White',
 							)}
 						>
-							{isLike ? (
-								<ThumbsUpFill
-									onClick={() => setIsLike(false)}
-									className={cn('h-8 w-8 rounded-full p-1', show && 'hover:bg-Grey/Grey-150')}
-								/>
+							{data?.likedUsers?.[0]?.isLike === true ? (
+								<ThumbsUpFill onClick={handleClickLike} className={cn('h-8 w-8 rounded-full p-1', show && 'hover:bg-Grey/Grey-150')} />
 							) : (
-								<ThumbsUp
-									onClick={() => {
-										setIsLike(true)
-										setIsHate(false)
-									}}
-									className={cn('h-8 w-8 rounded-full', show && 'hover:bg-Grey/Grey-150')}
-								/>
+								<ThumbsUp onClick={handleClickLike} className={cn('h-8 w-8 rounded-full', show && 'hover:bg-Grey/Grey-150')} />
 							)}
-							{isHate ? (
+							{data?.likedUsers?.[0]?.isLike === false ? (
 								<ThumbsUpFill
-									onClick={() => {
-										setIsHate(false)
-									}}
+									onClick={handleClickDislike}
 									className={cn('h-8 w-8 rotate-180 rounded-full p-1', show && 'hover:bg-Grey/Grey-150')}
 								/>
 							) : (
-								<ThumbsDown
-									onClick={() => {
-										setIsHate(true)
-										setIsLike(false)
-									}}
-									className={cn('h-8 w-8 rounded-full', show && 'hover:bg-Grey/Grey-150')}
-								/>
+								<ThumbsDown onClick={handleClickDislike} className={cn('h-8 w-8 rounded-full', show && 'hover:bg-Grey/Grey-150')} />
 							)}
 						</div>
 					</nav>

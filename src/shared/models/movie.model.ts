@@ -3,6 +3,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import movie from '../api/movie'
 import { MovieControllerFindAllParamsDto } from '../api/data-contracts'
 import wishlist from '../api/wishlist'
+import like from '../api/like'
 
 export const movieQueryKey = createQueryKeys('movie', {
 	fetchMovies: (take: number, cursor: string, title?: string) => [take, cursor, title],
@@ -90,13 +91,46 @@ export const useFetchWishlist = () => {
 export const usePostWishlist = () => {
 	const queryClient = useQueryClient()
 	return useMutation({
-		mutationFn: (id: number) => wishlist.movieControllerCreateMovieWish(id),
+		mutationFn: async (id: number) => {
+			await wishlist.movieControllerCreateMovieWish(id)
+			return id
+		},
+		onSuccess: (id) => {
+			console.log(movieQueryKey.fetchMovie(id).queryKey)
+			queryClient.invalidateQueries({ queryKey: movieQueryKey.fetchWishlist().queryKey })
+			queryClient.invalidateQueries({ queryKey: movieQueryKey.fetchMovie(id).queryKey })
+		},
+
+		onError: (error) => {
+			console.log(error)
+		},
+	})
+}
+
+export const usePostLikeMovie = () => {
+	const queryClient = useQueryClient()
+	return useMutation({
+		mutationFn: async (id: number) => {
+			await like.movieControllerCreateMovieLike(id)
+			return id
+		},
 		onSuccess: (id) => {
 			queryClient.invalidateQueries({ queryKey: movieQueryKey.fetchWishlist().queryKey })
 			queryClient.invalidateQueries({ queryKey: movieQueryKey.fetchMovie(id).queryKey })
 		},
-		onError: (error) => {
-			console.log(error)
+	})
+}
+
+export const usePostDislikeMovie = () => {
+	const queryClient = useQueryClient()
+	return useMutation({
+		mutationFn: async (id: number) => {
+			await like.movieControllerCreateMovieDislike(id)
+			return id
+		},
+		onSuccess: (id) => {
+			queryClient.invalidateQueries({ queryKey: movieQueryKey.fetchWishlist().queryKey })
+			queryClient.invalidateQueries({ queryKey: movieQueryKey.fetchMovie(id).queryKey })
 		},
 	})
 }
