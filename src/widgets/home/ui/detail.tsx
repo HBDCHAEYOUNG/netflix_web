@@ -1,10 +1,11 @@
 import ButtonPlay from '@features/video/ui/button-play'
+import CircleCheck from '@icons/checkmark.svg?react'
 import CirclePlus from '@icons/plus-thin.svg?react'
 import ThumbsDown from '@icons/thumb-down.svg?react'
 import ThumbsUpFill from '@icons/thumb-up-fill.svg?react'
 import ThumbsUp from '@icons/thumb-up.svg?react'
 import { useState } from 'react'
-import { useFetchMovie } from 'src/shared/models'
+import { useFetchMovie, usePostWishlist } from 'src/shared/models'
 
 interface DetailProps {
 	movieId: number
@@ -15,6 +16,15 @@ export function Detail({ movieId }: DetailProps) {
 	const [isHate, setIsHate] = useState(false)
 
 	const { data } = useFetchMovie(movieId)
+	const { mutateAsync: postWishlist } = usePostWishlist()
+	const handleClickWish = async () => {
+		try {
+			await postWishlist(movieId)
+		} catch (error) {
+			console.log(error)
+		}
+	}
+	console.log(data)
 	return (
 		<div className="fixed left-1/2 top-1/2 z-50 my-4 h-[calc(100vh-32px)] w-[850px] -translate-x-1/2 -translate-y-1/2 overflow-y-scroll rounded-md [&_*]:text-Primary/White">
 			<div className="relative w-[850px] bg-Grey/Grey-850">
@@ -32,7 +42,16 @@ export function Detail({ movieId }: DetailProps) {
 					<h1 className="text-3xl font-extrabold">{data?.title}</h1>
 					<nav className="mt-6 flex items-center gap-2">
 						<ButtonPlay movieId={data?.id} />
-						<CirclePlus className="h-10 w-10 rounded-full border-2 border-Grey/Grey-200 p-2 hover:border-Primary/White hover:bg-Grey/Grey-200" />
+						<div>
+							{data?.wishlist ? (
+								<CirclePlus
+									className="h-10 w-10 rounded-full border-2 border-Grey/Grey-200 p-2 hover:border-Primary/White hover:bg-Grey/Grey-200"
+									onClick={handleClickWish}
+								/>
+							) : (
+								<CircleCheck className="h-10 w-10 rounded-full border-2 border-Grey/Grey-200 p-2 hover:border-Primary/White hover:bg-Grey/Grey-200" />
+							)}
+						</div>
 						<ThumbsUp className="h-10 w-10 rounded-full border-2 border-Grey/Grey-200 p-1 hover:z-0 hover:border-Primary/White hover:bg-Grey/Grey-200" />
 						<div className="relative flex h-11 w-24 items-center justify-evenly rounded-full bg-Grey/Grey-700 transition-all duration-200">
 							{isLike ? (

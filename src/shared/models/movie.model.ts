@@ -20,7 +20,7 @@ export const useFetchMovies = (take: number, cursor: string, title?: string) => 
 	if (cursor) Object.assign(query, { cursor })
 	if (title) Object.assign(query, { title })
 	return useQuery({
-		queryKey: movieQueryKey.fetchMovies(take, cursor, title).queryKey,
+		queryKey: movieQueryKey.fetchMovies(take, cursor).queryKey,
 		queryFn: () => movie.movieControllerFindAll(query),
 	})
 }
@@ -91,8 +91,9 @@ export const usePostWishlist = () => {
 	const queryClient = useQueryClient()
 	return useMutation({
 		mutationFn: (id: number) => wishlist.movieControllerCreateMovieWish(id),
-		onSuccess: () => {
+		onSuccess: (id) => {
 			queryClient.invalidateQueries({ queryKey: movieQueryKey.fetchWishlist().queryKey })
+			queryClient.invalidateQueries({ queryKey: movieQueryKey.fetchMovie(id).queryKey })
 		},
 		onError: (error) => {
 			console.log(error)

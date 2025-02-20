@@ -57,11 +57,8 @@ export const AccountMenu = React.forwardRef<HTMLDivElement, AccountMenuProps>(({
 									))}
 
 							{menuItems.map((item, index) => (
-								<Link to={item.to}>
-									<li
-										key={`menu-${index}`}
-										className={cn('flex cursor-pointer items-center px-4 py-2 pr-12 hover:underline', item.className)}
-									>
+								<Link to={item.to} key={`menu-${index}`}>
+									<li className={cn('flex cursor-pointer items-center px-4 py-2 pr-12 hover:underline', item.className)}>
 										{item.icon && <div className="mr-3 flex h-8 w-8 items-center justify-center">{item.icon}</div>}
 										<p className="text-nowrap text-sm font-medium">{item.title}</p>
 									</li>

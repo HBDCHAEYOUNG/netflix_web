@@ -4,7 +4,6 @@ import { useFetchWishlist } from 'src/shared/models'
 
 export function MyList() {
 	const { data } = useFetchWishlist()
-	console.log(data)
 	if (!data) return <div>데이터가 없습니다.</div>
 	return (
 		<div className="pt-32 common-padding">

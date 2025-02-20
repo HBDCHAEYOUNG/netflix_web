@@ -11,7 +11,7 @@ interface MoreinfoProps {
 export function Moreinfo({ movieId }: MoreinfoProps) {
 	return (
 		<Dialog>
-			<DialogTrigger>
+			<DialogTrigger asChild>
 				<Button theme="secondary" className="w-[161px]">
 					<InfoIcon className="mr-3" />
 					More info

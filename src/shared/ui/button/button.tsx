@@ -1,4 +1,5 @@
 import { cn } from '@lib/utils'
+import { forwardRef } from 'react'
 
 const primary = 'bg-Primary/Red hover:bg-Secondary/Red-200'
 const outline = 'text-Grey/Grey-200 border border-Grey/Grey-200 hover:text-Primary/White hover:border-Primary/White'
@@ -13,6 +14,7 @@ const color: Record<PrimaryButtonTheme, string> = {
 	transparent,
 	white,
 }
+
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	theme?: PrimaryButtonTheme
 	children: React.ReactNode
@@ -24,16 +26,20 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 type PrimaryButtonTheme = 'primary' | 'outline' | 'secondary' | 'transparent' | 'white'
 
-function Button({ theme = 'primary', children, className, leftIcon, rightIcon, onClick, ...rest }: ButtonProps) {
-	const classes = cn('h-10 w-full rounded-md flex-center', color[theme], className)
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+	({ theme = 'primary', children, className, leftIcon, rightIcon, onClick, ...rest }, ref) => {
+		const classes = cn('h-10 w-full rounded-md flex-center', color[theme], className)
 
-	return (
-		<button className={classes} onClick={onClick} {...rest}>
-			{leftIcon && leftIcon}
-			{children}
-			{rightIcon && rightIcon}
-		</button>
-	)
-}
+		return (
+			<button ref={ref} className={classes} onClick={onClick} {...rest}>
+				{leftIcon && leftIcon}
+				{children}
+				{rightIcon && rightIcon}
+			</button>
+		)
+	},
+)
+
+Button.displayName = 'Button'
 
 export default Button
