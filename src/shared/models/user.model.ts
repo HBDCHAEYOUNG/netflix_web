@@ -3,6 +3,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import user from '../api/user'
 import { CreateUserProfileDtoDto, UpdateUserDtoDto, UpdateUserProfileDtoDto } from '../api/data-contracts'
 import { authQueryKey } from './auth.model'
+import { AuthStore } from '@store/auth-store'
 
 export const userQueryKey = createQueryKeys('user', {
 	fetchUser: (id: number) => [id],
@@ -60,11 +61,14 @@ export const usePostProfile = () => {
 }
 
 export const usePatchProfile = () => {
+	const { setLogin } = AuthStore()
 	const queryClient = useQueryClient()
 	return useMutation({
 		mutationFn: ({ profileId, id, data }: { profileId: number; id: number; data: UpdateUserProfileDtoDto }) =>
 			user.userControllerUpdateUserProfile(profileId, id, data),
-		onSuccess: () => {
+		onSuccess: (data) => {
+			setLogin(data?.accessToken, data?.refreshToken)
+
 			queryClient.invalidateQueries({ queryKey: userQueryKey._def })
 			queryClient.invalidateQueries({ queryKey: authQueryKey.fetchMe().queryKey })
 		},

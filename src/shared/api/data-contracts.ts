@@ -355,6 +355,12 @@ export interface MovieControllerFindAllParamsDto {
 	 */
 	order: string[]
 	/**
+	 * 페이지
+	 * @default 1
+	 * @example 1
+	 */
+	page?: number
+	/**
 	 * 가져올 데이터 갯수
 	 * @default 5
 	 * @example 5
@@ -572,6 +578,8 @@ export interface UpdateUserProfileDtoDto {
 	name?: string
 }
 
+export type UserControllerAccessUserProfileDataDto = TokenResDtoDto
+
 export type UserControllerCreateUserProfileDataDto = UserProfileDto
 
 export type UserControllerDeleteUserProfileDataDto = number
@@ -584,7 +592,7 @@ export type UserControllerRemoveDataDto = any
 
 export type UserControllerUpdateDataDto = any
 
-export type UserControllerUpdateUserProfileDataDto = UserProfileDto
+export type UserControllerUpdateUserProfileDataDto = TokenResDtoDto
 
 export interface UserDto {
 	/** 유저가 생성한 영화 목록 */

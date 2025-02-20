@@ -27,18 +27,19 @@ export function ManagerProfiles() {
 
 	const { data } = useFetchAuth()
 	const id = data?.id
-	const { mutate: patchProfile } = usePatchProfile()
-	const { mutate: deleteProfile } = useDeleteProfile()
+	const { mutateAsync: patchProfile } = usePatchProfile()
+	const { mutateAsync: deleteProfile } = useDeleteProfile()
 
-	const handleSubmit = () => {
+	const handleSubmit = async () => {
 		try {
-			patchProfile({
+			await patchProfile({
 				profileId: Number(selectedProfileId),
 				id: id!,
 				data: {
 					name: form.getValues('name'),
 				},
 			})
+
 			setOpen(false)
 		} catch (e: any) {
 			alert(e.error.message)

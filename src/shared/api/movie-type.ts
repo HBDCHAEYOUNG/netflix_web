@@ -34,6 +34,12 @@ export namespace Movie {
 			 */
 			order: string[]
 			/**
+			 * 페이지
+			 * @default 1
+			 * @example 1
+			 */
+			page?: number
+			/**
 			 * 가져올 데이터 갯수
 			 * @default 5
 			 * @example 5

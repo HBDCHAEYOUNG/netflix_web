@@ -2,6 +2,7 @@ import {
 	CreateUserProfileDtoDto,
 	UpdateUserDtoDto,
 	UpdateUserProfileDtoDto,
+	UserControllerAccessUserProfileDataDto,
 	UserControllerCreateUserProfileDataDto,
 	UserControllerDeleteUserProfileDataDto,
 	UserControllerFindAllDataDto,
@@ -115,11 +116,30 @@ class User<SecurityDataType = unknown> {
 	 * No description
 	 *
 	 * @tags user
+	 * @name UserControllerAccessUserProfile
+	 * @summary 유저 프로필 접속
+	 * @request POST:/user/{id}/profile/{profileId}
+	 * @secure
+	 * @response `200` `UserControllerAccessUserProfileDataDto` 유저 프로필 접속 성공
+	 * @response `201` `void`
+	 */
+	userControllerAccessUserProfile = (profileId: number, id: number, params: RequestParams = {}) =>
+		this.http.request<UserControllerAccessUserProfileDataDto, any>({
+			path: `/user/${id}/profile/${profileId}`,
+			method: 'POST',
+			secure: true,
+			format: 'json',
+			...params,
+		})
+	/**
+	 * No description
+	 *
+	 * @tags user
 	 * @name UserControllerUpdateUserProfile
 	 * @summary 유저 프로필 수정
 	 * @request PATCH:/user/{id}/profile/{profileId}
 	 * @secure
-	 * @response `200` `UserControllerUpdateUserProfileDataDto`
+	 * @response `200` `UserControllerUpdateUserProfileDataDto` 유저 프로필 수정 성공
 	 */
 	userControllerUpdateUserProfile = (profileId: number, id: number, data: UpdateUserProfileDtoDto, params: RequestParams = {}) =>
 		this.http.request<UserControllerUpdateUserProfileDataDto, any>({

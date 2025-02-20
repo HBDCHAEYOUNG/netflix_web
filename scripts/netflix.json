@@ -7,6 +7,17 @@
 				"summary": "영화 목록 조회",
 				"parameters": [
 					{
+						"name": "page",
+						"required": false,
+						"in": "query",
+						"description": "페이지",
+						"schema": {
+							"default": 1,
+							"example": 1,
+							"type": "number"
+						}
+					},
+					{
 						"name": "order",
 						"required": true,
 						"in": "query",
@@ -1071,6 +1082,49 @@
 			}
 		},
 		"/user/{id}/profile/{profileId}": {
+			"post": {
+				"operationId": "UserController_accessUserProfile",
+				"summary": "유저 프로필 접속",
+				"parameters": [
+					{
+						"name": "profileId",
+						"required": true,
+						"in": "path",
+						"schema": {
+							"type": "number"
+						}
+					},
+					{
+						"name": "id",
+						"required": true,
+						"in": "path",
+						"schema": {
+							"type": "number"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "유저 프로필 접속 성공",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TokenResDto"
+								}
+							}
+						}
+					},
+					"201": {
+						"description": ""
+					}
+				},
+				"tags": ["user"],
+				"security": [
+					{
+						"bearer": []
+					}
+				]
+			},
 			"patch": {
 				"operationId": "UserController_updateUserProfile",
 				"summary": "유저 프로필 수정",
@@ -1104,11 +1158,11 @@
 				},
 				"responses": {
 					"200": {
-						"description": "",
+						"description": "유저 프로필 수정 성공",
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/UserProfile"
+									"$ref": "#/components/schemas/TokenResDto"
 								}
 							}
 						}

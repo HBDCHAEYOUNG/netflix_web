@@ -2,6 +2,7 @@ import {
 	CreateUserProfileDtoDto,
 	UpdateUserDtoDto,
 	UpdateUserProfileDtoDto,
+	UserControllerAccessUserProfileDataDto,
 	UserControllerCreateUserProfileDataDto,
 	UserControllerDeleteUserProfileDataDto,
 	UserControllerFindAllDataDto,
@@ -108,11 +109,32 @@ export namespace User {
 	/**
 	 * No description
 	 * @tags user
+	 * @name UserControllerAccessUserProfile
+	 * @summary 유저 프로필 접속
+	 * @request POST:/user/{id}/profile/{profileId}
+	 * @secure
+	 * @response `200` `UserControllerAccessUserProfileDataDto` 유저 프로필 접속 성공
+	 * @response `201` `void`
+	 */
+	export namespace UserControllerAccessUserProfile {
+		export type RequestParams = {
+			id: number
+			profileId: number
+		}
+		export type RequestQuery = {}
+		export type RequestBody = never
+		export type RequestHeaders = {}
+		export type ResponseBody = UserControllerAccessUserProfileDataDto
+	}
+
+	/**
+	 * No description
+	 * @tags user
 	 * @name UserControllerUpdateUserProfile
 	 * @summary 유저 프로필 수정
 	 * @request PATCH:/user/{id}/profile/{profileId}
 	 * @secure
-	 * @response `200` `UserControllerUpdateUserProfileDataDto`
+	 * @response `200` `UserControllerUpdateUserProfileDataDto` 유저 프로필 수정 성공
 	 */
 	export namespace UserControllerUpdateUserProfile {
 		export type RequestParams = {
