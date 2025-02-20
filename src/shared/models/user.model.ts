@@ -60,6 +60,20 @@ export const usePostProfile = () => {
 	})
 }
 
+export const usePostProfileAccess = () => {
+	const { setLogin } = AuthStore()
+	const queryClient = useQueryClient()
+	return useMutation({
+		mutationFn: ({ id, profileId }: { id: number; profileId: number }) => user.userControllerAccessUserProfile(profileId, id),
+		onSuccess: (data) => {
+			console.log('data', data)
+			setLogin(data?.accessToken, data?.refreshToken)
+			queryClient.invalidateQueries({ queryKey: userQueryKey._def })
+			queryClient.invalidateQueries({ queryKey: authQueryKey.fetchMe().queryKey })
+		},
+	})
+}
+
 export const usePatchProfile = () => {
 	const { setLogin } = AuthStore()
 	const queryClient = useQueryClient()
@@ -78,8 +92,7 @@ export const useDeleteProfile = () => {
 	const queryClient = useQueryClient()
 	return useMutation({
 		mutationFn: ({ id, profileId }: { id: number; profileId: number }) => user.userControllerDeleteUserProfile(id, profileId),
-		onSuccess: (data) => {
-			console.log('data', data)
+		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: userQueryKey._def })
 			queryClient.invalidateQueries({ queryKey: authQueryKey.fetchMe().queryKey })
 		},

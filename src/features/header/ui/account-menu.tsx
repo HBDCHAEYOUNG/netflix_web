@@ -19,13 +19,13 @@ interface AccountMenuProps {
 export const AccountMenu = React.forwardRef<HTMLDivElement, AccountMenuProps>(({ label, className, ...props }, ref) => {
 	const { data } = useFetchAuth()
 	const menuItems = label === 'admin' ? adminMenuItems : userMenuItems
-
 	return (
 		<NavigationMenu ref={ref} className={className} {...props}>
 			<NavigationMenuList>
 				<NavigationMenuItem>
 					<NavigationMenuTrigger>
 						{label === 'admin' && 'admin'}
+
 						{label === 'user' && (
 							<img src={data?.profiles[0]?.avatar} alt={data?.profiles[0]?.name} className="h-8 w-8 rounded-sm object-cover" />
 						)}

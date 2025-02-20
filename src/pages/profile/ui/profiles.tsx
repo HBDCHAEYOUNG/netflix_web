@@ -12,7 +12,9 @@ export function Profiles() {
 			<h1 className="px-6 !text-center Regular-LargeTitle">Select the profile you want to watch Netflix on.</h1>
 
 			<div className="my-12 flex-wrap gap-8 flex-center">
-				{data?.profiles?.map((profile) => <Profile key={profile.id} image={profile.image} name={profile.name} />)}
+				{data?.profiles?.map((profile) => (
+					<Profile key={profile.id} image={profile.avatar} name={profile.name} profileId={profile.id} id={data.id} />
+				))}
 				<AddProfile />
 			</div>
 			<Link to="manage">
