@@ -10,6 +10,7 @@ import {
 	NavigationMenuList,
 	NavigationMenuTrigger,
 } from '../../../shared/ui/_shardcn/navigation-menu'
+import { usePostProfileAccess } from 'src/shared/models/user.model'
 
 interface AccountMenuProps {
 	label: string
@@ -17,8 +18,19 @@ interface AccountMenuProps {
 }
 
 export const AccountMenu = React.forwardRef<HTMLDivElement, AccountMenuProps>(({ label, className, ...props }, ref) => {
-	const { data } = useFetchAuth()
 	const menuItems = label === 'admin' ? adminMenuItems : userMenuItems
+
+	const { data } = useFetchAuth()
+	const { mutateAsync: postProfileAccess } = usePostProfileAccess()
+
+	const handleProfileClick = async (id: string) => {
+		try {
+			await postProfileAccess({ profileId: id, id: data?.id })
+		} catch (error) {
+			console.error(error)
+		}
+	}
+
 	return (
 		<NavigationMenu ref={ref} className={className} {...props}>
 			<NavigationMenuList>
@@ -26,21 +38,23 @@ export const AccountMenu = React.forwardRef<HTMLDivElement, AccountMenuProps>(({
 					<NavigationMenuTrigger>
 						{label === 'admin' && 'admin'}
 
-						{label === 'user' && (
-							<img src={data?.profiles[0]?.avatar} alt={data?.profiles[0]?.name} className="h-8 w-8 rounded-sm object-cover" />
-						)}
+						{label === 'user' && <img src={data?.me.avatar} alt={data?.me.name} className="h-8 w-8 rounded-sm object-cover" />}
 					</NavigationMenuTrigger>
 					<NavigationMenuContent>
 						<ul className="grid bg-Primary/Black py-2">
 							{label === 'user' &&
-								data?.profiles?.map((profile, index) => (
-									<Link to={`/profile/${profile.id}`}>
-										<li key={`profile-${index}`} className="flex cursor-pointer items-center px-4 py-2 pr-12 hover:underline">
+								data?.profiles
+									?.filter((profile) => profile.id !== data?.me.id)
+									.map((profile, index) => (
+										<li
+											key={`profile-${index}`}
+											className="flex cursor-pointer items-center px-4 py-2 pr-12 hover:underline"
+											onClick={() => handleProfileClick(profile.id)}
+										>
 											<img src={profile.avatar} alt={profile.name} className="mr-3 h-8 w-8 object-cover" />
 											<p className="text-nowrap text-sm font-medium">{profile.name}</p>
 										</li>
-									</Link>
-								))}
+									))}
 
 							{menuItems.map((item, index) => (
 								<Link to={item.to}>
