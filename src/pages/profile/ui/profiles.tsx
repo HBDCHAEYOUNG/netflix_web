@@ -15,9 +15,11 @@ export function Profiles() {
 				{data?.profiles?.map((profile) => <Profile key={profile.id} image={profile.image} name={profile.name} />)}
 				<AddProfile />
 			</div>
-			<Button theme="outline" className="mx-auto h-[42px] max-w-[178px] Regular-Headline">
-				<Link to="manage">Manage Your Profile</Link>
-			</Button>
+			<Link to="manage">
+				<Button theme="outline" className="mx-auto h-[42px] max-w-[178px] Regular-Headline">
+					Manage Your Profile
+				</Button>
+			</Link>
 		</div>
 	)
 }

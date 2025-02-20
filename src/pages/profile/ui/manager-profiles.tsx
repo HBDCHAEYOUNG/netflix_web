@@ -17,7 +17,7 @@ export function ManagerProfiles() {
 	const form = useForm({
 		resolver: zodResolver(
 			z.object({
-				name: z.string().max(5, { message: '5글자 이하로 입력해주세요' }),
+				name: z.string().max(10, { message: '10글자 이하로 입력해주세요' }).min(1, { message: '1글자 이상 입력해주세요' }),
 			}),
 		),
 	})

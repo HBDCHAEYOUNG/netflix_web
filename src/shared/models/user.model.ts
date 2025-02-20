@@ -68,7 +68,6 @@ export const usePatchProfile = () => {
 			user.userControllerUpdateUserProfile(profileId, id, data),
 		onSuccess: (data) => {
 			setLogin(data?.accessToken, data?.refreshToken)
-
 			queryClient.invalidateQueries({ queryKey: userQueryKey._def })
 			queryClient.invalidateQueries({ queryKey: authQueryKey.fetchMe().queryKey })
 		},
@@ -79,7 +78,8 @@ export const useDeleteProfile = () => {
 	const queryClient = useQueryClient()
 	return useMutation({
 		mutationFn: ({ id, profileId }: { id: number; profileId: number }) => user.userControllerDeleteUserProfile(id, profileId),
-		onSuccess: () => {
+		onSuccess: (data) => {
+			console.log('data', data)
 			queryClient.invalidateQueries({ queryKey: userQueryKey._def })
 			queryClient.invalidateQueries({ queryKey: authQueryKey.fetchMe().queryKey })
 		},
