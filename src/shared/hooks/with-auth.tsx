@@ -1,15 +1,19 @@
 import { Navigate } from 'react-router-dom'
 import { useFetchAuth } from 'src/shared/models/auth.model'
 
-export const WithAuth = (WrappedComponent: React.ComponentType, requiredRole: number = 3, redirectPath: string = '/') => {
-	return function WithAuthComponent(props: any) {
+export const WithAuth = <P extends object>(
+	WrappedComponent: React.ComponentType<P>,
+	requiredRole: number = 3,
+	redirectPath: string = '/',
+) => {
+	return function WithAuthComponent(props: P) {
 		const { data: auth, isLoading } = useFetchAuth()
 
 		if (isLoading) return <div>Loading...</div>
 
 		if (!auth) {
 			alert('로그인 후 이용바랍니다.')
-			return <Navigate to="/auth/login" />
+			return <Navigate to="/landing" />
 		}
 
 		if (Number(auth?.role) > requiredRole) {

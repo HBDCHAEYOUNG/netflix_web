@@ -47,7 +47,7 @@ export const AccountMenu = React.forwardRef<HTMLDivElement, AccountMenuProps>(({
 									?.filter((profile) => profile.id !== data?.me.id)
 									.map((profile, index) => (
 										<li
-											key={`profile-${index}`}
+											key={index}
 											className="flex cursor-pointer items-center px-4 py-2 pr-12 hover:underline"
 											onClick={() => handleProfileClick(profile.id)}
 										>

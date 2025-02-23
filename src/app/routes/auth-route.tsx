@@ -7,7 +7,7 @@ import { Signup } from '@pages/signup/ui/signup'
 
 export const AuthRoute = {
 	path: '/auth',
-	element: <CommonLayout headerType="auth" />,
+	element: <CommonLayout headerType="auth" requireAuth={false} />,
 	children: [
 		{ path: 'login', element: <Login /> },
 		{ path: 'signup', element: <Signup /> },

@@ -4,13 +4,16 @@ import { Header } from './header'
 import { HeaderType } from 'src/shared/const'
 import ScrollToTop from '@lib/scroll-to-top'
 import { SubHeader } from './sub-header'
+import { WithAuth } from 'src/shared/hooks/with-auth'
+import { memo } from 'react'
 
 interface CommonLayoutProps {
 	headerType: HeaderType
 	footerType?: 'home' | 'landing' | 'none'
+	requireAuth?: boolean
 }
 
-function CommonLayout({ headerType, footerType }: CommonLayoutProps) {
+const CommonLayout = memo(({ headerType, footerType }: Omit<CommonLayoutProps, 'requireAuth'>) => {
 	const { pathname } = useLocation()
 	const path = pathname.slice(1)
 	return (
@@ -22,6 +25,9 @@ function CommonLayout({ headerType, footerType }: CommonLayoutProps) {
 			<Footer footerType={footerType} />
 		</div>
 	)
-}
+})
 
-export default CommonLayout
+export default (props: CommonLayoutProps) => {
+	const Component = props.requireAuth === false ? CommonLayout : WithAuth(CommonLayout)
+	return <Component {...props} />
+}

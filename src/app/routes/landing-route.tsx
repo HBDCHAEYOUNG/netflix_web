@@ -4,7 +4,7 @@ import Landing from '@pages/landing/ui/landing'
 
 export const LandingRoute = {
 	path: '/landing',
-	element: <CommonLayout headerType="landing" />,
+	element: <CommonLayout headerType="landing" requireAuth={false} />,
 	children: [{ index: true, element: <Landing /> }],
 	errorElement: <ErrorLayout />,
 }

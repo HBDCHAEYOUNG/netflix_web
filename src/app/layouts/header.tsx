@@ -1,4 +1,5 @@
-import { AccountMenu, NavigationMenu, Notifications, SearchTap } from '@features/header'
+import { NavigationMenu, SearchTap } from '@features/header'
+import { AccountMenu } from '@features/header/ui/account-menu'
 import netflixLogo from '@images/logo.png'
 import { cn } from '@lib/utils'
 import { AuthStore } from '@store/auth-store'
@@ -56,7 +57,7 @@ export function Header({ headerType = 'landing' }: HeaderProps) {
 						<div className="flex w-full items-center gap-6">
 							<NavigationMenu />
 							<SearchTap />
-							<Notifications />
+							{/* <Notifications > */}
 						</div>
 					)}
 					<AccountMenu label={headerType === 'admin' ? 'admin' : 'user'} />

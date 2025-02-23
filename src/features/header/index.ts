@@ -1,5 +1,4 @@
 export * from './const/notifications'
-export * from './ui/account-menu'
 export * from './ui/navigation-menu'
 export * from './ui/notifications'
 export * from './ui/search-tap'

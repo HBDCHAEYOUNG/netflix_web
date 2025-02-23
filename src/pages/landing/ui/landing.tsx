@@ -11,7 +11,7 @@ import { faq, sections } from '../const/landing'
 import { EmailSchema, emailSchema } from '../const/landing.type'
 import { Link, useNavigate } from 'react-router-dom'
 
-const userEmail = ['test@test.com', 'testtest@test.com']
+const userEmail = ['test@naver.com', 'testtest@test.com']
 
 function Landing() {
 	const navigate = useNavigate()
