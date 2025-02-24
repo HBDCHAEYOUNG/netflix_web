@@ -13,7 +13,7 @@ import HeroImage from '@images/bg1.png'
 import ArrowIcon from '@icons/arrow-right.svg?react'
 import EyeIcon from '@icons/eye-open.svg?react'
 import EyeSlashIcon from '@icons/eye-close.svg?react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 function Login() {
 	const [isPasswordVisible, setIsPasswordVisible] = useState('password')
@@ -25,6 +25,16 @@ function Login() {
 		resolver: zodResolver(loginSchema),
 		mode: 'all',
 	})
+
+	const sessionEmail = sessionStorage.getItem('email')
+
+	useEffect(() => {
+		if (sessionEmail) {
+			form.setValue('email', sessionEmail)
+		}
+	}, [sessionEmail, form.setValue])
+
+	sessionStorage.removeItem('email')
 
 	const handleSubmit = async (data: z.infer<typeof loginSchema>) => {
 		const { email, password } = data

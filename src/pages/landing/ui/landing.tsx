@@ -22,8 +22,10 @@ function Landing() {
 	const handleSubmit = () => {
 		if (userEmail.find((email) => email === form.watch('email'))) {
 			navigate('/auth/login')
+			sessionStorage.setItem('email', form.watch('email'))
 		} else {
 			navigate('/auth/signup')
+			sessionStorage.setItem('email', form.watch('email'))
 		}
 	}
 
