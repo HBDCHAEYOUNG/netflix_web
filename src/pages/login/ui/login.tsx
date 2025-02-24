@@ -10,6 +10,7 @@ import { AccordionContent, AccordionTrigger } from '@radix-ui/react-accordion'
 import { AuthStore } from '@store/auth-store'
 import auth from 'src/shared/api/auth'
 import HeroImage from '@images/bg1.png'
+import WarningIcon from '@icons/warning.svg?react'
 import ArrowIcon from '@icons/arrow-right.svg?react'
 import EyeIcon from '@icons/eye-open.svg?react'
 import EyeSlashIcon from '@icons/eye-close.svg?react'
@@ -33,8 +34,6 @@ function Login() {
 			form.setValue('email', sessionEmail)
 		}
 	}, [sessionEmail, form.setValue])
-
-	sessionStorage.removeItem('email')
 
 	const handleSubmit = async (data: z.infer<typeof loginSchema>) => {
 		const { email, password } = data
@@ -61,6 +60,13 @@ function Login() {
 			<img src={HeroImage} alt="hero-image" className="pointer-events-none absolute h-full w-full object-cover opacity-50" />
 
 			<div className="relative h-[680px] w-[450px] bg-TransparentBlack/60% px-[68px] py-[48px]">
+				{sessionEmail && (
+					<p className="mb-4 flex items-center gap-4 rounded-md bg-Secondary/Blue-100/40 p-4 text-white">
+						<WarningIcon className="size-8" />
+						You already have an account. <br />
+						Please log in below to start watching.
+					</p>
+				)}
 				<h1 className="mb-7 Bold-Title1">Sign In</h1>
 				<Form form={form} onSubmit={handleSubmit} className="flex w-full flex-col items-center gap-4">
 					<Form.Item name="email">

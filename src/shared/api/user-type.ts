@@ -24,7 +24,31 @@ export namespace User {
 	 */
 	export namespace UserControllerFindAll {
 		export type RequestParams = {}
-		export type RequestQuery = {}
+		export type RequestQuery = {
+			/**
+			 * 페이지네이션 커서
+			 * @example "eyJ2YWx1ZXMiOnsiaWQiOjIyfSwib3JkZXIiOlsiaWRfREVTQyJdfQ=="
+			 */
+			cursor?: string
+			/**
+			 * 정렬 순서
+			 * @default ["id_DESC"]
+			 * @example ["id_DESC"]
+			 */
+			order: string[]
+			/**
+			 * 페이지
+			 * @default 1
+			 * @example 1
+			 */
+			page?: number
+			/**
+			 * 가져올 데이터 갯수
+			 * @default 5
+			 * @example 5
+			 */
+			take: number
+		}
 		export type RequestBody = never
 		export type RequestHeaders = {}
 		export type ResponseBody = UserControllerFindAllDataDto
@@ -94,7 +118,8 @@ export namespace User {
 	 * @summary 유저 프로필 생성
 	 * @request POST:/user/{id}/profile
 	 * @secure
-	 * @response `201` `UserControllerCreateUserProfileDataDto`
+	 * @response `200` `UserControllerCreateUserProfileDataDto` 유저 프로필 생성 성공
+	 * @response `201` `void`
 	 */
 	export namespace UserControllerCreateUserProfile {
 		export type RequestParams = {
@@ -154,7 +179,7 @@ export namespace User {
 	 * @summary 유저 프로필 삭제
 	 * @request DELETE:/user/{id}/profile/{profileId}
 	 * @secure
-	 * @response `200` `UserControllerDeleteUserProfileDataDto`
+	 * @response `200` `UserControllerDeleteUserProfileDataDto` 유저 프로필 삭제 성공
 	 */
 	export namespace UserControllerDeleteUserProfile {
 		export type RequestParams = {

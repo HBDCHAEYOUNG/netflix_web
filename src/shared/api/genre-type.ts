@@ -20,7 +20,31 @@ export namespace Genre {
 	 */
 	export namespace GenreControllerFindAll {
 		export type RequestParams = {}
-		export type RequestQuery = {}
+		export type RequestQuery = {
+			/**
+			 * 페이지네이션 커서
+			 * @example "eyJ2YWx1ZXMiOnsiaWQiOjIyfSwib3JkZXIiOlsiaWRfREVTQyJdfQ=="
+			 */
+			cursor?: string
+			/**
+			 * 정렬 순서
+			 * @default ["id_DESC"]
+			 * @example ["id_DESC"]
+			 */
+			order: string[]
+			/**
+			 * 페이지
+			 * @default 1
+			 * @example 1
+			 */
+			page?: number
+			/**
+			 * 가져올 데이터 갯수
+			 * @default 5
+			 * @example 5
+			 */
+			take: number
+		}
 		export type RequestBody = never
 		export type RequestHeaders = {}
 		export type ResponseBody = GenreControllerFindAllDataDto

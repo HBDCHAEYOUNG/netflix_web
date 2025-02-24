@@ -2,6 +2,7 @@ import {
 	CreateDirectorDtoDto,
 	DirectorControllerCreateDataDto,
 	DirectorControllerFindAllDataDto,
+	DirectorControllerFindAllParamsDto,
 	DirectorControllerFindOneDataDto,
 	DirectorControllerRemoveDataDto,
 	DirectorControllerUpdateDataDto,
@@ -26,12 +27,12 @@ class Director<SecurityDataType = unknown> {
 	 * @secure
 	 * @response `200` `DirectorControllerFindAllDataDto`
 	 */
-	directorControllerFindAll = (params: RequestParams = {}) =>
+	directorControllerFindAll = (query: DirectorControllerFindAllParamsDto, params: RequestParams = {}) =>
 		this.http.request<DirectorControllerFindAllDataDto, any>({
 			path: `/director`,
 			method: 'GET',
+			query: query,
 			secure: true,
-			format: 'json',
 			...params,
 		})
 	/**

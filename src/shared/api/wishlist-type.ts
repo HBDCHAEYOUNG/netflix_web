@@ -12,7 +12,15 @@ export namespace Wishlist {
 	 */
 	export namespace MovieControllerFindAllMovieWish {
 		export type RequestParams = {}
-		export type RequestQuery = {}
+		export type RequestQuery = {
+			/**
+			 * 페이지
+			 * @default 1
+			 * @example 1
+			 */
+			page?: number
+			take: number
+		}
 		export type RequestBody = never
 		export type RequestHeaders = {}
 		export type ResponseBody = MovieControllerFindAllMovieWishDataDto

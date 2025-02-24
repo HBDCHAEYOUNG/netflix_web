@@ -1,4 +1,8 @@
-import { MovieControllerCreateMovieWishDataDto, MovieControllerFindAllMovieWishDataDto } from './data-contracts'
+import {
+	MovieControllerCreateMovieWishDataDto,
+	MovieControllerFindAllMovieWishDataDto,
+	MovieControllerFindAllMovieWishParamsDto,
+} from './data-contracts'
 import { HttpClient, RequestParams } from './http-client'
 
 class Wishlist<SecurityDataType = unknown> {
@@ -18,12 +22,12 @@ class Wishlist<SecurityDataType = unknown> {
 	 * @secure
 	 * @response `200` `MovieControllerFindAllMovieWishDataDto`
 	 */
-	movieControllerFindAllMovieWish = (params: RequestParams = {}) =>
+	movieControllerFindAllMovieWish = (query: MovieControllerFindAllMovieWishParamsDto, params: RequestParams = {}) =>
 		this.http.request<MovieControllerFindAllMovieWishDataDto, any>({
 			path: `/movie/wishlist`,
 			method: 'GET',
+			query: query,
 			secure: true,
-			format: 'json',
 			...params,
 		})
 	/**

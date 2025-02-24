@@ -1,9 +1,11 @@
 import {
 	AuthControllerBlockTokenDataDto,
+	AuthControllerEmailDataDto,
 	AuthControllerLoginDataDto,
 	AuthControllerPrivateDataDto,
 	AuthControllerRegisterUserDataDto,
 	AuthControllerRotateAccessTokenDataDto,
+	EmailCheckDtoDto,
 } from './data-contracts'
 
 export namespace Auth {
@@ -99,5 +101,22 @@ export namespace Auth {
 		export type RequestBody = never
 		export type RequestHeaders = {}
 		export type ResponseBody = AuthControllerPrivateDataDto
+	}
+
+	/**
+	 * No description
+	 * @tags auth
+	 * @name AuthControllerEmail
+	 * @summary 이메일 중복 체크
+	 * @request POST:/auth/emailCheck
+	 * @secure
+	 * @response `201` `AuthControllerEmailDataDto`
+	 */
+	export namespace AuthControllerEmail {
+		export type RequestParams = {}
+		export type RequestQuery = {}
+		export type RequestBody = EmailCheckDtoDto
+		export type RequestHeaders = {}
+		export type ResponseBody = AuthControllerEmailDataDto
 	}
 }

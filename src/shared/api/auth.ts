@@ -1,11 +1,13 @@
 import {
 	AuthControllerBlockTokenDataDto,
+	AuthControllerEmailDataDto,
 	AuthControllerLoginDataDto,
 	AuthControllerPrivateDataDto,
 	AuthControllerRegisterUserDataDto,
 	AuthControllerRotateAccessTokenDataDto,
+	EmailCheckDtoDto,
 } from './data-contracts'
-import { HttpClient, RequestParams } from './http-client'
+import { ContentType, HttpClient, RequestParams } from './http-client'
 
 class Auth<SecurityDataType = unknown> {
 	http: HttpClient<SecurityDataType>
@@ -104,6 +106,25 @@ class Auth<SecurityDataType = unknown> {
 			method: 'GET',
 			secure: true,
 			format: 'json',
+			...params,
+		})
+	/**
+	 * No description
+	 *
+	 * @tags auth
+	 * @name AuthControllerEmail
+	 * @summary 이메일 중복 체크
+	 * @request POST:/auth/emailCheck
+	 * @secure
+	 * @response `201` `AuthControllerEmailDataDto`
+	 */
+	authControllerEmail = (data: EmailCheckDtoDto, params: RequestParams = {}) =>
+		this.http.request<AuthControllerEmailDataDto, any>({
+			path: `/auth/emailCheck`,
+			method: 'POST',
+			body: data,
+			secure: true,
+			type: ContentType.Json,
 			...params,
 		})
 }

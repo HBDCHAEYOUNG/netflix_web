@@ -10,6 +10,8 @@
 
 export type AuthControllerBlockTokenDataDto = any
 
+export type AuthControllerEmailDataDto = any
+
 export type AuthControllerLoginDataDto = TokenResDtoDto
 
 export type AuthControllerPrivateDataDto = MeResDtoDto
@@ -103,7 +105,33 @@ export interface CreateUserProfileDtoDto {
 
 export type DirectorControllerCreateDataDto = object
 
-export type DirectorControllerFindAllDataDto = DirectorDto[]
+export type DirectorControllerFindAllDataDto = any
+
+export interface DirectorControllerFindAllParamsDto {
+	/**
+	 * 페이지네이션 커서
+	 * @example "eyJ2YWx1ZXMiOnsiaWQiOjIyfSwib3JkZXIiOlsiaWRfREVTQyJdfQ=="
+	 */
+	cursor?: string
+	/**
+	 * 정렬 순서
+	 * @default ["id_DESC"]
+	 * @example ["id_DESC"]
+	 */
+	order: string[]
+	/**
+	 * 페이지
+	 * @default 1
+	 * @example 1
+	 */
+	page?: number
+	/**
+	 * 가져올 데이터 갯수
+	 * @default 5
+	 * @example 5
+	 */
+	take: number
+}
 
 export type DirectorControllerFindOneDataDto = DirectorDto
 
@@ -137,9 +165,43 @@ export interface DirectorDto {
 	nationality: string
 }
 
+export interface EmailCheckDtoDto {
+	/**
+	 * 이메일
+	 * @example "example@example.com"
+	 */
+	email: string
+}
+
 export type GenreControllerCreateDataDto = object
 
-export type GenreControllerFindAllDataDto = GenreDto[]
+export type GenreControllerFindAllDataDto = any
+
+export interface GenreControllerFindAllParamsDto {
+	/**
+	 * 페이지네이션 커서
+	 * @example "eyJ2YWx1ZXMiOnsiaWQiOjIyfSwib3JkZXIiOlsiaWRfREVTQyJdfQ=="
+	 */
+	cursor?: string
+	/**
+	 * 정렬 순서
+	 * @default ["id_DESC"]
+	 * @example ["id_DESC"]
+	 */
+	order: string[]
+	/**
+	 * 페이지
+	 * @default 1
+	 * @example 1
+	 */
+	page?: number
+	/**
+	 * 가져올 데이터 갯수
+	 * @default 5
+	 * @example 5
+	 */
+	take: number
+}
 
 export type GenreControllerFindOneDataDto = GenreDto
 
@@ -340,7 +402,17 @@ export type MovieControllerFindAllMovieBannerDataDto = GetMoviesBannerResDtoDto
 
 export type MovieControllerFindAllMovieRankDataDto = object
 
-export type MovieControllerFindAllMovieWishDataDto = MovieDto[]
+export type MovieControllerFindAllMovieWishDataDto = any
+
+export interface MovieControllerFindAllMovieWishParamsDto {
+	/**
+	 * 페이지
+	 * @default 1
+	 * @example 1
+	 */
+	page?: number
+	take: number
+}
 
 export interface MovieControllerFindAllParamsDto {
 	/**
@@ -580,11 +652,37 @@ export interface UpdateUserProfileDtoDto {
 
 export type UserControllerAccessUserProfileDataDto = TokenResDtoDto
 
-export type UserControllerCreateUserProfileDataDto = UserProfileDto
+export type UserControllerCreateUserProfileDataDto = TokenResDtoDto
 
-export type UserControllerDeleteUserProfileDataDto = number
+export type UserControllerDeleteUserProfileDataDto = TokenResDtoDto
 
-export type UserControllerFindAllDataDto = UserDto[]
+export type UserControllerFindAllDataDto = any
+
+export interface UserControllerFindAllParamsDto {
+	/**
+	 * 페이지네이션 커서
+	 * @example "eyJ2YWx1ZXMiOnsiaWQiOjIyfSwib3JkZXIiOlsiaWRfREVTQyJdfQ=="
+	 */
+	cursor?: string
+	/**
+	 * 정렬 순서
+	 * @default ["id_DESC"]
+	 * @example ["id_DESC"]
+	 */
+	order: string[]
+	/**
+	 * 페이지
+	 * @default 1
+	 * @example 1
+	 */
+	page?: number
+	/**
+	 * 가져올 데이터 갯수
+	 * @default 5
+	 * @example 5
+	 */
+	take: number
+}
 
 export type UserControllerFindOneDataDto = UserDto
 

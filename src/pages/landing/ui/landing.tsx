@@ -10,8 +10,7 @@ import { useForm } from 'react-hook-form'
 import { faq, sections } from '../const/landing'
 import { EmailSchema, emailSchema } from '../const/landing.type'
 import { Link, useNavigate } from 'react-router-dom'
-
-const userEmail = ['test@naver.com', 'testtest@test.com']
+import { usePostEmailCheck } from 'src/shared/models/auth.model'
 
 function Landing() {
 	const navigate = useNavigate()
@@ -19,12 +18,17 @@ function Landing() {
 		resolver: zodResolver(emailSchema),
 	})
 
-	const handleSubmit = () => {
-		if (userEmail.find((email) => email === form.watch('email'))) {
-			navigate('/auth/login')
-			sessionStorage.setItem('email', form.watch('email'))
-		} else {
+	const { mutateAsync: postEmailCheck } = usePostEmailCheck()
+
+	const handleSubmit = async () => {
+		try {
+			await postEmailCheck({ email: form.watch('email') })
+			alert('회원가입 페이지로 이동합니다.')
 			navigate('/auth/signup')
+			sessionStorage.setItem('email', form.watch('email'))
+		} catch (error) {
+			console.log(error)
+			navigate('/auth/login')
 			sessionStorage.setItem('email', form.watch('email'))
 		}
 	}

@@ -6,6 +6,7 @@ import {
 	UserControllerCreateUserProfileDataDto,
 	UserControllerDeleteUserProfileDataDto,
 	UserControllerFindAllDataDto,
+	UserControllerFindAllParamsDto,
 	UserControllerFindOneDataDto,
 	UserControllerRemoveDataDto,
 	UserControllerUpdateDataDto,
@@ -30,12 +31,12 @@ class User<SecurityDataType = unknown> {
 	 * @secure
 	 * @response `200` `UserControllerFindAllDataDto`
 	 */
-	userControllerFindAll = (params: RequestParams = {}) =>
+	userControllerFindAll = (query: UserControllerFindAllParamsDto, params: RequestParams = {}) =>
 		this.http.request<UserControllerFindAllDataDto, any>({
 			path: `/user`,
 			method: 'GET',
+			query: query,
 			secure: true,
-			format: 'json',
 			...params,
 		})
 	/**
@@ -100,7 +101,8 @@ class User<SecurityDataType = unknown> {
 	 * @summary 유저 프로필 생성
 	 * @request POST:/user/{id}/profile
 	 * @secure
-	 * @response `201` `UserControllerCreateUserProfileDataDto`
+	 * @response `200` `UserControllerCreateUserProfileDataDto` 유저 프로필 생성 성공
+	 * @response `201` `void`
 	 */
 	userControllerCreateUserProfile = (id: number, data: CreateUserProfileDtoDto, params: RequestParams = {}) =>
 		this.http.request<UserControllerCreateUserProfileDataDto, any>({
@@ -159,7 +161,7 @@ class User<SecurityDataType = unknown> {
 	 * @summary 유저 프로필 삭제
 	 * @request DELETE:/user/{id}/profile/{profileId}
 	 * @secure
-	 * @response `200` `UserControllerDeleteUserProfileDataDto`
+	 * @response `200` `UserControllerDeleteUserProfileDataDto` 유저 프로필 삭제 성공
 	 */
 	userControllerDeleteUserProfile = (id: number, profileId: number, params: RequestParams = {}) =>
 		this.http.request<UserControllerDeleteUserProfileDataDto, any>({

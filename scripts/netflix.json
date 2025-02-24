@@ -123,20 +123,30 @@
 			"get": {
 				"operationId": "MovieController_findAllMovieWish",
 				"summary": "유저 찜 목록 조회",
-				"parameters": [],
+				"parameters": [
+					{
+						"name": "page",
+						"required": false,
+						"in": "query",
+						"description": "페이지",
+						"schema": {
+							"default": 1,
+							"example": 1,
+							"type": "number"
+						}
+					},
+					{
+						"name": "take",
+						"required": true,
+						"in": "query",
+						"schema": {
+							"type": "number"
+						}
+					}
+				],
 				"responses": {
 					"200": {
-						"description": "",
-						"content": {
-							"application/json": {
-								"schema": {
-									"type": "array",
-									"items": {
-										"$ref": "#/components/schemas/Movie"
-									}
-								}
-							}
-						}
+						"description": ""
 					}
 				},
 				"security": [
@@ -428,20 +438,57 @@
 			"get": {
 				"operationId": "DirectorController_findAll",
 				"summary": "감독 목록 조회",
-				"parameters": [],
-				"responses": {
-					"200": {
-						"description": "",
-						"content": {
-							"application/json": {
-								"schema": {
-									"type": "array",
-									"items": {
-										"$ref": "#/components/schemas/Director"
-									}
-								}
+				"parameters": [
+					{
+						"name": "page",
+						"required": false,
+						"in": "query",
+						"description": "페이지",
+						"schema": {
+							"default": 1,
+							"example": 1,
+							"type": "number"
+						}
+					},
+					{
+						"name": "order",
+						"required": true,
+						"in": "query",
+						"description": "정렬 순서",
+						"schema": {
+							"default": ["id_DESC"],
+							"example": ["id_DESC"],
+							"type": "array",
+							"items": {
+								"type": "string"
 							}
 						}
+					},
+					{
+						"name": "take",
+						"required": true,
+						"in": "query",
+						"description": "가져올 데이터 갯수",
+						"schema": {
+							"default": 5,
+							"example": 5,
+							"type": "number"
+						}
+					},
+					{
+						"name": "cursor",
+						"required": false,
+						"in": "query",
+						"description": "페이지네이션 커서",
+						"schema": {
+							"example": "eyJ2YWx1ZXMiOnsiaWQiOjIyfSwib3JkZXIiOlsiaWRfREVTQyJdfQ==",
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": ""
 					}
 				},
 				"tags": ["director"],
@@ -597,20 +644,57 @@
 			"get": {
 				"operationId": "GenreController_findAll",
 				"summary": "장르 목록 조회",
-				"parameters": [],
-				"responses": {
-					"200": {
-						"description": "",
-						"content": {
-							"application/json": {
-								"schema": {
-									"type": "array",
-									"items": {
-										"$ref": "#/components/schemas/Genre"
-									}
-								}
+				"parameters": [
+					{
+						"name": "page",
+						"required": false,
+						"in": "query",
+						"description": "페이지",
+						"schema": {
+							"default": 1,
+							"example": 1,
+							"type": "number"
+						}
+					},
+					{
+						"name": "order",
+						"required": true,
+						"in": "query",
+						"description": "정렬 순서",
+						"schema": {
+							"default": ["id_DESC"],
+							"example": ["id_DESC"],
+							"type": "array",
+							"items": {
+								"type": "string"
 							}
 						}
+					},
+					{
+						"name": "take",
+						"required": true,
+						"in": "query",
+						"description": "가져올 데이터 갯수",
+						"schema": {
+							"default": 5,
+							"example": 5,
+							"type": "number"
+						}
+					},
+					{
+						"name": "cursor",
+						"required": false,
+						"in": "query",
+						"description": "페이지네이션 커서",
+						"schema": {
+							"example": "eyJ2YWx1ZXMiOnsiaWQiOjIyfSwib3JkZXIiOlsiaWRfREVTQyJdfQ==",
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": ""
 					}
 				},
 				"tags": ["genre"],
@@ -915,24 +999,89 @@
 				]
 			}
 		},
+		"/auth/emailCheck": {
+			"post": {
+				"operationId": "AuthController_email",
+				"summary": "이메일 중복 체크",
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/EmailCheckDto"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": ""
+					}
+				},
+				"tags": ["auth"],
+				"security": [
+					{
+						"bearer": []
+					}
+				]
+			}
+		},
 		"/user": {
 			"get": {
 				"operationId": "UserController_findAll",
 				"summary": "유저 목록 조회",
-				"parameters": [],
-				"responses": {
-					"200": {
-						"description": "",
-						"content": {
-							"application/json": {
-								"schema": {
-									"type": "array",
-									"items": {
-										"$ref": "#/components/schemas/User"
-									}
-								}
+				"parameters": [
+					{
+						"name": "page",
+						"required": false,
+						"in": "query",
+						"description": "페이지",
+						"schema": {
+							"default": 1,
+							"example": 1,
+							"type": "number"
+						}
+					},
+					{
+						"name": "order",
+						"required": true,
+						"in": "query",
+						"description": "정렬 순서",
+						"schema": {
+							"default": ["id_DESC"],
+							"example": ["id_DESC"],
+							"type": "array",
+							"items": {
+								"type": "string"
 							}
 						}
+					},
+					{
+						"name": "take",
+						"required": true,
+						"in": "query",
+						"description": "가져올 데이터 갯수",
+						"schema": {
+							"default": 5,
+							"example": 5,
+							"type": "number"
+						}
+					},
+					{
+						"name": "cursor",
+						"required": false,
+						"in": "query",
+						"description": "페이지네이션 커서",
+						"schema": {
+							"example": "eyJ2YWx1ZXMiOnsiaWQiOjIyfSwib3JkZXIiOlsiaWRfREVTQyJdfQ==",
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": ""
 					}
 				},
 				"tags": ["user"],
@@ -1062,15 +1211,18 @@
 					}
 				},
 				"responses": {
-					"201": {
-						"description": "",
+					"200": {
+						"description": "유저 프로필 생성 성공",
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/UserProfile"
+									"$ref": "#/components/schemas/TokenResDto"
 								}
 							}
 						}
+					},
+					"201": {
+						"description": ""
 					}
 				},
 				"tags": ["user"],
@@ -1198,11 +1350,11 @@
 				],
 				"responses": {
 					"200": {
-						"description": "",
+						"description": "유저 프로필 삭제 성공",
 						"content": {
 							"application/json": {
 								"schema": {
-									"type": "number"
+									"$ref": "#/components/schemas/TokenResDto"
 								}
 							}
 						}
@@ -2000,6 +2152,17 @@
 					}
 				},
 				"required": ["id", "role", "type", "iat", "exp"]
+			},
+			"EmailCheckDto": {
+				"type": "object",
+				"properties": {
+					"email": {
+						"type": "string",
+						"description": "이메일",
+						"example": "example@example.com"
+					}
+				},
+				"required": ["email"]
 			},
 			"UpdateUserDto": {
 				"type": "object",

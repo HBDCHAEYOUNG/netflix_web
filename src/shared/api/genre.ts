@@ -2,6 +2,7 @@ import {
 	CreateGenreDtoDto,
 	GenreControllerCreateDataDto,
 	GenreControllerFindAllDataDto,
+	GenreControllerFindAllParamsDto,
 	GenreControllerFindOneDataDto,
 	GenreControllerRemoveDataDto,
 	GenreControllerUpdateDataDto,
@@ -26,12 +27,12 @@ class Genre<SecurityDataType = unknown> {
 	 * @secure
 	 * @response `200` `GenreControllerFindAllDataDto`
 	 */
-	genreControllerFindAll = (params: RequestParams = {}) =>
+	genreControllerFindAll = (query: GenreControllerFindAllParamsDto, params: RequestParams = {}) =>
 		this.http.request<GenreControllerFindAllDataDto, any>({
 			path: `/genre`,
 			method: 'GET',
+			query: query,
 			secure: true,
-			format: 'json',
 			...params,
 		})
 	/**

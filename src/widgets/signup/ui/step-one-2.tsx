@@ -1,10 +1,12 @@
+import { zodResolver } from '@hookform/resolvers/zod'
 import Button from '@ui/button/button'
 import Form from '@ui/form/form'
 import { CheckboxBasic, InputText } from '@ui/index'
 import { useForm } from 'react-hook-form'
+import { signupSchema, SignupSchemaType } from '../model/signup.schema'
 
 interface StepOne2Props {
-	onClickNext: () => void
+	setStep: (step: number) => void
 }
 
 const formLabels = {
@@ -21,8 +23,21 @@ const formLabels = {
 	],
 }
 
-export function StepOne2({ onClickNext }: StepOne2Props) {
-	const form = useForm()
+export function StepOne2({ setStep }: StepOne2Props) {
+	const form = useForm<SignupSchemaType>({
+		resolver: zodResolver(signupSchema),
+		mode: 'all',
+		defaultValues: {
+			email: sessionStorage.getItem('email') || '',
+		},
+	})
+	console.log(form.watch())
+
+	const handleSubmit = form.handleSubmit(() => {
+		console.log('호잇ㅁㅁ')
+		setStep(2)
+	})
+
 	return (
 		<div className="flex min-h-screen w-fit flex-col justify-center">
 			<p>1/3 단계</p>
@@ -32,7 +47,7 @@ export function StepOne2({ onClickNext }: StepOne2Props) {
 					Complete your Netflix subscription in just a few more steps! <br />
 					All the complicated steps are gone.
 				</p>
-				<Form form={form} onSubmit={() => {}}>
+				<Form form={form} onSubmit={handleSubmit}>
 					{formLabels.inputs.map(({ name, label }) => (
 						<Form.Item key={name} name={name}>
 							<InputText name={name} label={label} className="mt-2 h-[56px]" />
@@ -43,11 +58,11 @@ export function StepOne2({ onClickNext }: StepOne2Props) {
 							<CheckboxBasic label={label} labelClassName="Regular-Headline" size="!size-8" className="mt-6 items-start" />
 						</Form.Item>
 					))}
+					<Button type="submit" className="mt-6 h-16 w-full Medium-Title2">
+						next
+					</Button>
 				</Form>
 			</div>
-			<Button onClick={onClickNext} className="mt-6 h-16 w-full Medium-Title2">
-				next
-			</Button>
 		</div>
 	)
 }
