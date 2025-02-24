@@ -50,10 +50,12 @@ export const useDeleteUser = () => {
 }
 
 export const usePostProfile = () => {
+	const { setLogin } = AuthStore()
 	const queryClient = useQueryClient()
 	return useMutation({
 		mutationFn: ({ id, data }: { id: number; data: CreateUserProfileDtoDto }) => user.userControllerCreateUserProfile(id, data),
-		onSuccess: () => {
+		onSuccess: (data) => {
+			setLogin(data?.accessToken, data?.refreshToken)
 			queryClient.invalidateQueries({ queryKey: userQueryKey._def })
 			queryClient.invalidateQueries({ queryKey: authQueryKey.fetchMe().queryKey })
 		},
@@ -89,10 +91,12 @@ export const usePatchProfile = () => {
 }
 
 export const useDeleteProfile = () => {
+	const { setLogin } = AuthStore()
 	const queryClient = useQueryClient()
 	return useMutation({
 		mutationFn: ({ id, profileId }: { id: number; profileId: number }) => user.userControllerDeleteUserProfile(id, profileId),
-		onSuccess: () => {
+		onSuccess: (data) => {
+			setLogin(data?.accessToken, data?.refreshToken)
 			queryClient.invalidateQueries({ queryKey: userQueryKey._def })
 			queryClient.invalidateQueries({ queryKey: authQueryKey.fetchMe().queryKey })
 		},
