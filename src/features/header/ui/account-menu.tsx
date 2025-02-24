@@ -38,11 +38,12 @@ export const AccountMenu = React.forwardRef<HTMLDivElement, AccountMenuProps>(({
 					<NavigationMenuTrigger>
 						{label === 'admin' && 'admin'}
 
-						{label === 'user' && <img src={data?.me.avatar} alt={data?.me.name} className="h-8 w-8 rounded-sm object-cover" />}
+						{label === 'user' && data?.me && <img src={data?.me.avatar} alt={data?.me.name} className="h-8 w-8 rounded-sm object-cover" />}
 					</NavigationMenuTrigger>
 					<NavigationMenuContent>
 						<ul className="grid bg-Primary/Black py-2">
 							{label === 'user' &&
+								data?.me &&
 								data?.profiles
 									?.filter((profile) => profile.id !== data?.me.id)
 									.map((profile, index) => (

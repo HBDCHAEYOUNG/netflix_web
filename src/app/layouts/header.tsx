@@ -29,7 +29,7 @@ export function Header({ headerType = 'landing' }: HeaderProps) {
 		window.addEventListener('scroll', handleScroll)
 		return () => window.removeEventListener('scroll', handleScroll)
 	}, [])
-
+	console.log(isLogin)
 	return (
 		<header
 			className={cn(
