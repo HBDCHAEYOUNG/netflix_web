@@ -6,6 +6,7 @@ import { useFetchAuth } from 'src/shared/models/auth.model'
 
 export function Profiles() {
 	const { data } = useFetchAuth()
+	console.log(data)
 
 	return (
 		<div className="mx-auto h-screen place-content-center text-center max-w-wide">

@@ -6,6 +6,7 @@ import { DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHead
 import Form from '@ui/form/form'
 import { Dialog, DialogTrigger, InputText } from '@ui/index'
 import { ProfileImg } from '@ui/profile/profileImg'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useFetchAuth } from 'src/shared/models/auth.model'
 import { usePostProfile } from 'src/shared/models/user.model'
@@ -26,7 +27,16 @@ export function AddProfile() {
 	const { mutate: postProfile } = usePostProfile()
 
 	const handleSubmit = () => {
-		console.log('프로필 추가 시작')
+		if (data?.role < 2 && data?.profiles.length === 4) {
+			setOpen(false)
+			alert('프로필은 최대 4개까지 생성할 수 있습니다.')
+			return
+		}
+		if (data?.role > 1 && data?.profiles.length === 2) {
+			setOpen(false)
+			alert('프로필은 최대 4개까지 생성할 수 있습니다.')
+			return
+		}
 		try {
 			postProfile({
 				id: id!,
@@ -43,9 +53,12 @@ export function AddProfile() {
 			console.log('에러에러')
 		}
 	}
+
+	const [open, setOpen] = useState(false)
+
 	return (
 		<div>
-			<Dialog>
+			<Dialog open={open} onOpenChange={setOpen}>
 				<DialogTrigger>
 					<ProfileAdd />
 				</DialogTrigger>
