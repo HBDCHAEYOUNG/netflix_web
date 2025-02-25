@@ -9,10 +9,12 @@ interface SelectProps {
 	value?: string
 	onChange?: (value: string) => void
 	className?: string
+	contentClassName?: string
+	itemClassName?: string
 }
 
 export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
-	({ type = 'common', label, items, value, onChange, className }, ref) => {
+	({ type = 'common', label, items, value, onChange, className, contentClassName, itemClassName }, ref) => {
 		return (
 			<SelectShardcn value={value} onValueChange={onChange} defaultValue={items[0]}>
 				<SelectTrigger
@@ -21,7 +23,7 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
 				>
 					{value ? (
 						<div className={cn('flex w-full flex-col', type === 'video' && 'hidden')}>
-							<span className="text-left text-xs">{label}</span>
+							<span className="text-left text-xs"> {label}</span>
 							<SelectValue placeholder={value} />
 						</div>
 					) : (
@@ -30,9 +32,9 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
 					{type === 'video' && <SelectValue placeholder={value} />}
 				</SelectTrigger>
 
-				<SelectContent>
+				<SelectContent className={cn(contentClassName)}>
 					{items.map((item) => (
-						<SelectItem key={item} value={item} className="cursor-pointer">
+						<SelectItem key={item} value={item} className={cn('cursor-pointer', itemClassName)}>
 							{item}
 						</SelectItem>
 					))}

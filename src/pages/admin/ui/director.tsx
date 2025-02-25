@@ -16,7 +16,7 @@ export function Director() {
 
 	const [directorId, setDirectorId] = useState(1)
 	const [pageIndex, setPageIndex] = useState(1)
-	const take = 3
+	const [take, setTake] = useState(3)
 
 	const { data: directorsData, isLoading } = useFetchDirectors(pageIndex, take)
 	const { data: directorData, isLoading: directorLoading, refetch: refetchDirector } = useFetchDirector(directorId)
@@ -47,6 +47,7 @@ export function Director() {
 					pageIndex={pageIndex}
 					setPageIndex={setPageIndex}
 					take={take}
+					setTake={setTake}
 				/>
 			)}
 
