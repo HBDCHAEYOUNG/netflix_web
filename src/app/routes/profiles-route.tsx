@@ -1,6 +1,7 @@
 import CommonLayout from '@app/layouts/common-layout'
 import ErrorLayout from '@app/layouts/error-layout'
-import { ManagerProfiles, Profiles } from '@pages/profile'
+import { ManagerProfiles } from '@pages/profile'
+import Profiles from '@pages/profile/ui/profiles'
 
 export const ProfilesRoute = {
 	path: '/profiles',

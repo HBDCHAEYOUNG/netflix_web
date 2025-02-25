@@ -1,9 +1,21 @@
+import { WithAuth } from '@hooks/with-auth'
 import { AuthStore } from '@store/auth-store'
+import { useQueryClient } from '@tanstack/react-query'
 import Button from '@ui/button/button'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { authQueryKey } from 'src/shared/models/auth.model'
 
-export function Logout() {
+function Logout() {
+	const router = useNavigate()
 	const { setLogout } = AuthStore()
+	const queryClient = useQueryClient()
+
+	const handleLogout = () => {
+		setLogout()
+		router('/landing')
+		queryClient.removeQueries({ queryKey: authQueryKey.fetchMe().queryKey })
+	}
+
 	return (
 		<div className="h-screen flex-center">
 			<div className="w-[440px] rounded-lg bg-Primary/White p-12">
@@ -13,13 +25,13 @@ export function Logout() {
 				</p>
 				<Button
 					className="rounded-sm bg-Secondary/Blue-100 py-6 Regular-Title4 hover:bg-Secondary/Blue-100 hover:outline hover:outline-Secondary/Blue-100"
-					onClick={setLogout}
+					onClick={handleLogout}
 				>
-					<Link to="/landing" onClick={setLogout}>
-						지금 이동
-					</Link>
+					지금 이동
 				</Button>
 			</div>
 		</div>
 	)
 }
+
+export default WithAuth(Logout, 4)

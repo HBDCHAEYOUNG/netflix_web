@@ -1,10 +1,13 @@
+import { WithAuth } from '@hooks/with-auth'
 import { Dialog, DialogContent, DialogTrigger } from '@ui/index'
 import { Detail } from '@widgets/home'
 import { useFetchWishlist } from 'src/shared/models'
 
-export function MyList() {
+function MyList() {
 	const { data } = useFetchWishlist()
+
 	if (!data) return <div>데이터가 없습니다.</div>
+
 	return (
 		<div className="pt-32 common-padding">
 			<h2 className="Bold-Title2">My List</h2>
@@ -33,3 +36,5 @@ export function MyList() {
 		</div>
 	)
 }
+
+export default WithAuth(MyList)

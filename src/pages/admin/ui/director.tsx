@@ -15,8 +15,10 @@ export function Director() {
 	const [open, setOpen] = useState(false)
 
 	const [directorId, setDirectorId] = useState(1)
+	const [pageIndex, setPageIndex] = useState(1)
+	const take = 3
 
-	const { data: directorsData, isLoading } = useFetchDirectors()
+	const { data: directorsData, isLoading } = useFetchDirectors(pageIndex, take)
 	const { data: directorData, isLoading: directorLoading, refetch: refetchDirector } = useFetchDirector(directorId)
 	const { mutateAsync: postDirector } = usePostDirector()
 	const { mutateAsync: patchDirector } = usePatchDirector()
@@ -28,25 +30,23 @@ export function Director() {
 		setOpen(true)
 	}
 
-	const handleNext = () => {
-		console.log(123)
-	}
-
 	return (
 		<div className="pl-72 [&_*]:text-Primary/Black">
 			<h1 className="px-10 pb-4 pt-[84px] Bold-Title2">director</h1>
 			{isLoading ? (
 				<div>Loading...</div>
-			) : !directorsData ? (
+			) : !directorsData?.data ? (
 				<div>No data</div>
 			) : (
 				<AdminTable
 					currentMenu="director"
-					data={directorsData}
+					data={directorsData?.data}
 					columns={directorColumns}
 					handleDetail={handleDetail}
-					count={directorsData.length}
-					handleNext={handleNext}
+					count={directorsData?.count}
+					pageIndex={pageIndex}
+					setPageIndex={setPageIndex}
+					take={take}
 				/>
 			)}
 

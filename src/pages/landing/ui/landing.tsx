@@ -9,11 +9,13 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, InputText
 import { useForm } from 'react-hook-form'
 import { faq, sections } from '../const/landing'
 import { EmailSchema, emailSchema } from '../const/landing.type'
-import { Link, useNavigate } from 'react-router-dom'
-import { usePostEmailCheck } from 'src/shared/models/auth.model'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { useFetchAuth, usePostEmailCheck } from 'src/shared/models/auth.model'
 
 function Landing() {
 	const navigate = useNavigate()
+	const { data } = useFetchAuth()
+
 	const form = useForm<EmailSchema>({
 		resolver: zodResolver(emailSchema),
 	})
@@ -31,6 +33,11 @@ function Landing() {
 			navigate('/auth/login')
 			sessionStorage.setItem('email', form.watch('email'))
 		}
+	}
+
+	if (data) {
+		alert('이미 로그인 되었습니다.')
+		return <Navigate to="/" />
 	}
 
 	return (

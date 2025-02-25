@@ -1,5 +1,6 @@
 import { CarouselBtn, MoreinfoImg } from '@entities/home'
 import { MoreinfoNumber } from '@entities/home/ui/moreinfo-number'
+import { WithAuth } from '@hooks/with-auth'
 import { cn } from '@lib/utils'
 import { Carousel, CarouselContent, CarouselItem } from '@ui/_shardcn/carousel'
 import { Billboard } from '@widgets/home'
@@ -63,4 +64,4 @@ function Home() {
 	)
 }
 
-export default Home
+export default WithAuth(Home)

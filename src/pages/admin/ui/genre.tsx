@@ -15,7 +15,10 @@ export function Genre() {
 	const [open, setOpen] = useState(false)
 	const [genreId, setGenreId] = useState(1)
 
-	const { data: genresData, isLoading } = useFetchGenres()
+	const [pageIndex, setPageIndex] = useState(1)
+	const take = 5
+
+	const { data: genresData, isLoading } = useFetchGenres(pageIndex, take)
 	const { data: genreData, isLoading: genreLoading, refetch: refetchGenre } = useFetchGenre(genreId)
 	const { mutateAsync: postGenre } = usePostGenre()
 	const { mutateAsync: patchGenre } = usePatchGenre()
@@ -34,7 +37,16 @@ export function Genre() {
 			) : !genresData ? (
 				<div>No data</div>
 			) : (
-				<AdminTable data={genresData} currentMenu="genre" columns={genreColumns} handleDetail={handleDetail} />
+				<AdminTable
+					data={genresData.data}
+					currentMenu="genre"
+					columns={genreColumns}
+					handleDetail={handleDetail}
+					pageIndex={pageIndex}
+					setPageIndex={setPageIndex}
+					take={take}
+					count={genresData.count}
+				/>
 			)}
 
 			<AddModal mutateAsync={postGenre} {...genreModal} />

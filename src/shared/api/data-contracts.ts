@@ -105,31 +105,15 @@ export interface CreateUserProfileDtoDto {
 
 export type DirectorControllerCreateDataDto = object
 
-export type DirectorControllerFindAllDataDto = any
+export type DirectorControllerFindAllDataDto = GetDirectorsResDtoDto
 
 export interface DirectorControllerFindAllParamsDto {
-	/**
-	 * 페이지네이션 커서
-	 * @example "eyJ2YWx1ZXMiOnsiaWQiOjIyfSwib3JkZXIiOlsiaWRfREVTQyJdfQ=="
-	 */
-	cursor?: string
-	/**
-	 * 정렬 순서
-	 * @default ["id_DESC"]
-	 * @example ["id_DESC"]
-	 */
-	order: string[]
 	/**
 	 * 페이지
 	 * @default 1
 	 * @example 1
 	 */
 	page?: number
-	/**
-	 * 가져올 데이터 갯수
-	 * @default 5
-	 * @example 5
-	 */
 	take: number
 }
 
@@ -175,31 +159,15 @@ export interface EmailCheckDtoDto {
 
 export type GenreControllerCreateDataDto = object
 
-export type GenreControllerFindAllDataDto = any
+export type GenreControllerFindAllDataDto = GetGenresResDtoDto
 
 export interface GenreControllerFindAllParamsDto {
-	/**
-	 * 페이지네이션 커서
-	 * @example "eyJ2YWx1ZXMiOnsiaWQiOjIyfSwib3JkZXIiOlsiaWRfREVTQyJdfQ=="
-	 */
-	cursor?: string
-	/**
-	 * 정렬 순서
-	 * @default ["id_DESC"]
-	 * @example ["id_DESC"]
-	 */
-	order: string[]
 	/**
 	 * 페이지
 	 * @default 1
 	 * @example 1
 	 */
 	page?: number
-	/**
-	 * 가져올 데이터 갯수
-	 * @default 5
-	 * @example 5
-	 */
 	take: number
 }
 
@@ -222,6 +190,24 @@ export interface GenreDto {
 	 * @example "액션"
 	 */
 	name: string
+}
+
+export interface GetDirectorsResDtoDto {
+	/**
+	 * 감독 총 갯수
+	 * @example 100
+	 */
+	count: number
+	data: DirectorDto[]
+}
+
+export interface GetGenresResDtoDto {
+	/**
+	 * 장르 총 갯수
+	 * @example 100
+	 */
+	count: number
+	data: GenreDto[]
 }
 
 export interface GetMovieResDtoDto {
@@ -346,6 +332,15 @@ export interface GetMoviesResDtoDto {
 	 * @example 100
 	 */
 	total: number
+}
+
+export interface GetUsersResDtoDto {
+	/**
+	 * 장르 총 갯수
+	 * @example 100
+	 */
+	count: number
+	data: UserDto[]
 }
 
 export interface MeResDtoDto {
@@ -656,31 +651,15 @@ export type UserControllerCreateUserProfileDataDto = TokenResDtoDto
 
 export type UserControllerDeleteUserProfileDataDto = TokenResDtoDto
 
-export type UserControllerFindAllDataDto = any
+export type UserControllerFindAllDataDto = GetUsersResDtoDto
 
 export interface UserControllerFindAllParamsDto {
-	/**
-	 * 페이지네이션 커서
-	 * @example "eyJ2YWx1ZXMiOnsiaWQiOjIyfSwib3JkZXIiOlsiaWRfREVTQyJdfQ=="
-	 */
-	cursor?: string
-	/**
-	 * 정렬 순서
-	 * @default ["id_DESC"]
-	 * @example ["id_DESC"]
-	 */
-	order: string[]
 	/**
 	 * 페이지
 	 * @default 1
 	 * @example 1
 	 */
 	page?: number
-	/**
-	 * 가져올 데이터 갯수
-	 * @default 5
-	 * @example 5
-	 */
 	take: number
 }
 

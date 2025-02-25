@@ -31,12 +31,10 @@ export function StepOne2({ setStep }: StepOne2Props) {
 			email: sessionStorage.getItem('email') || '',
 		},
 	})
-	console.log(form.watch())
 
-	const handleSubmit = form.handleSubmit(() => {
-		console.log('호잇ㅁㅁ')
+	const handleSubmit = () => {
 		setStep(2)
-	})
+	}
 
 	return (
 		<div className="flex min-h-screen w-fit flex-col justify-center">

@@ -25,7 +25,7 @@ class Director<SecurityDataType = unknown> {
 	 * @summary 감독 목록 조회
 	 * @request GET:/director
 	 * @secure
-	 * @response `200` `DirectorControllerFindAllDataDto`
+	 * @response `200` `DirectorControllerFindAllDataDto` 감독 목록 조회 성공
 	 */
 	directorControllerFindAll = (query: DirectorControllerFindAllParamsDto, params: RequestParams = {}) =>
 		this.http.request<DirectorControllerFindAllDataDto, any>({
@@ -33,6 +33,7 @@ class Director<SecurityDataType = unknown> {
 			method: 'GET',
 			query: query,
 			secure: true,
+			format: 'json',
 			...params,
 		})
 	/**

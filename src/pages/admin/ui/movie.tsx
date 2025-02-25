@@ -22,9 +22,10 @@ export function Movie() {
 	const [openEdit, setOpenEdit] = useState(false)
 	const [movieId, setMovieId] = useState(0)
 	const [nextCursor, setNextCursor] = useState('')
+	const [pageIndex, setPageIndex] = useState(1)
+	const take = 3
 
-	const { data: moviesData, isLoading } = useFetchMovies(3, nextCursor)
-	console.log('nextCursor', nextCursor)
+	const { data: moviesData, isLoading } = useFetchMovies(take, nextCursor)
 	const { data: movieData, isLoading: movieLoading, refetch: refetchMovie } = useFetchMovie(movieId)
 	const { mutateAsync: postMovie } = usePostMovie()
 	const { mutateAsync: patchMovie } = usePatchMovie()
@@ -36,15 +37,15 @@ export function Movie() {
 		setOpenRead(true)
 	}
 
-	const handleNext = () => {
-		console.log(123)
-		// table.nextPage()
-		setNextCursor((moviesData as any)?.nextCursor)
-		// console.log(123, data)
-		console.log(moviesData)
-		// setNextCursor(moviesData?.data.nextCursor)
-	}
-
+	// const handleNext = () => {
+	// 	console.log(123)
+	// 	// table.nextPage()
+	// 	setNextCursor((moviesData as any)?.nextCursor)
+	// 	// console.log(123, data)
+	// 	console.log(moviesData)
+	// 	// setNextCursor(moviesData?.data.nextCursor)
+	// }
+	console.log(setNextCursor)
 	return (
 		<div className="pl-72 [&_*]:text-Primary/Black">
 			<h1 className="px-10 pb-4 pt-[84px] Bold-Title2">movie</h1>
@@ -58,9 +59,10 @@ export function Movie() {
 					data={moviesData?.data}
 					columns={movieColumns}
 					handleDetail={handleDetail}
-					handleNext={handleNext}
 					count={(moviesData as any)?.count}
-					// setNextCursor={setNextCursor}
+					pageIndex={pageIndex}
+					setPageIndex={setPageIndex}
+					take={take}
 				/>
 			)}
 

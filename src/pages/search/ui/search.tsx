@@ -1,9 +1,10 @@
+import { WithAuth } from '@hooks/with-auth'
 import { Dialog, DialogContent, DialogTrigger } from '@ui/dialog/dialog'
 import { Detail } from '@widgets/home'
 import { useSearchParams } from 'react-router-dom'
 import { useFetchMovies } from 'src/shared/models'
 
-export function Search() {
+function Search() {
 	const [searchParams] = useSearchParams()
 	const query = searchParams.get('keyword')
 	const { data } = useFetchMovies(10, '', query || '')
@@ -27,3 +28,5 @@ export function Search() {
 		</div>
 	)
 }
+
+export default WithAuth(Search)

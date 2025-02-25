@@ -17,8 +17,6 @@ import EyeSlashIcon from '@icons/eye-close.svg?react'
 import { useState, useEffect } from 'react'
 
 function Login() {
-	const [isPasswordVisible, setIsPasswordVisible] = useState('password')
-
 	const { setLogin } = AuthStore()
 	const navigate = useNavigate()
 
@@ -28,12 +26,7 @@ function Login() {
 	})
 
 	const sessionEmail = sessionStorage.getItem('email')
-
-	useEffect(() => {
-		if (sessionEmail) {
-			form.setValue('email', sessionEmail)
-		}
-	}, [sessionEmail, form.setValue])
+	const [isPasswordVisible, setIsPasswordVisible] = useState('password')
 
 	const handleSubmit = async (data: z.infer<typeof loginSchema>) => {
 		const { email, password } = data
@@ -54,6 +47,11 @@ function Login() {
 			console.log(error)
 		}
 	}
+
+	useEffect(() => {
+		if (sessionEmail) form.setValue('email', sessionEmail)
+		return () => sessionStorage.removeItem('email')
+	}, [sessionEmail, form])
 
 	return (
 		<section className="relative h-screen flex-col flex-center">

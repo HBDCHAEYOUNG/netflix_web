@@ -21,16 +21,16 @@ interface AdminTableProps {
 	columns: ColumnDef<any>[]
 	count: number
 	handleDetail: (id: string) => () => void
-	handleNext: () => void
+	pageIndex: number
+	setPageIndex: (pageIndex: number) => void
+	take: number
 }
 
-export function AdminTable({ data, currentMenu, columns, handleDetail, handleNext, count }: AdminTableProps) {
+export function AdminTable({ data, currentMenu, columns, handleDetail, count, pageIndex, setPageIndex, take }: AdminTableProps) {
 	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
 	const [sorting, setSorting] = useState<SortingState>([])
-	// const [pagination, setPagination] = useState({
-	// 	pageIndex: 0, //initial page index
-	// 	pageSize: 6, //default page size
-	// })
+
+	const totalPages = Math.ceil(count / take)
 
 	const table = useReactTable({
 		data,
@@ -42,12 +42,15 @@ export function AdminTable({ data, currentMenu, columns, handleDetail, handleNex
 		state: {
 			columnFilters,
 			sorting,
-			// pagination,
 		},
 		onSortingChange: setSorting,
-		// onPaginationChange: setPagination,
 	})
 
+	const handlePageChange = (newPage: number) => {
+		if (newPage >= 1 && newPage <= totalPages) {
+			setPageIndex(newPage)
+		}
+	}
 	return (
 		<>
 			<div className="px-10 pb-20">
@@ -84,16 +87,28 @@ export function AdminTable({ data, currentMenu, columns, handleDetail, handleNex
 				<div className="mt-4 flex items-center">
 					Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
 					<button
-						className="ml-auto mr-1 cursor-pointer border border-Grey/Grey-20 bg-Primary/White px-2 py-1"
-						onClick={() => table.previousPage()}
-						disabled={!table.getCanPreviousPage()}
+						className="ml-auto mr-1 cursor-pointer border border-Grey/Grey-20 bg-Primary/White px-2 py-1 disabled:cursor-not-allowed disabled:bg-Grey/Grey-20 disabled:text-Grey/Grey-150"
+						onClick={() => handlePageChange(pageIndex - 1)}
+						disabled={pageIndex === 1}
 					>
 						Previous
 					</button>
+					{[...Array(totalPages)].map((_, index) => {
+						const pageNum = index + 1
+						return (
+							<button
+								key={pageNum}
+								onClick={() => handlePageChange(pageNum)}
+								className={`px-3 py-1 ${pageNum === pageIndex ? 'font-bold underline' : ''}`}
+							>
+								{pageNum}
+							</button>
+						)
+					})}
 					<button
 						className="w-fit cursor-pointer border border-Grey/Grey-20 bg-Primary/White px-2 py-1 disabled:cursor-not-allowed disabled:bg-Grey/Grey-20 disabled:text-Grey/Grey-150"
-						onClick={handleNext}
-						disabled={count <= data.length}
+						onClick={() => handlePageChange(pageIndex + 1)}
+						disabled={pageIndex >= totalPages}
 					>
 						Next
 					</button>

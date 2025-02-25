@@ -4,13 +4,14 @@ import director from '../api/director'
 import { CreateDirectorDtoDto } from '../api/data-contracts'
 
 export const directorQueryKey = createQueryKeys('director', {
+	fetchDirectors: (page: number, take: number) => [page, take],
 	fetchDirector: (id: number) => [id],
 })
 
-export const useFetchDirectors = () =>
+export const useFetchDirectors = (page: number, take: number) =>
 	useQuery({
-		queryKey: directorQueryKey._def,
-		queryFn: () => director.directorControllerFindAll(),
+		queryKey: directorQueryKey.fetchDirectors(page, take).queryKey,
+		queryFn: () => director.directorControllerFindAll({ page, take }),
 	})
 
 export const usePostDirector = () => {

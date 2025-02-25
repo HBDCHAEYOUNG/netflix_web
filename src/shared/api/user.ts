@@ -29,7 +29,7 @@ class User<SecurityDataType = unknown> {
 	 * @summary 유저 목록 조회
 	 * @request GET:/user
 	 * @secure
-	 * @response `200` `UserControllerFindAllDataDto`
+	 * @response `200` `UserControllerFindAllDataDto` 유저 목록 조회 성공
 	 */
 	userControllerFindAll = (query: UserControllerFindAllParamsDto, params: RequestParams = {}) =>
 		this.http.request<UserControllerFindAllDataDto, any>({
@@ -37,6 +37,7 @@ class User<SecurityDataType = unknown> {
 			method: 'GET',
 			query: query,
 			secure: true,
+			format: 'json',
 			...params,
 		})
 	/**

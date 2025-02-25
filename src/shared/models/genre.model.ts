@@ -4,13 +4,14 @@ import genre from '../api/genre'
 import { CreateGenreDtoDto, UpdateGenreDtoDto } from '../api/data-contracts'
 
 export const genreQueryKey = createQueryKeys('genre', {
+	fetchGenres: (page: number, take: number) => [page, take],
 	fetchGenre: (id: number) => [id],
 })
 
-export const useFetchGenres = () =>
+export const useFetchGenres = (page: number, take: number) =>
 	useQuery({
-		queryKey: genreQueryKey._def,
-		queryFn: () => genre.genreControllerFindAll(),
+		queryKey: genreQueryKey.fetchGenres(page, take).queryKey,
+		queryFn: () => genre.genreControllerFindAll({ page, take }),
 	})
 
 export const usePostGenre = () => {

@@ -20,7 +20,10 @@ export function User() {
 	const [openEdit, setOpenEdit] = useState(false)
 	const [userId, setUserId] = useState(1)
 
-	const { data: usersData, isLoading } = useFetchUsers()
+	const [pageIndex, setPageIndex] = useState(1)
+	const take = 4
+
+	const { data: usersData, isLoading } = useFetchUsers(pageIndex, take)
 	const { data: userData, isLoading: userLoading, refetch: refetchUser } = useFetchUser(userId)
 	const { mutateAsync: patchUser } = usePatchUser()
 	const { mutateAsync: deleteUser } = useDeleteUser()
@@ -39,7 +42,16 @@ export function User() {
 			) : !usersData ? (
 				<div>No data</div>
 			) : (
-				<AdminTable currentMenu="user" data={usersData} columns={userColumns} handleDetail={handleDetail} />
+				<AdminTable
+					currentMenu="user"
+					data={usersData.data}
+					columns={userColumns}
+					handleDetail={handleDetail}
+					pageIndex={pageIndex}
+					setPageIndex={setPageIndex}
+					take={take}
+					count={usersData.count}
+				/>
 			)}
 
 			{userLoading ? (

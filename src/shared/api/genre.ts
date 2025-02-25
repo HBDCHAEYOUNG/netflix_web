@@ -25,7 +25,7 @@ class Genre<SecurityDataType = unknown> {
 	 * @summary 장르 목록 조회
 	 * @request GET:/genre
 	 * @secure
-	 * @response `200` `GenreControllerFindAllDataDto`
+	 * @response `200` `GenreControllerFindAllDataDto` 장르 목록 조회 성공
 	 */
 	genreControllerFindAll = (query: GenreControllerFindAllParamsDto, params: RequestParams = {}) =>
 		this.http.request<GenreControllerFindAllDataDto, any>({
@@ -33,6 +33,7 @@ class Genre<SecurityDataType = unknown> {
 			method: 'GET',
 			query: query,
 			secure: true,
+			format: 'json',
 			...params,
 		})
 	/**

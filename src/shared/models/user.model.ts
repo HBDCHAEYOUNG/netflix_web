@@ -6,13 +6,14 @@ import { authQueryKey } from './auth.model'
 import { AuthStore } from '@store/auth-store'
 
 export const userQueryKey = createQueryKeys('user', {
+	fetchUsers: (page: number, take: number) => [page, take],
 	fetchUser: (id: number) => [id],
 })
 
-export const useFetchUsers = () => {
+export const useFetchUsers = (page: number, take: number) => {
 	return useQuery({
-		queryKey: userQueryKey._def,
-		queryFn: () => user.userControllerFindAll(),
+		queryKey: userQueryKey.fetchUsers(page, take).queryKey,
+		queryFn: () => user.userControllerFindAll({ page, take }),
 	})
 }
 
