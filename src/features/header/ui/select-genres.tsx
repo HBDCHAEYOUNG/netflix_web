@@ -1,15 +1,12 @@
-import * as React from 'react'
-import { SelectShardcn, SelectContent, SelectItem, SelectTrigger } from '@ui/index'
+import { SelectContent, SelectItem, SelectShardcn, SelectTrigger } from '@ui/index'
 import { useNavigate } from 'react-router-dom'
+import { useFetchGenres } from 'src/shared/models/genre.model'
 
-interface SelectGenresProps {
-	label?: string
-	items: string[]
-	onChange?: (value: string) => void
-}
-
-export const SelectGenres = React.forwardRef<HTMLButtonElement, SelectGenresProps>(({ label, items }, ref) => {
+export const SelectGenres = () => {
 	const navigate = useNavigate()
+
+	const { data: genres } = useFetchGenres(1, 10)
+	console.log(genres)
 
 	const handleGenreSelect = (selectedGenre: string) => {
 		navigate(`?genre=${selectedGenre}`)
@@ -17,19 +14,17 @@ export const SelectGenres = React.forwardRef<HTMLButtonElement, SelectGenresProp
 
 	return (
 		<SelectShardcn onValueChange={handleGenreSelect}>
-			<SelectTrigger ref={ref} className="flex h-6 w-24 items-center rounded-none border bg-black">
-				<span className="text-left text-xs">{label}</span>
+			<SelectTrigger className="flex h-6 w-24 items-center rounded-none border bg-black">
+				<span className="text-left text-xs">Genre</span>
 			</SelectTrigger>
 
 			<SelectContent className="rounded-none bg-black text-Primary/White">
-				{items.map((item) => (
-					<SelectItem key={item} value={item} className="cursor-pointer">
-						{item}
+				{genres?.data.map((item) => (
+					<SelectItem key={item.id} value={item.name} className="cursor-pointer">
+						{item.name}
 					</SelectItem>
 				))}
 			</SelectContent>
 		</SelectShardcn>
 	)
-})
-
-SelectGenres.displayName = 'SelectGenres'
+}

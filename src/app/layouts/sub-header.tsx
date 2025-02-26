@@ -3,17 +3,6 @@ import { cn } from '@lib/utils'
 import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 
-const genres = [
-	'Korean Drama',
-	'American Drama',
-	'British Drama',
-	'Asian Drama',
-	'Entertainment from all over the world in one place!',
-	'animated film',
-	'comedy',
-	'romance',
-]
-
 export function SubHeader({ path }: { path: string }) {
 	const [scrolled, setScrolled] = useState(false)
 	const [searchParams] = useSearchParams()
@@ -37,7 +26,7 @@ export function SubHeader({ path }: { path: string }) {
 			<h1 className={cn('mr-10 flex items-center gap-3 text-4xl font-bold', searchParams.get('genre') && 'hidden')}>{path}</h1>
 			{searchParams.get('genre') && (
 				<>
-					<Link to="/series" className="flex cursor-pointer items-center gap-3 text-xl font-thin text-Grey/Grey-25">
+					<Link to="/movie" className="flex cursor-pointer items-center gap-3 text-xl font-thin text-Grey/Grey-25">
 						{path}
 
 						<p className="text-xl font-thin text-Grey/Grey-25"> |</p>
@@ -46,7 +35,7 @@ export function SubHeader({ path }: { path: string }) {
 				</>
 			)}
 
-			{!searchParams.get('genre') && <SelectGenres items={genres} label="Genre" />}
+			{!searchParams.get('genre') && <SelectGenres />}
 		</header>
 	)
 }
