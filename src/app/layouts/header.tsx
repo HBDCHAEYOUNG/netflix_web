@@ -7,18 +7,19 @@ import Button from '@ui/button/button'
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { HeaderType } from 'src/shared/const'
+import { useFetchAuth } from 'src/shared/models/auth.model'
 
 interface HeaderProps {
 	headerType?: HeaderType
 }
 
 export function Header({ headerType = 'landing' }: HeaderProps) {
+	const { data, isLoading } = useFetchAuth()
+	const { isLogin, setLogout } = AuthStore()
 	const { pathname } = useLocation()
 	const path = pathname.slice(1)
 
 	const [scrolled, setScrolled] = useState(false)
-
-	const { isLogin } = AuthStore()
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -26,10 +27,14 @@ export function Header({ headerType = 'landing' }: HeaderProps) {
 			setScrolled(isScrolled)
 		}
 
+		if (!isLoading && !data && isLogin) {
+			setLogout()
+		}
+
 		window.addEventListener('scroll', handleScroll)
 		return () => window.removeEventListener('scroll', handleScroll)
-	}, [])
-	console.log(isLogin)
+	}, [isLoading, data, isLogin])
+
 	return (
 		<header
 			className={cn(

@@ -279,6 +279,15 @@ export interface GetMovieResDtoDto {
 	wishList: string[]
 }
 
+export interface GetMovieWishlistResDtoDto {
+	/**
+	 * 장르 총 갯수
+	 * @example 100
+	 */
+	count: number
+	data: MovieDto[]
+}
+
 export interface GetMoviesBannerResDtoDto {
 	/**
 	 * 영화 생성 일자
@@ -397,7 +406,7 @@ export type MovieControllerFindAllMovieBannerDataDto = GetMoviesBannerResDtoDto
 
 export type MovieControllerFindAllMovieRankDataDto = object
 
-export type MovieControllerFindAllMovieWishDataDto = any
+export type MovieControllerFindAllMovieWishDataDto = GetMovieWishlistResDtoDto
 
 export interface MovieControllerFindAllMovieWishParamsDto {
 	/**

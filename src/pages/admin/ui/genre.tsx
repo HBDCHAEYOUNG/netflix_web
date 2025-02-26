@@ -16,7 +16,7 @@ export function Genre() {
 	const [genreId, setGenreId] = useState(1)
 
 	const [pageIndex, setPageIndex] = useState(1)
-	const take = 5
+	const [take, setTake] = useState(3)
 
 	const { data: genresData, isLoading } = useFetchGenres(pageIndex, take)
 	const { data: genreData, isLoading: genreLoading, refetch: refetchGenre } = useFetchGenre(genreId)
@@ -29,6 +29,7 @@ export function Genre() {
 		refetchGenre()
 		setOpen(true)
 	}
+
 	return (
 		<div className="pl-72 [&_*]:text-Primary/Black">
 			<h1 className="px-10 pb-4 pt-[84px] Bold-Title2">genre</h1>
@@ -46,6 +47,7 @@ export function Genre() {
 					setPageIndex={setPageIndex}
 					take={take}
 					count={genresData.count}
+					setTake={setTake}
 				/>
 			)}
 

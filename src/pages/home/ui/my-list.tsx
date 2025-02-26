@@ -6,13 +6,13 @@ import { useFetchWishlist } from 'src/shared/models'
 function MyList() {
 	const { data } = useFetchWishlist()
 
-	if (!data) return <div>데이터가 없습니다.</div>
+	if (!data) return <div className="h-screen flex-center">데이터가 없습니다.</div>
 
 	return (
 		<div className="pt-32 common-padding">
 			<h2 className="Bold-Title2">My List</h2>
 			<div className="grid grid-cols-5 gap-x-[6px] gap-y-10 pt-4">
-				{data.map((item, index) => {
+				{data.data.map((item, index) => {
 					console.log(item.id)
 					return (
 						<Dialog key={index}>

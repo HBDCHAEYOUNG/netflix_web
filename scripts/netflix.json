@@ -146,7 +146,14 @@
 				],
 				"responses": {
 					"200": {
-						"description": ""
+						"description": "유저 찜 목록 조회 성공",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetMovieWishlistResDto"
+								}
+							}
+						}
 					}
 				},
 				"security": [
@@ -1679,6 +1686,23 @@
 					}
 				},
 				"required": ["data", "total", "page"]
+			},
+			"GetMovieWishlistResDto": {
+				"type": "object",
+				"properties": {
+					"data": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/Movie"
+						}
+					},
+					"count": {
+						"type": "number",
+						"description": "장르 총 갯수",
+						"example": 100
+					}
+				},
+				"required": ["data", "count"]
 			},
 			"GetMoviesBannerResDto": {
 				"type": "object",

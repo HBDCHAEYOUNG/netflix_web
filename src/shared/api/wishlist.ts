@@ -20,7 +20,7 @@ class Wishlist<SecurityDataType = unknown> {
 	 * @summary 유저 찜 목록 조회
 	 * @request GET:/movie/wishlist
 	 * @secure
-	 * @response `200` `MovieControllerFindAllMovieWishDataDto`
+	 * @response `200` `MovieControllerFindAllMovieWishDataDto` 유저 찜 목록 조회 성공
 	 */
 	movieControllerFindAllMovieWish = (query: MovieControllerFindAllMovieWishParamsDto, params: RequestParams = {}) =>
 		this.http.request<MovieControllerFindAllMovieWishDataDto, any>({
@@ -28,6 +28,7 @@ class Wishlist<SecurityDataType = unknown> {
 			method: 'GET',
 			query: query,
 			secure: true,
+			format: 'json',
 			...params,
 		})
 	/**

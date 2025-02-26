@@ -21,7 +21,7 @@ export function User() {
 	const [userId, setUserId] = useState(1)
 
 	const [pageIndex, setPageIndex] = useState(1)
-	const take = 4
+	const [take, setTake] = useState(3)
 
 	const { data: usersData, isLoading } = useFetchUsers(pageIndex, take)
 	const { data: userData, isLoading: userLoading, refetch: refetchUser } = useFetchUser(userId)
@@ -51,6 +51,7 @@ export function User() {
 					setPageIndex={setPageIndex}
 					take={take}
 					count={usersData.count}
+					setTake={setTake}
 				/>
 			)}
 

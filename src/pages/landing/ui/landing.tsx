@@ -7,10 +7,10 @@ import Button from '@ui/button/button'
 import Form from '@ui/form/form'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, InputText } from '@ui/index'
 import { useForm } from 'react-hook-form'
-import { faq, sections } from '../const/landing'
-import { EmailSchema, emailSchema } from '../const/landing.type'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { useFetchAuth, usePostEmailCheck } from 'src/shared/models/auth.model'
+import { faq, sections } from '../const/landing'
+import { EmailSchema, emailSchema } from '../const/landing.type'
 
 function Landing() {
 	const navigate = useNavigate()

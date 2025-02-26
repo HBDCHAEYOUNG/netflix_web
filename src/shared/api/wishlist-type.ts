@@ -8,7 +8,7 @@ export namespace Wishlist {
 	 * @summary 유저 찜 목록 조회
 	 * @request GET:/movie/wishlist
 	 * @secure
-	 * @response `200` `MovieControllerFindAllMovieWishDataDto`
+	 * @response `200` `MovieControllerFindAllMovieWishDataDto` 유저 찜 목록 조회 성공
 	 */
 	export namespace MovieControllerFindAllMovieWish {
 		export type RequestParams = {}

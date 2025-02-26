@@ -57,10 +57,11 @@ export function AdminTable({ data, currentMenu, columns, handleDetail, count, pa
 		<div className="px-10 pb-20">
 			<Select
 				items={['3', '5', '7', '10']}
-				type="video"
+				type="admin"
 				className="absolute right-[314px] top-[84px] h-[34px] w-20 rounded-none border border-Grey/Grey-20 bg-Primary/White text-Primary/Black"
 				contentClassName="!rounded-none border-Grey/Grey-20 !bg-Primary/White"
 				itemClassName="!rounded-none !bg-Primary/White"
+				value={take.toString()}
 				onChange={(value) => {
 					setTake(Number(value))
 				}}

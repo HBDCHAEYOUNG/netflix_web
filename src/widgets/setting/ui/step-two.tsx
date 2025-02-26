@@ -18,7 +18,11 @@ export function StepTwo({ onClickNext }: StepTwoProps) {
 			<Form form={form} onSubmit={() => {}}>
 				<h3 className="mb-6 Regular-Title3">Date of Birth</h3>
 				<Form.Item name="day" className="mb-2">
-					<Select label="Day" items={Array.from({ length: 31 }, (_, i) => i + 1).map((item) => item.toString())} />
+					<Select
+						label="Day"
+						items={Array.from({ length: 31 }, (_, i) => i + 1).map((item) => item.toString())}
+						itemClassName="text-Primary/White"
+					/>
 				</Form.Item>
 				<Form.Item name="month" className="mb-2">
 					<Select
@@ -37,14 +41,19 @@ export function StepTwo({ onClickNext }: StepTwoProps) {
 							'November',
 							'December',
 						]}
+						itemClassName="text-Primary/White"
 					/>
 				</Form.Item>
 				<Form.Item name="year" className="mb-2">
-					<Select label="Year" items={Array.from({ length: 100 }, (_, i) => 2025 - i).map((item) => item.toString())} />
+					<Select
+						label="Year"
+						items={Array.from({ length: 100 }, (_, i) => 2025 - i).map((item) => item.toString())}
+						itemClassName="text-Primary/White"
+					/>
 				</Form.Item>
 				<h3 className="my-6 Regular-Title3">Gender</h3>
 				<Form.Item name="gender" className="mb-6">
-					<Select label="Gender" items={['Male', 'Female', 'Other']} />
+					<Select label="Gender" items={['Male', 'Female', 'Other']} itemClassName="text-Primary/White" />
 				</Form.Item>
 
 				<Form.Item name="agree">

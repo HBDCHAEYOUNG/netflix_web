@@ -3,7 +3,7 @@ import { SelectShardcn, SelectContent, SelectItem, SelectTrigger, SelectValue } 
 import { cn } from '@lib/utils'
 
 interface SelectProps {
-	type?: 'common' | 'video'
+	type?: 'common' | 'admin'
 	label?: string
 	items: string[]
 	value?: string
@@ -21,15 +21,15 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
 					ref={ref}
 					className={cn('flex h-14 w-full items-center rounded-md border border-[#808080] px-3 !text-Grey/Grey-50', className)}
 				>
-					{value ? (
-						<div className={cn('flex w-full flex-col', type === 'video' && 'hidden')}>
+					{value && type === 'common' ? (
+						<div className={cn('flex w-full flex-col')}>
 							<span className="text-left text-xs"> {label}</span>
 							<SelectValue placeholder={value} />
 						</div>
 					) : (
 						<span className="text-left text-xs">{label}</span>
 					)}
-					{type === 'video' && <SelectValue placeholder={value} />}
+					{type === 'admin' && <SelectValue placeholder={value} />}
 				</SelectTrigger>
 
 				<SelectContent className={cn(contentClassName)}>

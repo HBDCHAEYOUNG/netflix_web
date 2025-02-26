@@ -6,12 +6,12 @@ import wishlist from '../api/wishlist'
 import like from '../api/like'
 
 export const movieQueryKey = createQueryKeys('movie', {
-	fetchMovies: (take: number, cursor: string, title?: string) => [take, cursor, title],
+	fetchMovies: (take: number, pagination: string | number, title?: string) => [take, pagination, title],
 	fetchMovie: (id: number) => [id],
 	fetchWishlist: () => ['whislist'],
 })
 
-export const useFetchMovies = (take: number, cursor: string, title?: string) => {
+export const useFetchMovies = (take: number, page?: number, cursor?: string, title?: string) => {
 	const query: MovieControllerFindAllParamsDto = {
 		order: ['id_DESC'],
 		take,
@@ -19,9 +19,11 @@ export const useFetchMovies = (take: number, cursor: string, title?: string) => 
 	}
 
 	if (cursor) Object.assign(query, { cursor })
+	if (page) Object.assign(query, { page })
 	if (title) Object.assign(query, { title })
+
 	return useQuery({
-		queryKey: movieQueryKey.fetchMovies(take, cursor).queryKey,
+		queryKey: movieQueryKey.fetchMovies(take, (cursor ?? page) as string | number).queryKey,
 		queryFn: () => movie.movieControllerFindAll(query),
 	})
 }
@@ -84,7 +86,11 @@ export const useDeleteMovie = () => {
 export const useFetchWishlist = () => {
 	return useQuery({
 		queryKey: movieQueryKey.fetchWishlist().queryKey,
-		queryFn: () => wishlist.movieControllerFindAllMovieWish(),
+		queryFn: () =>
+			wishlist.movieControllerFindAllMovieWish({
+				take: 10,
+				page: 1,
+			}),
 	})
 }
 
