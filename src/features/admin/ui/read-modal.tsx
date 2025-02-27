@@ -66,7 +66,7 @@ export function ReadModal({ data, currentMenu, formItems, open, setOpen, setOpen
 									{...form.register('detail')}
 									id="detail"
 									className="min-h-60 w-full rounded-md border border-Grey/Grey-20 p-3 pt-6 focus:outline-black"
-									placeholder={`게시글 내용을 작성해 주세요. (판매금지 물품은 게시가 제한될 수 있어요.) 신뢰할 수 있는`}
+									placeholder="Write a brief movie summary"
 								/>
 							</div>
 						</Form.Item>

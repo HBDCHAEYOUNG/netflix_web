@@ -29,17 +29,19 @@ export const InputText = React.forwardRef<HTMLInputElement, InputProps>(
 				document.removeEventListener('mousedown', handleClickOutside)
 			}
 		}, [])
-
+		console.log(props.value)
 		return (
 			<fieldset className="relative">
-				{isFocused && !!props.value && <label className="absolute left-3 top-2 text-left text-xs text-Grey/Grey-50">{label}</label>}
+				{(isFocused || props.value) && (
+					<label className="absolute left-3 top-2 text-left text-xs text-Grey/Grey-50">{label}</label>
+				)}
 				<input
 					placeholder={label}
 					type={type}
 					onFocus={() => setIsFocused(true)}
 					className={cn(
 						'h-14 w-full rounded-md border border-[#808080] bg-Primary/Black px-3 text-Grey/Grey-50 focus:outline-none',
-						isFocused && !!props.value && 'pt-4',
+						(isFocused || props.value) && 'pt-4',
 						className,
 					)}
 					ref={ref}
