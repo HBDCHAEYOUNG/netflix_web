@@ -39,11 +39,10 @@ export const usePostMovie = () => {
 	const queryClient = useQueryClient()
 	return useMutation({
 		mutationFn: (data: any) => {
-			console.log(123123, data)
 			const newData = {
 				detail: data.detail,
 				directorId: Number(data.director),
-				genreIds: [Number(data.genre)],
+				genreIds: data.genreIds,
 				movieFileName: data.movieFileName,
 				thumbnail: data.thumbnail,
 				title: data.title,
@@ -63,8 +62,9 @@ export const usePatchMovie = () => {
 			const newData = {
 				detail: data.detail,
 				directorId: Number(data.director),
-				genreIds: [Number(data.genre)],
+				genreIds: data.genreIds,
 				movieFileName: data.movieFileName,
+				thumbnail: data.thumbnail,
 				title: data.title,
 			}
 			return movie.movieControllerUpdate(id, newData)

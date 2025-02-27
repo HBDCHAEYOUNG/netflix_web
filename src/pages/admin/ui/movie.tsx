@@ -14,7 +14,7 @@ const movieReadModal = {
 
 const movieEditModal = {
 	currentMenu: 'movie',
-	formItems: ['title', 'director', 'genre'],
+	formItems: ['title', 'director'],
 }
 
 export function Movie() {

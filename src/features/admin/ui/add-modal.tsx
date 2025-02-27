@@ -1,9 +1,9 @@
+import { MovieItems } from '@entities/admin/ui/movie-items'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@ui/dialog/dialog'
 import Form from '@ui/form/form'
 import { InputText } from '@ui/input/input-text'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { usePostVideo } from 'src/shared/models/video.model'
 
 interface AddModalProps {
 	currentMenu: string
@@ -16,22 +16,10 @@ export function AddModal({ currentMenu, formItems, mutateAsync }: AddModalProps)
 
 	const [open, setOpen] = useState(false)
 
-	const { mutateAsync: postVideo } = usePostVideo()
-
-	const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-		const file = e.target.files?.[0]
-		if (file) {
-			try {
-				const video = await postVideo({ video: file })
-				form.setValue('movieFileName', video.fileName.toString())
-			} catch (error) {
-				console.error('Upload error:', error)
-			}
-		}
-	}
 	const onSubmitAdd = async () => {
 		try {
-			await mutateAsync(form.getValues())
+			const values = form.getValues()
+			await mutateAsync(values)
 			alert('add success')
 			setOpen(false)
 		} catch (e: any) {
@@ -57,28 +45,8 @@ export function AddModal({ currentMenu, formItems, mutateAsync }: AddModalProps)
 							<InputText label={item} className="border-Grey/Grey-20 bg-transparent" />
 						</Form.Item>
 					))}
-					{currentMenu === 'movie' && (
-						<>
-							<div className="mb-4 rounded-md border border-Grey/Grey-20 px-3 py-2">
-								<label className="text-xs">동영상 파일</label>
-								<input type="file" onChange={handleFileChange} />
-							</div>
-							<Form.Item name="movieFileName" className="hidden">
-								<InputText />
-							</Form.Item>
-							<Form.Item name="thumbnail">
-								<InputText label="thumbnail" className="border-Grey/Grey-20 bg-transparent" />
-							</Form.Item>
-							<Form.Item name="detail">
-								<textarea
-									{...form.register('detail')}
-									id="detail"
-									className="min-h-60 w-full rounded-md border border-Grey/Grey-20 p-4 focus:outline-black"
-									placeholder={`게시글 내용을 작성해 주세요. (판매금지 물품은 게시가 제한될 수 있어요.) 신뢰할 수 있는`}
-								/>
-							</Form.Item>
-						</>
-					)}
+
+					{currentMenu === 'movie' && <MovieItems form={form} />}
 					<button type="submit" className="mt-8 w-full rounded-md bg-Primary/Red py-4 font-bold !text-Primary/White">
 						Add
 					</button>

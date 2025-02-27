@@ -24,7 +24,10 @@ function Home() {
 						{rankData.map((rank, index) => (
 							<CarouselItem
 								key={index}
-								className={cn('relative w-1/5 basis-1/5 cursor-pointer rounded', index === 9 ? 'content-center' : 'overflow-hiddenn')}
+								className={cn(
+									'relative w-1/5 basis-1/5 cursor-pointer rounded',
+									index === 9 ? 'content-center' : 'overflow-hiddenn',
+								)}
 							>
 								<MoreinfoNumber
 									index={index}

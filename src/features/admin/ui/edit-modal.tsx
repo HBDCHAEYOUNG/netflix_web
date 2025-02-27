@@ -1,3 +1,4 @@
+import { MovieItems } from '@entities/admin/ui/movie-items'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@ui/dialog/dialog'
 import Form from '@ui/form/form'
 import { InputText } from '@ui/input/input-text'
@@ -18,9 +19,9 @@ export function EditModal({ data, currentMenu, formItems, open, setOpen, mutateA
 	const form = useForm()
 
 	const onSubmitEdit = async () => {
-		console.log(data.id)
 		try {
-			await mutateAsync({ id: data.id, data: form.getValues() })
+			const values = form.getValues()
+			await mutateAsync({ id: data.id, data: values })
 			alert('edit success')
 			setOpen(false)
 		} catch (e: any) {
@@ -40,11 +41,11 @@ export function EditModal({ data, currentMenu, formItems, open, setOpen, mutateA
 
 	useEffect(() => {
 		if (currentMenu === 'movie' && data) {
-			console.log(data)
+			console.log(1111111, data)
 			form.reset({
 				title: data.title,
 				director: data.director.id,
-				genre: data.genres.map((genre: any) => genre.id).join(','),
+				genreIds: data.genres.map((genre: any) => parseInt(genre.id, 10)),
 				movieFileName: data.movieFilePath,
 				thumbnail: data.thumbnail,
 				detail: data.detail.detail,
@@ -69,6 +70,8 @@ export function EditModal({ data, currentMenu, formItems, open, setOpen, mutateA
 		}
 	}, [currentMenu, data, form])
 
+	console.log('Form values (edit):', form.watch())
+
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogContent className="!max-w-[600px] bg-Primary/White px-28 pb-10 [&_*]:text-Primary/Black">
@@ -81,17 +84,7 @@ export function EditModal({ data, currentMenu, formItems, open, setOpen, mutateA
 							<InputText label={item} className="border-Grey/Grey-20 bg-transparent" />
 						</Form.Item>
 					))}
-					{currentMenu === 'movie' && (
-						<>
-							<Form.Item name="detail">
-								<textarea
-									{...form.register('detail')}
-									id="detail"
-									className="min-h-60 w-full rounded-md border border-Grey/Grey-20 p-4 focus:outline-black"
-								/>
-							</Form.Item>
-						</>
-					)}
+					{currentMenu === 'movie' && <MovieItems form={form} />}
 					<div className="flex gap-1">
 						<button
 							type="submit"
