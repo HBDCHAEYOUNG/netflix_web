@@ -18,8 +18,8 @@ export function NavigationMenu() {
 					to={item.path}
 					key={index}
 					className={cn(
-						'min-w-max cursor-pointer pr-6 text-Grey/Grey-20 transition-colors duration-300 Regular-Body hover:text-Grey/Grey-50',
-						pathname === item.path && 'cursor-default text-Primary/White hover:text-Primary/White',
+						'min-w-max cursor-pointer px-3 py-8 !text-Grey/Grey-50 transition-colors duration-300 Regular-Body hover:underline',
+						pathname === item.path && 'cursor-default !text-Primary/White hover:no-underline',
 					)}
 				>
 					{item.title}

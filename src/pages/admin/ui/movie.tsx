@@ -9,12 +9,12 @@ import { useDeleteMovie, useFetchMovie, useFetchMovies, usePatchMovie, usePostMo
 
 const movieReadModal = {
 	currentMenu: 'movie',
-	formItems: ['title', 'director', 'genre', 'movieFile'],
+	formItems: ['title', 'director', 'genre'],
 }
 
 const movieEditModal = {
 	currentMenu: 'movie',
-	formItems: ['title', 'director', 'genre', 'movieFile'],
+	formItems: ['title', 'director', 'genre'],
 }
 
 export function Movie() {
@@ -61,7 +61,13 @@ export function Movie() {
 				<div>Loading...</div>
 			) : (
 				<>
-					<ReadModal data={movieData} {...movieReadModal} open={openRead} setOpen={setOpenRead} setOpenEdit={setOpenEdit} />
+					<ReadModal
+						data={movieData}
+						{...movieReadModal}
+						open={openRead}
+						setOpen={setOpenRead}
+						setOpenEdit={setOpenEdit}
+					/>
 					<EditModal
 						data={movieData}
 						open={openEdit}

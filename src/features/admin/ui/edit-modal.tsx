@@ -45,7 +45,8 @@ export function EditModal({ data, currentMenu, formItems, open, setOpen, mutateA
 				title: data.title,
 				director: data.director.id,
 				genre: data.genres.map((genre: any) => genre.id).join(','),
-				movieFile: data.movieFilePath,
+				movieFileName: data.movieFilePath,
+				thumbnail: data.thumbnail,
 				detail: data.detail.detail,
 			})
 		}
@@ -81,17 +82,21 @@ export function EditModal({ data, currentMenu, formItems, open, setOpen, mutateA
 						</Form.Item>
 					))}
 					{currentMenu === 'movie' && (
-						<Form.Item name="detail">
-							<textarea
-								{...form.register('detail')}
-								id="detail"
-								className="min-h-60 w-full rounded-md border border-Grey/Grey-20 p-4 focus:outline-black"
-								placeholder={`게시글 내용을 작성해 주세요. (판매금지 물품은 게시가 제한될 수 있어요.) 신뢰할 수 있는`}
-							/>
-						</Form.Item>
+						<>
+							<Form.Item name="detail">
+								<textarea
+									{...form.register('detail')}
+									id="detail"
+									className="min-h-60 w-full rounded-md border border-Grey/Grey-20 p-4 focus:outline-black"
+								/>
+							</Form.Item>
+						</>
 					)}
 					<div className="flex gap-1">
-						<button type="submit" className="mt-8 w-full rounded-md bg-Primary/Black py-4 font-bold !text-Primary/White">
+						<button
+							type="submit"
+							className="mt-8 w-full rounded-md bg-Primary/Black py-4 font-bold !text-Primary/White"
+						>
 							Save
 						</button>
 						<button

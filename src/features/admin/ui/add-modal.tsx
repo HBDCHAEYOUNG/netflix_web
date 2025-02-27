@@ -23,13 +23,12 @@ export function AddModal({ currentMenu, formItems, mutateAsync }: AddModalProps)
 		if (file) {
 			try {
 				const video = await postVideo({ video: file })
-				form.setValue('movieFileName', video.fileName)
+				form.setValue('movieFileName', video.fileName.toString())
 			} catch (error) {
 				console.error('Upload error:', error)
 			}
 		}
 	}
-
 	const onSubmitAdd = async () => {
 		try {
 			await mutateAsync(form.getValues())
@@ -40,10 +39,13 @@ export function AddModal({ currentMenu, formItems, mutateAsync }: AddModalProps)
 			alert('add failed')
 		}
 	}
+
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger className="absolute right-10 top-[84px]">
-				<button className="rounded-lg border border-Grey/Grey-20 bg-Primary/White px-3 py-1 !text-Primary/Black">Add</button>
+				<button className="rounded-lg border border-Grey/Grey-20 bg-Primary/White px-3 py-1 !text-Primary/Black">
+					Add
+				</button>
 			</DialogTrigger>
 			<DialogContent className="!max-w-[600px] bg-Primary/White px-28 pb-10 [&_*]:text-Primary/Black">
 				<DialogHeader>
@@ -57,8 +59,15 @@ export function AddModal({ currentMenu, formItems, mutateAsync }: AddModalProps)
 					))}
 					{currentMenu === 'movie' && (
 						<>
-							<Form.Item name="movieFileName">
+							<div className="mb-4 rounded-md border border-Grey/Grey-20 px-3 py-2">
+								<label className="text-xs">동영상 파일</label>
 								<input type="file" onChange={handleFileChange} />
+							</div>
+							<Form.Item name="movieFileName" className="hidden">
+								<InputText />
+							</Form.Item>
+							<Form.Item name="thumbnail">
+								<InputText label="thumbnail" className="border-Grey/Grey-20 bg-transparent" />
 							</Form.Item>
 							<Form.Item name="detail">
 								<textarea

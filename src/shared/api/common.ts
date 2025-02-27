@@ -24,6 +24,7 @@ class Common<SecurityDataType = unknown> {
 			method: 'POST',
 			body: data,
 			secure: true,
+			format: 'json',
 			type: ContentType.FormData,
 			...params,
 		})
