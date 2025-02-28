@@ -61,10 +61,19 @@ export function MovieItems({ form }: { form: UseFormReturn }) {
 		}
 	}
 
-	// 폼 필드들을 명시적으로 등록
 	React.useEffect(() => {
 		form.register('genreIds')
 		form.register('movieFileName')
+
+		// 초기 genreIds가 있는 경우 views 상태 업데이트
+		const initialGenreIds = form.getValues('genreIds')
+		if (initialGenreIds?.length) {
+			const initialViews = { ...views }
+			initialGenreIds.forEach((id: number) => {
+				initialViews[id] = true
+			})
+			setViews(initialViews)
+		}
 	}, [form])
 
 	return (
@@ -78,7 +87,7 @@ export function MovieItems({ form }: { form: UseFormReturn }) {
 								form.watch('genreIds') && '!text-Black absolute left-3 top-1 text-xs',
 							)}
 						>
-							Genres
+							Genre
 						</p>
 						{form.watch('genreIds') &&
 							form.watch('genreIds').map((id: number) => {

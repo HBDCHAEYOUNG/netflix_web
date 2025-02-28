@@ -85,13 +85,13 @@ export const useDeleteMovie = () => {
 	})
 }
 
-export const useFetchWishlist = () => {
+export const useFetchWishlist = (take: number, page: number) => {
 	return useQuery({
 		queryKey: movieQueryKey.fetchWishlist().queryKey,
 		queryFn: () =>
 			wishlist.movieControllerFindAllMovieWish({
-				take: 10,
-				page: 1,
+				take,
+				page,
 			}),
 	})
 }

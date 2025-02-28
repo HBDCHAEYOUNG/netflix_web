@@ -14,7 +14,7 @@ interface CommonLayoutProps {
 function CommonLayout({ headerType, footerType }: CommonLayoutProps) {
 	const { pathname } = useLocation()
 	const path = pathname?.slice(1)
-	const isSubHeader = path === 'series' || path === 'movie'
+	const isSubHeader = path === 'series' || path === 'genre'
 
 	return (
 		<div className="min-h-screen w-full bg-Primary/Black min-w-base [&_*]:text-white">

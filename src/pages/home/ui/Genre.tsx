@@ -1,7 +1,7 @@
 import { WithAuth } from '@hooks/with-auth'
 import { Billboard } from '@widgets/home'
 
-export function Movie() {
+export function Genre() {
 	return (
 		<div className="relative flex min-w-full flex-col">
 			<Billboard />
@@ -9,4 +9,4 @@ export function Movie() {
 	)
 }
 
-export default WithAuth(Movie)
+export default WithAuth(Genre)

@@ -27,7 +27,6 @@ function Login() {
 
 	const sessionEmail = sessionStorage.getItem('email')
 	const [isPasswordVisible, setIsPasswordVisible] = useState('password')
-
 	const handleSubmit = async (data: z.infer<typeof loginSchema>) => {
 		const { email, password } = data
 
@@ -42,6 +41,12 @@ function Login() {
 			})
 			setLogin(response.accessToken, response.refreshToken)
 			navigate('/profiles')
+			console.log(form.watch('remember'))
+			if (form.watch('remember')) {
+				localStorage.setItem('email', email)
+				console.log(11111)
+				console.log(localStorage.getItem('email'))
+			}
 		} catch (error) {
 			form.setError('password', { message: '이메일 또는 비밀번호가 올바르지 않습니다.' })
 			console.log(error)
@@ -55,7 +60,11 @@ function Login() {
 
 	return (
 		<section className="relative h-screen flex-col flex-center">
-			<img src={HeroImage} alt="hero-image" className="pointer-events-none absolute h-full w-full object-cover opacity-50" />
+			<img
+				src={HeroImage}
+				alt="hero-image"
+				className="pointer-events-none absolute h-full w-full object-cover opacity-50"
+			/>
 
 			<div className="relative h-[680px] w-[450px] bg-TransparentBlack/60% px-[68px] py-[48px]">
 				{sessionEmail && (
@@ -103,14 +112,16 @@ function Login() {
 					This page is protected by Google reCAPTCHA to ensure you're not a bot.{' '}
 					<Accordion type="single" collapsible className="inline font-bold text-white">
 						<AccordionItem value="item-1" className="mb-2 inline w-full bg-transparent Regular-Body">
-							<AccordionTrigger className="!text-Secondary/Blue-200 Regular-Body [&[data-state=open]]:hidden">Learn more.</AccordionTrigger>
+							<AccordionTrigger className="!text-Secondary/Blue-200 Regular-Body [&[data-state=open]]:hidden">
+								Learn more.
+							</AccordionTrigger>
 							<AccordionTrigger className="hidden !text-Secondary/Blue-200 Regular-Body [&[data-state=open]]:inline">
 								Close.
 							</AccordionTrigger>
 							<AccordionContent className="!text-TransparentWhite/50% Regular-Body">
-								The information collected by Google reCAPTCHA is subject to Google's Privacy Policy and Terms of Service, and is used to
-								provide, maintain and improve the reCAPTCHA service and for general security purposes (not used for personalized advertising
-								by Google).
+								The information collected by Google reCAPTCHA is subject to Google's Privacy Policy and Terms of
+								Service, and is used to provide, maintain and improve the reCAPTCHA service and for general security
+								purposes (not used for personalized advertising by Google).
 							</AccordionContent>
 						</AccordionItem>
 					</Accordion>

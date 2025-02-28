@@ -46,7 +46,7 @@ export function Header({ headerType = 'landing' }: HeaderProps) {
 				(headerType === 'landing' || headerType === 'auth') &&
 					'absolute left-1/2 top-0 -translate-x-1/2 translate-y-0 bg-transparent !px-0 max-w-base',
 				headerType === 'none' && 'hidden',
-				(path === 'series' || path === 'movie') && 'bg-Primary/Black',
+				(path === 'series' || path === 'genre') && 'bg-Primary/Black',
 			)}
 		>
 			<div className="z-30 flex items-center">
@@ -57,7 +57,13 @@ export function Header({ headerType = 'landing' }: HeaderProps) {
 			</div>
 
 			{isLogin ? (
-				<nav className={cn('hidden', headerType === 'admin' && 'flex', headerType === 'home' && 'flex w-full items-center gap-6')}>
+				<nav
+					className={cn(
+						'hidden',
+						headerType === 'admin' && 'flex',
+						headerType === 'home' && 'flex w-full items-center gap-6',
+					)}
+				>
 					{headerType === 'home' && (
 						<div className="flex w-full items-center gap-6">
 							<NavigationMenu />

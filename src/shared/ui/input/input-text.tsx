@@ -29,7 +29,6 @@ export const InputText = React.forwardRef<HTMLInputElement, InputProps>(
 				document.removeEventListener('mousedown', handleClickOutside)
 			}
 		}, [])
-		console.log(props.value)
 		return (
 			<fieldset className="relative">
 				{(isFocused || props.value) && (

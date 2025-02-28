@@ -64,12 +64,12 @@ export function Detail({ movieId }: DetailProps) {
 					<ButtonPlay movieId={data?.id} />
 					<div>
 						{data?.wishList && data?.wishList?.length > 0 ? (
-							<CirclePlus
+							<CircleCheck
 								className="relative z-10 h-10 w-10 cursor-pointer rounded-full border-2 border-Grey/Grey-200 p-2 hover:border-Primary/White hover:bg-Grey/Grey-200"
 								onClick={handleClickWish}
 							/>
 						) : (
-							<CircleCheck
+							<CirclePlus
 								onClick={handleClickWish}
 								className="relative z-10 h-10 w-10 cursor-pointer rounded-full border-2 border-Grey/Grey-200 p-2 hover:border-Primary/White hover:bg-Grey/Grey-200"
 							/>
