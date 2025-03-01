@@ -24,7 +24,10 @@ export function Movie() {
 	const [pageIndex, setPageIndex] = useState(1)
 	const [take, setTake] = useState(3)
 
-	const { data: moviesData, isLoading } = useFetchMovies(take, pageIndex)
+	const { data: moviesData, isLoading } = useFetchMovies({
+		take,
+		page: pageIndex,
+	})
 	const { data: movieData, isLoading: movieLoading, refetch: refetchMovie } = useFetchMovie(movieId)
 	const { mutateAsync: postMovie } = usePostMovie()
 	const { mutateAsync: patchMovie } = usePatchMovie()

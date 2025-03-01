@@ -7,7 +7,7 @@ import { useFetchMovies } from 'src/shared/models'
 function Search() {
 	const [searchParams] = useSearchParams()
 	const query = searchParams.get('keyword')
-	const { data } = useFetchMovies(10, '', query || '')
+	const { data } = useFetchMovies({ take: 10, title: query || '', order: ['id_DESC'] })
 	if (!query || !data) return <div>loading...</div>
 	console.log(data)
 	return (
@@ -17,7 +17,11 @@ function Search() {
 				{data.data.map((item, index) => (
 					<Dialog key={index}>
 						<DialogTrigger>
-							<img src={item.thumbnail} alt={item.title} className="aspect-video h-auto w-full rounded-md object-cover" />
+							<img
+								src={item.thumbnail}
+								alt={item.title}
+								className="aspect-video h-auto w-full rounded-md object-cover"
+							/>
 						</DialogTrigger>
 						<DialogContent>
 							<Detail movieId={item.id} />

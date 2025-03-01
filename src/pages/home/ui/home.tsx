@@ -8,7 +8,7 @@ import { useFetchMovies } from 'src/shared/models'
 import { useFetchRank } from 'src/shared/models/rank.mode'
 
 function Home() {
-	const { data: moviesData } = useFetchMovies(0, '')
+	const { data: moviesData } = useFetchMovies({ take: 0 })
 	const { data: rankData } = useFetchRank()
 	if (!rankData) return <div className="h-screen flex-center">Loading...</div>
 

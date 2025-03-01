@@ -1,5 +1,5 @@
 import { createQueryKeys } from '@lukemorales/query-key-factory'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import movie from '../api/movie'
 import { MovieControllerFindAllParamsDto } from '../api/data-contracts'
 import wishlist from '../api/wishlist'
@@ -11,7 +11,13 @@ export const movieQueryKey = createQueryKeys('movie', {
 	fetchWishlist: () => ['whislist'],
 })
 
-export const useFetchMovies = (take: number, page?: number, cursor?: string, title?: string) => {
+export const useFetchMovies = ({
+	take,
+	page,
+	cursor,
+	title,
+	order,
+}: Omit<MovieControllerFindAllParamsDto, 'order'> & { order?: string[] }) => {
 	const query: MovieControllerFindAllParamsDto = {
 		order: ['id_DESC'],
 		take,
@@ -21,9 +27,9 @@ export const useFetchMovies = (take: number, page?: number, cursor?: string, tit
 	if (cursor) Object.assign(query, { cursor })
 	if (page) Object.assign(query, { page })
 	if (title) Object.assign(query, { title })
-
+	if (order) Object.assign(query, { order })
 	return useQuery({
-		queryKey: movieQueryKey.fetchMovies(take, (cursor ?? page) as string | number).queryKey,
+		queryKey: movieQueryKey.fetchMovies(take, (cursor ?? page ?? title) as string | number).queryKey,
 		queryFn: () => movie.movieControllerFindAll(query),
 	})
 }
@@ -86,13 +92,18 @@ export const useDeleteMovie = () => {
 }
 
 export const useFetchWishlist = (take: number, page: number) => {
-	return useQuery({
+	return useInfiniteQuery({
 		queryKey: movieQueryKey.fetchWishlist().queryKey,
 		queryFn: () =>
 			wishlist.movieControllerFindAllMovieWish({
 				take,
 				page,
 			}),
+		initialPageParam: 1,
+		getNextPageParam: (lastPage) => {
+			console.log(lastPage)
+			return { lastPage }
+		},
 	})
 }
 

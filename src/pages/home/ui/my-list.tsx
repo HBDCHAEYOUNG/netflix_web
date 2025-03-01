@@ -4,19 +4,7 @@ import { Detail } from '@widgets/home'
 import { useFetchWishlist } from 'src/shared/models'
 
 function MyList() {
-	const { data: wishlist } = useFetchWishlist(10, 1)
-	// const useWishlist = useFetchWishlist
-
-	// const { data, error, fetchNextPage, hasNextPage, isFetchingNextPage, status } = useInfiniteQuery({
-	// 	queryKey: ['movies'],
-	// 	queryFn: async () => {
-	// 		return useWishlist(10, 1)
-	// 	},
-	// 	initialPageParam: undefined,
-	// 	getNextPageParam: (lastPage) => {
-	// 		return lastPage + 1
-	// 	},
-	// })
+	const { data } = useFetchWishlist(4, 1)
 
 	if (!data) return <div className="h-screen flex-center">데이터가 없습니다.</div>
 
@@ -24,8 +12,8 @@ function MyList() {
 		<div className="pt-32 common-padding">
 			<h2 className="Bold-Title2">My List</h2>
 			<div className="grid grid-cols-2 gap-x-[6px] gap-y-10 pt-4">
-				{wishlist &&
-					wishlist.map((item, index) => {
+				{data.pages.flatMap((page) =>
+					page.data.map((item, index) => {
 						return (
 							<Dialog key={index}>
 								<DialogTrigger>
@@ -43,7 +31,8 @@ function MyList() {
 								</DialogContent>
 							</Dialog>
 						)
-					})}
+					}),
+				)}
 			</div>
 		</div>
 	)
