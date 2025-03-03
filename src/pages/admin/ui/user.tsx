@@ -21,7 +21,7 @@ export function User() {
 	const [userId, setUserId] = useState(1)
 
 	const [pageIndex, setPageIndex] = useState(1)
-	const [take, setTake] = useState(3)
+	const [take, setTake] = useState(7)
 
 	const { data: usersData, isLoading } = useFetchUsers(pageIndex, take)
 	const { data: userData, isLoading: userLoading, refetch: refetchUser } = useFetchUser(userId)
@@ -59,7 +59,13 @@ export function User() {
 				<div>Loading...</div>
 			) : (
 				<>
-					<ReadModal data={userData} {...userReadModal} open={openRead} setOpen={setOpenRead} setOpenEdit={setOpenEdit} />
+					<ReadModal
+						data={userData}
+						{...userReadModal}
+						open={openRead}
+						setOpen={setOpenRead}
+						setOpenEdit={setOpenEdit}
+					/>
 					<EditModal
 						data={userData}
 						{...userEditModal}

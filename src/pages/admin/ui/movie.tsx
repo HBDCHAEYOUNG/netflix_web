@@ -14,7 +14,7 @@ const movieReadModal = {
 
 const movieEditModal = {
 	currentMenu: 'movie',
-	formItems: ['title', 'director'],
+	formItems: ['title'],
 }
 
 export function Movie() {
@@ -22,7 +22,7 @@ export function Movie() {
 	const [openEdit, setOpenEdit] = useState(false)
 	const [movieId, setMovieId] = useState(0)
 	const [pageIndex, setPageIndex] = useState(1)
-	const [take, setTake] = useState(3)
+	const [take, setTake] = useState(7)
 
 	const { data: moviesData, isLoading } = useFetchMovies({
 		take,

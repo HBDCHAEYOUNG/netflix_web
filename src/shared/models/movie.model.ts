@@ -49,7 +49,7 @@ export const usePostMovie = () => {
 				detail: data.detail,
 				directorId: Number(data.director),
 				genreIds: data.genreIds,
-				movieFileName: data.movieFileName,
+				movieFilePath: data.movieFilePathw,
 				thumbnail: data.thumbnail,
 				title: data.title,
 			}
@@ -69,7 +69,7 @@ export const usePatchMovie = () => {
 				detail: data.detail,
 				directorId: Number(data.director),
 				genreIds: data.genreIds,
-				movieFileName: data.movieFileName,
+				movieFilePath: data.movieFilePath,
 				thumbnail: data.thumbnail,
 				title: data.title,
 			}

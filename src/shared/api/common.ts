@@ -16,7 +16,8 @@ class Common<SecurityDataType = unknown> {
 	 * @summary 비디오 업로드
 	 * @request POST:/common/video
 	 * @secure
-	 * @response `201` `CommonControllerCreatedVideoDataDto`
+	 * @response `200` `CommonControllerCreatedVideoDataDto` 비디오 업로드 성공
+	 * @response `201` `void`
 	 */
 	commonControllerCreatedVideo = (data: CommonControllerCreatedVideoPayloadDto, params: RequestParams = {}) =>
 		this.http.request<CommonControllerCreatedVideoDataDto, any>({
@@ -24,8 +25,8 @@ class Common<SecurityDataType = unknown> {
 			method: 'POST',
 			body: data,
 			secure: true,
-			format: 'json',
 			type: ContentType.FormData,
+			format: 'json',
 			...params,
 		})
 }

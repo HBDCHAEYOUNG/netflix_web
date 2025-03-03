@@ -35,7 +35,6 @@ export namespace Movie {
 			order: string[]
 			/**
 			 * 페이지
-			 * @default 1
 			 * @example 1
 			 */
 			page?: number

@@ -23,7 +23,6 @@ export namespace Genre {
 		export type RequestQuery = {
 			/**
 			 * 페이지
-			 * @default 1
 			 * @example 1
 			 */
 			page?: number

@@ -144,7 +144,12 @@ class User<SecurityDataType = unknown> {
 	 * @secure
 	 * @response `200` `UserControllerUpdateUserProfileDataDto` 유저 프로필 수정 성공
 	 */
-	userControllerUpdateUserProfile = (profileId: number, id: number, data: UpdateUserProfileDtoDto, params: RequestParams = {}) =>
+	userControllerUpdateUserProfile = (
+		profileId: number,
+		id: number,
+		data: UpdateUserProfileDtoDto,
+		params: RequestParams = {},
+	) =>
 		this.http.request<UserControllerUpdateUserProfileDataDto, any>({
 			path: `/user/${id}/profile/${profileId}`,
 			method: 'PATCH',

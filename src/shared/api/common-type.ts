@@ -8,7 +8,8 @@ export namespace Common {
 	 * @summary 비디오 업로드
 	 * @request POST:/common/video
 	 * @secure
-	 * @response `201` `CommonControllerCreatedVideoDataDto`
+	 * @response `200` `CommonControllerCreatedVideoDataDto` 비디오 업로드 성공
+	 * @response `201` `void`
 	 */
 	export namespace CommonControllerCreatedVideo {
 		export type RequestParams = {}

@@ -4,7 +4,13 @@ import { AdminTable } from '@widgets/admin'
 import { directorColumns } from '@widgets/admin/const/director-columns'
 import { useState } from 'react'
 import { flushSync } from 'react-dom'
-import { useDeleteDirector, useFetchDirector, useFetchDirectors, usePatchDirector, usePostDirector } from 'src/shared/models'
+import {
+	useDeleteDirector,
+	useFetchDirector,
+	useFetchDirectors,
+	usePatchDirector,
+	usePostDirector,
+} from 'src/shared/models'
 
 const directorModal = {
 	currentMenu: 'director',
@@ -16,7 +22,7 @@ export function Director() {
 
 	const [directorId, setDirectorId] = useState(1)
 	const [pageIndex, setPageIndex] = useState(1)
-	const [take, setTake] = useState(3)
+	const [take, setTake] = useState(7)
 
 	const { data: directorsData, isLoading } = useFetchDirectors(pageIndex, take)
 	const { data: directorData, isLoading: directorLoading, refetch: refetchDirector } = useFetchDirector(directorId)

@@ -2,6 +2,7 @@ import { createQueryKeys } from '@lukemorales/query-key-factory'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import director from '../api/director'
 import { CreateDirectorDtoDto } from '../api/data-contracts'
+import { movieQueryKey } from './movie.model'
 
 export const directorQueryKey = createQueryKeys('director', {
 	fetchDirectors: (page: number, take: number) => [page, take],
@@ -39,14 +40,15 @@ export const usePatchDirector = () => {
 	return useMutation({
 		mutationFn: ({ id, data }: { id: number; data: any }) => {
 			const newData = {
-				detail: data.detail,
-				directorFileName: data.directorFile,
+				dob: data.dob,
+				nationality: data.nationality,
 				name: data.name,
 			}
 			return director.directorControllerUpdate(id, newData)
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: directorQueryKey._def })
+			queryClient.invalidateQueries({ queryKey: movieQueryKey._def })
 		},
 	})
 }

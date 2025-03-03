@@ -84,7 +84,9 @@ export class HttpClient<SecurityDataType = unknown> {
 	protected toQueryString(rawQuery?: QueryParamsType): string {
 		const query = rawQuery || {}
 		const keys = Object.keys(query).filter((key) => 'undefined' !== typeof query[key])
-		return keys.map((key) => (Array.isArray(query[key]) ? this.addArrayQueryParam(query, key) : this.addQueryParam(query, key))).join('&')
+		return keys
+			.map((key) => (Array.isArray(query[key]) ? this.addArrayQueryParam(query, key) : this.addQueryParam(query, key)))
+			.join('&')
 	}
 
 	protected addQueryParams(rawQuery?: QueryParamsType): string {

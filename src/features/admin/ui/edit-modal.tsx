@@ -30,23 +30,24 @@ export function EditModal({ data, currentMenu, formItems, open, setOpen, mutateA
 	}
 
 	const handleDelete = async () => {
-		try {
-			await deleteAsync(data.id)
-			setOpen(false)
-			alert('delete success')
-		} catch (e: any) {
-			alert(e.error.message)
+		if (confirm('Are you sure you want to delete?')) {
+			try {
+				await deleteAsync(data.id)
+				setOpen(false)
+				alert('delete success')
+			} catch (e: any) {
+				alert(e.error.message)
+			}
 		}
 	}
 
 	useEffect(() => {
 		if (currentMenu === 'movie' && data) {
-			console.log(1111111, data)
 			form.reset({
 				title: data.title,
 				director: data.director.id,
 				genreIds: data.genres.map((genre: any) => parseInt(genre.id, 10)),
-				movieFileName: data.movieFilePath,
+				movieFilePath: data.movieFilePath,
 				thumbnail: data.thumbnail,
 				detail: data.detail.detail,
 			})
@@ -69,8 +70,6 @@ export function EditModal({ data, currentMenu, formItems, open, setOpen, mutateA
 			})
 		}
 	}, [currentMenu, data, form])
-
-	console.log('Form values (edit):', form.watch())
 
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>

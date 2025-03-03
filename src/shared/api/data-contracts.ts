@@ -20,7 +20,7 @@ export type AuthControllerRegisterUserDataDto = TokenResDtoDto
 
 export type AuthControllerRotateAccessTokenDataDto = TokenAccessResDtoDto
 
-export type CommonControllerCreatedVideoDataDto = any
+export type CommonControllerCreatedVideoDataDto = VideoUploadResDtoDto
 
 export interface CommonControllerCreatedVideoPayloadDto {
 	/**
@@ -77,7 +77,7 @@ export interface CreateMovieDtoDto {
 	 * 영화 파일 이름
 	 * @example "aaa-bbbb-cccc.jpg"
 	 */
-	movieFileName: string
+	movieFilePath: string
 	/**
 	 * 영화 썸네일 파일
 	 * @example "aaa-bbbb-cccc.png"
@@ -110,7 +110,6 @@ export type DirectorControllerFindAllDataDto = GetDirectorsResDtoDto
 export interface DirectorControllerFindAllParamsDto {
 	/**
 	 * 페이지
-	 * @default 1
 	 * @example 1
 	 */
 	page?: number
@@ -164,7 +163,6 @@ export type GenreControllerFindAllDataDto = GetGenresResDtoDto
 export interface GenreControllerFindAllParamsDto {
 	/**
 	 * 페이지
-	 * @default 1
 	 * @example 1
 	 */
 	page?: number
@@ -411,7 +409,6 @@ export type MovieControllerFindAllMovieWishDataDto = GetMovieWishlistResDtoDto
 export interface MovieControllerFindAllMovieWishParamsDto {
 	/**
 	 * 페이지
-	 * @default 1
 	 * @example 1
 	 */
 	page?: number
@@ -432,7 +429,6 @@ export interface MovieControllerFindAllParamsDto {
 	order: string[]
 	/**
 	 * 페이지
-	 * @default 1
 	 * @example 1
 	 */
 	page?: number
@@ -608,7 +604,7 @@ export interface UpdateMovieDtoDto {
 	 * 영화 파일 이름
 	 * @example "aaa-bbbb-cccc.jpg"
 	 */
-	movieFileName?: string
+	movieFilePath?: string
 	/**
 	 * 영화 썸네일 파일
 	 * @example "aaa-bbbb-cccc.png"
@@ -665,7 +661,6 @@ export type UserControllerFindAllDataDto = GetUsersResDtoDto
 export interface UserControllerFindAllParamsDto {
 	/**
 	 * 페이지
-	 * @default 1
 	 * @example 1
 	 */
 	page?: number
@@ -731,4 +726,17 @@ export enum UserRoleEnumDto {
 	Value2 = '2',
 	Value3 = '3',
 	Value4 = '4',
+}
+
+export interface VideoUploadResDtoDto {
+	/**
+	 * 파일 이름
+	 * @example "050c34ab-dddf-4bb5-af5e-2f1ce7e481df_1741016363291.mp4"
+	 */
+	fileName: string
+	/**
+	 * 파일 경로
+	 * @example "http://localhost:3000/public/temp/050c34ab-dddf-4bb5-af5e-2f1ce7e481df_1741016363291.mp4"
+	 */
+	filePath: string
 }

@@ -23,7 +23,6 @@ export function ReadModal({ data, currentMenu, formItems, open, setOpen, setOpen
 
 	useEffect(() => {
 		if (currentMenu === 'movie' && data) {
-			console.log(data)
 			form.reset({
 				title: data.title,
 				director: data.director.name,

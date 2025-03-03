@@ -27,7 +27,17 @@ interface AdminTableProps {
 	setTake: (take: number) => void
 }
 
-export function AdminTable({ data, currentMenu, columns, handleDetail, count, pageIndex, setPageIndex, take, setTake }: AdminTableProps) {
+export function AdminTable({
+	data,
+	currentMenu,
+	columns,
+	handleDetail,
+	count,
+	pageIndex,
+	setPageIndex,
+	take,
+	setTake,
+}: AdminTableProps) {
 	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
 	const [sorting, setSorting] = useState<SortingState>([])
 
@@ -56,7 +66,7 @@ export function AdminTable({ data, currentMenu, columns, handleDetail, count, pa
 	return (
 		<div className="px-10 pb-20">
 			<Select
-				items={['3', '5', '7', '10']}
+				items={['7', '15', '30']}
 				type="admin"
 				className="absolute right-[314px] top-[84px] h-[34px] w-20 rounded-none border border-Grey/Grey-20 bg-Primary/White text-Primary/Black"
 				contentClassName="!rounded-none border-Grey/Grey-20 !bg-Primary/White"

@@ -1,19 +1,22 @@
+import { cn } from '@lib/utils'
+import { DropdownMenuCheckboxItemProps } from '@radix-ui/react-dropdown-menu'
 import {
 	DropdownMenu,
 	DropdownMenuCheckboxItem,
 	DropdownMenuContent,
 	DropdownMenuLabel,
+	DropdownMenuRadioGroup,
+	DropdownMenuRadioItem,
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from '@ui/_shardcn/dropdown-menu'
-import { Button, InputText } from '@ui/index'
-import { useFetchGenres } from 'src/shared/models/genre.model'
-import { DropdownMenuCheckboxItemProps } from '@radix-ui/react-dropdown-menu'
-import React from 'react'
-import { usePostVideo } from 'src/shared/models/video.model'
 import Form from '@ui/form/form'
+import { Button, InputText } from '@ui/index'
+import React from 'react'
 import { UseFormReturn } from 'react-hook-form'
-import { cn } from '@lib/utils'
+import { useFetchDirectors } from 'src/shared/models'
+import { useFetchGenres } from 'src/shared/models/genre.model'
+import { usePostVideo } from 'src/shared/models/video.model'
 
 type Checked = DropdownMenuCheckboxItemProps['checked']
 interface ViewState {
@@ -22,31 +25,25 @@ interface ViewState {
 
 export function MovieItems({ form }: { form: UseFormReturn }) {
 	const { data: Genres } = useFetchGenres(1, 20)
+	const { data: Directors } = useFetchDirectors(1, 20)
 	const { mutateAsync: postVideo } = usePostVideo()
 
-	const [views, setViews] = React.useState<ViewState>({
+	const [genreViews, setGenreViews] = React.useState<ViewState>({
 		1: false,
-		2: false,
-		3: false,
-		4: false,
-		5: false,
-		6: false,
-		7: false,
-		8: false,
-		9: false,
 	})
 
-	const updateView = (key: keyof ViewState) => (value: Checked) => {
-		setViews((prev) => ({ ...prev, [key]: value }))
+	const updateGenreView = (key: keyof ViewState) => (value: Checked) => {
+		setGenreViews((prev) => ({ ...prev, [key]: value }))
 	}
 
-	const onCheckedChange = (key: keyof ViewState) => (value: Checked) => {
-		updateView(key)(value)
-		const updatedViews = { ...views, [key]: value }
-		const selectedGenres: number[] = Object.keys(updatedViews)
-			.filter((key) => updatedViews[Number(key)])
+	const onCheckedGenreChange = (key: keyof ViewState) => (value: Checked) => {
+		updateGenreView(key)(value)
+		const updatedGenreViews = { ...genreViews, [key]: value }
+		const selectedGenres: number[] = Object.keys(updatedGenreViews)
+			.filter((key) => updatedGenreViews[Number(key)])
 			.map((key) => parseInt(key, 10))
 		form.setValue('genreIds', selectedGenres)
+		console.log(selectedGenres)
 	}
 
 	const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,7 +51,7 @@ export function MovieItems({ form }: { form: UseFormReturn }) {
 		if (file) {
 			try {
 				const video = await postVideo({ video: file })
-				form.setValue('movieFileName', video.fileName.toString())
+				form.setValue('movieFilePath', video.fileName.toString())
 			} catch (error) {
 				console.error('Upload error:', error)
 			}
@@ -63,21 +60,54 @@ export function MovieItems({ form }: { form: UseFormReturn }) {
 
 	React.useEffect(() => {
 		form.register('genreIds')
-		form.register('movieFileName')
-
+		form.register('movieFilePath')
+		form.register('directorId')
 		// 초기 genreIds가 있는 경우 views 상태 업데이트
 		const initialGenreIds = form.getValues('genreIds')
 		if (initialGenreIds?.length) {
-			const initialViews = { ...views }
+			const initialGenreViews = { ...genreViews }
 			initialGenreIds.forEach((id: number) => {
-				initialViews[id] = true
+				initialGenreViews[id] = true
 			})
-			setViews(initialViews)
+			setGenreViews(initialGenreViews)
 		}
 	}, [form])
-
 	return (
 		<>
+			<DropdownMenu>
+				<DropdownMenuTrigger asChild>
+					<Button variant="outline" className="relative h-14 items-center justify-start border-Grey/Grey-20 px-3">
+						<p
+							className={cn(
+								'text-base !text-Grey/Grey-150',
+								form.watch('director') && '!text-Black absolute left-3 top-1 text-xs',
+							)}
+						>
+							Director
+						</p>
+						{form.watch('director') && (
+							<span className="pt-3 text-base">
+								{Directors?.data.find((d) => d.id === form.watch('director'))?.name}
+							</span>
+						)}
+					</Button>
+				</DropdownMenuTrigger>
+				<DropdownMenuContent className="bg-Primary/White">
+					<DropdownMenuLabel>Director</DropdownMenuLabel>
+					<DropdownMenuSeparator />
+					<DropdownMenuRadioGroup
+						value={form.watch('director')?.toString() || ''}
+						onValueChange={(value) => form.setValue('director', Number(value))}
+					>
+						{Directors &&
+							Directors.data.map((director) => (
+								<DropdownMenuRadioItem key={director.id} value={director.id.toString()}>
+									{director.name}
+								</DropdownMenuRadioItem>
+							))}
+					</DropdownMenuRadioGroup>
+				</DropdownMenuContent>
+			</DropdownMenu>
 			<DropdownMenu>
 				<DropdownMenuTrigger asChild>
 					<Button variant="outline" className="relative h-14 items-center justify-start border-Grey/Grey-20 px-3">
@@ -107,8 +137,8 @@ export function MovieItems({ form }: { form: UseFormReturn }) {
 						Genres.data.map((genre) => (
 							<DropdownMenuCheckboxItem
 								key={genre.id}
-								checked={views[genre.id]}
-								onCheckedChange={onCheckedChange(genre.id)}
+								checked={genreViews[genre.id]}
+								onCheckedChange={onCheckedGenreChange(genre.id)}
 							>
 								{genre.name}
 							</DropdownMenuCheckboxItem>

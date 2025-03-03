@@ -4,7 +4,13 @@ import { AdminTable } from '@widgets/admin'
 import { genreColumns } from '@widgets/admin/const/genre-columns'
 import { useState } from 'react'
 import { flushSync } from 'react-dom'
-import { useDeleteGenre, useFetchGenre, useFetchGenres, usePatchGenre, usePostGenre } from 'src/shared/models/genre.model'
+import {
+	useDeleteGenre,
+	useFetchGenre,
+	useFetchGenres,
+	usePatchGenre,
+	usePostGenre,
+} from 'src/shared/models/genre.model'
 
 const genreModal = {
 	currentMenu: 'genre',
@@ -16,7 +22,7 @@ export function Genre() {
 	const [genreId, setGenreId] = useState(1)
 
 	const [pageIndex, setPageIndex] = useState(1)
-	const [take, setTake] = useState(3)
+	const [take, setTake] = useState(7)
 
 	const { data: genresData, isLoading } = useFetchGenres(pageIndex, take)
 	const { data: genreData, isLoading: genreLoading, refetch: refetchGenre } = useFetchGenre(genreId)
@@ -56,7 +62,14 @@ export function Genre() {
 			{genreLoading ? (
 				<div>Loading...</div>
 			) : (
-				<EditModal data={genreData} {...genreModal} open={open} setOpen={setOpen} mutateAsync={patchGenre} deleteAsync={deleteGenre} />
+				<EditModal
+					data={genreData}
+					{...genreModal}
+					open={open}
+					setOpen={setOpen}
+					mutateAsync={patchGenre}
+					deleteAsync={deleteGenre}
+				/>
 			)}
 		</div>
 	)
