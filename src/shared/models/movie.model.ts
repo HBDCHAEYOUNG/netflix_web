@@ -49,7 +49,7 @@ export const usePostMovie = () => {
 				detail: data.detail,
 				directorId: Number(data.director),
 				genreIds: data.genreIds,
-				movieFilePath: data.movieFilePathw,
+				movieFilePath: data.movieFilePath,
 				thumbnail: data.thumbnail,
 				title: data.title,
 			}
@@ -91,18 +91,18 @@ export const useDeleteMovie = () => {
 	})
 }
 
-export const useFetchWishlist = (take: number, page: number) => {
+export const useFetchWishlist = (take: number) => {
 	return useInfiniteQuery({
 		queryKey: movieQueryKey.fetchWishlist().queryKey,
-		queryFn: () =>
-			wishlist.movieControllerFindAllMovieWish({
+		queryFn: ({ pageParam }) => {
+			return wishlist.movieControllerFindAllMovieWish({
 				take,
-				page,
-			}),
+				page: pageParam,
+			})
+		},
 		initialPageParam: 1,
-		getNextPageParam: (lastPage) => {
-			console.log(lastPage)
-			return { lastPage }
+		getNextPageParam: (lastPage, allPages) => {
+			return lastPage.count > take * allPages.length ? allPages.length + 1 : undefined
 		},
 	})
 }
@@ -115,7 +115,6 @@ export const usePostWishlist = () => {
 			return id
 		},
 		onSuccess: (id) => {
-			console.log(movieQueryKey.fetchMovie(id).queryKey)
 			queryClient.invalidateQueries({ queryKey: movieQueryKey.fetchWishlist().queryKey })
 			queryClient.invalidateQueries({ queryKey: movieQueryKey.fetchMovie(id).queryKey })
 		},

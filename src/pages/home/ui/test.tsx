@@ -1,31 +1,25 @@
-import { CarouselBtn, MoreinfoImg } from '@entities/home'
-import { cn } from '@lib/utils'
-import { useInfiniteQuery } from '@tanstack/react-query'
-import { Carousel, CarouselContent, CarouselItem } from '@ui/index'
-import movie from 'src/shared/api/movie'
-
 export function Test() {
-	const take = 5
+	// const take = 5
 
-	const { data, error, fetchNextPage, hasNextPage, isFetchingNextPage, status } = useInfiniteQuery({
-		queryKey: ['movies'],
-		queryFn: async ({ pageParam }) => {
-			const query = {
-				order: ['id_DESC'],
-				take: take,
-				cursor: pageParam,
-			}
-			return movie.movieControllerFindAll(query)
-		},
-		initialPageParam: undefined,
-		getNextPageParam: (lastPage) => {
-			return lastPage.count > take ? lastPage.nextCursor : undefined
-		},
-	})
-	console.log('data', data)
+	// const { data, error, fetchNextPage, hasNextPage, isFetchingNextPage, status } = useInfiniteQuery({
+	// 	queryKey: ['movies'],
+	// 	queryFn: async ({ pageParam }) => {
+	// 		const query = {
+	// 			order: ['id_DESC'],
+	// 			take: take,
+	// 			cursor: pageParam,
+	// 		}
+	// 		return movie.movieControllerFindAll(query)
+	// 	},
+	// 	initialPageParam: undefined,
+	// 	getNextPageParam: (lastPage) => {
+	// 		return lastPage.count > take ? lastPage.nextCursor : undefined
+	// 	},
+	// })
+	// console.log('data', data)
 	return (
 		<div className="h-screen w-full flex-col flex-center">
-			{status === 'pending' ? (
+			{/* {status === 'pending' ? (
 				<p>Loading...</p>
 			) : status === 'error' ? (
 				<p>Error: {error.message}</p>
@@ -56,7 +50,7 @@ export function Test() {
 						/>
 					</Carousel>
 				</div>
-			)}
+			)} */}
 		</div>
 	)
 }

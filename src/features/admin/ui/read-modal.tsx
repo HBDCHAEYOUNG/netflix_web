@@ -54,21 +54,30 @@ export function ReadModal({ data, currentMenu, formItems, open, setOpen, setOpen
 							<InputText readOnly label={item} className="border-Grey/Grey-20 bg-transparent" />
 						</Form.Item>
 					))}
+
 					{currentMenu === 'movie' && (
-						<Form.Item name="detail">
-							<div className="relative">
-								<label htmlFor="detail" className="absolute left-3 top-2 Regular-Caption1">
-									detail
-								</label>
-								<textarea
-									readOnly
-									{...form.register('detail')}
-									id="detail"
-									className="min-h-60 w-full rounded-md border border-Grey/Grey-20 p-3 pt-6 focus:outline-black"
-									placeholder="Write a brief movie summary"
-								/>
+						<>
+							<Form.Item name="detail">
+								<div className="relative">
+									<label htmlFor="detail" className="absolute left-3 top-2 Regular-Caption1">
+										detail
+									</label>
+									<textarea
+										readOnly
+										{...form.register('detail')}
+										id="detail"
+										className="min-h-60 w-full rounded-md border border-Grey/Grey-20 p-3 pt-6 focus:outline-black"
+										placeholder="Write a brief movie summary"
+									/>
+								</div>
+							</Form.Item>
+							<div className="mx-1 gap-2 flex-center">
+								{data?.movieFilePath && (
+									<video controls src={`http://localhost:3000/${data.movieFilePath}`} className="aspect-video w-1/2" />
+								)}
+								{data?.thumbnail && <img src={data.thumbnail} alt="thumbnail" className="aspect-video w-1/2" />}
 							</div>
-						</Form.Item>
+						</>
 					)}
 					<button type="submit" className="mt-8 w-full rounded-md bg-Primary/Red py-4 font-bold !text-Primary/White">
 						Edit

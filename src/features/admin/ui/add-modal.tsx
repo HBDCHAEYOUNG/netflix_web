@@ -19,6 +19,7 @@ export function AddModal({ currentMenu, formItems, mutateAsync }: AddModalProps)
 	const onSubmitAdd = async () => {
 		try {
 			const values = form.getValues()
+			console.log(1111, values)
 			await mutateAsync(values)
 			alert('add success')
 			setOpen(false)

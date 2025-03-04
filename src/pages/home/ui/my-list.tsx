@@ -2,16 +2,30 @@ import { WithAuth } from '@hooks/with-auth'
 import { Dialog, DialogContent, DialogTrigger } from '@ui/index'
 import { Detail } from '@widgets/home'
 import { useFetchWishlist } from 'src/shared/models'
+import { useInView } from 'react-intersection-observer'
+import { useEffect } from 'react'
 
 function MyList() {
-	const { data } = useFetchWishlist(4, 1)
+	const { data, fetchNextPage, hasNextPage } = useFetchWishlist(18)
+
+	const { ref, inView } = useInView({
+		rootMargin: '0px 0px 0px 0px',
+		threshold: 0.5,
+	})
+
+	useEffect(() => {
+		if (inView) {
+			fetchNextPage()
+			console.log(hasNextPage)
+		}
+	}, [inView])
 
 	if (!data) return <div className="h-screen flex-center">데이터가 없습니다.</div>
 
 	return (
 		<div className="pt-32 common-padding">
 			<h2 className="Bold-Title2">My List</h2>
-			<div className="grid grid-cols-2 gap-x-[6px] gap-y-10 pt-4">
+			<div className="grid grid-cols-6 gap-x-[6px] gap-y-10 pt-4">
 				{data.pages.flatMap((page) =>
 					page.data.map((item, index) => {
 						return (
@@ -24,6 +38,7 @@ function MyList() {
 										}
 										alt={item.title}
 										className="aspect-video h-auto w-full rounded-md"
+										ref={index === page.data.length - 1 ? ref : undefined}
 									/>
 								</DialogTrigger>
 								<DialogContent>
@@ -34,6 +49,7 @@ function MyList() {
 					}),
 				)}
 			</div>
+			{hasNextPage && <p className="text-center text-Primary/Red">Loading...</p>}
 		</div>
 	)
 }
