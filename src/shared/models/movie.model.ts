@@ -8,7 +8,8 @@ import like from '../api/like'
 export const movieQueryKey = createQueryKeys('movie', {
 	fetchMovies: (take: number, pagination: string | number, title?: string) => [take, pagination, title],
 	fetchMovie: (id: number) => [id],
-	fetchWishlist: () => ['whislist'],
+	fetchWishlist: () => ['infinite', 'whislist'],
+	fetchInfiniteMovies: () => ['infinite', 'movies'],
 })
 
 export const useFetchMovies = ({
@@ -31,6 +32,24 @@ export const useFetchMovies = ({
 	return useQuery({
 		queryKey: movieQueryKey.fetchMovies(take, (cursor ?? page ?? title) as string | number).queryKey,
 		queryFn: () => movie.movieControllerFindAll(query),
+	})
+}
+
+export const useInfiniteFetchMovies = (take: number) => {
+	return useInfiniteQuery({
+		queryKey: movieQueryKey.fetchInfiniteMovies().queryKey,
+		queryFn: async ({ pageParam }) => {
+			const query = {
+				order: ['id_DESC'],
+				take: take,
+				cursor: pageParam,
+			}
+			return movie.movieControllerFindAll(query)
+		},
+		initialPageParam: undefined,
+		getNextPageParam: (lastPage) => {
+			return lastPage.count > take ? lastPage.nextCursor : undefined
+		},
 	})
 }
 

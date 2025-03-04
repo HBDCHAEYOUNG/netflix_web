@@ -4,9 +4,9 @@ import { Detail } from '@widgets/home'
 import { useFetchWishlist } from 'src/shared/models'
 import { useInView } from 'react-intersection-observer'
 import { useEffect } from 'react'
-
+import LoadingIcon from '@icons/loading.svg?react'
 function MyList() {
-	const { data, fetchNextPage, hasNextPage } = useFetchWishlist(18)
+	const { data, fetchNextPage, hasNextPage } = useFetchWishlist(4)
 
 	const { ref, inView } = useInView({
 		rootMargin: '0px 0px 0px 0px',
@@ -25,7 +25,7 @@ function MyList() {
 	return (
 		<div className="pt-32 common-padding">
 			<h2 className="Bold-Title2">My List</h2>
-			<div className="grid grid-cols-6 gap-x-[6px] gap-y-10 pt-4">
+			<div className="grid grid-cols-2 gap-x-[6px] gap-y-10 pt-4">
 				{data.pages.flatMap((page) =>
 					page.data.map((item, index) => {
 						return (
@@ -49,7 +49,7 @@ function MyList() {
 					}),
 				)}
 			</div>
-			{hasNextPage && <p className="text-center text-Primary/Red">Loading...</p>}
+			{hasNextPage && <LoadingIcon className="mx-auto my-10 h-8 w-8 animate-spin" />}
 		</div>
 	)
 }

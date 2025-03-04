@@ -9,13 +9,8 @@ interface MoreInfoImgProps {
 export function MoreinfoImg({ movieId, movieImage }: MoreInfoImgProps) {
 	return (
 		<Dialog>
-			<DialogTrigger>
-				<img
-					//src="https://images.unsplash.com/photo-1705418181762-1a52ab82ddf5?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-					src={movieImage}
-					alt="아델리펭귄"
-					className="aspect-[23/13] h-auto w-full rounded-md object-cover"
-				/>
+			<DialogTrigger className="aspect-[23/13] w-full">
+				<img src={movieImage} alt="아델리펭귄" className="aspect-[23/13] h-full rounded-md object-cover" />
 			</DialogTrigger>
 			<DialogContent>
 				<Detail movieId={movieId} />

@@ -8,7 +8,7 @@ import { useFetchMovies } from 'src/shared/models'
 import { useFetchRank } from 'src/shared/models/rank.mode'
 
 function Home() {
-	const { data: moviesData } = useFetchMovies({ take: 0 })
+	const { data: moviesData } = useFetchMovies({ take: 10 })
 	const { data: rankData } = useFetchRank()
 	if (!rankData) return <div className="h-screen flex-center">Loading...</div>
 
@@ -50,13 +50,7 @@ function Home() {
 					<CarouselContent className="px-14">
 						{moviesData?.data.map((movie, index) => (
 							<CarouselItem key={index} className={cn('basis-1/5 cursor-pointer transition-all duration-700')}>
-								<MoreinfoImg
-									movieImage={
-										movie.thumbnail ||
-										'https://occ-0-1361-325.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABT-QluA7qJRE6WnLFefO6LrzXTCJSNDrG50CONz6Lz8DI9-z3SAValsqr6Dm3hTk0jbPYikgRMNakph2QIgZqUKybkGl8STwXZYsEwO8lrqR0LE_FMHIEvS16oJfy727U65K.jpg?r=169'
-									}
-									movieId={movie.id}
-								/>
+								<MoreinfoImg movieImage={movie.thumbnail} movieId={movie.id} />
 							</CarouselItem>
 						))}
 					</CarouselContent>
