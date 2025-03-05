@@ -1,11 +1,25 @@
-import Button from '@ui/button/button'
-import { useState } from 'react'
 import ThumbUp from '@icons/thumb-up-fill.svg?react'
-import { Link } from 'react-router-dom'
+import { cn } from '@lib/utils'
+import Button from '@ui/button/button'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@ui/index'
+import { useEffect, useState } from 'react'
+import { useInView } from 'react-intersection-observer'
+import { Link } from 'react-router-dom'
+import { useInfiniteFetchMovies } from 'src/shared/models'
 
 export function StepThree() {
 	const [likeContents, setLikeContents] = useState<string[]>([])
+
+	const { data: movies, fetchNextPage } = useInfiniteFetchMovies(10)
+	console.log(111, movies)
+
+	const profileData = JSON.parse(sessionStorage.getItem('profileData') || '{}')
+	console.log(profileData)
+
+	const { ref, inView } = useInView({
+		rootMargin: '0px 0px 0px 0px',
+		threshold: 0.95,
+	})
 
 	const onClickContent = (content: string) => {
 		setLikeContents((prev) => [...prev, content])
@@ -13,34 +27,58 @@ export function StepThree() {
 			setLikeContents((prev) => prev.filter((prev) => content !== prev))
 		}
 	}
+
+	useEffect(() => {
+		if (inView) {
+			fetchNextPage()
+		}
+	}, [inView])
+
 	return (
-		<div className="flex min-h-screen w-full flex-col justify-center pt-24">
+		<div className="mt-10 flex min-h-screen w-full flex-col">
 			<h1 className="mx-auto max-w-base Medium-LargeTitle">WooHyuk, choose your 3 favorite contents</h1>
 			<p className="mx-auto my-6 !font-normal text-TransparentWhite/70% max-w-base Regular-Title3">
 				We'll help you find series and movies that perfectly match your taste. Choose content that you like.
 			</p>
-			<Carousel opts={{ slidesToScroll: 'auto', loop: true }} className="my-6">
-				<CarouselContent className="pl-[156px]">
-					{Array.from({ length: 12 }).map((_, index) => (
-						<CarouselItem key={index} className="relative w-[10%] basis-[10%]">
-							<img
-								src="https://occ-0-1361-325.1.nflxso.net/dnm/api/v6/mAcAr9TxZIVbINe88xb3Teg5_OA/AAAABXXuSKJKuMesBLmtpX9tbK-YO0hHcPpP314H0bPrpyHpLHwFb1Tkg3n1obTF3ocuV0eokxDXc9T_2tpWcmEI08BF2-JV-qZgc80DbeAFMC7hRoAK7GQgIbZFFB4UZFP6eMzrNlngzuzLoOMDQH11jshkxWausRtUsntiOp6aCeTpvGn61RBeBq-KzZ7N9CoCxtfYCpgY1uiMu0NCJHj1fkHSpNY3OOVCK0wfZfN2Rf7HZpg1l02IaxKkhAEhKI0ZXnVrlc8QsS99MnPF2qsPXtr4pGJsoIaUGUqRvpl_ZgiVAoD4x0rVlE7tEL6xymnsMLIrI2SsKN0ZWrnJdqMS8R1_HO4HxQklE5Jc_3y5QhaC9I4Ew_zfEx_kewfobIE1mFILgGy7Ds2BrAwcblgRnQg34eAdwBuA_N8O_DLlaSa9aS1Zp2RvrOnjCjqRZqeTy0wQfQP1EWaHGAWTlC7XLkrjTNr31qklA0sSRA.jpg?r=eec"
-								alt={`content${index + 1}`}
-								className={`${likeContents.find((content) => content === `content${index + 1}`) && 'opacity-60'} cursor-pointer hover:opacity-40`}
+
+			<Carousel opts={{ slidesToScroll: 'auto', dragFree: true }}>
+				<CarouselContent className="px-14">
+					{movies?.pages
+						.flatMap((page) => page.data)
+						.map((movie, index, array) => (
+							<CarouselItem
+								key={index}
+								className={cn('relative basis-1/5 cursor-pointer transition-all duration-700')}
 								onClick={() => onClickContent(`content${index + 1}`)}
-							/>
-							{likeContents.find((content) => content === `content${index + 1}`) && (
-								<ThumbUp className="absolute left-1/2 top-1/2 size-7 -translate-x-1/2 -translate-y-1/2" />
-							)}
-						</CarouselItem>
-					))}
+							>
+								<img
+									src={movie.thumbnail}
+									alt={`content${index + 1}`}
+									className={`aspect-[23/13] h-full rounded-md object-cover ${likeContents.find((content) => content === `content${index + 1}`) && 'opacity-60'} cursor-pointer hover:opacity-40`}
+									ref={index === array.length - 1 ? ref : undefined}
+								/>
+								{likeContents.find((content) => content === `content${index + 1}`) && (
+									<ThumbUp className="absolute left-1/2 top-1/2 size-7 -translate-x-1/2 -translate-y-1/2" />
+								)}
+							</CarouselItem>
+						))}
 				</CarouselContent>
-				<CarouselPrevious className="absolute left-0 z-10 h-full w-8 hover:scale-150 hover:bg-TransparentBlack/30%" />
-				<CarouselNext className="absolute right-0 z-10 h-full w-8 hover:scale-150 hover:bg-TransparentBlack/30%" />
+
+				<CarouselPrevious className="absolute left-0 top-1/2 z-10 h-full w-10 -translate-y-1/2 cursor-pointer hover:scale-150 hover:bg-black/50" />
+				<CarouselNext className="absolute right-0 top-1/2 h-full w-10 -translate-y-1/2 cursor-pointer hover:scale-150 hover:bg-black/50" />
 			</Carousel>
-			<Button theme={likeContents.length > 2 ? 'primary' : 'secondary'} className="mx-auto my-12 h-16 w-[400px] Medium-Title2">
-				{likeContents.length > 2 ? <Link to="/profiles">Complete!</Link> : 'Select 3 contents'}
-			</Button>
+
+			<Link to={likeContents.length > 2 ? '/profiles' : '#'}>
+				<Button
+					theme={likeContents.length > 2 ? 'primary' : 'secondary'}
+					className={cn(
+						'mx-auto my-12 h-16 w-[400px] Medium-Title2',
+						likeContents.length > 2 ? 'cursor-pointer' : 'cursor-not-allowed',
+					)}
+				>
+					{likeContents.length > 2 ? 'Complete!' : 'Select 3 contents'}
+				</Button>
+			</Link>
 		</div>
 	)
 }

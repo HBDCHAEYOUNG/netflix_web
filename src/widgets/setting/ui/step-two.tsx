@@ -10,10 +10,11 @@ interface StepTwoProps {
 export function StepTwo({ onClickNext }: StepTwoProps) {
 	const form = useForm()
 	return (
-		<div className="flex min-h-screen max-w-[400px] flex-col justify-center pt-24">
+		<div className="flex min-h-screen max-w-[400px] flex-col justify-center">
 			<h1 className="Medium-LargeTitle">Let's add some information to Woohyuk's profile</h1>
 			<p className="my-6 !font-normal text-TransparentWhite/70% Regular-Title3">
-				Just let us know a few things for personalized ads, viewing ratings settings, and other purposes in line with Netflix's policies.
+				Just let us know a few things for personalized ads, viewing ratings settings, and other purposes in line with
+				Netflix's policies.
 			</p>
 			<Form form={form} onSubmit={() => {}}>
 				<h3 className="mb-6 Regular-Title3">Date of Birth</h3>
