@@ -6,7 +6,7 @@ import { useInView } from 'react-intersection-observer'
 import { useEffect } from 'react'
 import LoadingIcon from '@icons/loading.svg?react'
 function MyList() {
-	const { data, fetchNextPage, hasNextPage } = useFetchWishlist(4)
+	const { data, fetchNextPage, hasNextPage } = useFetchWishlist(16)
 
 	const { ref, inView } = useInView({
 		rootMargin: '0px 0px 0px 0px',
@@ -23,9 +23,9 @@ function MyList() {
 	if (!data) return <div className="h-screen flex-center">데이터가 없습니다.</div>
 
 	return (
-		<div className="pt-32 common-padding">
-			<h2 className="Bold-Title2">My List</h2>
-			<div className="grid grid-cols-2 gap-x-[6px] gap-y-10 pt-4">
+		<div className="pb-96 pt-20 common-padding">
+			<h2 className="mb-24 Bold-Title2">My List</h2>
+			<div className="grid grid-cols-4 gap-x-[6px] gap-y-10 pt-4">
 				{data.pages.flatMap((page) =>
 					page.data.map((item, index) => {
 						return (

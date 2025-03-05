@@ -23,6 +23,7 @@ export function AddModal({ currentMenu, formItems, mutateAsync }: AddModalProps)
 			await mutateAsync(values)
 			alert('add success')
 			setOpen(false)
+			form.reset()
 		} catch (e: any) {
 			console.log(e)
 			alert('add failed')

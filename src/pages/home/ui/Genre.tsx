@@ -9,11 +9,11 @@ import { useFetchGenres } from 'src/shared/models/genre.model'
 import LoadingIcon from '@icons/loading.svg?react'
 
 export function Genre() {
-	const { data: moviesData, fetchNextPage, hasNextPage } = useInfiniteFetchMovies(20)
+	const { data: moviesData, fetchNextPage, hasNextPage } = useInfiniteFetchMovies(12)
 	const { data: genresData } = useFetchGenres(1, 0)
 	const [searchParams] = useSearchParams()
 	const genreId = genresData?.data.find((item) => item.name === searchParams.get('genre'))?.id
-
+	console.log(genreId)
 	const { ref, inView } = useInView({
 		rootMargin: '0px 0px 0px 0px',
 		threshold: 0.5,
@@ -24,10 +24,9 @@ export function Genre() {
 			fetchNextPage()
 		}
 	}, [inView])
-
 	return (
-		<div className="pt-32 common-padding">
-			<div className="grid grid-cols-5 gap-x-[6px] gap-y-10 pt-4">
+		<div className="pb-96 pt-52 common-padding">
+			<div className="grid grid-cols-4 gap-x-[6px] gap-y-10 pt-4">
 				{moviesData?.pages
 					.flatMap((page) => page.data)
 					.filter((item) => (genreId ? item.genres.some((genre) => genre.id === genreId) : true))

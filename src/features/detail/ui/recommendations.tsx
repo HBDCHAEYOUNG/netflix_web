@@ -17,7 +17,7 @@ export function Recommendations({ movieId }: RecommendationsProps) {
 					.filter((movie: any) => movie.id !== movieId)
 					.map((item, index) => (
 						<li key={index} className="overflow-hidden rounded-sm bg-Grey/Grey-550">
-							<img src={item.thumbnail} alt={item.title} className="aspect-video object-cover" />
+							<img src={item.thumbnail} alt={item.title} className="aspect-video w-full object-cover" />
 							<div className="p-3 pb-20 [&_*]:!text-Grey/Grey-25">
 								<div className="flex items-center gap-3 py-4">
 									<span className="aspect-square size-9 rounded-sm bg-Secondary/Yellow-100 p-1 text-3xl font-extrabold">
