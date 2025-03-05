@@ -1,5 +1,5 @@
+import { Recommendations } from '@features/detail/ui/recommendations'
 import ButtonPlay from '@features/video/ui/button-play'
-import ArrowIcon from '@icons/arrowdown.svg?react'
 import CircleCheck from '@icons/checkmark.svg?react'
 import HdIcon from '@icons/hd.svg?react'
 import CirclePlus from '@icons/plus-thin.svg?react'
@@ -8,13 +8,8 @@ import ThumbsUpFill from '@icons/thumb-up-fill.svg?react'
 import ThumbsUp from '@icons/thumb-up.svg?react'
 import { cn } from '@lib/utils'
 import { useState } from 'react'
-import {
-	useFetchMovie,
-	useInfiniteFetchMovies,
-	usePostDislikeMovie,
-	usePostLikeMovie,
-	usePostWishlist,
-} from 'src/shared/models'
+import { Link } from 'react-router-dom'
+import { useFetchMovie, usePostDislikeMovie, usePostLikeMovie, usePostWishlist } from 'src/shared/models'
 
 interface DetailProps {
 	movieId: number
@@ -24,7 +19,6 @@ export function Detail({ movieId }: DetailProps) {
 	const [show, setShow] = useState(false)
 
 	const { data } = useFetchMovie(movieId)
-	const { data: Movies, fetchNextPage } = useInfiniteFetchMovies(6)
 	const { mutateAsync: postWishlist } = usePostWishlist()
 	const { mutateAsync: postLike } = usePostLikeMovie()
 	const { mutateAsync: postDislike } = usePostDislikeMovie()
@@ -36,11 +30,6 @@ export function Detail({ movieId }: DetailProps) {
 			console.log(error)
 		}
 	}
-
-	const relatedMovies = Movies?.pages
-		.flatMap((page) => page.data)
-		.filter((movie: any) => movie.genres.some((genre: any) => genre.id === data?.genres[0].id) && movie.id !== movieId)
-	console.log(relatedMovies)
 
 	const handleClickLike = async () => {
 		try {
@@ -150,33 +139,23 @@ export function Detail({ movieId }: DetailProps) {
 				</div>
 				<div className="flex-[4]">
 					<p>director : {data?.director.name}</p>
-					<p>genre : {data?.genres.map((genre: any) => genre.name).join(', ')}</p>
+					<p className="!text-Grey/Grey-50">
+						genre :{' '}
+						{data?.genres.map((genre: any, index: number) => (
+							<Link
+								to={`/genre?genre=${genre.name}`}
+								key={index}
+								className="cursor-pointer whitespace-pre-wrap break-all"
+							>
+								{genre.name}
+								{index < data.genres.length - 1 ? ', ' : ''}
+							</Link>
+						))}
+					</p>
 				</div>
 			</div>
 
-			<div className="px-12 pb-6 pt-16 Medium-Title3">Content viewed together</div>
-			<ol className="grid grid-cols-3 gap-4 px-12 pb-6">
-				{relatedMovies?.map((item, index) => (
-					<li key={index} className="w-60 overflow-hidden rounded-md bg-Grey/Grey-450">
-						<img src={item.thumbnail} alt={item.title} className="aspect-video w-60 object-cover" />
-						<div className="p-3 pb-12">
-							<div className="flex items-center gap-2 py-4">
-								<span className="aspect-square size-9 rounded-sm bg-Secondary/Yellow-100 p-1 text-3xl font-extrabold">
-									12
-								</span>
-								{item.createdAt.slice(0, 4)}
-							</div>
-							<p className="Regular-Body">{item.detail.detail}</p>
-						</div>
-					</li>
-				))}
-			</ol>
-			<div className="relative mx-[50px] flex justify-center border-b border-Grey/Grey-200 pt-6">
-				<ArrowIcon
-					className="absolute top-1/4 mx-auto h-10 w-10 cursor-pointer rounded-full border-2 border-Grey/Grey-200 bg-Grey/Grey-850 p-2 hover:border-Primary/White hover:bg-Grey/Grey-200"
-					onClick={() => fetchNextPage()}
-				/>
-			</div>
+			{data && <Recommendations movieId={data.id} />}
 		</div>
 	)
 }
