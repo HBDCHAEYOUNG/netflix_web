@@ -3,9 +3,9 @@ import { fields, memberships } from '@widgets/signup/const/signup'
 import Button from '@ui/button/button'
 
 const membershipTypes = [
-	{ value: 'advertising', label: 'Advertising Standard', quality: '1080p', gradient: 'gradient2' },
-	{ value: 'standard', label: 'Standard', quality: '1080p', gradient: 'gradient3' },
-	{ value: 'premium', label: 'Premium', quality: '4K + HDR', gradient: 'gradient4' },
+	{ value: '3', label: 'Advertising Standard', quality: '1080p', gradient: 'gradient2' },
+	{ value: '2', label: 'Standard', quality: '1080p', gradient: 'gradient3' },
+	{ value: '1', label: 'Premium', quality: '4K + HDR', gradient: 'gradient4' },
 ]
 
 const infoText = `Learn more about our advertising memberships . If you choose an advertising membership, you will be asked to provide your date of birth to serve you personalized ads and for other purposes consistent with Netflix’s Privacy Policy .

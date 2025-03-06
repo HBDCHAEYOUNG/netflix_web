@@ -27,6 +27,7 @@ function Login() {
 
 	const sessionEmail = sessionStorage.getItem('email')
 	const [isPasswordVisible, setIsPasswordVisible] = useState('password')
+
 	const handleSubmit = async (data: z.infer<typeof loginSchema>) => {
 		const { email, password } = data
 
@@ -41,17 +42,15 @@ function Login() {
 			})
 			setLogin(response.accessToken, response.refreshToken)
 			navigate('/profiles')
-			console.log(form.watch('remember'))
 			if (form.watch('remember')) {
 				localStorage.setItem('email', email)
-				console.log(11111)
-				console.log(localStorage.getItem('email'))
 			}
 		} catch (error) {
 			form.setError('password', { message: '이메일 또는 비밀번호가 올바르지 않습니다.' })
 			console.log(error)
 		}
 	}
+	//user.role : 4 (free)인 경우 멤버쉽 결제 페이지로 이동되게 할것 업데이트!!
 
 	useEffect(() => {
 		if (sessionEmail) form.setValue('email', sessionEmail)

@@ -2,7 +2,10 @@ import Button from '@ui/button/button'
 import Form from '@ui/form/form'
 import { CheckboxBasic, InputText } from '@ui/index'
 import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { UpdateUserDtoRoleEnumDto } from 'src/shared/api/data-contracts'
+import { useFetchAuth } from 'src/shared/models/auth.model'
+import { usePatchUser } from 'src/shared/models/user.model'
 
 const inputItems = [
 	{ name: 'cardNumber', label: 'Card Number' },
@@ -35,7 +38,6 @@ const checkboxItems = [
 		className: 'py-2 ',
 	},
 ]
-
 interface StepThree2Props {
 	membership: string
 	setStep: (value: number) => void
@@ -44,12 +46,32 @@ interface StepThree2Props {
 
 export function StepThree2({ membership, setStep, onClickNext }: StepThree2Props) {
 	const form = useForm()
+	const navigate = useNavigate()
 
+	const { data: me } = useFetchAuth()
+	const { mutateAsync: patchUser } = usePatchUser()
+
+	const handleSubmit = async () => {
+		try {
+			if (!me) return
+			await patchUser({
+				id: me.id,
+				data: { role: membership as UpdateUserDtoRoleEnumDto },
+			})
+
+			onClickNext()
+			navigate('/auth/simple-setting')
+		} catch (error) {
+			console.error(error)
+		}
+	}
+
+	console.log(me)
 	return (
 		<div className="flex min-h-screen w-fit max-w-[440px] flex-col pb-40 pt-24">
 			<p>3/3 단계</p>
 			<h1 className="pb-6 pt-2 Medium-LargeTitle">Register a credit or check card</h1>
-			<Form form={form} onSubmit={() => {}} className="flex flex-col gap-2">
+			<Form form={form} onSubmit={handleSubmit} className="flex flex-col gap-2">
 				{inputItems.map((item) => (
 					<Form.Item key={item.name} name={item.name}>
 						<InputText name={item.name} label={item.label} className="h-[56px]" />
@@ -58,8 +80,10 @@ export function StepThree2({ membership, setStep, onClickNext }: StepThree2Props
 
 				<div className="mb-6 flex w-full items-center justify-between rounded-md bg-Grey/Grey-850 px-4 py-4">
 					<span className="flex flex-col Medium-Headline">
-						{membership === 'premium' ? '17,000' : membership === 'standard' ? '13,500' : '5,500'}won per month
-						<p className="mt-1 text-Grey/Grey-25 Regular-Body">{membership}</p>
+						{membership === '3' ? '17,000' : membership === '2' ? '13,500' : '5,500'}won per month
+						<p className="mt-1 text-Grey/Grey-25 Regular-Body">
+							{membership === '3' ? 'Premium' : membership === '2' ? 'Standard' : 'Advertising'}
+						</p>
 					</span>
 					<p className="cursor-pointer text-Secondary/Blue-200 Regular-Headline" onClick={() => setStep(3)}>
 						change
@@ -76,12 +100,10 @@ export function StepThree2({ membership, setStep, onClickNext }: StepThree2Props
 						/>
 					</Form.Item>
 				))}
-			</Form>
-			<Link to="/auth/simple-setting">
-				<Button onClick={onClickNext} className="mt-6 h-16 w-full Medium-Title2">
+				<Button type="submit" className="mt-6 h-16 w-full Medium-Title2">
 					Start Paid Membership
 				</Button>
-			</Link>
+			</Form>
 		</div>
 	)
 }

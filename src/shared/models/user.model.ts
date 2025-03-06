@@ -27,6 +27,7 @@ export const useFetchUser = (id: number) => {
 
 export const usePatchUser = () => {
 	const queryClient = useQueryClient()
+	const { setLogin } = AuthStore()
 	return useMutation({
 		mutationFn: ({ id, data }: { id: number; data: UpdateUserDtoDto }) => {
 			const newData = {
@@ -34,8 +35,11 @@ export const usePatchUser = () => {
 			}
 			return user.userControllerUpdate(id, newData)
 		},
-		onSuccess: () => {
+		onSuccess: (data) => {
+			console.log(111, data)
+			setLogin(data?.accessToken, data?.refreshToken)
 			queryClient.invalidateQueries({ queryKey: userQueryKey._def })
+			queryClient.invalidateQueries({ queryKey: authQueryKey.fetchMe().queryKey })
 		},
 	})
 }
@@ -54,7 +58,8 @@ export const usePostProfile = () => {
 	const { setLogin } = AuthStore()
 	const queryClient = useQueryClient()
 	return useMutation({
-		mutationFn: ({ id, data }: { id: number; data: CreateUserProfileDtoDto }) => user.userControllerCreateUserProfile(id, data),
+		mutationFn: ({ id, data }: { id: number; data: CreateUserProfileDtoDto }) =>
+			user.userControllerCreateUserProfile(id, data),
 		onSuccess: (data) => {
 			setLogin(data?.accessToken, data?.refreshToken)
 			queryClient.invalidateQueries({ queryKey: userQueryKey._def })
@@ -67,9 +72,9 @@ export const usePostProfileAccess = () => {
 	const { setLogin } = AuthStore()
 	const queryClient = useQueryClient()
 	return useMutation({
-		mutationFn: ({ id, profileId }: { id: number; profileId: number }) => user.userControllerAccessUserProfile(profileId, id),
+		mutationFn: ({ id, profileId }: { id: number; profileId: number }) =>
+			user.userControllerAccessUserProfile(profileId, id),
 		onSuccess: (data) => {
-			console.log('data', data)
 			setLogin(data?.accessToken, data?.refreshToken)
 			queryClient.invalidateQueries({ queryKey: userQueryKey._def })
 			queryClient.invalidateQueries({ queryKey: authQueryKey.fetchMe().queryKey })
@@ -95,7 +100,8 @@ export const useDeleteProfile = () => {
 	const { setLogin } = AuthStore()
 	const queryClient = useQueryClient()
 	return useMutation({
-		mutationFn: ({ id, profileId }: { id: number; profileId: number }) => user.userControllerDeleteUserProfile(id, profileId),
+		mutationFn: ({ id, profileId }: { id: number; profileId: number }) =>
+			user.userControllerDeleteUserProfile(id, profileId),
 		onSuccess: (data) => {
 			setLogin(data?.accessToken, data?.refreshToken)
 			queryClient.invalidateQueries({ queryKey: userQueryKey._def })

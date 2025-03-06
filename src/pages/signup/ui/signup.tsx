@@ -4,12 +4,11 @@ import { useNavigate } from 'react-router-dom'
 
 export function Signup() {
 	const [step, setStep] = useState(0)
-	const [membership, setMembership] = useState('premium')
+	const [membership, setMembership] = useState('3')
 
 	const navigate = useNavigate()
 
 	const onClickNext = () => {
-		console.log('호호잇')
 		if (step === 5) {
 			navigate('/simple-settings')
 		} else {

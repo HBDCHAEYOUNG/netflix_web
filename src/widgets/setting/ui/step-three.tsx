@@ -11,10 +11,8 @@ export function StepThree() {
 	const [likeContents, setLikeContents] = useState<string[]>([])
 
 	const { data: movies, fetchNextPage } = useInfiniteFetchMovies(10)
-	console.log(111, movies)
 
-	const profileData = JSON.parse(sessionStorage.getItem('profileData') || '{}')
-	console.log(profileData)
+	// const profileData = JSON.parse(sessionStorage.getItem('profileData') || '{}')
 
 	const { ref, inView } = useInView({
 		rootMargin: '0px 0px 0px 0px',
@@ -28,12 +26,14 @@ export function StepThree() {
 		}
 	}
 
+	const handleSubmit = () => {}
+
 	useEffect(() => {
 		if (inView) {
 			fetchNextPage()
 		}
 	}, [inView])
-
+	//profile 생성!!, 선호도 업데이트!!, 유저 프로필 접속!!
 	return (
 		<div className="mt-10 flex min-h-screen w-full flex-col">
 			<h1 className="mx-auto max-w-base Medium-LargeTitle">WooHyuk, choose your 3 favorite contents</h1>
@@ -49,15 +49,15 @@ export function StepThree() {
 							<CarouselItem
 								key={index}
 								className={cn('relative basis-1/5 cursor-pointer transition-all duration-700')}
-								onClick={() => onClickContent(`content${index + 1}`)}
+								onClick={() => onClickContent(movie.id)}
 							>
 								<img
 									src={movie.thumbnail}
-									alt={`content${index + 1}`}
-									className={`aspect-[23/13] h-full rounded-md object-cover ${likeContents.find((content) => content === `content${index + 1}`) && 'opacity-60'} cursor-pointer hover:opacity-40`}
+									alt={movie.id}
+									className={`aspect-[23/13] h-full rounded-md object-cover ${likeContents.find((content) => content === movie.id) && 'opacity-60'} cursor-pointer hover:opacity-40`}
 									ref={index === array.length - 1 ? ref : undefined}
 								/>
-								{likeContents.find((content) => content === `content${index + 1}`) && (
+								{likeContents.find((content) => content === movie.id) && (
 									<ThumbUp className="absolute left-1/2 top-1/2 size-7 -translate-x-1/2 -translate-y-1/2" />
 								)}
 							</CarouselItem>
@@ -70,6 +70,7 @@ export function StepThree() {
 
 			<Link to={likeContents.length > 2 ? '/profiles' : '#'}>
 				<Button
+					onClick={handleSubmit}
 					theme={likeContents.length > 2 ? 'primary' : 'secondary'}
 					className={cn(
 						'mx-auto my-12 h-16 w-[400px] Medium-Title2',

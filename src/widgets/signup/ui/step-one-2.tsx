@@ -4,6 +4,8 @@ import Form from '@ui/form/form'
 import { CheckboxBasic, InputText } from '@ui/index'
 import { useForm } from 'react-hook-form'
 import { signupSchema, SignupSchemaType } from '../model/signup.schema'
+import auth from 'src/shared/api/auth'
+import { AuthStore } from '@store/auth-store'
 
 interface StepOne2Props {
 	setStep: (step: number) => void
@@ -17,13 +19,16 @@ const formLabels = {
 	checkboxes: [
 		{
 			name: 'poricyAgreement',
-			label: 'Yes, I agree to the collection and use of my personal information in accordance with the Netflix Privacy Policy.',
+			label:
+				'Yes, I agree to the collection and use of my personal information in accordance with the Netflix Privacy Policy.',
 		},
 		{ name: 'termsAgreement', label: 'Yes, please send me emails notifying me of Netflix special offers. (Optional)' },
 	],
 }
 
 export function StepOne2({ setStep }: StepOne2Props) {
+	const { setLogin } = AuthStore()
+
 	const form = useForm<SignupSchemaType>({
 		resolver: zodResolver(signupSchema),
 		mode: 'all',
@@ -32,8 +37,33 @@ export function StepOne2({ setStep }: StepOne2Props) {
 		},
 	})
 
-	const handleSubmit = () => {
-		setStep(2)
+	const handleSubmit = async (data: SignupSchemaType) => {
+		const { email, password } = data
+
+		try {
+			const token = btoa(`${email}:${password}`)
+
+			// 회원가입 요청
+			await auth.authControllerRegisterUser({
+				headers: {
+					Authorization: `Basic ${token}`,
+					'Content-Type': 'application/json',
+				},
+			})
+
+			const response = await auth.authControllerLogin({
+				headers: {
+					Authorization: `Basic ${token}`,
+					'Content-Type': 'application/json',
+				},
+			})
+
+			setLogin(response.accessToken, response.refreshToken)
+			setStep(2)
+		} catch (error) {
+			form.setError('email', { message: '이미 존재하는 이메일입니다.' })
+			console.error(error)
+		}
 	}
 
 	return (
@@ -53,7 +83,12 @@ export function StepOne2({ setStep }: StepOne2Props) {
 					))}
 					{formLabels.checkboxes.map(({ name, label }) => (
 						<Form.Item key={name} name={name}>
-							<CheckboxBasic label={label} labelClassName="Regular-Headline" size="!size-8" className="mt-6 items-start" />
+							<CheckboxBasic
+								label={label}
+								labelClassName="Regular-Headline"
+								size="!size-8"
+								className="mt-6 items-start"
+							/>
 						</Form.Item>
 					))}
 					<Button type="submit" className="mt-6 h-16 w-full Medium-Title2">

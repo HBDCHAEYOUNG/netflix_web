@@ -15,7 +15,13 @@ export function StepOne({ onClickNext }: StepOneProps) {
 	const form = useForm({
 		resolver: zodResolver(
 			z.object({
-				name: z.string().max(5, { message: '5자 이내로 입력해주세요.' }),
+				profile1: z
+					.string({ message: 'please enter your name' })
+					.min(1, { message: 'please enter your name' })
+					.max(5, { message: '5 characters or less' }),
+				profile2: z.string().max(5, { message: '5 characters or less' }).optional(),
+				profile3: z.string().max(5, { message: '5 characters or less' }).optional(),
+				profile4: z.string().max(5, { message: '5 characters or less' }).optional(),
 			}),
 		),
 		mode: 'all',
@@ -59,7 +65,7 @@ export function StepOne({ onClickNext }: StepOneProps) {
 				<div className="w-full rounded-md bg-Grey/Grey-800 px-4 py-4">
 					Only people who live together can use your account
 				</div>
-				<Button type="submit" onClick={handleSubmit} className="h-16 w-full Medium-Title2">
+				<Button type="submit" className="h-16 w-full Medium-Title2">
 					next
 				</Button>
 			</Form>
