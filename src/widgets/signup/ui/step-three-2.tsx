@@ -77,9 +77,11 @@ export function StepThree2({ membership, setStep, onClickNext }: StepThree2Props
 					</Form.Item>
 				))}
 			</Form>
-			<Button onClick={onClickNext} className="mt-6 h-16 w-full Medium-Title2">
-				<Link to="/auth/simple-setting">Start Paid Membership</Link>
-			</Button>
+			<Link to="/auth/simple-setting">
+				<Button onClick={onClickNext} className="mt-6 h-16 w-full Medium-Title2">
+					Start Paid Membership
+				</Button>
+			</Link>
 		</div>
 	)
 }
