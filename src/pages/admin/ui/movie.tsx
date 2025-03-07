@@ -42,9 +42,9 @@ export function Movie() {
 		<div className="pl-72 [&_*]:text-Primary/Black">
 			<h1 className="px-10 pb-4 pt-[84px] Bold-Title2">movie</h1>
 			{isLoading ? (
-				<div>Loading...</div>
+				<div className="h-screen flex-center">Loading...</div>
 			) : !moviesData?.data ? (
-				<div>No data</div>
+				<div className="h-screen flex-center">No data available.</div>
 			) : (
 				<AdminTable
 					currentMenu="movie"

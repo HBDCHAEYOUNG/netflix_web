@@ -8,9 +8,9 @@ export function Watch() {
 		? `http://localhost:3000/${data.movieFilePath}`
 		: 'https://videos.pexels.com/video-files/15375094/15375094-uhd_2560_1440_30fps.mp4'
 
-	if (isLoading) return <div className="h-screen flex-center">로딩중...</div>
-	if (error) return <div className="h-screen flex-center">에러가 발생했습니다</div>
-	if (!movieFilePath) return <div className="h-screen flex-center">동영상을 찾을 수 없습니다</div>
+	if (isLoading) return <div className="h-screen flex-center">Loading...</div>
+	if (error) return <div className="h-screen flex-center">Error occurred.</div>
+	if (!movieFilePath) return <div className="h-screen flex-center">No data available.</div>
 
 	return (
 		<div className="h-screen">

@@ -1,9 +1,6 @@
+import Clap from '@icons/clap.svg?react'
 import Button from '@ui/button/button'
 import { useNavigate } from 'react-router-dom'
-import { UpdateUserDtoRoleEnumDto } from 'src/shared/api/data-contracts'
-import { useFetchAuth } from 'src/shared/models/auth.model'
-import { usePatchUser } from 'src/shared/models/user.model'
-import Clap from '@icons/clap.svg?react'
 
 interface StepThree2Props {
 	membership: string
@@ -13,22 +10,9 @@ interface StepThree2Props {
 export function StepThree2({ membership, onClickNext }: StepThree2Props) {
 	const navigate = useNavigate()
 
-	const { data: me } = useFetchAuth()
-	const { mutateAsync: patchUser } = usePatchUser()
-
-	const handleSubmit = async () => {
-		try {
-			if (!me) return
-			await patchUser({
-				id: me.id,
-				data: { role: membership as UpdateUserDtoRoleEnumDto },
-			})
-
-			onClickNext()
-			navigate('/auth/simple-setting')
-		} catch (error) {
-			console.error(error)
-		}
+	const handleSubmit = () => {
+		onClickNext()
+		navigate('/auth/simple-setting')
 	}
 
 	return (

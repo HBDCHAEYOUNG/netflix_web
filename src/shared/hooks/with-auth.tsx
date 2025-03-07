@@ -9,7 +9,7 @@ export const WithAuth = <P extends object>(
 	return function WithAuthComponent(props: P) {
 		const { data: auth, isLoading } = useFetchAuth()
 
-		if (isLoading) return <div>Loading...</div>
+		if (isLoading) return <div className="h-screen flex-center">Loading...</div>
 
 		if (!auth) {
 			alert('로그인 후 이용바랍니다.')

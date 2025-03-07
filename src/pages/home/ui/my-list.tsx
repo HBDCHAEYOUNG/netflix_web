@@ -20,8 +20,8 @@ function MyList() {
 		}
 	}, [inView])
 
-	if (!data) return <div className="h-screen flex-center">데이터가 없습니다.</div>
-
+	if (!data) return <div className="h-screen flex-center">No data available.</div>
+	console.log(data)
 	return (
 		<div className="pb-96 pt-20 common-padding">
 			<h2 className="mb-24 Bold-Title2">My List</h2>

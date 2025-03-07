@@ -40,9 +40,9 @@ export function Genre() {
 		<div className="pl-72 [&_*]:text-Primary/Black">
 			<h1 className="px-10 pb-4 pt-[84px] Bold-Title2">genre</h1>
 			{isLoading ? (
-				<div>Loading...</div>
+				<div className="h-screen flex-center">Loading...</div>
 			) : !genresData ? (
-				<div>No data</div>
+				<div className="h-screen flex-center">No data available.</div>
 			) : (
 				<AdminTable
 					data={genresData.data}

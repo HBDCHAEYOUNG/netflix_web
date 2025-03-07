@@ -8,8 +8,8 @@ import { useFetchAuth } from 'src/shared/models/auth.model'
 function Profiles() {
 	const { data, isLoading } = useFetchAuth()
 
-	if (isLoading) return <div>Loading...</div>
-	if (!data) return <div>데이터가 없습니다.</div>
+	if (isLoading) return <div className="h-screen flex-center">Loading...</div>
+	if (!data) return <div className="h-screen flex-center">No data available.</div>
 
 	const profileCount = data?.profileCount
 	const roleProfileCount = data?.role < 2 ? 4 : 2
