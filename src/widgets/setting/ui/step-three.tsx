@@ -33,6 +33,7 @@ export function StepThree() {
 			fetchNextPage()
 		}
 	}, [inView])
+
 	//profile 생성!!, 선호도 업데이트!!, 유저 프로필 접속!!
 	return (
 		<div className="mt-10 flex min-h-screen w-full flex-col">
@@ -41,7 +42,7 @@ export function StepThree() {
 				We'll help you find series and movies that perfectly match your taste. Choose content that you like.
 			</p>
 
-			<Carousel opts={{ slidesToScroll: 'auto', dragFree: true }}>
+			<Carousel opts={{ slidesToScroll: 5 }}>
 				<CarouselContent className="px-14">
 					{movies?.pages
 						.flatMap((page) => page.data)

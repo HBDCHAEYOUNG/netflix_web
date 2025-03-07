@@ -40,8 +40,22 @@ function Login() {
 					'Content-Type': 'application/json',
 				},
 			})
+
 			setLogin(response.accessToken, response.refreshToken)
-			navigate('/profiles')
+
+			const responseMe = await auth.authControllerPrivate({
+				headers: {
+					Authorization: `Bearer ${response.accessToken}`,
+					'Content-Type': 'application/json',
+				},
+			})
+			console.log(responseMe)
+			if (responseMe.role === '4' && responseMe.profileCount === 0)
+				navigate('/auth/signup', { state: { initialStep: 2 } })
+			else navigate('/profiles')
+
+			if (responseMe.profileCount === 0) navigate('/auth/simple-setting')
+
 			if (form.watch('remember')) {
 				localStorage.setItem('email', email)
 			}
@@ -50,7 +64,6 @@ function Login() {
 			console.log(error)
 		}
 	}
-	//user.role : 4 (free)인 경우 멤버쉽 결제 페이지로 이동되게 할것 업데이트!!
 
 	useEffect(() => {
 		if (sessionEmail) form.setValue('email', sessionEmail)

@@ -75,10 +75,10 @@ export function StepOne2({ setStep }: StepOne2Props) {
 					Complete your Netflix subscription in just a few more steps! <br />
 					All the complicated steps are gone.
 				</p>
-				<Form form={form} onSubmit={handleSubmit}>
+				<Form form={form} onSubmit={handleSubmit} className="flex flex-col gap-2">
 					{formLabels.inputs.map(({ name, label }) => (
 						<Form.Item key={name} name={name}>
-							<InputText name={name} label={label} className="mt-2 h-[56px]" />
+							<InputText name={name} label={label} className="h-[56px]" />
 						</Form.Item>
 					))}
 					{formLabels.checkboxes.map(({ name, label }) => (

@@ -35,11 +35,11 @@ function Landing() {
 		}
 	}
 
-	if (data) {
+	if (data && (data?.role === 1 || data?.role === 2 || data?.role === 3)) {
 		alert('이미 로그인 되었습니다.')
 		return <Navigate to="/" />
 	}
-
+	console.log(data)
 	return (
 		<div className="flex flex-col">
 			<section className="relative aspect-frame h-full bg-red-400 flex-center">
@@ -49,7 +49,9 @@ function Landing() {
 				<div className="relative w-full flex-col">
 					<h1 className="mx-auto mb-4 w-fit Bold-Title1">Unlimited movies, TV shows, and more</h1>
 					<p className="mx-auto mb-6 w-fit Regular-Title2">Watch anywhere. Cancel anytime.</p>
-					<p className="mx-auto mb-4 w-fit Regular-Title4">Ready to watch? Enter your email to create or restart your membership. test</p>
+					<p className="mx-auto mb-4 w-fit Regular-Title4">
+						Ready to watch? Enter your email to create or restart your membership. test
+					</p>
 
 					<Form form={form} onSubmit={handleSubmit} className="flex justify-center gap-2">
 						<Form.Item name="email">

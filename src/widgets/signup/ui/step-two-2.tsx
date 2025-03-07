@@ -1,20 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/index'
-import { fields, memberships } from '@widgets/signup/const/signup'
+import { fields, infoText, memberships, membershipTypes } from '@widgets/signup/const/signup'
 import Button from '@ui/button/button'
-
-const membershipTypes = [
-	{ value: '3', label: 'Advertising Standard', quality: '1080p', gradient: 'gradient2' },
-	{ value: '2', label: 'Standard', quality: '1080p', gradient: 'gradient3' },
-	{ value: '1', label: 'Premium', quality: '4K + HDR', gradient: 'gradient4' },
-]
-
-const infoText = `Learn more about our advertising memberships . If you choose an advertising membership, you will be asked to provide your date of birth to serve you personalized ads and for other purposes consistent with Netflix’s Privacy Policy .
-
-Availability of Full HD (1080p), UHD (4K), and HDR picture quality may vary depending on the Internet service and device performance used. Not all content is available in all picture quality levels. For more information, see Terms of Use .
-
-Only people who live together can use the account together. Standard membership allows 1 additional member, Premium allows up to 2 additional members. Learn more . Premium membership allows 4 simultaneous connections, Standard or Advertising Standard allows 2 simultaneous connections.
-
-Live events are available to all Netflix members and include ads.`
+import { cn } from '@lib/utils'
 
 interface StepTwo2Props {
 	membership: string
@@ -34,7 +21,11 @@ export function StepTwo2({ membership, setMembership, onClickNext }: StepTwo2Pro
 						<TabsTrigger
 							key={value}
 							value={value}
-							className={`flex-1 !rounded-xl border border-Grey/Grey-250 p-6 !data-[state=active]:${gradient}`}
+							className={cn('flex-1 !rounded-xl border border-Grey/Grey-250 p-6', {
+								'data-[state=active]:gradient2': gradient === 'gradient2',
+								'data-[state=active]:gradient3': gradient === 'gradient3',
+								'data-[state=active]:gradient4': gradient === 'gradient4',
+							})}
 							onClick={() => setMembership(value)}
 						>
 							{label} <br /> {quality}
@@ -60,6 +51,7 @@ export function StepTwo2({ membership, setMembership, onClickNext }: StepTwo2Pro
 			</Tabs>
 
 			<p className="whitespace-pre-wrap pt-6 text-TransparentWhite/50% Regular-Body">{infoText}</p>
+
 			<Button onClick={onClickNext} className="mt-6 h-16 w-full Medium-Title2">
 				next
 			</Button>

@@ -21,14 +21,20 @@ export const WithAuth = <P extends object>(
 			return <Navigate to={redirectPath} />
 		}
 
+		if (auth.profileCount === 0) {
+			return <Navigate to={redirectPath} />
+		}
+
 		return <WrappedComponent {...props} />
 	}
 }
 
 /* 
     WithAuth(AdminLayout) // 결제한 사용자 접근 가능 (기본값 3) 
+
     WithAuth(AdminLayout, 0) // admin만 접근 가능
     WithAuth(AdminLayout, 1) // admin과 premium 사용자만 접근 가능
     WithAuth(AdminLayout, 2) // admin, premium, standard 사용자만 접근 가능
+    WithAuth(AdminLayout, 3) // admin, premium, standard, advanced 사용자만 접근 가능
     WithAuth(AdminLayout, 4) // 모든 인증된 사용자 접근 가능
 */

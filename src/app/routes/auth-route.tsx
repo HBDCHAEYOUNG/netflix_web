@@ -3,7 +3,7 @@ import ErrorLayout from '@app/layouts/error-layout'
 import Login from '@pages/login/ui/login'
 import Logout from '@pages/logout/logout'
 import { SimpleSetting } from '@pages/setting'
-import { Signup } from '@pages/signup/ui/signup'
+import Signup from '@pages/signup/ui/signup'
 
 export const AuthRoute = {
 	path: '/auth',
