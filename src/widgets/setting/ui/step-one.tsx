@@ -5,6 +5,7 @@ import Form from '@ui/form/form'
 import { InputText } from '@ui/index'
 import { useForm } from 'react-hook-form'
 import { useFetchAuth } from 'src/shared/models/auth.model'
+import { usePostProfile } from 'src/shared/models/user.model'
 import { z } from 'zod'
 
 interface StepOneProps {
@@ -12,6 +13,12 @@ interface StepOneProps {
 }
 
 export function StepOne({ onClickNext }: StepOneProps) {
+	const { data } = useFetchAuth()
+	const { mutate: postProfile } = usePostProfile()
+
+	const id = data?.id
+	const profileLength = data?.role < 2 ? 3 : 1
+
 	const form = useForm({
 		resolver: zodResolver(
 			z.object({
@@ -27,12 +34,36 @@ export function StepOne({ onClickNext }: StepOneProps) {
 		mode: 'all',
 	})
 
-	const { data } = useFetchAuth()
-	const profileLength = data?.role < 2 ? 3 : 1
-
 	const handleSubmit = () => {
-		sessionStorage.setItem('profileData', JSON.stringify(form.getValues()))
-		onClickNext()
+		try {
+			// First profile (required)
+			postProfile({
+				id: id!,
+				data: {
+					name: form.getValues('profile1'),
+					avatar:
+						'https://occ-0-1361-325.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABfjwXqIYd3kCEU6KWsiHSHvkft8VhZg0yyD50a_pHXku4dz9VgxWwfA2ontwogStpj1NE9NJMt7sCpSKFEY2zmgqqQfcw1FMWwB9.png?r=229&quot',
+				},
+			})
+
+			// Additional profiles (optional)
+			for (let i = 2; i <= profileLength + 1; i++) {
+				const profileName = form.getValues(`profile${i}`)
+				if (profileName) {
+					postProfile({
+						id: id!,
+						data: {
+							name: profileName,
+							avatar:
+								'https://occ-0-1361-325.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABfjwXqIYd3kCEU6KWsiHSHvkft8VhZg0yyD50a_pHXku4dz9VgxWwfA2ontwogStpj1NE9NJMt7sCpSKFEY2zmgqqQfcw1FMWwB9.png?r=229&quot',
+						},
+					})
+				}
+			}
+			onClickNext()
+		} catch (error) {
+			console.log(error)
+		}
 	}
 	return (
 		<div className="flex min-h-screen w-fit max-w-[400px] flex-col justify-center gap-6">

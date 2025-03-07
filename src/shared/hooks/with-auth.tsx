@@ -17,7 +17,6 @@ export const WithAuth = <P extends object>(
 		}
 
 		if (Number(auth?.role) > requiredRole) {
-			alert('권한이 없습니다.')
 			return <Navigate to={redirectPath} />
 		}
 

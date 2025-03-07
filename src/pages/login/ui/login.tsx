@@ -54,7 +54,11 @@ function Login() {
 				navigate('/auth/signup', { state: { initialStep: 2 } })
 			else navigate('/profiles')
 
-			if (responseMe.profileCount === 0) navigate('/auth/simple-setting')
+			if (
+				(responseMe.role === '3' || responseMe.role === '2' || responseMe.role === '1') &&
+				responseMe.profileCount === 0
+			)
+				navigate('/auth/simple-setting')
 
 			if (form.watch('remember')) {
 				localStorage.setItem('email', email)
