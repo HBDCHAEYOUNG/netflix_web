@@ -4,6 +4,8 @@ import {
 	MovieControllerFindAllDataDto,
 	MovieControllerFindAllParamsDto,
 	MovieControllerFindOneDataDto,
+	MovieControllerFindSameGenreDataDto,
+	MovieControllerFindSameGenreParamsDto,
 	MovieControllerRemoveDataDto,
 	MovieControllerUpdateDataDto,
 	UpdateMovieDtoDto,
@@ -110,6 +112,29 @@ class Movie<SecurityDataType = unknown> {
 		this.http.request<MovieControllerRemoveDataDto, any>({
 			path: `/movie/${id}`,
 			method: 'DELETE',
+			secure: true,
+			format: 'json',
+			...params,
+		})
+	/**
+	 * No description
+	 *
+	 * @tags movie
+	 * @name MovieControllerFindSameGenre
+	 * @summary 상세 영화와 같은 장르 영화 조회
+	 * @request GET:/movie/{id}/same-genre
+	 * @secure
+	 * @response `200` `MovieControllerFindSameGenreDataDto` 상세 영화와 같은 장르 영화 조회 성공
+	 * @response `400` `void` 잘못된 영화 ID 입력
+	 */
+	movieControllerFindSameGenre = (
+		{ id, ...query }: MovieControllerFindSameGenreParamsDto,
+		params: RequestParams = {},
+	) =>
+		this.http.request<MovieControllerFindSameGenreDataDto, void>({
+			path: `/movie/${id}/same-genre`,
+			method: 'GET',
+			query: query,
 			secure: true,
 			format: 'json',
 			...params,

@@ -63,7 +63,7 @@ export namespace User {
 	 * @summary 유저 수정
 	 * @request PATCH:/user/{id}
 	 * @secure
-	 * @response `200` `UserControllerUpdateDataDto`
+	 * @response `200` `UserControllerUpdateDataDto` 유저 수정 성공
 	 */
 	export namespace UserControllerUpdate {
 		export type RequestParams = {

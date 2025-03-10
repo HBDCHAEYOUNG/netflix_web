@@ -66,7 +66,7 @@ class User<SecurityDataType = unknown> {
 	 * @summary 유저 수정
 	 * @request PATCH:/user/{id}
 	 * @secure
-	 * @response `200` `UserControllerUpdateDataDto`
+	 * @response `200` `UserControllerUpdateDataDto` 유저 수정 성공
 	 */
 	userControllerUpdate = (id: number, data: UpdateUserDtoDto, params: RequestParams = {}) =>
 		this.http.request<UserControllerUpdateDataDto, any>({

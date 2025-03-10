@@ -3,6 +3,7 @@ import {
 	MovieControllerCreateDataDto,
 	MovieControllerFindAllDataDto,
 	MovieControllerFindOneDataDto,
+	MovieControllerFindSameGenreDataDto,
 	MovieControllerRemoveDataDto,
 	MovieControllerUpdateDataDto,
 	UpdateMovieDtoDto,
@@ -128,5 +129,32 @@ export namespace Movie {
 		export type RequestBody = never
 		export type RequestHeaders = {}
 		export type ResponseBody = MovieControllerRemoveDataDto
+	}
+
+	/**
+	 * No description
+	 * @tags movie
+	 * @name MovieControllerFindSameGenre
+	 * @summary 상세 영화와 같은 장르 영화 조회
+	 * @request GET:/movie/{id}/same-genre
+	 * @secure
+	 * @response `200` `MovieControllerFindSameGenreDataDto` 상세 영화와 같은 장르 영화 조회 성공
+	 * @response `400` `void` 잘못된 영화 ID 입력
+	 */
+	export namespace MovieControllerFindSameGenre {
+		export type RequestParams = {
+			id: number
+		}
+		export type RequestQuery = {
+			/**
+			 * 페이지
+			 * @example 1
+			 */
+			page?: number
+			take: number
+		}
+		export type RequestBody = never
+		export type RequestHeaders = {}
+		export type ResponseBody = MovieControllerFindSameGenreDataDto
 	}
 }

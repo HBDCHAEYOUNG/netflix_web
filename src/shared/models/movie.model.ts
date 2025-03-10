@@ -10,6 +10,7 @@ export const movieQueryKey = createQueryKeys('movie', {
 	fetchMovie: (id: number) => [id],
 	fetchWishlist: () => ['infinite', 'whislist'],
 	fetchInfiniteMovies: () => ['infinite', 'movies'],
+	fetchRecommendations: (id: number) => [id],
 })
 
 export const useFetchMovies = ({
@@ -168,6 +169,17 @@ export const usePostDislikeMovie = () => {
 		onSuccess: (id) => {
 			queryClient.invalidateQueries({ queryKey: movieQueryKey.fetchWishlist().queryKey })
 			queryClient.invalidateQueries({ queryKey: movieQueryKey.fetchMovie(id).queryKey })
+		},
+	})
+}
+
+export const useFetchRecommendations = (id: number, take: number) => {
+	return useInfiniteQuery({
+		queryKey: movieQueryKey.fetchRecommendations(id).queryKey,
+		queryFn: ({ pageParam }) => movie.movieControllerFindSameGenre({ id, page: pageParam, take }),
+		initialPageParam: 1,
+		getNextPageParam: (lastPage, allPages) => {
+			return lastPage.count > take * allPages.length ? allPages.length + 1 : undefined
 		},
 	})
 }

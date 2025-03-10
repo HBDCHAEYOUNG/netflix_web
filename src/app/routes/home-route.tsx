@@ -4,7 +4,7 @@ import MyList from '@pages/home/ui/my-list'
 import Home from '@pages/home/ui/home'
 import { Test } from '@pages/home/ui/test'
 import Search from '@pages/search/ui/search'
-import { Genre } from '@pages/home/ui/Genre'
+import { HomeGenre } from '@pages/home/ui/home-genre'
 export const HomeRoute = {
 	path: '/',
 	element: <CommonLayout headerType="home" />,
@@ -13,7 +13,7 @@ export const HomeRoute = {
 		{ path: 'test', element: <Test /> },
 		{ path: 'search', element: <Search /> },
 		// { path: 'series', element: <Series /> },
-		{ path: 'genre', element: <Genre /> },
+		{ path: 'genre', element: <HomeGenre /> },
 		// { path: 'trend', element: <Trend /> },
 		{ path: 'my-list', element: <MyList /> },
 	],

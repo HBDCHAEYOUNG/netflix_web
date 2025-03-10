@@ -447,6 +447,18 @@ export interface MovieControllerFindAllParamsDto {
 
 export type MovieControllerFindOneDataDto = GetMovieResDtoDto
 
+export type MovieControllerFindSameGenreDataDto = GetMovieResDtoDto
+
+export interface MovieControllerFindSameGenreParamsDto {
+	id: number
+	/**
+	 * 페이지
+	 * @example 1
+	 */
+	page?: number
+	take: number
+}
+
 export type MovieControllerRemoveDataDto = number
 
 export type MovieControllerUpdateDataDto = MovieDto
@@ -532,8 +544,8 @@ export interface MovieUserWishListDto {
 	isWish: boolean
 	/** 영화 */
 	movie: MovieDto
-	/** 유저 */
-	user: UserDto
+	/** 유저 프로필 */
+	userProfile: UserProfileDto
 }
 
 export interface TokenAccessResDtoDto {
@@ -671,7 +683,7 @@ export type UserControllerFindOneDataDto = UserDto
 
 export type UserControllerRemoveDataDto = any
 
-export type UserControllerUpdateDataDto = any
+export type UserControllerUpdateDataDto = TokenResDtoDto
 
 export type UserControllerUpdateUserProfileDataDto = TokenResDtoDto
 
@@ -695,8 +707,6 @@ export interface UserDto {
 	profiles: UserProfileDto
 	/** 0 = Admin(관리자)<br>1 = Premium(프리미엄)<br>2 = Standard(스탠다드)<br>3 = Advertising(광고)<br>4 = Free(프리) */
 	role: UserRoleEnumDto
-	/** 유저가 찜한 영화 목록 */
-	wishList: MovieUserWishListDto
 }
 
 export interface UserProfileDto {
@@ -717,6 +727,8 @@ export interface UserProfileDto {
 	name: string
 	/** 유저 */
 	user: UserDto
+	/** 유저가 찜한 영화 목록 */
+	wishList: MovieUserWishListDto[]
 }
 
 /** 0 = Admin(관리자)<br>1 = Premium(프리미엄)<br>2 = Standard(스탠다드)<br>3 = Advertising(광고)<br>4 = Free(프리) */

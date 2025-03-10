@@ -18,13 +18,12 @@ function MyList() {
 			fetchNextPage()
 		}
 	}, [inView])
-	console.log(data)
 	return (
 		<div className="pb-[410px] pt-20 common-padding">
 			<h2 className="mb-24 Bold-Title2">My List</h2>
 			{data && data.pages[0].count > 0 ? (
 				<div className="grid grid-cols-4 gap-x-[6px] gap-y-10 pt-4">
-					{data.pages.flatMap((page) =>
+					{data.pages.map((page) =>
 						page.data.map((item, index) => {
 							return (
 								<Dialog key={index}>

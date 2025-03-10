@@ -1,5 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import Person from '@icons/person.svg?react'
+import { avatars } from '@pages/profile'
+import profiles from '@pages/profile/ui/profiles'
 import Button from '@ui/button/button'
 import Form from '@ui/form/form'
 import { InputText } from '@ui/index'
@@ -41,8 +43,7 @@ export function StepOne({ onClickNext }: StepOneProps) {
 				id: id!,
 				data: {
 					name: form.getValues('profile1'),
-					avatar:
-						'https://occ-0-1361-325.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABfjwXqIYd3kCEU6KWsiHSHvkft8VhZg0yyD50a_pHXku4dz9VgxWwfA2ontwogStpj1NE9NJMt7sCpSKFEY2zmgqqQfcw1FMWwB9.png?r=229&quot',
+					avatar: avatars[Math.floor(Math.random() * profiles.length)],
 				},
 			})
 
@@ -54,8 +55,7 @@ export function StepOne({ onClickNext }: StepOneProps) {
 						id: id!,
 						data: {
 							name: profileName,
-							avatar:
-								'https://occ-0-1361-325.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABfjwXqIYd3kCEU6KWsiHSHvkft8VhZg0yyD50a_pHXku4dz9VgxWwfA2ontwogStpj1NE9NJMt7sCpSKFEY2zmgqqQfcw1FMWwB9.png?r=229&quot',
+							avatar: avatars[Math.floor(Math.random() * avatars.length)],
 						},
 					})
 				}

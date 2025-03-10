@@ -46,7 +46,6 @@ export function Detail({ movieId }: DetailProps) {
 			console.log(error)
 		}
 	}
-	console.log(data)
 	return (
 		<div className="fixed left-1/2 top-1/2 z-50 h-[calc(100vh-40px)] w-[850px] -translate-x-1/2 -translate-y-1/2 overflow-y-scroll rounded-md bg-Grey/Grey-850 pb-40 no-scrollbar [&_*]:text-Primary/White">
 			<img

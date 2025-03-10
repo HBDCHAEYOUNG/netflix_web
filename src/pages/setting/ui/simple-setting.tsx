@@ -1,5 +1,7 @@
-import { StepOne, StepThree, StepTwo } from '@widgets/setting'
 import { Process } from '@widgets/setting/ui/process'
+import { StepOne } from '@widgets/setting/ui/step-one'
+import { StepThree } from '@widgets/setting/ui/step-three'
+import { StepTwo } from '@widgets/setting/ui/step-two'
 import { useState } from 'react'
 
 export function SimpleSetting() {

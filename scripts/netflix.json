@@ -350,6 +350,61 @@
 				"tags": ["movie"]
 			}
 		},
+		"/movie/{id}/same-genre": {
+			"get": {
+				"operationId": "MovieController_findSameGenre",
+				"summary": "상세 영화와 같은 장르 영화 조회",
+				"parameters": [
+					{
+						"name": "page",
+						"required": false,
+						"in": "query",
+						"description": "페이지",
+						"schema": {
+							"example": 1,
+							"type": "number"
+						}
+					},
+					{
+						"name": "take",
+						"required": true,
+						"in": "query",
+						"schema": {
+							"type": "number"
+						}
+					},
+					{
+						"name": "id",
+						"required": true,
+						"in": "path",
+						"schema": {
+							"type": "number"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "상세 영화와 같은 장르 영화 조회 성공",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetMovieResDto"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "잘못된 영화 ID 입력"
+					}
+				},
+				"security": [
+					{
+						"bearer": []
+					}
+				],
+				"tags": ["movie"]
+			}
+		},
 		"/movie/{id}/like": {
 			"post": {
 				"operationId": "MovieController_createMovieLike",
@@ -1102,7 +1157,14 @@
 				},
 				"responses": {
 					"200": {
-						"description": ""
+						"description": "유저 수정 성공",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TokenResDto"
+								}
+							}
+						}
 					}
 				},
 				"tags": ["user"],
@@ -1385,11 +1447,11 @@
 							}
 						]
 					},
-					"user": {
-						"description": "유저",
+					"userProfile": {
+						"description": "유저 프로필",
 						"allOf": [
 							{
-								"$ref": "#/components/schemas/User"
+								"$ref": "#/components/schemas/UserProfile"
 							}
 						]
 					},
@@ -1399,7 +1461,7 @@
 						"example": true
 					}
 				},
-				"required": ["movie", "user", "isWish"]
+				"required": ["movie", "userProfile", "isWish"]
 			},
 			"UserProfile": {
 				"type": "object",
@@ -1426,9 +1488,16 @@
 								"$ref": "#/components/schemas/User"
 							}
 						]
+					},
+					"wishList": {
+						"description": "유저가 찜한 영화 목록",
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/MovieUserWishList"
+						}
 					}
 				},
-				"required": ["id", "name", "user"]
+				"required": ["id", "name", "user", "wishList"]
 			},
 			"User": {
 				"type": "object",
@@ -1464,14 +1533,6 @@
 							}
 						]
 					},
-					"wishList": {
-						"description": "유저가 찜한 영화 목록",
-						"allOf": [
-							{
-								"$ref": "#/components/schemas/MovieUserWishList"
-							}
-						]
-					},
 					"profiles": {
 						"description": "유저 프로필 목록",
 						"allOf": [
@@ -1484,7 +1545,7 @@
 						"type": "string"
 					}
 				},
-				"required": ["id", "email", "role", "createdMovies", "likedMovies", "wishList", "profiles", "password"]
+				"required": ["id", "email", "role", "createdMovies", "likedMovies", "profiles", "password"]
 			},
 			"Genre": {
 				"type": "object",
