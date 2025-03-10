@@ -111,7 +111,11 @@ function Login() {
 							)}
 						</div>
 					</Form.Item>
-					<Button className="h-[56px] w-[314px] flex-center Medium-Title3" rightIcon={<ArrowIcon className="ml-4" />}>
+					<Button
+						type="submit"
+						className="h-[56px] w-[314px] flex-center Medium-Title3"
+						rightIcon={<ArrowIcon className="ml-4" />}
+					>
 						Sign In
 					</Button>
 					<Form.Item name="remember" className="mt-1 w-full">

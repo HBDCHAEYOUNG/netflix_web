@@ -1,8 +1,15 @@
 import { ProfileAdd } from '@features/profile'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { profiles } from '@pages/profile/const/profiles'
+import { avatars } from '@pages/profile/const/profiles'
 import Button from '@ui/button/button'
-import { DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@ui/dialog/dialog'
+import {
+	DialogClose,
+	DialogContent,
+	DialogDescription,
+	DialogFooter,
+	DialogHeader,
+	DialogTitle,
+} from '@ui/dialog/dialog'
 import Form from '@ui/form/form'
 import { Dialog, DialogTrigger, InputText } from '@ui/index'
 import { ProfileImg } from '@ui/profile/profileImg'
@@ -25,6 +32,8 @@ export function AddProfile() {
 	const { data } = useFetchAuth()
 	const id = data?.id
 	const { mutate: postProfile } = usePostProfile()
+	const [open, setOpen] = useState(false)
+	const [randomAvatar] = useState(avatars[Math.floor(Math.random() * avatars.length)])
 
 	const handleSubmit = () => {
 		if (data?.role < 2 && data?.profiles.length === 4) {
@@ -42,8 +51,7 @@ export function AddProfile() {
 				id: id!,
 				data: {
 					name: form.getValues('name'),
-					avatar:
-						'https://occ-0-1361-325.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABfjwXqIYd3kCEU6KWsiHSHvkft8VhZg0yyD50a_pHXku4dz9VgxWwfA2ontwogStpj1NE9NJMt7sCpSKFEY2zmgqqQfcw1FMWwB9.png?r=229&quot',
+					avatar: randomAvatar,
 				},
 			})
 			form.reset()
@@ -53,8 +61,6 @@ export function AddProfile() {
 			console.log('에러에러')
 		}
 	}
-
-	const [open, setOpen] = useState(false)
 
 	return (
 		<div>
@@ -71,7 +77,7 @@ export function AddProfile() {
 							</DialogDescription>
 						</DialogHeader>
 
-						<ProfileImg image={profiles[0].image} className="w-16" />
+						<ProfileImg image={randomAvatar} className="w-16" />
 						<Form.Item name="name" className="w-full">
 							<InputText name="name" label="Name" className="bg-Grey/Grey-850" />
 						</Form.Item>

@@ -1,6 +1,7 @@
 import Lock from '@icons/lock.svg?react'
 import usePortOne from '@lib/use-port-one'
 import Button from '@ui/button/button'
+import { UpdateUserDtoRoleEnumDto } from 'src/shared/api/data-contracts'
 import { useFetchAuth } from 'src/shared/models/auth.model'
 import { usePatchUser } from 'src/shared/models/user.model'
 
@@ -17,13 +18,15 @@ export function StepThree1({ setStep, membership, onClickNext }: StepThree1Props
 	const { mutateAsync: patchUser } = usePatchUser()
 
 	const handlePayment = () => {
+		if (!window.IMP) return
+
 		const IMP = window.IMP
 
 		const amount = membership === '1' ? 17000 : membership === '2' ? 13500 : 5500
 
 		IMP.request_pay(
 			{
-				channelKey: 'channel-key-ca778845-0368-4e1d-9caf-cb3276f661d0', // 콘솔에서 확인한 채널키 사용
+				channelKey: import.meta.env.VITE_IMP_KEY, // 콘솔에서 확인한 채널키 사용
 				pay_method: 'card',
 				merchant_uid: `payment-${crypto.randomUUID()}`,
 				name: membership === '1' ? 'Premium 멤버십' : membership === '2' ? 'Standard 멤버십' : 'Advertising 멤버십',
@@ -32,7 +35,7 @@ export function StepThree1({ setStep, membership, onClickNext }: StepThree1Props
 				// buyer_name: '구매자이름',          // 구매자 이름
 				// buyer_tel: '010-1234-5678',      // 구매자 전화번호
 			},
-			async (response) => {
+			async (response: any) => {
 				if (response.success) {
 					// 결제 성공 시 처리
 					if (!me) return

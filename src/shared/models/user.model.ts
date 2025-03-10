@@ -4,6 +4,7 @@ import user from '../api/user'
 import { CreateUserProfileDtoDto, UpdateUserDtoDto, UpdateUserProfileDtoDto } from '../api/data-contracts'
 import { authQueryKey } from './auth.model'
 import { AuthStore } from '@store/auth-store'
+import { movieQueryKey } from './movie.model'
 
 export const userQueryKey = createQueryKeys('user', {
 	fetchUsers: (page: number, take: number) => [page, take],
@@ -78,6 +79,7 @@ export const usePostProfileAccess = () => {
 			setLogin(data?.accessToken, data?.refreshToken)
 			queryClient.invalidateQueries({ queryKey: userQueryKey._def })
 			queryClient.invalidateQueries({ queryKey: authQueryKey.fetchMe().queryKey })
+			queryClient.invalidateQueries({ queryKey: movieQueryKey.fetchWishlist().queryKey })
 		},
 	})
 }

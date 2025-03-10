@@ -38,6 +38,7 @@ export function Movie() {
 		refetchMovie()
 		setOpenRead(true)
 	}
+
 	return (
 		<div className="pl-72 [&_*]:text-Primary/Black">
 			<h1 className="px-10 pb-4 pt-[84px] Bold-Title2">movie</h1>

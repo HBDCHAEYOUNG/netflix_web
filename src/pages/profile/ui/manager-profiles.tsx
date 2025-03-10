@@ -1,7 +1,15 @@
 import { ProfileEdit } from '@features/profile'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Button from '@ui/button/button'
-import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@ui/dialog/dialog'
+import {
+	Dialog,
+	DialogClose,
+	DialogContent,
+	DialogFooter,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
+} from '@ui/dialog/dialog'
 import Form from '@ui/form/form'
 import { InputText } from '@ui/index'
 import { ProfileImg } from '@ui/profile/profileImg'
@@ -17,7 +25,10 @@ export function ManagerProfiles() {
 	const form = useForm({
 		resolver: zodResolver(
 			z.object({
-				name: z.string().max(10, { message: '10글자 이하로 입력해주세요' }).min(1, { message: '1글자 이상 입력해주세요' }),
+				name: z
+					.string()
+					.max(10, { message: '10글자 이하로 입력해주세요' })
+					.min(1, { message: '1글자 이상 입력해주세요' }),
 			}),
 		),
 	})
@@ -77,7 +88,7 @@ export function ManagerProfiles() {
 					{data?.profiles?.map((profile) => (
 						<Dialog key={profile.id} open={open} onOpenChange={setOpen}>
 							<DialogTrigger onClick={() => setSelectedProfileId(profile.id.toString())}>
-								<ProfileEdit image={profile.image} name={profile.name} />
+								<ProfileEdit image={profile.avatar} name={profile.name} />
 							</DialogTrigger>
 							<DialogContent>
 								<Form form={form} onSubmit={handleSubmit} className="flex-col gap-7 flex-center">
@@ -86,7 +97,7 @@ export function ManagerProfiles() {
 									</DialogHeader>
 
 									<div className="w-full gap-2 flex-center">
-										<ProfileImg image={profile.image} className="size-12" />
+										<ProfileImg image={profile.avatar} className="size-12" />
 										<div className="flex flex-1 flex-col gap-2">
 											<Form.Item name="name">
 												<InputText name="name" label="Name" className="bg-Grey/Grey-850 text-Primary/White" />
