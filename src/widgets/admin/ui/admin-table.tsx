@@ -1,4 +1,3 @@
-import Sort from '@icons/sort.svg?react'
 import {
 	ColumnDef,
 	ColumnFiltersState,
@@ -53,8 +52,14 @@ export function AdminTable({
 		state: {
 			columnFilters,
 			sorting,
+			pagination: {
+				pageIndex: pageIndex - 1,
+				pageSize: take,
+			},
 		},
 		onSortingChange: setSorting,
+		pageCount: totalPages,
+		manualPagination: true,
 	})
 
 	const handlePageChange = (newPage: number) => {
@@ -84,13 +89,7 @@ export function AdminTable({
 						<TableRow key={headerGroup.id}>
 							{headerGroup.headers.map((header) => (
 								<TableHead key={header.id} className="text-base">
-									<div className="gap-2 flex-center">
-										{header.id}
-										{header.column.getCanSort() && (
-											<Sort className="h-4 w-4 cursor-pointer" onClick={header.column.getToggleSortingHandler()} />
-										)}
-										{header.column.getIsSorted() === 'asc' ? '⬇️ ' : '⬆️ '}
-									</div>
+									<div className="gap-2 flex-center">{header.id}</div>
 								</TableHead>
 							))}
 						</TableRow>
