@@ -1,12 +1,13 @@
 import { StepOne1, StepOne2, StepThree1, StepThree2, StepTwo1, StepTwo2 } from '@widgets/signup'
-import { useState, useEffect } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 function Signup() {
 	const location = useLocation()
+	const navigate = useNavigate()
+
 	const [step, setStep] = useState(0)
 	const [membership, setMembership] = useState('3')
-	const navigate = useNavigate()
 
 	const onClickNext = () => {
 		if (step === 5) {
