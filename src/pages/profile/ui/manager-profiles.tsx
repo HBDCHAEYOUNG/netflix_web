@@ -71,7 +71,7 @@ export function ManagerProfiles() {
 
 	useEffect(() => {
 		if (data?.profiles && selectedProfileId) {
-			const selectedProfile = data?.profiles.find((profile) => profile.id.toString() === selectedProfileId)
+			const selectedProfile = data?.profiles.find((profile: any) => profile.id.toString() === selectedProfileId)
 			if (selectedProfile) {
 				form.reset({
 					name: selectedProfile.name,
@@ -85,7 +85,7 @@ export function ManagerProfiles() {
 			<div>
 				<h1 className="!text-center Regular-LargeTitle">Manage your profile</h1>
 				<div className="my-12 flex-wrap gap-8 flex-center">
-					{data?.profiles?.map((profile) => (
+					{data?.profiles?.map((profile: any) => (
 						<Dialog key={profile.id} open={open} onOpenChange={setOpen}>
 							<DialogTrigger onClick={() => setSelectedProfileId(profile.id.toString())}>
 								<ProfileEdit image={profile.avatar} name={profile.name} />

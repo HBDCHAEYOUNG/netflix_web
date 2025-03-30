@@ -49,7 +49,7 @@ export function Detail({ movieId }: DetailProps) {
 	return (
 		<div className="fixed left-1/2 top-1/2 z-50 h-[calc(100vh-40px)] w-[850px] -translate-x-1/2 -translate-y-1/2 overflow-y-scroll rounded-md bg-Grey/Grey-850 pb-40 no-scrollbar [&_*]:text-Primary/White">
 			<img
-				src={data?.thumbnail}
+				src={(data as any)?.thumbnail}
 				alt={data?.title}
 				className="mask-linear-gradient absolute left-0 top-0 z-0 aspect-video w-full object-cover"
 				style={{
@@ -76,7 +76,7 @@ export function Detail({ movieId }: DetailProps) {
 						)}
 					</div>
 
-					{data?.likedUsers?.[0]?.isLike === true && (
+					{(data as any)?.likedUsers?.[0]?.isLike === true && (
 						<ThumbsUpFill
 							onMouseEnter={() => setShow(true)}
 							className="z-10 h-10 w-10 rounded-full border-2 border-Grey/Grey-200 p-2 hover:border-Primary/White hover:bg-Grey/Grey-200"
@@ -88,7 +88,7 @@ export function Detail({ movieId }: DetailProps) {
 							className="z-10 h-10 w-10 rounded-full border-2 border-Grey/Grey-200 p-1 hover:border-Primary/White hover:bg-Grey/Grey-200"
 						/>
 					)}
-					{data?.likedUsers?.[0]?.isLike === false && (
+					{(data as any)?.likedUsers?.[0]?.isLike === false && (
 						<ThumbsUpFill
 							onMouseEnter={() => setShow(true)}
 							className="z-10 h-10 w-10 rotate-180 rounded-full border-2 border-Grey/Grey-200 p-2 hover:border-Primary/White hover:bg-Grey/Grey-200"
@@ -102,7 +102,7 @@ export function Detail({ movieId }: DetailProps) {
 							show && 'z-20 scale-100 bg-Grey/Grey-700 [&_path]:fill-Primary/White',
 						)}
 					>
-						{data?.likedUsers?.[0]?.isLike === true ? (
+						{(data as any)?.likedUsers?.[0]?.isLike === true ? (
 							<ThumbsUpFill
 								onClick={handleClickLike}
 								className={cn('h-8 w-8 rounded-full p-1', show && 'hover:bg-Grey/Grey-150')}
@@ -113,7 +113,7 @@ export function Detail({ movieId }: DetailProps) {
 								className={cn('h-8 w-8 rounded-full', show && 'hover:bg-Grey/Grey-150')}
 							/>
 						)}
-						{data?.likedUsers?.[0]?.isLike === false ? (
+						{(data as any)?.likedUsers?.[0]?.isLike === false ? (
 							<ThumbsUpFill
 								onClick={handleClickDislike}
 								className={cn('h-8 w-8 rotate-180 rounded-full p-1', show && 'hover:bg-Grey/Grey-150')}
@@ -131,7 +131,7 @@ export function Detail({ movieId }: DetailProps) {
 			<div className="flex px-12">
 				<div className="flex-[6]">
 					<p className="flex items-baseline gap-2">
-						{data?.createdAt.slice(0, 4)}
+						{(data as any)?.createdAt.slice(0, 4)}
 						<HdIcon />
 					</p>
 					{data?.detail.detail}

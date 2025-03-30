@@ -20,7 +20,7 @@ export function StepThree1({ setStep, membership, onClickNext }: StepThree1Props
 	const handlePayment = () => {
 		if (!window.IMP) return
 
-		const IMP = window.IMP
+		const IMP: any = window.IMP
 
 		const amount = membership === '1' ? 17000 : membership === '2' ? 13500 : 5500
 

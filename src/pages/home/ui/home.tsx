@@ -22,7 +22,7 @@ function Home() {
 				<div className="absolute left-0 top-0 h-full w-full bg-[linear-gradient(180deg,hsla(0,0%,8%,0)_0,hsla(0,0%,8%,.15)_15%,hsla(0,0%,8%,.35)_29%,hsla(0,0%,8%,.58)_44%,#141414_68%,#000)]" />
 				<Carousel opts={{ slidesToScroll: 'auto' }}>
 					<CarouselContent className="px-14">
-						{rankData.map((rank, index) => (
+						{rankData.map((rank: any, index: number) => (
 							<CarouselItem
 								key={index}
 								className={cn(

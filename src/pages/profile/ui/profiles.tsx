@@ -11,8 +11,8 @@ function Profiles() {
 	if (isLoading) return <div className="h-screen flex-center">Loading...</div>
 	if (!data) return <div className="h-screen flex-center">No data available.</div>
 
-	const profileCount = data?.profileCount
-	const roleProfileCount = data?.role < 2 ? 4 : 2
+	const profileCount = (data as any)?.profileCount
+	const roleProfileCount = (data as any)?.role < 2 ? 4 : 2
 	const maxProfileCount = profileCount < roleProfileCount
 
 	return (
@@ -20,7 +20,7 @@ function Profiles() {
 			<h1 className="px-6 !text-center Regular-LargeTitle">Select the profile you want to watch Netflix on.</h1>
 
 			<div className="my-12 flex-wrap gap-8 flex-center">
-				{data?.profiles?.map((profile) => (
+				{(data as any)?.profiles?.map((profile: any) => (
 					<Profile key={profile.id} image={profile.avatar} name={profile.name} profileId={profile.id} id={data.id} />
 				))}
 				{maxProfileCount && <AddProfile />}

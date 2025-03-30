@@ -25,7 +25,7 @@ export const AccountMenu = React.forwardRef<HTMLDivElement, AccountMenuProps>(({
 
 	const handleProfileClick = async (id: string) => {
 		try {
-			await postProfileAccess({ profileId: id, id: data?.id })
+			await postProfileAccess({ profileId: id as any, id: (data as any)?.id })
 		} catch (error) {
 			console.error(error)
 		}
@@ -38,15 +38,17 @@ export const AccountMenu = React.forwardRef<HTMLDivElement, AccountMenuProps>(({
 					<NavigationMenuTrigger>
 						{label === 'admin' && 'admin'}
 
-						{label === 'user' && data?.me && <img src={data?.me.avatar} alt={data?.me.name} className="h-8 w-8 rounded-sm object-cover" />}
+						{label === 'user' && data?.me && (
+							<img src={data?.me.avatar} alt={data?.me.name} className="h-8 w-8 rounded-sm object-cover" />
+						)}
 					</NavigationMenuTrigger>
 					<NavigationMenuContent>
 						<ul className="grid bg-Primary/Black py-2">
 							{label === 'user' &&
 								data?.me &&
 								data?.profiles
-									?.filter((profile) => profile.id !== data?.me.id)
-									.map((profile, index) => (
+									?.filter((profile: any) => profile.id !== data?.me.id)
+									.map((profile: any, index: any) => (
 										<li
 											key={index}
 											className="flex cursor-pointer items-center px-4 py-2 pr-12 hover:underline"
@@ -57,9 +59,11 @@ export const AccountMenu = React.forwardRef<HTMLDivElement, AccountMenuProps>(({
 										</li>
 									))}
 
-							{menuItems.map((item, index) => (
+							{menuItems.map((item: any, index: any) => (
 								<Link to={item.to} key={`menu-${index}`}>
-									<li className={cn('flex cursor-pointer items-center px-4 py-2 pr-12 hover:underline', item.className)}>
+									<li
+										className={cn('flex cursor-pointer items-center px-4 py-2 pr-12 hover:underline', item.className)}
+									>
 										{item.icon && <div className="mr-3 flex h-8 w-8 items-center justify-center">{item.icon}</div>}
 										<p className="text-nowrap text-sm font-medium">{item.title}</p>
 									</li>

@@ -19,7 +19,7 @@ export function StepOne({ onClickNext }: StepOneProps) {
 	const { mutate: postProfile } = usePostProfile()
 
 	const id = data?.id
-	const profileLength = data?.role < 2 ? 3 : 1
+	const profileLength = (data as any)?.role < 2 ? 3 : 1
 
 	const form = useForm({
 		resolver: zodResolver(

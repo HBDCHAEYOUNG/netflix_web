@@ -8,7 +8,7 @@ export const authQueryKey = createQueryKeys('auth', {
 })
 
 export const useFetchAuth = () => {
-	return useQuery({
+	return useQuery<any>({
 		queryKey: authQueryKey.fetchMe().queryKey,
 		queryFn: () => auth.authControllerPrivate(),
 	})

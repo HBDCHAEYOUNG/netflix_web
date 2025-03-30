@@ -5,7 +5,7 @@ import rank from '../api/rank'
 export const rankQueryKey = createQueryKeys('rank')
 
 export const useFetchRank = () => {
-	return useQuery({
+	return useQuery<any>({
 		queryKey: rankQueryKey._def,
 		queryFn: () => rank.movieControllerFindAllMovieRank(),
 	})

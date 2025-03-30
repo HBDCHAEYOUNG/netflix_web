@@ -12,8 +12,8 @@ export function Recommendations({ movieId }: RecommendationsProps) {
 		<div className="relative">
 			<div className="px-12 pb-6 pt-16 Medium-Title3">Content viewed together</div>
 			<ol className="grid grid-cols-3 gap-6 px-12">
-				{Movies?.pages.map((page) =>
-					page.data.map((item, index: number) => (
+				{Movies?.pages.map((page: any) =>
+					page.data.map((item: any, index: number) => (
 						<li key={index} className="overflow-hidden rounded-sm bg-Grey/Grey-550">
 							<img src={item.thumbnail} alt={item.title} className="aspect-video w-full object-cover" />
 							<div className="p-3 pb-20 [&_*]:!text-Grey/Grey-25">

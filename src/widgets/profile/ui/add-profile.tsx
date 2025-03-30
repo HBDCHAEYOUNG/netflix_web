@@ -36,12 +36,12 @@ export function AddProfile() {
 	const [randomAvatar] = useState(avatars[Math.floor(Math.random() * avatars.length)])
 
 	const handleSubmit = () => {
-		if (data?.role < 2 && data?.profiles.length === 4) {
+		if ((data as any)?.role < 2 && (data as any)?.profiles.length === 4) {
 			setOpen(false)
 			alert('프로필은 최대 4개까지 생성할 수 있습니다.')
 			return
 		}
-		if (data?.role > 1 && data?.profiles.length === 2) {
+		if ((data as any)?.role > 1 && (data as any)?.profiles.length === 2) {
 			setOpen(false)
 			alert('프로필은 최대 4개까지 생성할 수 있습니다.')
 			return

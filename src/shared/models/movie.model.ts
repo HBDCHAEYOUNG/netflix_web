@@ -48,7 +48,7 @@ export const useInfiniteFetchMovies = (take: number) => {
 			return movie.movieControllerFindAll(query)
 		},
 		initialPageParam: undefined,
-		getNextPageParam: (lastPage) => {
+		getNextPageParam: (lastPage: any) => {
 			return lastPage.count > take ? lastPage.nextCursor : undefined
 		},
 	})
@@ -178,7 +178,7 @@ export const useFetchRecommendations = (id: number, take: number) => {
 		queryKey: movieQueryKey.fetchRecommendations(id).queryKey,
 		queryFn: ({ pageParam }) => movie.movieControllerFindSameGenre({ id, page: pageParam, take }),
 		initialPageParam: 1,
-		getNextPageParam: (lastPage, allPages) => {
+		getNextPageParam: (lastPage: any, allPages: any) => {
 			return lastPage.count > take * allPages.length ? allPages.length + 1 : undefined
 		},
 	})

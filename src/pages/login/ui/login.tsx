@@ -43,7 +43,7 @@ function Login() {
 
 			setLogin(response.accessToken, response.refreshToken)
 
-			const responseMe = await auth.authControllerPrivate({
+			const responseMe: any = await auth.authControllerPrivate({
 				headers: {
 					Authorization: `Bearer ${response.accessToken}`,
 					'Content-Type': 'application/json',

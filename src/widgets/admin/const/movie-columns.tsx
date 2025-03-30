@@ -6,11 +6,11 @@ export const movieColumns: ColumnDef<MovieControllerFindAllDataDto['data'][0]>[]
 	{
 		accessorKey: 'genres',
 		header: 'Genre',
-		cell: (info) => (
+		cell: (info: any) => (
 			<div>
 				{info
 					.getValue()
-					?.map((genre) => genre.name)
+					?.map((genre: any) => genre.name)
 					.join(', ')}
 			</div>
 		),
