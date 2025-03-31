@@ -24,7 +24,7 @@ export function Recommendations({ movieId }: RecommendationsProps) {
 									{item.createdAt.slice(0, 4)}
 									{item.id && <MoreinfoPlus movieId={item.id} />}
 								</div>
-								{/* <p className="Regular-Body">{item.detail.detail}</p> */}
+								<p className="Regular-Body">{item.detail.detail}</p>
 							</div>
 						</li>
 					)),
