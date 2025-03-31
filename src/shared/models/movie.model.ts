@@ -9,7 +9,7 @@ export const movieQueryKey = createQueryKeys('movie', {
 	fetchMovies: (take: number, pagination: string | number, title?: string) => [take, pagination, title],
 	fetchMovie: (id: number) => [id],
 	fetchWishlist: () => ['infinite', 'whislist'],
-	fetchInfiniteMovies: () => ['infinite', 'movies'],
+	fetchInfiniteMovies: (genreId?: number) => ['infinite', 'movies', genreId],
 	fetchRecommendations: (id: number) => [id],
 })
 
@@ -36,15 +36,16 @@ export const useFetchMovies = ({
 	})
 }
 
-export const useInfiniteFetchMovies = (take: number) => {
+export const useInfiniteFetchMovies = (take: number, genreId?: number) => {
 	return useInfiniteQuery({
-		queryKey: movieQueryKey.fetchInfiniteMovies().queryKey,
+		queryKey: movieQueryKey.fetchInfiniteMovies(genreId).queryKey,
 		queryFn: async ({ pageParam }) => {
 			const query = {
 				order: ['id_DESC'],
 				take: take,
 				cursor: pageParam,
 			}
+			if (genreId) Object.assign(query, { genreId })
 			return movie.movieControllerFindAll(query)
 		},
 		initialPageParam: undefined,

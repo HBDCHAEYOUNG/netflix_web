@@ -60,6 +60,16 @@
 							"example": "스파이더맨",
 							"type": "string"
 						}
+					},
+					{
+						"name": "genreId",
+						"required": false,
+						"in": "query",
+						"description": "장르 ID",
+						"schema": {
+							"example": 1,
+							"type": "number"
+						}
 					}
 				],
 				"responses": {
@@ -1390,12 +1400,7 @@
 		"contact": {}
 	},
 	"tags": [],
-	"servers": [
-		{
-			"url": "http://localhost:3000",
-			"description": "로컬 테스트 서버"
-		}
-	],
+	"servers": [],
 	"components": {
 		"securitySchemes": {
 			"basic": {

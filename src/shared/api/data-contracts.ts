@@ -422,6 +422,11 @@ export interface MovieControllerFindAllParamsDto {
 	 */
 	cursor?: string
 	/**
+	 * 장르 ID
+	 * @example 1
+	 */
+	genreId?: number
+	/**
 	 * 정렬 순서
 	 * @default ["id_DESC"]
 	 * @example ["id_DESC"]
