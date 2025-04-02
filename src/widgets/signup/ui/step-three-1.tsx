@@ -26,18 +26,14 @@ export function StepThree1({ setStep, membership, onClickNext }: StepThree1Props
 
 		IMP.request_pay(
 			{
-				channelKey: import.meta.env.VITE_IMP_KEY, // 콘솔에서 확인한 채널키 사용
+				channelKey: import.meta.env.VITE_IMP_KEY,
 				pay_method: 'card',
 				merchant_uid: `payment-${crypto.randomUUID()}`,
 				name: membership === '1' ? 'Premium 멤버십' : membership === '2' ? 'Standard 멤버십' : 'Advertising 멤버십',
 				amount: amount,
-				// buyer_email: 'example@email.com',  // 구매자 이메일
-				// buyer_name: '구매자이름',          // 구매자 이름
-				// buyer_tel: '010-1234-5678',      // 구매자 전화번호
 			},
 			async (response: any) => {
 				if (response.success) {
-					// 결제 성공 시 처리
 					if (!me) return
 					await patchUser({
 						id: me.id,
@@ -46,7 +42,6 @@ export function StepThree1({ setStep, membership, onClickNext }: StepThree1Props
 					console.log('결제 성공:', response)
 					onClickNext()
 				} else {
-					// 결제 실패 시 처리
 					console.log('결제 실패:', response.error_msg)
 				}
 			},

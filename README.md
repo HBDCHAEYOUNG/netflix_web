@@ -28,80 +28,107 @@
 
 ## 📌 주요 기능
 
-1. **로그인 & 회원가입** 🔐
+1. **회원 인증** 🔐
 
-<img  align="right" src="https://user-images.githubusercontent.com/101618759/197943525-3fbbf517-4b72-47cb-8704-756bf63c9150.gif" width="40%">
+<img align="right" src="https://github.com/user-attachments/assets/eb41ad1c-80ce-4147-b835-9391bf43a4e7" width="45%">
 
-- JWT 인증 방식 적용
-- 보안 강화를 위한 비밀번호 암호화
-- 회원가입 후 자동 로그인 기능
-
-<br />
-<br />
-<br />
-<br />
-
-2. **영상 보기** 🎥
-
-<img  align="right" src="https://user-images.githubusercontent.com/101618759/197943525-3fbbf517-4b72-47cb-8704-756bf63c9150.gif" width="45%">
-
-<div>
-<h3>📌 Pages with many features</h3>
-<h4>• 로그인 페이지</h4>
-<p>소셜로그인, 유효성검사, 아이디/비밀번호 찾기를 할 수 있어요.</p>
-<h4>• 회원가입 페이지</h4>
-<p>주소검색, 휴대폰/이메일 인증을 할수 있어요.</p>
-</div>
+- JWT를 활용한 로그인/회원가입 구현
+- 이메일 중복 확인 및 유효성 검사
+- 로그인 상태 유지 기능
 
 <br />
 <br />
 <br />
 <br />
-
-3. **좋아요 & 싫어요** 👍👎
-
-   - 개별 영화에 대한 좋아요 및 싫어요 반영
-   - 사용자별 선호도 데이터 저장 및 관리
-
-<br />
-<br />
 <br />
 <br />
 
-4. **위시리스트** 🌟
+2. **결제 시스템** 💳
 
-   - 관심 있는 영화 저장 및 리스트 관리
-   - UI에서 직관적인 추가/삭제 기능 제공
+<img align="right" src="" width="45%">
+
+- 아임포트(I'mport)를 활용한 테스트 결제 기능
+- 다양한 결제 수단 지원 (신용카드, 카카오페이, 네이버페이 등)
+- 멤버십 등급별 가격 정책
 
 <br />
 <br />
 <br />
 <br />
-
-5. **검색 기능** 🔍
-
-   - 키워드 기반 검색
-   - 자동완성 기능 추가 (예정)
-
-<br />
-<br />
 <br />
 <br />
 
-6. **회원정보 변경** 🛠
+3. **콘텐츠 스트리밍** 🎥
 
-   - 프로필 사진 변경
-   - 비밀번호 변경 및 계정 삭제
+<img align="right" src="https://github.com/user-attachments/assets/1bb137f1-e1ae-4052-871f-b47b1d1d4d75" width="45%">
+
+- 영화 상세 정보 조회
+- 영화 예고편 재생 기능
+- 장르별 영화 목록 제공
+- 조회수 반영 탑 10 영화 목록 제공
 
 <br />
 <br />
 <br />
 <br />
+<br />
+<br />
 
-7. **관리자 모드** 🏗
-   - 영화(Movie), 장르(Genre), 감독(Director), 사용자(User) CRUD
-   - 관리자 전용 페이지 제공
+4. **인터랙티브 기능** 👍
 
+<img align="right" src="https://github.com/user-attachments/assets/8322c00d-4fa8-4110-b639-de267b71c0ed" width="45%">
+
+- 영화 좋아요 기능
+- 내가 찜한 콘텐츠 목록
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+5. **검색 시스템** 🔍
+
+   <img align="right" src="https://github.com/user-attachments/assets/0abed0df-e5c4-4af2-9569-a16c20d83096" width="45%">
+
+   - 영화 제목 기반 검색
+   - 검색 결과 필터링
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+6. **프로필 관리** 👤
+
+<img align="right" src="https://github.com/user-attachments/assets/b0eccfd0-fdcc-4773-981e-6b2e44d69b01" width="45%">
+
+- 프로필 닉네임 변경
+- 프로필 별 영화 좋아요 및 찜 목록 제공
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+7. **관리자 대시보드** 👨‍💼
+
+<img align="right" src="https://github.com/user-attachments/assets/69c043ff-36f9-4fee-9c27-c4a48d2fd495" width="45%">
+
+- 영화 데이터 CRUD 기능
+- 사용자 관리
+
+<br />
+<br />
+<br />
 <br />
 <br />
 <br />

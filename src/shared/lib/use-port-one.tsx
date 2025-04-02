@@ -16,7 +16,7 @@ const usePortOne = () => {
 
 		script.onload = () => {
 			if (window.IMP) {
-				window.IMP.init('imp82301670')
+				window.IMP.init(import.meta.env.VITE_CUSTOMER_IDENTIFICATION_CODE)
 			}
 		}
 
