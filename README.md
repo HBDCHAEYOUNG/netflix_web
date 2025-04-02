@@ -45,7 +45,7 @@
 
 2. **결제 시스템** 💳
 
-<img align="right" src="" width="45%">
+<img align="right" src="https://github.com/user-attachments/assets/cbfbdbdb-2fff-4401-8add-6b9d9854bb9b" width="45%">
 
 - 아임포트(I'mport)를 활용한 테스트 결제 기능
 - 다양한 결제 수단 지원 (신용카드, 카카오페이, 네이버페이 등)
