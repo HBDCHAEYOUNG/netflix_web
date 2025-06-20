@@ -1,5 +1,7 @@
 <div align="center"><img src="https://github.com/user-attachments/assets/2261727d-64aa-44a7-b614-518970830027" alt="Material Bread logo"></div>
 
+https://netflix-48usnm86t-cheyoungs-projects.vercel.app/landing
+
 # 🎬 Netflix Clone Project
 
 넷플릭스 클론 프로젝트입니다! 다양한 기능과 최신 기술을 활용하여 실제 넷플릭스처럼 동작하도록 구현했습니다. 🚀
