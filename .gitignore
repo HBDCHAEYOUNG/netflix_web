@@ -25,4 +25,8 @@ dist-ssr
 
 # 
 
-*storybook.log
+pnpm-lock.yaml
+
+READMEd.md
+
+.env

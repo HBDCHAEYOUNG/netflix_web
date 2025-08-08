@@ -49,15 +49,13 @@
 			"@hooks/*": ["src/shared/hooks/*"],
 			"@lib/*": ["src/shared/lib/*"],
 			"@icons/*": ["src/shared/icons/*"],
+			"@images/*": ["src/shared/images/*"],
 			"@providers/*": ["src/shared/providers/*"],
 			"@store/*": ["src/shared/store/*"],
 			"@styles/*": ["src/shared/styles/*"],
 			"@type/*": ["src/shared/type/*"],
 			"@ui/*": ["src/shared/ui/*"],
-			"@utils/*": ["src/shared/utils/*"],
-
-			// public
-			"@images/*": ["public/images/*"]
+			"@utils/*": ["src/shared/utils/*"]
 		}
 	},
 	"include": ["src", "svg.d.ts", "vite-env.d.ts", "layouts/routes", "layouts"]
