@@ -1,6 +1,6 @@
 <div align="center"><img src="https://github.com/user-attachments/assets/2261727d-64aa-44a7-b614-518970830027" alt="Material Bread logo"></div>
 
-https://netflix-48usnm86t-cheyoungs-projects.vercel.app/landing
+https://netflix-web-project.vercel.app/landing
 
 # 🎬 Netflix Clone Project
 
