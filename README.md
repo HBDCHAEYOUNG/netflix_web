@@ -1,4 +1,5 @@
-<div align="center"><img src="https://github.com/user-attachments/assets/2261727d-64aa-44a7-b614-518970830027" alt="Material Bread logo"></div>
+<img align="center" alt="image" src="https://github.com/user-attachments/assets/b5d39fd0-65d8-4f3d-9a8b-cb93f827a8c7" />
+
 
 https://netflix-web-project.vercel.app/landing
 
