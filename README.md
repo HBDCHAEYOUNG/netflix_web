@@ -150,4 +150,9 @@ https://cetflix.vercel.app/
 
 # 🛠 기술적 도전
 
+- FSD (Feature Slice Design) 아키텍처 적용
+- Swagger 기반 API 자동 생성 시스템
+- 커스텀 HTTP Client 구현
+- 역할 기반 접근 제어 (RBAC) HOC 패턴
 - 아임포트를 이용한 test 결제 기능
+- Embla Carousel 기반 커스텀 캐러셀 구현
